@@ -7,10 +7,11 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.linkalma.dto.Alumni;
+import com.linkalma.dao.mapper.SchoolMapper;
+import com.linkalma.dto.User;
 import com.linkalma.dto.School;
 
-public class SchoolJDBCTemplate implements SchoolDAO {
+public class SchoolJDBCTemplate implements ISchoolDAO {
    
 	@Autowired
 	private DataSource dataSource;
@@ -20,41 +21,18 @@ public class SchoolJDBCTemplate implements SchoolDAO {
    
    public void setDataSource(DataSource dataSource) {
       this.dataSource = dataSource;
-      System.out.println("data src...");
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
    }
 
-   public void createSchool(School school) {
+   public int createSchool(School school) {
       String SQL = "insert into School (SchoolID,SchoolName, SchoolAddress1, SchoolAddress2, Branch, WebsiteAddress, Approved, Active) "
       		+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
       
-      jdbcTemplateObject.update( SQL, school.getSchoolID(),school.getSchoolName(), school.getSchoolAddress1(), 
+      return jdbcTemplateObject.update( SQL, school.getSchoolID(),school.getSchoolName(), school.getSchoolAddress1(), 
     		  school.getSchoolAddress2(), school.getBranch(), school.getWebsiteAddress(), school.getApproved(), school.getActive());
-      System.out.println("Created Record Name = " + school.getSchoolID());
-      return;
    }
    
-   public void createUser(Alumni alumni) {
-	      String SQL = "insert into User (UserID, FirstName, MiddleName, LastName, Address1, Address2, Phone1, "
-	      		+ "Phone2, Phone3, Phone4, Gender, City, State, Country, EmailAddress, AboutMe, Photo, Approved, "
-	      		+ "CreateDttm, UpdateDttm) "
-	      		+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	      
-	      jdbcTemplateObject.update( SQL, alumni.getUserID(), alumni.getUserFirstName(), alumni.getUserMiddleName(), alumni.getUserLastName(),
-	    		  alumni.getAddres1(), alumni.getAddress2(), alumni.getPhone1(),alumni.getPhone2(), alumni.getPhone3(),
-	    		  alumni.getPhone4(), alumni.getGender(),  alumni.getCity(), alumni.getState(), alumni.getCountry(), 
-	    		  alumni.getEmailAddress(), alumni.getAboutMe(), alumni.getPhoto(), 
-	    		  alumni.getApproved(), alumni.getCreateDttm(), alumni.getUpdateDttm());
-	      return;
-	   }
    
-   public void createCredentials(Alumni alumni) {
-	      String SQL = "insert into Credentials (UserID,Password) "
-	      		+ "values (?, ?, ?, ?)";
-	      
-	      jdbcTemplateObject.update( SQL, alumni.getUserID(), alumni.getPassword(), alumni.getCreateUserID(), alumni.getCreateDttm());
-	      return;
-	   }
 
    public School getSchool(String schoolName) {
       String SQL = "select * from School where schoolName = ?";
@@ -77,11 +55,23 @@ public class SchoolJDBCTemplate implements SchoolDAO {
       return;
    }
 
-   public void update(Integer id, Integer age){
+   public int update(Integer id, Integer age){
       String SQL = "update School set age = ? where id = ?";
-      jdbcTemplateObject.update(SQL, age, id);
-      System.out.println("Updated Record with ID = " + id );
-      return;
+      return jdbcTemplateObject.update(SQL, age, id);
    }
+
+/**
+ * @return the jdbcTemplateObject
+ */
+public JdbcTemplate getJdbcTemplateObject() {
+	return jdbcTemplateObject;
+}
+
+/**
+ * @param jdbcTemplateObject the jdbcTemplateObject to set
+ */
+public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
+	this.jdbcTemplateObject = jdbcTemplateObject;
+}
 
 }
