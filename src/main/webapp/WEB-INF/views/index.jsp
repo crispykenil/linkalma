@@ -76,7 +76,7 @@
 							<input type="password" value="" placeholder="Confirm Password" />
 							<input type="date" value="" placeholder="DOB" name="dob" />
 							<input type="text" value="" placeholder="Gender" name="gender" />
-
+							<img src="images/captcha-image.jpg" /><input type="text" value="" placeholder="Enter Text" name="captcha" />
 							<input type="submit" class="button large" value="Sign Up" />
 						</form>
 					</div>

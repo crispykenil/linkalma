@@ -25,9 +25,12 @@
 	</beans:bean>
 	<beans:bean name="school" class="com.linkalma.dto.School">
 	</beans:bean>
-	<beans:bean name="alumni" class="com.linkalma.dto.Alumni">
+	<beans:bean name="alumni" class="com.linkalma.dto.User">
 	</beans:bean>
 	
-	<context:component-scan base-package="com.linkalma.controller" />
+	<beans:bean id="validator" class="com.linkalma.validator.CommonValidator" />
+	
+	
+	<context:component-scan base-package="com.linkalma" />
 	
 </beans:beans>
