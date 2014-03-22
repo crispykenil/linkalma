@@ -1,0 +1,64 @@
+/* CSS Document */
+.button, input[type="submit"], input[type="button"] {
+	display: inline-block;
+	padding: 4px 14px;
+	margin-bottom: 0;
+	line-height: 20px;
+	text-align: center;
+	/* text-shadow: 0 1px 1px rgba(255,255,255,0.75); */
+	vertical-align: middle;
+	cursor: pointer;
+	background-color: #0082c8;
+	color:#fff;
+	border:none;
+		-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+}
+input.smalbtn {
+	padding:0px 10px;
+	font-size:12px;
+}
+.button:hover {
+	color:#333;
+	background-color:#d9d9d9;
+}
+
+button.btn.btn-large,input[type="submit"].btn.btn-large {
+padding-top:7px;
+padding-bottom:7px;
+}
+
+button.btn.btn-mini,input[type="submit"].btn.btn-mini {
+padding-top:1px;
+padding-bottom:1px;
+}
+
+.button.medium {
+	padding:5px 25px;
+}
+.button.large {
+	padding:10px 35px;
+}
+input[type=text], input[type=password],input[type=email], input[type=date] {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background-color: #fff;
+	
+	border: 1px solid #cacaca;
+	padding: 8px 10px;
+	margin-bottom:10px;
+
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    -webkit-box-shadow:0 0 10px #0079b5;
+    -moz-box-shadow:0 0 10px #0079b5;
+    box-shadow:0 0 10px #0079b5;
+	border:1px solid #0082c8;
+}
+input[type=radio]{
+	margin:none;
+	padding:none;
+}

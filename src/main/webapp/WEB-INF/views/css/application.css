@@ -1,94 +1,6 @@
-/* CSS Document */
-
-html{color:#000;background:#FFF;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p{margin:0;padding:0;
-	font-family:  Helvetica, Verdana,  sans-serif; 
-	color:#999999; 
-	line-height:18px; font-size:14px;
-	text-align:left;
-}
-
-fieldset,img{border:0;}
-address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
-li{list-style:none;}
-caption,th{text-align:left;}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
-
-h1 {
-	font-size:30px; color:#000;
-	font-family:century gothic, Helvetica, Verdana, Arial,  sans-serif; 
-	margin-bottom:20px;
-
-}
-
-h2 {
-	font-size:30px; color:#000;
-	font-family:century gothic, Helvetica, Verdana, Arial,  sans-serif; 
-	margin-bottom:15px;
-	line-height:30px;
-}
-h3 {
-	color:#0082c8;
-	font-weight:bold;
-	font-size:110%;
-}
-div {margin:auto;}
-a {
-	text-decoration:none;
-	outline:none;
-	color:#0082c8;
-}
-p {
-	line-height:19px;
-	margin-bottom:10px;
-	text-align:justify;
-}
-.clear-both {
-	clear:both;
-}
-.clear-fix:before, .cf:after { content: ""; display: table; }
-.clear-fix:after { clear: both; }
-.clear-fix { zoom: 1; }
-.border-box {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-div {margin:auto;}
-
-table{font-size:inherit;font:100%;}
 
 
-.fl {
-	float:left;
-}
-.fr {
-	float:right;
-}
-#ft{clear:both;}
 
-input[type=text], input[type=password],input[type=email], input[type=date] {
-		-moz-border-radius: 2px;
-		-webkit-border-radius: 2px;
-		border-radius: 2px;
-		background-color: #fff;
-		
-    	border: 1px solid #cacaca;
-    	padding: 8px 10px;
-		margin-bottom:10px;
-}
-input[type=text]:focus, input[type=password]:focus, textarea:focus {
-    -webkit-box-shadow:0 0 10px #0079b5;
-    -moz-box-shadow:0 0 10px #0079b5;
-    box-shadow:0 0 10px #0079b5;
-	border:1px solid #fff;
-}
-input[type=radio]{
-	margin:none;
-	padding:none;
-}
-
-/* end of reset css */
 #top-bar ul li{
 	display:list-item;
 	height:36px;
@@ -130,7 +42,8 @@ input[type=radio]{
 	height:100%;
 }
 .search-bar {
-	width:250px;
+	width:300px;
+	margin-top:50px;
 }
 .search-field {
 	width:90%
@@ -154,19 +67,20 @@ input[type=radio]{
 }
 .sign-in-wrapper input[type=text], #signin-signup-panel input[type=password]{
 	width:90%;
+	margin-bottom:0px;
 }
-#sign-up input[type=text], #sign-up input[type=date], #sign-up input[type=password]{
+.sign-in-wrapper ul li{
+
+	margin-bottom:10px;
+}
+#sign-up input[type=text], #sign-up input[type=date], #sign-up input[type=password], #sign-up input[type=email]{
 	width:187px;
 }
-#sign-up input[type=email]{
-	width:400px;
-}
-.sign-up-wrapper {
-	margin-top:15px;
-}
+
+
 .sign-up-wrapper ul:first-child li{
 	text-align:center;
-	margin-bottom:10px;
+	margin-bottom:5px;
 }
 .sign-up-container {
 	background-color: #FFFFFF;
@@ -177,7 +91,7 @@ input[type=radio]{
 }
 /* end for index page */
 #main-content-wrapper {
-	padding-bottom:20px;
+	padding:15px 0px;
 	margin-top:3px;
 	min-height:200px;
 	display:block;
@@ -185,16 +99,18 @@ input[type=radio]{
 }
 .main-content {
 	min-height:100px;
+	width:650px;
 }
 .main-content .middle-wrapper {
 	float:left;
 	width:732px;
 }
-.main-content .left-wrapper {
+.left-content {
 	float:left;
 	margin-right: 10px;
-	width:282px;
-	padding:0px 20px 0px 0px; 
+	width:350px;
+	padding:0px 10px 0px 0px; 
+	margin-right:24px;
 }
 .title-image {
 	float:right;
@@ -233,20 +149,57 @@ input[type=radio]{
 	float:right;
 	line-height:36px;
 }
-.button {
-	padding:3px 10px;
-	background-color:#009bd0;
-	color:#fff;
-	cursor:pointer;
-	border:none;
-	text-transform:uppercase
+
+
+.panel {
+	margin-bottom:15px;
 }
-.button:hover {
+.panel .panel-content {
+	border: 1px solid #bbb;
+	min-height:150px;
+	padding:10px;
+}
+.panel .panel-header {
+	background-color:#0082c8;
+	padding:6px;
+
 
 }
-.button.medium {
-	padding:5px 25px;
+.panel .panel-header h3 {
+	color:#fff;
+	font-weight:normal;
+	vertical-align:middle
 }
-.button.large {
-	padding:10px 35px;
+/* for dashboard */
+	#user-info-panel {
+		margin-bottom:30px;
+	}
+	.user-info {
+		width:500px;
+		margin-left:25px;
+	}
+	.posting-panel {
+		border:1px solid #cccccc;
+		
+	}
+	.posting-panel textarea{
+		width:100%;
+		border:none;
+		height:50px;
+	}
+	.posting-options {
+		background-color:#f2f2f2;
+		padding:5px;
+		height:30px;
+	}
+/* for dashboard */
+
+/* generic classes */
+#capchaContainer {
+	display:inline-block;
+}
+#capchaContainer img {width:100px}
+}
+ #capchaContainer input {
+	width:15px !important
 }

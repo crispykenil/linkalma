@@ -4,7 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>:: LINK-ALMA ::</title>
 
+<link href="css/reset.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/form.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/application.css" rel="stylesheet" type="text/css" media="screen" />
+
 	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="js/jquery.bpopup.min.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
@@ -46,17 +49,18 @@
 				<div class="sign-in-wrapper">
 					<h2>Login</h2>
 					<form>
-						<input type="text" value="" placeholder="Username" />
-						<input type="password" value="" placeholder="Password" />
-						<label>Alumni Login
-							<input type="radio" value="" />
-						</label>
-							<label>Studant Login
-							<input type="radio" value="" />
-						</label>
+						<ul>
+							<li><input type="text" value="" placeholder="Username" /> </li>
+							<li><input type="password" value="" placeholder="Password" /> </li>
+							<li> <input type="button" value="Sign In" id="sign-in-button" class="button"/><a href="javascript:;" class="smallestFont fr">Forgot your password?</a></li>
+							<li class="smallFont"> 
+								<label>Alumni Login	<input type="radio" value="" />	</label>
+								<label class="fr">Studant Login <input type="radio" value="" />	</label>
+							</li>
+						</ul>
 					</form>
 				</div>
-				<div><a href="javascript:;">Forgot your password?</a></div>
+		
 				<div class="sign-up-wrapper">
 					<ul>
 						<li>No Account Yet? </li>
@@ -76,7 +80,10 @@
 							<input type="password" value="" placeholder="Confirm Password" />
 							<input type="date" value="" placeholder="DOB" name="dob" />
 							<input type="text" value="" placeholder="Gender" name="gender" />
-							<img src="images/captcha-image.jpg" /><input type="text" value="" placeholder="Enter Text" name="captcha" />
+							
+							<div id="capchaContainer"> <img src="images/captcha-image.jpg" />
+							<input type="text" value="" placeholder="Enter Text" name="captcha" style="width:75px" /></div>
+							
 							<input type="submit" class="button large" value="Sign Up" />
 						</form>
 					</div>
@@ -89,8 +96,8 @@
 	</div><!-- show-case-area -->
 	<div id="bd">
 		<div id="main-content-wrapper">
-			<div class="main-content">
-				<div class="left-wrapper border-box">
+		
+				<div class="left-content border-box">
 					<div class="news-and-event">
 						<h2>Linkalma News & Events</h2>
 						<ul>
@@ -108,7 +115,7 @@
 				
 					
 				</div><!-- left-side-wrapper -->
-				<div class="middle-wrapper border-box">
+				<div class="main-content border-box clear-fix">
 					<h2>Welcome to Linkalma</h2>
 					<ul>
 					<li>
@@ -122,9 +129,6 @@
 					</ul>
 					
 				</div>
-				
-				<div class="clear-both" ></div>
-			</div>
 		</div><!-- main-wrapper -->
 	</div><!-- bd -->
 </div><!-- doc-->
