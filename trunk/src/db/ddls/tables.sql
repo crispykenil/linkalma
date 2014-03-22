@@ -1,18 +1,17 @@
- 
 
 CREATE TABLE `userupdates` (
   `PostID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserlID` varchar(255) DEFAULT NULL,
+  `UserID` int(20) DEFAULT NULL,
   `Subject` varchar(255) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL,
   `UploadedOn` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`PostID`),
   KEY `CreateUserID` (`CreateUserID`),
-  KEY `UserlID` (`UserlID`),
+  KEY `UserID` (`UserID`),
   KEY `UpdateUserID` (`UpdateUserID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -21,13 +20,13 @@ CREATE TABLE `userupdates` (
 
 CREATE TABLE `comments` (
   `CommentID` int(11) NOT NULL AUTO_INCREMENT,
-  `GroupID` varchar(255) DEFAULT NULL,
-  `TopicID` varchar(255) DEFAULT NULL,
-  `ActiveYN` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
+  `GroupID` int(20) DEFAULT NULL,
+  `TopicID` int(20) DEFAULT NULL,
+  `ActiveYN` char(1) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`CommentID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -36,7 +35,7 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `credentials` (
   `UserID` int(11) NOT NULL,
-  `Password` varchar(255) DEFAULT NULL
+  `Password` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -44,9 +43,9 @@ CREATE TABLE `credentials` (
 
 CREATE TABLE `donation` (
   `DonationID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserID` varchar(255) DEFAULT NULL,
-  `SchoolID` varchar(255) DEFAULT NULL,
-  `Amount` varchar(255) DEFAULT NULL,
+  `UserID` int(20) DEFAULT NULL,
+  `SchoolID` int(20) DEFAULT NULL,
+  `Amount` int(10) DEFAULT NULL,
   `Currency` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`DonationID`),
   KEY `SchoolID` (`SchoolID`),
@@ -64,15 +63,13 @@ CREATE TABLE `groups` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
-
 CREATE TABLE `referrals` (
   `ReferralID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserID` varchar(255) DEFAULT NULL,
-  `EmailID` varchar(255) DEFAULT NULL,
+  `UserID` int(20) DEFAULT NULL,
+  `ReferralEmailID` varchar(40) DEFAULT NULL,
   `ReferralName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ReferralID`),
-  KEY `EmailID` (`EmailID`),
+  KEY `ReferralEmailID` (`ReferralEmailID`),
   KEY `UserID` (`UserID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -80,17 +77,18 @@ CREATE TABLE `referrals` (
  
 
 CREATE TABLE `school` (
-  `SchoolID` int(11) NOT NULL AUTO_INCREMENT,
+  `SchoolID` int(20) NOT NULL AUTO_INCREMENT,
   `SchoolName` varchar(255) DEFAULT NULL,
   `SchoolAddress1` varchar(255) DEFAULT NULL,
   `SchoolAddress2` varchar(255) DEFAULT NULL,
   `Branch` varchar(255) DEFAULT NULL,
-  `WebsiteAddress` varchar(255) DEFAULT NULL,
-  `Approved` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
+  `WebsiteURL` varchar(255) DEFAULT NULL,
+  `EmailAddres` varchar(40) DEFAULT NULL,
+  `Approved` char(1) DEFAULT NULL,
+  `CreateDttm` date DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
+  `UpdateUserID` int(20) DEFAULT NULL,
   PRIMARY KEY (`SchoolID`),
   KEY `CreateUserID` (`CreateUserID`),
   KEY `UpdateUserID` (`UpdateUserID`)
@@ -100,10 +98,10 @@ CREATE TABLE `school` (
  
 
 CREATE TABLE `schoolnews` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `SchoolID` varchar(255) DEFAULT NULL,
+  `ID` int(20) NOT NULL AUTO_INCREMENT,
+  `SchoolID` int(20) DEFAULT NULL,
   `NewsDescription` varchar(255) DEFAULT NULL,
-  `NewsType` varchar(255) DEFAULT NULL,
+  `NewsType` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -112,14 +110,14 @@ CREATE TABLE `schoolnews` (
 
 CREATE TABLE `schoolupdates` (
   `PostID` int(11) NOT NULL AUTO_INCREMENT,
-  `SchoolID` varchar(255) DEFAULT NULL,
+  `SchoolID` int(20) DEFAULT NULL,
   `Subject` varchar(255) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL,
   `Type` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`PostID`),
   KEY `CreateUserID` (`CreateUserID`),
   KEY `SchoolID` (`SchoolID`),
@@ -130,19 +128,19 @@ CREATE TABLE `schoolupdates` (
  
 
 CREATE TABLE `topics` (
-  `TopicID` int(11) NOT NULL AUTO_INCREMENT,
-  `Topic` varchar(255) DEFAULT NULL,
-  `TopicDate` varchar(255) DEFAULT NULL,
+  `TopicID` int(20) NOT NULL AUTO_INCREMENT,
+  `TopicTitle` varchar(255) DEFAULT NULL,
+  `TopicStartDate` datetime DEFAULT CURRENT_TIMESTAMP,
   `TopicCategory` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`TopicID`),
-  KEY `TopicDate` (`TopicDate`)
+  KEY `TopicStartDate` (`TopicStartDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
  
 
 CREATE TABLE `user` (
-  `UserID` int(11) NOT NULL AUTO_INCREMENT,
+  `UserID` int(20) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(255) NOT NULL,
   `MiddleName` varchar(255) DEFAULT NULL,
   `LastName` varchar(255) DEFAULT NULL,
@@ -152,17 +150,17 @@ CREATE TABLE `user` (
   `Phone2` int(11) DEFAULT NULL,
   `Phone3` int(11) DEFAULT NULL,
   `Phone4` int(11) DEFAULT NULL,
-  `Gender` varchar(255) DEFAULT NULL,
-  `City` varchar(255) DEFAULT NULL,
-  `State` varchar(255) DEFAULT NULL,
-  `Country` varchar(255) DEFAULT NULL,
+  `Gender` varchar(10) DEFAULT NULL,
+  `City` varchar(30) DEFAULT NULL,
+  `State` varchar(30) DEFAULT NULL,
+  `Country` varchar(30) DEFAULT NULL,
   `EmailAddress` varchar(255) NOT NULL,
-  `DOB` varchar(255) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
   `AboutMe` varchar(255) DEFAULT NULL,
   `Photo` varchar(255) DEFAULT NULL,
-  `Approved` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
+  `Approved` char(1) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -171,47 +169,14 @@ CREATE TABLE `user` (
 
 CREATE TABLE `userschool` (
   `UserSchoolID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserID` varchar(255) DEFAULT NULL,
-  `SchoolID` varchar(255) DEFAULT NULL,
-  `FromYear` varchar(255) DEFAULT NULL,
-  `ToYear` varchar(255) DEFAULT NULL,
-  `PassoutBatch` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
+  `UserID` int(20) DEFAULT NULL,
+  `SchoolID` int(20) DEFAULT NULL,
+  `FromYear` date DEFAULT NULL,
+  `ToYear` date DEFAULT NULL,
+  `PassoutBatch` int(4) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`UserSchoolID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
- 
-
-CREATE TABLE `topics` (
-  `TopicID` int(11) NOT NULL AUTO_INCREMENT,
-  `Topic` varchar(255) DEFAULT NULL,
-  `TopicDate` varchar(255) DEFAULT NULL,
-  `TopicCategory` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`TopicID`),
-  KEY `TopicDate` (`TopicDate`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
- 
-
-CREATE TABLE `userupdates` (
-  `PostID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserlID` varchar(255) DEFAULT NULL,
-  `Subject` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `UploadedOn` varchar(255) DEFAULT NULL,
-  `CreateUserID` varchar(255) DEFAULT NULL,
-  `CreateDttm` varchar(255) DEFAULT NULL,
-  `UpdateUserID` varchar(255) DEFAULT NULL,
-  `UpdateDttm` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`PostID`),
-  KEY `CreateUserID` (`CreateUserID`),
-  KEY `UserlID` (`UserlID`),
-  KEY `UpdateUserID` (`UpdateUserID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
