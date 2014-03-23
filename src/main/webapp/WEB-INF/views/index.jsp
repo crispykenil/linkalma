@@ -54,8 +54,8 @@
 							<li><input type="password" value="" placeholder="Password" /> </li>
 							<li> <input type="button" value="Sign In" id="sign-in-button" class="button"/><a href="javascript:;" class="smallestFont fr">Forgot your password?</a></li>
 							<li class="smallFont"> 
-								<label>Alumni Login	<input type="radio" value="" />	</label>
-								<label class="fr">Studant Login <input type="radio" value="" />	</label>
+								<label>Alumni Login	<input type="radio" value="" name="loginType" />	</label>
+								<label class="fr">School Login <input type="radio" value="" name="loginType" />	</label>
 							</li>
 						</ul>
 					</form>

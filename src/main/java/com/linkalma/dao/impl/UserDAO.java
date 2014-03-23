@@ -27,36 +27,35 @@ public class UserDAO implements IUserDAO {
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-	      final String SQL = "insert into User (UserID, FirstName, MiddleName, LastName, Address1, Address2, Phone1, "
+	      final String SQL = "insert into User (FirstName, MiddleName, LastName, Address1, Address2, Phone1, "
 	      		+ "Phone2, Phone3, Phone4, Gender, City, State, Country, EmailAddress,DOB, AboutMe, Photo, Approved, "
 	      		+ "CreateDttm, UpdateDttm) "
-	      		+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	      		+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	      
 	      getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 		    	  	PreparedStatement ps =  connection.prepareStatement(SQL, new String[] {"id"});
 		    	  	
-		    	  	ps.setLong(1, alumni.getUserID());
-		    	  	ps.setString(2, alumni.getUserFirstName());
-		    	  	ps.setString(3, alumni.getUserMiddleName());
-		    	  	ps.setString(4, alumni.getUserLastName());
-		    	  	ps.setString(5, alumni.getAddres1());
-		    	  	ps.setString(6, alumni.getAddress2());
-		    	  	ps.setLong(7, alumni.getPhone1());
-		    	  	ps.setLong(8, alumni.getPhone2());
-		    	  	ps.setLong(9, alumni.getPhone3());
-		    	  	ps.setLong(10, alumni.getPhone4());
-		    	  	ps.setString(11, alumni.getGender());
-		    	  	ps.setString(12, alumni.getCity());
-		    	  	ps.setString(13, alumni.getState());
-		    	  	ps.setString(14, alumni.getCountry());
-		    	  	ps.setString(15, alumni.getEmailAddress());
-		    	  	ps.setString(16, alumni.getDob());
-		    	  	ps.setString(17, alumni.getAboutMe());
-		    	  	ps.setString(18, alumni.getPhoto());
-		    	  	ps.setString(19, alumni.getApproved());
-		    	  	ps.setDate(20, alumni.getCreateDttm());
-		    	  	ps.setDate(21, alumni.getUpdateDttm());
+		    	  	ps.setString(1, alumni.getUserFirstName());
+		    	  	ps.setString(2, alumni.getUserMiddleName());
+		    	  	ps.setString(3, alumni.getUserLastName());
+		    	  	ps.setString(4, alumni.getAddres1());
+		    	  	ps.setString(5, alumni.getAddress2());
+		    	  	ps.setLong(6, alumni.getPhone1());
+		    	  	ps.setLong(7, alumni.getPhone2());
+		    	  	ps.setLong(8, alumni.getPhone3());
+		    	  	ps.setLong(9, alumni.getPhone4());
+		    	  	ps.setString(10, alumni.getGender());
+		    	  	ps.setString(11, alumni.getCity());
+		    	  	ps.setString(12, alumni.getState());
+		    	  	ps.setString(13, alumni.getCountry());
+		    	  	ps.setString(14, alumni.getEmailAddress());
+		    	  	ps.setString(15, alumni.getDob());
+		    	  	ps.setString(16, alumni.getAboutMe());
+		    	  	ps.setString(17, alumni.getPhoto());
+		    	  	ps.setString(18, alumni.getApproved());
+		    	  	ps.setDate(19, alumni.getCreateDttm());
+		    	  	ps.setDate(20, alumni.getUpdateDttm());
 		    	  	
 		    	  	return ps;
 	    	  	}
