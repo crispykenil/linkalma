@@ -23,4 +23,9 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
+   <bean id="schoolDAO" 
+      class="com.linkalma.dao.impl.SchoolDAO">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
 </beans>

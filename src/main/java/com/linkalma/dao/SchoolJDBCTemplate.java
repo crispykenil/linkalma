@@ -28,8 +28,8 @@ public class SchoolJDBCTemplate implements ISchoolDAO {
       String SQL = "insert into School (SchoolID,SchoolName, SchoolAddress1, SchoolAddress2, Branch, WebsiteAddress, Approved, Active) "
       		+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
       
-      return jdbcTemplateObject.update( SQL, school.getSchoolID(),school.getSchoolName(), school.getSchoolAddress1(), 
-    		  school.getSchoolAddress2(), school.getBranch(), school.getWebsiteAddress(), school.getApproved(), school.getActive());
+      return jdbcTemplateObject.update( SQL, school.getSchoolID(),school.getSchoolName(), school.getAddress1(), 
+    		  school.getAddress2(), school.getBranch(), school.getWebsiteAddress(), school.getApproved(), school.getActive());
    }
    
    
@@ -41,7 +41,7 @@ public class SchoolJDBCTemplate implements ISchoolDAO {
       return School;
    }
 
-   public List<School> listSchools() {
+   public List<School> listSchools(School school) {
       String SQL = "select * from School";
       List <School> Schools = jdbcTemplateObject.query(SQL, 
                                 new SchoolMapper());

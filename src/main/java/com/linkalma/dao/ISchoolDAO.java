@@ -30,7 +30,7 @@ public interface ISchoolDAO {
 	    * This is the method to be used to list down
 	    * all the records from the School table.
 	    */
-	   public List<School> listSchools();
+	   public List<School> listSchools(School schoolDto);
 	   /** 
 	    * This is the method to be used to delete
 	    * a record from the School table corresponding
