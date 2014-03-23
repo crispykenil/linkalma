@@ -50,7 +50,7 @@ public class UserDAO implements IUserDAO {
 		    	  	ps.setString(12, alumni.getState());
 		    	  	ps.setString(13, alumni.getCountry());
 		    	  	ps.setString(14, alumni.getEmailAddress());
-		    	  	ps.setString(15, alumni.getDob());
+		    	  	ps.setDate(15, alumni.getDob());
 		    	  	ps.setString(16, alumni.getAboutMe());
 		    	  	ps.setString(17, alumni.getPhoto());
 		    	  	ps.setString(18, alumni.getApproved());
