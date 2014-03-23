@@ -12,10 +12,17 @@ public class SchoolMapper implements RowMapper<School> {
 		      School school = new School();
 		      school.setSchoolID(rs.getLong("SchoolID"));
 		      school.setSchoolName(rs.getString("SchoolName"));
-		      school.setSchoolAddress1(rs.getString("SchoolAddress1"));
-		      school.setSchoolAddress2(rs.getString("SchoolAddress2"));
+		      school.setAddress1(rs.getString("Address1"));
+		      school.setAddress2(rs.getString("Address2"));
 		      school.setBranch(rs.getString("Branch"));
-		      school.setWebsiteAddress(rs.getString("WebsiteAddress"));
+		      school.setWebsiteAddress(rs.getString("WebsiteURL"));
+		      school.setActive(rs.getString("ActiveYN"));
+		      school.setApproved(rs.getString("Approved"));
+		      school.setCreateDttm(rs.getTimestamp("CreateDttm"));
 		      return school;
 		   }
+	   
+	   public SchoolMapper() {
+		// TODO Auto-generated constructor stub
+	}
 		}

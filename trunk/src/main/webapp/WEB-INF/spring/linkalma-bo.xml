@@ -4,10 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="userBO" 
-      class="com.linkalma.bo.impl.UserBO">
-     
-      <property name="userDAO" ref="userDAO" />   
+	<bean id="userBO" class="com.linkalma.bo.impl.UserBO">
+		<property name="userDAO" ref="userDAO" />   
    </bean>
    
+	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
+		<property name="schoolDAO" ref="schoolDAO" />   
+   </bean>
+
 </beans>

@@ -71,7 +71,7 @@
 					</ul>
 					<div id="sign-up" class="sign-up-container">
 						<h2>New User? Sign Up</h2>
-						<form action="createProfile" name="userProfile" method="post">
+						<form action="createProfile" id="signUpForm" name="userProfile" method="post">
 
 							<input type="text" value="" placeholder="First Name" name="fName" />
 							<input type="text" value="" placeholder="Last Name" name="lName" />

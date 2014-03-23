@@ -9,13 +9,17 @@ public class School
 	
 	String schoolName;
 	
-	String schoolAddress1;
+	String address1;
 	
-	String schoolAddress2;
+	String address2;
 	
 	String branch;
 	
 	String websiteAddress;
+	
+	String emailAddress;
+	
+	String linkalmaAddress;
 	
 	String approved;
 	
@@ -56,34 +60,6 @@ public class School
 	 */
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
-	}
-
-	/**
-	 * @return the schoolAddress1
-	 */
-	public String getSchoolAddress1() {
-		return schoolAddress1;
-	}
-
-	/**
-	 * @param schoolAddress1 the schoolAddress1 to set
-	 */
-	public void setSchoolAddress1(String schoolAddress1) {
-		this.schoolAddress1 = schoolAddress1;
-	}
-
-	/**
-	 * @return the schoolAdress2
-	 */
-	public String getSchoolAddress2() {
-		return schoolAddress2;
-	}
-
-	/**
-	 * @param schoolAdress2 the schoolAdress2 to set
-	 */
-	public void setSchoolAddress2(String schoolAddress2) {
-		this.schoolAddress2 = schoolAddress2;
 	}
 
 	/**
@@ -196,6 +172,62 @@ public class School
 	 */
 	public void setUpdateUserID(String updateUserID) {
 		this.updateUserID = updateUserID;
+	}
+
+	/**
+	 * @return the address1
+	 */
+	public String getAddress1() {
+		return address1;
+	}
+
+	/**
+	 * @param address1 the address1 to set
+	 */
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	/**
+	 * @return the address2
+	 */
+	public String getAddress2() {
+		return address2;
+	}
+
+	/**
+	 * @param address2 the address2 to set
+	 */
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	/**
+	 * @return the emailAddress
+	 */
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	/**
+	 * @param emailAddress the emailAddress to set
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * @return the linkalmaAddress
+	 */
+	public String getLinkalmaAddress() {
+		return linkalmaAddress;
+	}
+
+	/**
+	 * @param linkalmaAddress the linkalmaAddress to set
+	 */
+	public void setLinkalmaAddress(String linkalmaAddress) {
+		this.linkalmaAddress = linkalmaAddress;
 	}
 
 	
