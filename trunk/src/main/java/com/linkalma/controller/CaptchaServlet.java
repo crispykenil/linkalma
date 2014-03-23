@@ -34,7 +34,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     /*
      * Size image iHeight and iWidth, declare globl
      */
-    int iHeight = 35;
+    int iHeight = 50;
     int iWidth = 150;
 
     /*

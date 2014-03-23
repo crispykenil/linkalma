@@ -17,6 +17,7 @@
 
             });
             $("#signUpForm").submit(function(e){
+            	alert('--');
             	 e.preventDefault();
             	 var formData = $(this).serialize();
            		       	$.ajax({
