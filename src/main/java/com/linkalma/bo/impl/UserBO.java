@@ -2,6 +2,7 @@ package com.linkalma.bo.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.linkalma.bo.IUserBO;
 import com.linkalma.dao.IUserDAO;
@@ -12,13 +13,18 @@ public class UserBO implements IUserBO
 	@Autowired
 	private IUserDAO userDAO;
 
+	@Override
 	@Transactional
-	public int createUser(User userDto)
+	public Model createUser(User userDto, Model model)
 	{
 		System.out.println("In create User UserBO");
 		long userID = getUserDAO().createUser(userDto);
 		userDto.setUserID(userID);
-		return getUserDAO().createCredentials(userDto);
+		getUserDAO().createCredentials(userDto);
+		
+		model.addAttribute("success", "");
+		
+		return model;
 		
 	}
 	

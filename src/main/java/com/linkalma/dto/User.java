@@ -21,7 +21,7 @@ public class User
 	
 	private String gender;
 	
-	private String dob;
+	private Date dob;
 	
 	private String addres1;
 	
@@ -242,14 +242,14 @@ public class User
 	/**
 	 * @return the dob
 	 */
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
 	/**
 	 * @param dob the dob to set
 	 */
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
