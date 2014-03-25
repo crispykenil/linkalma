@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +39,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	private ApplicationContext context = new FileSystemXmlApplicationContext(
-			"F:\\Projects\\LinkAlma\\Code\\linkalma\\src\\main\\webapp\\WEB-INF\\spring\\linkalma-beans.xml");
-
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("linkalma-beans.xml");
+	
 	@Autowired
 	School school;
 	
