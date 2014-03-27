@@ -11,18 +11,21 @@
 	background-color: #0082c8;
 	color:#fff;
 	border:none;
-		-moz-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	border-radius:2px;
+	opacity:0.9
 	
 }
-input.smalbtn {
+input.smalbtn, a.smalbtn {
 	padding:0px 10px;
 	font-size:12px;
+	
 }
-.button:hover {
-	color:#333;
-	background-color:#d9d9d9;
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+
+opacity:1
 }
 
 button.btn.btn-large,input[type="submit"].btn.btn-large {
@@ -40,17 +43,19 @@ padding-bottom:1px;
 }
 .button.large {
 	padding:10px 35px;
+	width:200px;
 }
-input[type=text], input[type=password],input[type=email], input[type=date] {
+
+select, input[type=text], input[type=password], input[type=email], input[type=date], textarea  {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-	background-color: #fff;
-	
 	border: 1px solid #cacaca;
+}
+input[type=text], input[type=password],input[type=email], input[type=date] {
+	background-color: #fff;
 	padding: 8px 10px;
 	margin-bottom:10px;
-
 }
 input[type=text]:focus, input[type=password]:focus, textarea:focus {
     -webkit-box-shadow:0 0 10px #0079b5;
@@ -61,4 +66,15 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
 input[type=radio]{
 	margin:none;
 	padding:none;
+}
+select {
+	padding:7px 5px;	
+}
+.formFields li {
+	width:50%;
+	float:left;
+	height:65px;
+}
+.formFields label {
+	display:block
 }

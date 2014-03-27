@@ -57,11 +57,24 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model) {
+	
+	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
-		return "index";
+		return new ModelAndView("index");
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request, Model model) {
+		logger.info("Welcome home! Redirecting to login page.");
+		return new ModelAndView("redirect:/dashboard");
+	}
+	
+	@RequestMapping(value = "/dashboard")
+	public ModelAndView dashboard(HttpServletRequest request, Model model) {
+		logger.info("Welcome home! Redirecting to Dashboard page.");
+		return new ModelAndView("dashboard");
+	}
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -115,7 +128,6 @@ public class HomeController {
 	
 		UserBO userBO = (UserBO)context.getBean("userBO");
 		model = userBO.createUser(user, model);
-		
 		
 		return model;
 	}

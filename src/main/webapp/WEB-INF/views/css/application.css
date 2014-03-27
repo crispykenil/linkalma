@@ -1,4 +1,6 @@
-
+.vError {
+	border:1px solid red !important;
+}
 
 
 #top-bar ul li{
@@ -66,12 +68,15 @@
 	box-shadow: inset -11px 24px 202px -27px rgba(0,0,0,0.07);
 }
 .sign-in-wrapper input[type=text], #signin-signup-panel input[type=password]{
-	width:90%;
+	width:66%;
 	margin-bottom:0px;
 }
 .sign-in-wrapper ul li{
 
 	margin-bottom:10px;
+}
+.sign-in-wrapper label {
+	margin-right:5px;
 }
 #sign-up input[type=text], #sign-up input[type=date], #sign-up input[type=password], #sign-up input[type=email]{
 	width:187px;
@@ -171,35 +176,38 @@
 	vertical-align:middle
 }
 /* for dashboard */
-	#user-info-panel {
-		margin-bottom:30px;
-	}
-	.user-info {
-		width:500px;
-		margin-left:25px;
-	}
-	.posting-panel {
-		border:1px solid #cccccc;
-		
-	}
-	.posting-panel textarea{
-		width:100%;
-		border:none;
-		height:50px;
-	}
-	.posting-options {
-		background-color:#f2f2f2;
-		padding:5px;
-		height:30px;
-	}
+#user-info-panel {
+	margin-bottom:30px;
+}
+.user-info {
+	width:500px;
+	margin-left:25px;
+}
+.posting-panel {
+	border:1px solid #cccccc;
+	
+}
+.posting-panel textarea{
+	width:100%;
+	border:none;
+	height:50px;
+}
+.posting-options {
+	background-color:#f2f2f2;
+	padding:5px;
+	height:30px;
+}
+
 /* for dashboard */
 
 /* generic classes */
 #capchaContainer {
 	display:inline-block;
 }
-#capchaContainer img {width:100px}
+#capchaContainer img {width:100px;
+float:right
 }
- #capchaContainer input {
-	width:15px !important
+#capchaContainer input {
+	width:75px !important;
+	
 }
