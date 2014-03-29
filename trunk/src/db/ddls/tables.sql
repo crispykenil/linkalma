@@ -1,5 +1,6 @@
 
-CREATE TABLE `userupdates` (
+DROP TABLE `userupdates`;
+CREATE TABLE IF NOT EXISTS `userupdates` (
   `PostID` int(20) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `Subject` varchar(255) DEFAULT NULL,
@@ -16,9 +17,8 @@ CREATE TABLE `userupdates` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
-
-CREATE TABLE `comments` (
+DROP TABLE `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
   `CommentID` int(20) NOT NULL AUTO_INCREMENT,
   `GroupID` int(20) DEFAULT NULL,
   `TopicID` int(20) DEFAULT NULL,
@@ -33,7 +33,8 @@ CREATE TABLE `comments` (
 
  
 
-CREATE TABLE `credentials` (
+DROP TABLE `credentials`;
+CREATE TABLE IF NOT EXISTS `credentials` (
   `UserID` int(11) NOT NULL,
   `Password` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -41,7 +42,8 @@ CREATE TABLE `credentials` (
 
  
 
-CREATE TABLE `donation` (
+DROP TABLE `donation`;
+CREATE TABLE IF NOT EXISTS `donation` (
   `DonationID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `SchoolID` int(20) DEFAULT NULL,
@@ -55,7 +57,8 @@ CREATE TABLE `donation` (
 
  
 
-CREATE TABLE `groups` (
+DROP TABLE `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
   `GroupID` int(20) NOT NULL AUTO_INCREMENT,
   `GroupName` varchar(255) DEFAULT NULL,
   `GroupAdmin` varchar(255) DEFAULT NULL,
@@ -66,7 +69,8 @@ CREATE TABLE `groups` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `referrals` (
+DROP TABLE `referrals`;
+CREATE TABLE IF NOT EXISTS `referrals` (
   `ReferralID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `ReferralEmailID` varchar(40) DEFAULT NULL,
@@ -79,7 +83,8 @@ CREATE TABLE `referrals` (
 
  
 
-CREATE TABLE `school` (
+DROP TABLE `school`;
+CREATE TABLE IF NOT EXISTS `school` (
   `SchoolID` int(20) NOT NULL AUTO_INCREMENT,
   `SchoolName` varchar(255) DEFAULT NULL,
   `Address1` varchar(255) DEFAULT NULL,
@@ -102,7 +107,8 @@ CREATE TABLE `school` (
 
  
 
-CREATE TABLE `schoolnews` (
+DROP TABLE `schoolnews`;
+CREATE TABLE IF NOT EXISTS `schoolnews` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `SchoolID` int(20) DEFAULT NULL,
   `NewsDescription` varchar(255) DEFAULT NULL,
@@ -113,7 +119,8 @@ CREATE TABLE `schoolnews` (
 
  
 
-CREATE TABLE `schoolupdates` (
+DROP TABLE `schoolupdates`;
+CREATE TABLE IF NOT EXISTS `schoolupdates` (
   `PostID` int(11) NOT NULL AUTO_INCREMENT,
   `SchoolID` int(20) DEFAULT NULL,
   `Subject` varchar(255) DEFAULT NULL,
@@ -132,7 +139,8 @@ CREATE TABLE `schoolupdates` (
 
  
 
-CREATE TABLE `topics` (
+DROP TABLE `topics`;
+CREATE TABLE IF NOT EXISTS `topics` (
   `TopicID` int(20) NOT NULL AUTO_INCREMENT,
   `TopicTitle` varchar(255) DEFAULT NULL,
   `TopicStartDate` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -148,7 +156,8 @@ CREATE TABLE `topics` (
 
  
 
-CREATE TABLE `user` (
+DROP TABLE `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `UserID` int(20) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(255) NOT NULL,
   `MiddleName` varchar(255) DEFAULT NULL,
@@ -178,7 +187,8 @@ CREATE TABLE `user` (
 
  
 
-CREATE TABLE `userschool` (
+DROP TABLE `userschool`;
+CREATE TABLE IF NOT EXISTS `userschool` (
   `UserSchoolID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `SchoolID` int(20) DEFAULT NULL,
@@ -193,7 +203,8 @@ CREATE TABLE `userschool` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `StaticCodes` (  `CategoryID` INTEGER NOT NULL ,
+DROP TABLE `StaticCodes`;
+CREATE TABLE IF NOT EXISTS `StaticCodes` (  `CategoryID` INTEGER NOT NULL ,
 `Code` int(10) NOT NULL,  
 `PrimaryDecode` VARCHAR(30),  
 `SecondaryDecode` VARCHAR(60))
