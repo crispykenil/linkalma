@@ -15,7 +15,8 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	border-radius:2px;
-	opacity:0.9
+	opacity:0.8;
+	filter: alpha(opacity=80);
 	
 }
 input.smalbtn, a.smalbtn {
@@ -24,8 +25,8 @@ input.smalbtn, a.smalbtn {
 	
 }
 .button:hover, input[type="submit"]:hover, input[type="button"]:hover {
-
-opacity:1
+ 	filter: alpha(opacity=100);
+	opacity:1
 }
 
 button.btn.btn-large,input[type="submit"].btn.btn-large {
@@ -51,6 +52,7 @@ select, input[type=text], input[type=password], input[type=email], input[type=da
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	border: 1px solid #cacaca;
+	width:100%;
 }
 input[type=text], input[type=password],input[type=email], input[type=date] {
 	background-color: #fff;
