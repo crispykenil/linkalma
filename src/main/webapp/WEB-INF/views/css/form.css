@@ -75,8 +75,12 @@ select {
 .formFields li {
 	width:50%;
 	float:left;
-	height:65px;
+	height:75px;
 }
 .formFields label {
 	display:block
+}
+
+.dobFields select {
+	width:auto
 }

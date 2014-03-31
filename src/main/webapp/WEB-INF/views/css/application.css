@@ -236,7 +236,7 @@ input[type="text"].search-field {
 
 
 /* for register page */
-#registerSchool {
+.registerSchoolContainer {
 	width:50%;
 	margin:50px auto;
 }

@@ -49,7 +49,7 @@
 	<div id="bd">
 		<div id="main-content-wrapper">
 		
-				<div id="registerSchool" class="registerSchoolContainer">
+				<div class="registerSchoolContainer">
 						<h2>Register New School</h2>
 						<form action="registerSchool" name="registerSchool" method="post" id="registerSchoolForm" >
 							<ul>
