@@ -36,28 +36,32 @@ function submitSignUpForm() {
 }
 
 function registerNewSchool() {
-	$("#registerSchoolForm").submit(function(e) {
+	$("#registerSchoolBtn").on("click",function(e) {
 		e.preventDefault();
-		if (validateForm($(this))) {
-			$(this).submit();
-		}
-
+		console.log("test");
+if(validateForm($("#registerSchoolForm"))){
+	$("#registerSchoolForm").submit();
+}
+		
+		
+			
 	});
 }
 
 function submitFormThroughAjax(form) {
 	var formData = form.serialize();
+	var url = form.attr("action");
 	$.ajax({
 		type : "POST",
-		url : "createProfile",
+		url : url,
 		data : formData
 
 	}).done(function(data) {
-		alert(data);
+		console.log(data);
 	});
 }
 function validateForm(form) {
-	var errContainer = $("<div class='errorMsg'></div>");
+	
 	$(".errorMsg", form).remove();
 	var isFormValidate = true;
 	
@@ -71,6 +75,7 @@ function validateForm(form) {
 
 	//password match validation
 	if($("input[type='password']", form).length > 1){
+		var errContainer = $("<div class='errorMsg'></div>");
 		var errMsg = "Your password does not match";
 		var pwdField1 = $("input[type='password']", form).eq(0);
 		var pwdField2 = $("input[type='password']", form).eq(1);
@@ -82,7 +87,6 @@ function validateForm(form) {
 			
 		} else {
 			$(pwdField2).removeClass("vError");
-			
 		}
 		
 	}
@@ -90,6 +94,7 @@ function validateForm(form) {
 	var emailFields = $(".emailField", form);
 	if(emailFields.length > 0){
 		// if any value then only validate email pattern
+		var errContainer = $("<div class='errorMsg'></div>");
 		if($.trim(emailFields.val()).length > 0){
 			var errMsg = "Pleae enter a valid email address";
 			var reg = /^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/ ;
@@ -110,7 +115,7 @@ function validateForm(form) {
 		
 	}
 
-	if($(".vError",form)){
+	if($(".vError",form).length > 0){
 		isFormValidate = false;
 	}
 	
