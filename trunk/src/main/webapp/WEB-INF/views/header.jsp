@@ -25,7 +25,12 @@
 <body>
 <div id="top-bar">
 	<div class="top-navigation fl">
-		<ul><li><a href="contact.html">Contact Us</a></li><li><a href="gallery.html">Photo Gallery</a></li><li><a href="whyus.html"> Why Us </a></li><li><a href="services.html">Services </a></li><li><a href="aboutus.html">About Us</a></li><li><a href="index.html">Home</a></li></ul>
+		<ul>
+			<li><a href="/linkalma">Home</a></li>
+			<li><a href="/linkalma/dashboard">My Dashboard</a></li>
+			<li><a href="/linkalma">About Us</a></li>
+			<li><a href="/linkalma">Contact Us</a></li>
+		</ul>
 	</div>
 	<div class="status-info-bar fr">
 		<ul>
@@ -37,7 +42,7 @@
 	<div id="hd">
 		<div class="header-content-wrapper">
 			<div class="logo">
-				<a href="#"></a>
+				<a href="/linkalma"></a>
 			</div>
 			<div class="fr">
 				<div class="search-bar">
@@ -47,3 +52,6 @@
 			</div>
 		</div><!-- header-content-wrapper -->
 	</div><!-- hd -->
+		<div id="bd">
+		
+			<div id="main-content-wrapper">
