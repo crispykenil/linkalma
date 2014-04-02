@@ -76,6 +76,12 @@ float:right
 	background-repeat: no-repeat;
 	height:100%;
 }
+#hd .logo a {
+    display: block;
+    height: 50px;
+    margin-top: 38px;
+    width: 237px;
+}
 .search-bar {
 	width:300px;
 	margin-top:50px;

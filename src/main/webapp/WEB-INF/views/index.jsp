@@ -111,9 +111,6 @@
 					
 					
 				</div>
-		</div><!-- main-wrapper -->
-	</div><!-- bd -->
-</div><!-- doc-->
 
 <%@ include file="footer.jsp" %>
 
