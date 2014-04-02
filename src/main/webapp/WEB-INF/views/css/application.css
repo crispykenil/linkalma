@@ -231,7 +231,7 @@ input[type="text"].search-field {
 	height:30px;
 }
 
-/* for dashboard */
+/*end for dashboard */
 
 
 
@@ -239,4 +239,9 @@ input[type="text"].search-field {
 .registerSchoolContainer {
 	width:50%;
 	margin:50px auto;
+}
+
+
+.tow-col-layout .main-content{
+	float:left;
 }
