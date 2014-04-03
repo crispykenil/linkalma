@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.linkalma.dao.mapper.SchoolMapper;
-import com.linkalma.dto.User;
 import com.linkalma.dto.School;
+import com.linkalma.dto.UserSchoolDTO;
 
 public class SchoolJDBCTemplate implements ISchoolDAO {
    
@@ -24,7 +24,7 @@ public class SchoolJDBCTemplate implements ISchoolDAO {
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
    }
 
-   public int createSchool(School school) {
+   public long createSchool(School school) {
       String SQL = "insert into School (SchoolID,SchoolName, SchoolAddress1, SchoolAddress2, Branch, WebsiteAddress, Approved, Active) "
       		+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
       
@@ -41,7 +41,7 @@ public class SchoolJDBCTemplate implements ISchoolDAO {
       return School;
    }
 
-   public List<School> listSchools(School school) {
+   public List<School> listSchools() {
       String SQL = "select * from School";
       List <School> Schools = jdbcTemplateObject.query(SQL, 
                                 new SchoolMapper());
@@ -55,7 +55,7 @@ public class SchoolJDBCTemplate implements ISchoolDAO {
       return;
    }
 
-   public int update(Integer id, Integer age){
+   public long update(Integer id, Integer age){
       String SQL = "update School set age = ? where id = ?";
       return jdbcTemplateObject.update(SQL, age, id);
    }
@@ -72,6 +72,18 @@ public JdbcTemplate getJdbcTemplateObject() {
  */
 public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
 	this.jdbcTemplateObject = jdbcTemplateObject;
+}
+
+@Override
+public List<UserSchoolDTO> listLinkedSchools(long userID) {
+		// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public int deleteSchool(long userSchoolID) {
+	// TODO Auto-generated method stub
+	return 0;
 }
 
 }

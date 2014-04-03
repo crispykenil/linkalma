@@ -16,16 +16,16 @@ public class SchoolBO implements ISchoolBO
 
 	@Override
 	public Model createSchool(School schoolDto, Model model) {
-		int result = schoolDAO.createSchool(schoolDto);
+		long result = schoolDAO.createSchool(schoolDto);
 		System.out.println("School Insert Success : "+result);
-		model.addAttribute("successMsg","School Created");
+		model.addAttribute("successMsg","School Registered");
 		return model;
 	}
 
 	@Override
 	public Model getSchoolList(School schoolDto, Model model) {
 		// TODO Auto-generated method stub
-		List<School> schoolList = schoolDAO.listSchools(schoolDto);
+		List<School> schoolList = schoolDAO.listSchools();
 		System.out.println("SchoolList Size : "+schoolList.size());
 		model.addAttribute("schoolList",schoolList );
 		return model;

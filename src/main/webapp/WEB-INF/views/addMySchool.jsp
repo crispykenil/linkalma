@@ -1,22 +1,46 @@
 <%@ include file="header.jsp" %>
 		
 				<div id="addMydSchool" class="addMydSchoolContainer">
+				<span>${model.succesMsg}</span>
 						<h2>Add school to your profile</h2>
-						<form action="createProfile" name="userProfile" method="post">
+						<form action="addMySchool" name="addMySchool" method="post">
+						<select name="schoolID">
+						<c:forEach var="schoolList" items="${model.schoolList}">
+							<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
+						</c:forEach>
 
-							<input type="text" value="" placeholder="First Name" name="fName" />
-							<input type="text" value="" placeholder="Last Name" name="lName" />
-							<input type="email" value="" placeholder="Email" name="emailAddress" />
-							<input type="password" value="" placeholder="Password" name="password" />
-							<input type="password" value="" placeholder="Confirm Password" />
-							<input type="date" value="" placeholder="DOB" name="dob" />
-							<input type="text" value="" placeholder="Gender" name="gender" />
-							
-							<div id="capchaContainer"> <img src="images/captcha-image.jpg" />
-							<input type="text" value="" placeholder="Enter Text" name="captcha" style="width:75px" /></div>
-							
-							<input type="submit" class="button large" value="Sign Up" />
+						</select> 
+						<input type="text" value="" placeholder="From Year" name="fromYear" />
+							<input type="text" value="" placeholder="Last Name" name="toYear" />
+							<input type="text" value="" placeholder="Batch" name="batch" />
+							<input type="text" value="" placeholder="Branch" name="branch" />
+							<input type="submit" class="button large" value="Add School" />
+							<input type="button" class="button large" value="Cancel"  />
 						</form>
-					</div>
-
+					
+					<table class="dataTable">
+					<thead>
+						<tr>
+							<th> School Name </th>
+							<th> From Year </th>
+							<th> To Year </th>
+							<th> Batch</th>
+							<th> Branch</th>
+							<th> - </th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="userSchoolList" items="${model.userSchoolList}">
+						<tr>
+							<td>${userSchoolList.schoolName}</td>
+							<td>${userSchoolList.toYear}</td>
+							<td>${userSchoolList.fromYear}</td>
+							<td>${userSchoolList.passOutBatch}</td>
+							<td>${userSchoolList.branch}</td>
+							<td> <a href="deleteMySchool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+					</table>
+				</div>
 <%@ include file="footer.jsp" %>

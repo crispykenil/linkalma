@@ -2,24 +2,26 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-public class School 
+public class UserSchoolDTO 
 {
 
+	long userSchoolID;
+	
 	long schoolID;
 	
+	long userID;
+
 	String schoolName;
 	
 	String address1;
 	
-	String address2;
-	
 	String branch;
 	
-	String websiteAddress;
+	String fromYear;
 	
-	String emailAddress;
+	String toYear;
 	
-	String linkalmaAddress;
+	String passOutBatch;
 	
 	String approved;
 	
@@ -27,11 +29,11 @@ public class School
 	
 	Date createDttm;
 	
-	long createUserID;
+	String createUserID;
 	
 	Date updateDttm;
 	
-	long updateUserID;
+	String updateUserID;
 	
 	
 	/**
@@ -77,20 +79,6 @@ public class School
 	}
 
 	/**
-	 * @return the websiteAddress
-	 */
-	public String getWebsiteAddress() {
-		return websiteAddress;
-	}
-
-	/**
-	 * @param websiteAddress the websiteAddress to set
-	 */
-	public void setWebsiteAddress(String websiteAddress) {
-		this.websiteAddress = websiteAddress;
-	}
-
-	/**
 	 * @return the approved
 	 */
 	public String getApproved() {
@@ -132,7 +120,20 @@ public class School
 		this.createDttm = createDttm;
 	}
 
-	
+	/**
+	 * @return the createUserID
+	 */
+	public String getCreateUserID() {
+		return createUserID;
+	}
+
+	/**
+	 * @param createUserID the createUserID to set
+	 */
+	public void setCreateUserID(String createUserID) {
+		this.createUserID = createUserID;
+	}
+
 	/**
 	 * @return the updateDttm
 	 */
@@ -145,6 +146,20 @@ public class School
 	 */
 	public void setUpdateDttm(Date updateDttm) {
 		this.updateDttm = updateDttm;
+	}
+
+	/**
+	 * @return the updateUserID
+	 */
+	public String getUpdateUserID() {
+		return updateUserID;
+	}
+
+	/**
+	 * @param updateUserID the updateUserID to set
+	 */
+	public void setUpdateUserID(String updateUserID) {
+		this.updateUserID = updateUserID;
 	}
 
 	/**
@@ -162,73 +177,73 @@ public class School
 	}
 
 	/**
-	 * @return the address2
+	 * @return the userID
 	 */
-	public String getAddress2() {
-		return address2;
+	public long getUserID() {
+		return userID;
 	}
 
 	/**
-	 * @param address2 the address2 to set
+	 * @param userID the userID to set
 	 */
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setUserID(long userID) {
+		this.userID = userID;
 	}
 
 	/**
-	 * @return the emailAddress
+	 * @return the fromYear
 	 */
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getFromYear() {
+		return fromYear;
 	}
 
 	/**
-	 * @param emailAddress the emailAddress to set
+	 * @param fromYear the fromYear to set
 	 */
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setFromYear(String fromYear) {
+		this.fromYear = fromYear;
 	}
 
 	/**
-	 * @return the linkalmaAddress
+	 * @return the toYear
 	 */
-	public String getLinkalmaAddress() {
-		return linkalmaAddress;
+	public String getToYear() {
+		return toYear;
 	}
 
 	/**
-	 * @param linkalmaAddress the linkalmaAddress to set
+	 * @param toYear the toYear to set
 	 */
-	public void setLinkalmaAddress(String linkalmaAddress) {
-		this.linkalmaAddress = linkalmaAddress;
+	public void setToYear(String toYear) {
+		this.toYear = toYear;
 	}
 
 	/**
-	 * @return the createUserID
+	 * @return the passOutBatch
 	 */
-	public long getCreateUserID() {
-		return createUserID;
+	public String getPassOutBatch() {
+		return passOutBatch;
 	}
 
 	/**
-	 * @param createUserID the createUserID to set
+	 * @param passOutBatch the passOutBatch to set
 	 */
-	public void setCreateUserID(long createUserID) {
-		this.createUserID = createUserID;
+	public void setPassOutBatch(String passOutBatch) {
+		this.passOutBatch = passOutBatch;
 	}
 
 	/**
-	 * @return the updateUserID
+	 * @return the userSchoolID
 	 */
-	public long getUpdateUserID() {
-		return updateUserID;
+	public long getUserSchoolID() {
+		return userSchoolID;
 	}
 
 	/**
-	 * @param updateUserID the updateUserID to set
+	 * @param userSchoolID the userSchoolID to set
 	 */
-	public void setUpdateUserID(long updateUserID) {
-		this.updateUserID = updateUserID;
+	public void setUserSchoolID(long userSchoolID) {
+		this.userSchoolID = userSchoolID;
 	}
 
 	
