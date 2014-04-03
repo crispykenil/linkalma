@@ -8,5 +8,9 @@
 	<import resource="linkalma-dao.xml" />
 
 	<import resource="linkalma-bo.xml" />
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<bean name="/fileUpload.do" class="com.linkalma.controller.FileUploadController"/>
    
 </beans>

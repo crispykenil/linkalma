@@ -1,11 +1,8 @@
 package com.linkalma.controller;
 
-
-
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -24,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.linkalma.bo.IUserBO;
+import com.linkalma.bo.ISchoolBO;
+import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.bo.impl.UserBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dto.User;
 import com.linkalma.dto.School;
+import com.linkalma.dto.UserSchoolDTO;
 
 /**
  * Handles requests for the application home page.
@@ -88,7 +85,7 @@ public class HomeController {
 		school.setBranch(request.getParameter("branch"));
 		
 		schoolJDBCTemplate.createSchool(school);;
-		List<School> schoolList = schoolJDBCTemplate.listSchools(school);
+		List<School> schoolList = schoolJDBCTemplate.listSchools();
 		model.addAttribute("schoolList", schoolList );
 		
 		logger.info("Forwarding to Search Page!");
@@ -103,22 +100,22 @@ public class HomeController {
 	public Model createProfile(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! The client locale is {}.");
 		
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy"); // your template here
-				Date dbDate = null;
-				try {
-					dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
-				} catch (ParseException e) {
-					formatter = new SimpleDateFormat("dd-mm-yyyy");
-					try {
-						dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
+/*		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy"); // your template here
+		Date dbDate = null;
+		try {
+			dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
+		} catch (ParseException e) {
+			formatter = new SimpleDateFormat("dd-mm-yyyy");
+			try {
+				dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}*/
 		user.setUserFirstName(request.getParameter("fName"));
 		user.setUserLastName(request.getParameter("lName"));
-		user.setDob(dbDate);
+		user.setDob(new Date(System.currentTimeMillis()));
 		user.setGender(request.getParameter("gender"));
 		user.setEmailAddress(request.getParameter("emailAddress"));
 		user.setPassword(request.getParameter("password"));
@@ -135,45 +132,64 @@ public class HomeController {
 	
 	@RequestMapping(value = "/addMySchool", method = RequestMethod.POST)
 	@Transactional
-	public String addMySchool(HttpServletRequest request, Model model) {
+	public ModelAndView addMySchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome addMySchool!");
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
-		Date dbDate = null;
-		try {
-			dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-						
-		user.setUserFirstName(request.getParameter("fName"));
-		user.setUserLastName(request.getParameter("lName"));
-		user.setDob(dbDate);
-		user.setGender(request.getParameter("gender"));
-		user.setEmailAddress(request.getParameter("emailAddress"));
-		user.setPassword(request.getParameter("password"));
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
 		
-		System.out.println("Session Captcha: "+request.getSession().getAttribute("dns_security_code"));
-		System.out.println("User Captcha: "+request.getParameter("captcha"));
-	
-		UserBO userBO = (UserBO)context.getBean("userBO");
-//		userBO.createUser(user);
+		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
 		
-		return "index";
+		userSchoolDto.setSchoolID(Long.parseLong(request.getParameter("schoolID")));
+		userSchoolDto.setUserID(Long.parseLong("1"));
+		userSchoolDto.setFromYear(request.getParameter("fromYear"));
+		userSchoolDto.setToYear(request.getParameter("toYear"));
+		userSchoolDto.setPassOutBatch(request.getParameter("batch"));
+		userSchoolDto.setBranch(request.getParameter("branch"));
+
+		userSchoolBO.createUserSchool(userSchoolDto, model);
+		System.out.println("Redirecting to LoadUser School");
+		return new ModelAndView("redirect:/loadUserSchool","model", model);
 	}
 
+	@RequestMapping(value = "/deleteMySchool", method = RequestMethod.GET)
+	@Transactional
+	public ModelAndView deleteMySchool(HttpServletRequest request, Model model) {
+		logger.info("Welcome deleteMySchool!");
+		
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
+		
+		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
+		
+		userSchoolDto.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
+
+		userSchoolBO.deleteUserSchool(userSchoolDto, model);
+		System.out.println("Redirecting to LoadUser School");
+		return new ModelAndView("redirect:/loadUserSchool","model", model);
+	}
+
+	@RequestMapping(value = "/loadUserSchool")
+	@Transactional
+	public ModelAndView loadUserSchool(HttpServletRequest request, Model model) {
+		logger.info("Loading User School!");
+						
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
+		
+		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
+		
+		model = userSchoolBO.getUserSchoolList(userSchoolDto, model);
+		return new ModelAndView("addMySchool","model", model);
+	}
+	
 	@RequestMapping(value = "/loadSchool")
 	@Transactional
-	public ModelAndView loadSchool(HttpServletRequest request, Model model) {
+	public ModelAndView loadAllSchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
 						
-		SchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
+		ISchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
 		
 		School schoolDto = new School();
 		
 		model = schoolBO.getSchoolList(schoolDto, model);
-		System.out.println("Got the list...");
 		return new ModelAndView("registerSchool","model", model);
 	}
 	
@@ -182,7 +198,7 @@ public class HomeController {
 	public ModelAndView registerSchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
 						
-		SchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
+		ISchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
 		
 		School schoolDto = new School();
 		schoolDto.setAddress1(request.getParameter("address1"));

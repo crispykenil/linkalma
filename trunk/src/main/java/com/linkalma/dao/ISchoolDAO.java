@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.linkalma.dto.User;
 import com.linkalma.dto.School;
+import com.linkalma.dto.UserSchoolDTO;
 
 public interface ISchoolDAO {
 
@@ -19,7 +19,7 @@ public interface ISchoolDAO {
 	    * This is the method to be used to create
 	    * a record in the School table.
 	    */
-	   public int createSchool(School school);
+	   public long createSchool(School school);
 	   /** 
 	    * This is the method to be used to list down
 	    * a record from the School table corresponding
@@ -30,7 +30,7 @@ public interface ISchoolDAO {
 	    * This is the method to be used to list down
 	    * all the records from the School table.
 	    */
-	   public List<School> listSchools(School schoolDto);
+	   public List<School> listSchools();
 	   /** 
 	    * This is the method to be used to delete
 	    * a record from the School table corresponding
@@ -41,5 +41,9 @@ public interface ISchoolDAO {
 	    * This is the method to be used to update
 	    * a record into the School table.
 	    */
-	   public int update(Integer id, Integer age);
+	   public long update(Integer id, Integer age);
+	   
+	   public List<UserSchoolDTO> listLinkedSchools(long userID);
+
+	public int deleteSchool(long userSchoolID);
 }

@@ -12,4 +12,9 @@
 		<property name="schoolDAO" ref="schoolDAO" />   
    </bean>
 
+	<bean id="userSchoolBO" class="com.linkalma.bo.impl.UserSchoolBO">
+		<property name="schoolDAO" ref="schoolDAO" />   
+		<property name="userSchoolDAO" ref="userSchoolDAO" />   
+   </bean>
+
 </beans>

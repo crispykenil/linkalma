@@ -18,7 +18,7 @@ public class SchoolMapper implements RowMapper<School> {
 		      school.setWebsiteAddress(rs.getString("WebsiteURL"));
 		      school.setActive(rs.getString("ActiveYN"));
 		      school.setApproved(rs.getString("Approved"));
-		      school.setCreateDttm(rs.getTimestamp("CreateDttm"));
+		      school.setCreateDttm(rs.getDate("CreateDttm"));
 		      return school;
 		   }
 	   

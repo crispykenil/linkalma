@@ -45,6 +45,11 @@
 	        <version>5.1.15</version>
     	</dependency>
 
+		<dependency>
+	        <groupId>commons-fileupload</groupId>
+	        <artifactId>commons-fileupload</artifactId>
+	        <version>1.2.1</version>
+    	</dependency>
 <!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
