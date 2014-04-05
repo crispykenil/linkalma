@@ -38,8 +38,7 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 		    	  	ps.setString(3, userschoolDto.getFromYear());
 		    	  	ps.setString(4, userschoolDto.getToYear());
 		    	  	ps.setString(5, userschoolDto.getPassOutBatch());
-		    	  	ps.setString(6, userschoolDto.getBranch());
-		    	  	ps.setLong(7, userschoolDto.getUserID());
+		    	  	ps.setLong(6, userschoolDto.getUserID());
 		    	  	
 		    	  	return ps;
 	    	  	}

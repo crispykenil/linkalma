@@ -35,9 +35,9 @@
 						<form action="createProfile" id="signUpForm" name="userProfile" method="post">
 											<ul class="formFields clear-fix">
 							<li><label>First Name</label>
-							<input type="text" value="" placeholder="" name="fName" class="required" /></li>
+							<input type="text" value="" placeholder="" name="userFirstName" class="required" /></li>
 							<li><label>Last Name</label>
-							<input type="text" value="" placeholder="" name="lName" class="required" /></li>
+							<input type="text" value="" placeholder="" name="userLastName" class="required" /></li>
 							<li><label>Email</label>
 							<input type="text" value="" placeholder="" name="emailAddress"  class="required" /></li>
 							<li><label>DOB</label>

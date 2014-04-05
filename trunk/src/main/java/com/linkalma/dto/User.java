@@ -21,7 +21,15 @@ public class User
 	
 	private String gender;
 	
+	private String captcha;
+	
 	private Date dob;
+	
+	private short day;
+	
+	private short year;
+	
+	private String month;
 	
 	private String addres1;
 	
@@ -445,5 +453,61 @@ public class User
 		sb.append("Apprv: "+this.approved);
 		
 		return sb.toString();
+	}
+
+	/**
+	 * @return the captcha
+	 */
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	/**
+	 * @param captcha the captcha to set
+	 */
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+
+	/**
+	 * @return the day
+	 */
+	public short getDay() {
+		return day;
+	}
+
+	/**
+	 * @param day the day to set
+	 */
+	public void setDay(short day) {
+		this.day = day;
+	}
+
+	/**
+	 * @return the year
+	 */
+	public short getYear() {
+		return year;
+	}
+
+	/**
+	 * @param year the year to set
+	 */
+	public void setYear(short year) {
+		this.year = year;
+	}
+
+	/**
+	 * @return the month
+	 */
+	public String getMonth() {
+		return month;
+	}
+
+	/**
+	 * @param month the month to set
+	 */
+	public void setMonth(String month) {
+		this.month = month;
 	}
 }

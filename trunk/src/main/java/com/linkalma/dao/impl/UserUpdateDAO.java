@@ -8,14 +8,14 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.linkalma.dao.ISchoolUpdateDAO;
-import com.linkalma.dao.mapper.SchoolUpdateMapper;
+import com.linkalma.dao.IUserUpdateDAO;
+import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dao.mapper.UserUpdateMapper;
-import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.School;
 import com.linkalma.dto.UserUpdateDTO;
 import com.linkalma.utils.ApplicationConstants;
 
-public class SchoolUpdateDAO implements ISchoolUpdateDAO {
+public class UserUpdateDAO implements IUserUpdateDAO {
 
 	@Autowired
 	private DataSource dataSource;
@@ -23,18 +23,18 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplateObject;
 	
+
 	@Override
-	public int updateNews(SchoolUpdateDTO schoolUPdateDto) {
+	public int createWallPost(UserUpdateDTO userUpdateDto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID) {
-		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL,
-				new SchoolUpdateMapper());
-		return schoolUpdateDTO;
-		
+	public List<UserUpdateDTO> getUserWallPost(long userID) {
+		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_USER_WALL_POSTS,
+				new UserUpdateMapper());
+		return userUpdateDtoList;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	/**

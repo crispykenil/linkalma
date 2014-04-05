@@ -2,11 +2,9 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-public class SchoolUpdateDTO {
+public class UserUpdateDTO {
 
 	private long postID;
-	
-	private long schoolID;
 	
 	private long userID;
 	
@@ -14,19 +12,15 @@ public class SchoolUpdateDTO {
 	
 	private String description;
 	
-	private String type;
-	
-	private String schoolName;
-	
-	private String branch;
-	
-	private String emailAddress;
-	
-	private String linkAlmaURL;
+	private String uploadedOn;
 	
 	private long createUserID;
 	
 	private Date CreateDttm;
+	
+	private String userFirstName;
+	
+	private String userLastName;
 	
 	private long updateUserID;
 	
@@ -46,19 +40,6 @@ public class SchoolUpdateDTO {
 		this.postID = postID;
 	}
 
-	/**
-	 * @return the schoolID
-	 */
-	public long getSchoolID() {
-		return schoolID;
-	}
-
-	/**
-	 * @param schoolID the schoolID to set
-	 */
-	public void setSchoolID(long schoolID) {
-		this.schoolID = schoolID;
-	}
 
 	/**
 	 * @return the subject
@@ -86,20 +67,6 @@ public class SchoolUpdateDTO {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	/**
@@ -173,58 +140,44 @@ public class SchoolUpdateDTO {
 	}
 
 	/**
-	 * @return the schoolName
+	 * @return the uploadedOn
 	 */
-	public String getSchoolName() {
-		return schoolName;
+	public String getUploadedOn() {
+		return uploadedOn;
 	}
 
 	/**
-	 * @param schoolName the schoolName to set
+	 * @param uploadedOn the uploadedOn to set
 	 */
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
+	public void setUploadedOn(String uploadedOn) {
+		this.uploadedOn = uploadedOn;
 	}
 
 	/**
-	 * @return the branch
+	 * @return the userFirstName
 	 */
-	public String getBranch() {
-		return branch;
+	public String getUserFirstName() {
+		return userFirstName;
 	}
 
 	/**
-	 * @param branch the branch to set
+	 * @param userFirstName the userFirstName to set
 	 */
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
 	}
 
 	/**
-	 * @return the emailAddress
+	 * @return the userLastName
 	 */
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getUserLastName() {
+		return userLastName;
 	}
 
 	/**
-	 * @param emailAddress the emailAddress to set
+	 * @param userLastName the userLastName to set
 	 */
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
-	/**
-	 * @return the linkAlmaURL
-	 */
-	public String getLinkAlmaURL() {
-		return linkAlmaURL;
-	}
-
-	/**
-	 * @param linkAlmaURL the linkAlmaURL to set
-	 */
-	public void setLinkAlmaURL(String linkAlmaURL) {
-		this.linkAlmaURL = linkAlmaURL;
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
 	}
 }

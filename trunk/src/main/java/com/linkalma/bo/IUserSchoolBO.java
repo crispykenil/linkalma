@@ -6,7 +6,7 @@ import com.linkalma.dto.UserSchoolDTO;
 
 public interface IUserSchoolBO {
 
-	public Model createUserSchool(UserSchoolDTO userSchoolDto, Model model);
+	public void createUserSchool(UserSchoolDTO userSchoolDto);
 	
 	public Model getUserSchoolList(UserSchoolDTO userSchoolDto, Model model);
 
