@@ -1,25 +1,24 @@
 
 
 <%@ include file="header.jsp" %>
-
-	<div id="show-case-area">
-		<div id="signin-signup-panel" class="fl border-box">
-				<div class="sign-in-wrapper">
-					<h2>Login</h2>
-					<form:form action="login" modelAttribute="loginForm" >
-						<ul>
-							<li><label>Username</label><input type="text" value="" /> </li>
-							<li><label>Password</label><input type="password" value="" /> </li>
-							<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
-							<a href="javascript:;" class="smallestFont fr">Forgot your password?</a>
-							</li>
-							<li class="smallFont"> 
-								<label>Alumni Login	<input type="radio" value="" name="loginType" checked />	</label>
-								<label class="fr">School Login <input type="radio" value="" name="loginType" />	</label>
-							</li>
-						</ul>
-					</form:form>
-				</div>
+			<div id="show-case-area">
+					<div id="signin-signup-panel" class="fl border-box">
+						<div class="sign-in-wrapper">
+						<h2>Login</h2>
+						<form:form action="login" modelAttribute="loginForm" >
+							<ul>
+								<li><label>Username</label><input type="text" value="" /> </li>
+								<li><label>Password</label><input type="password" value="" /> </li>
+								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
+								<a href="javascript:;" class="smallestFont fr">Forgot your password?</a>
+								</li>
+								<li class="smallFont"> 
+									<label>Alumni Login	<input type="radio" value="" name="loginType" checked />	</label>
+									<label class="fr">School Login <input type="radio" value="" name="loginType" />	</label>
+								</li>
+							</ul>
+						</form:form>
+					</div>
 		
 				<div class="sign-up-wrapper">
 					<ul>
@@ -81,9 +80,6 @@
 			<img src="images/show-case.png" />
 		</div>
 	</div><!-- show-case-area -->
-	<div id="bd" class="tow-col-layout">
-		<div id="main-content-wrapper" class="clear-fix">
-		
 				<div class="left-content border-box">
 					<div class="news-and-event">
 						<h2>Linkalma News & Events</h2>

@@ -85,6 +85,11 @@ public class HomeController {
 		return new ModelAndView("dashboard", "model", model);
 	}
 
+	@RequestMapping(value = "/school")
+	public ModelAndView school(HttpServletRequest request, Model model) {
+		logger.info("Welcome home! Redirecting to Dashboard page.");
+		return new ModelAndView("school");
+	}
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
