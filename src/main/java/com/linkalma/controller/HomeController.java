@@ -15,10 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.linkalma.bo.IDashboardBO;
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
@@ -26,6 +28,7 @@ import com.linkalma.bo.impl.UserBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dto.User;
 import com.linkalma.dto.School;
+import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 
 /**
@@ -42,9 +45,6 @@ public class HomeController {
 	School school;
 	
 	@Autowired
-	User user;
-
-	@Autowired
 	SchoolJDBCTemplate schoolJDBCTemplate;
 	
 	@Autowired
@@ -57,6 +57,14 @@ public class HomeController {
 	
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
+
+		if(request.getSession().getAttribute("userBean") == null)
+		{
+			UserBean userBean = new UserBean();
+			userBean.setUserID(1);
+			request.getSession().setAttribute("userBean", userBean);
+			System.out.println("User Bean set in session");
+		}
 		return new ModelAndView("index");
 	}
 	
@@ -67,9 +75,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/dashboard")
-	public ModelAndView dashboard(HttpServletRequest request, Model model) {
+	public ModelAndView dashboard(@ModelAttribute User userDto, Model model) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
-		return new ModelAndView("dashboard");
+		
+		IDashboardBO dashboardBO = (IDashboardBO)context.getBean("dashboardBO");
+		
+		model = dashboardBO.getAllDashboardDetails(userDto, model);
+		
+		return new ModelAndView("dashboard", "model", model);
 	}
 
 	/**
@@ -97,56 +110,36 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/createProfile", method = RequestMethod.POST)
 	@Transactional
-	public Model createProfile(HttpServletRequest request, Model model) {
-		logger.info("Welcome home! The client locale is {}.");
+	public Model createProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+		logger.info("Welcome home! ");
 		
-/*		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy"); // your template here
-		Date dbDate = null;
-		try {
-			dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
-		} catch (ParseException e) {
-			formatter = new SimpleDateFormat("dd-mm-yyyy");
-			try {
-				dbDate = new Date(formatter.parse(request.getParameter("dob")).getTime());
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}*/
-		user.setUserFirstName(request.getParameter("fName"));
-		user.setUserLastName(request.getParameter("lName"));
-		user.setDob(new Date(System.currentTimeMillis()));
-		user.setGender(request.getParameter("gender"));
-		user.setEmailAddress(request.getParameter("emailAddress"));
-		user.setPassword(request.getParameter("password"));
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		if (userBean != null)
+			user.setUserID(userBean.getUserID());
+		else
+			user.setUserID(0);
 		
-		System.out.println("Session Captcha: "+request.getSession().getAttribute("dns_security_code"));
-		System.out.println("User Captcha: "+request.getParameter("captcha"));
-	
+		System.out.println("UserID : "+ user.getUserID());
 		UserBO userBO = (UserBO)context.getBean("userBO");
 		model = userBO.createUser(user, model);
 		
 		return model;
 	}
 
-	
 	@RequestMapping(value = "/addMySchool", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView addMySchool(HttpServletRequest request, Model model) {
-		logger.info("Welcome addMySchool!");
+	public ModelAndView addMySchool(@ModelAttribute UserSchoolDTO userSchoolDto, HttpServletRequest request, Model model) {
+		logger.info("=====Welcome addMySchool!=====");
 		
 		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
 		
-		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		if (userBean != null)
+			userSchoolDto.setUserID(userBean.getUserID());
+		else
+			userSchoolDto.setUserID(0);
+		userSchoolBO.createUserSchool(userSchoolDto);
 		
-		userSchoolDto.setSchoolID(Long.parseLong(request.getParameter("schoolID")));
-		userSchoolDto.setUserID(Long.parseLong("1"));
-		userSchoolDto.setFromYear(request.getParameter("fromYear"));
-		userSchoolDto.setToYear(request.getParameter("toYear"));
-		userSchoolDto.setPassOutBatch(request.getParameter("batch"));
-		userSchoolDto.setBranch(request.getParameter("branch"));
-
-		userSchoolBO.createUserSchool(userSchoolDto, model);
 		System.out.println("Redirecting to LoadUser School");
 		return new ModelAndView("redirect:/loadUserSchool","model", model);
 	}
@@ -169,12 +162,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/loadUserSchool")
 	@Transactional
-	public ModelAndView loadUserSchool(HttpServletRequest request, Model model) {
+	public ModelAndView loadUserSchool(@ModelAttribute UserSchoolDTO userSchoolDto, Model model) {
 		logger.info("Loading User School!");
 						
 		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
-		
-		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
 		
 		model = userSchoolBO.getUserSchoolList(userSchoolDto, model);
 		return new ModelAndView("addMySchool","model", model);
@@ -195,22 +186,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/registerSchool")
 	@Transactional
-	public ModelAndView registerSchool(HttpServletRequest request, Model model) {
+	public ModelAndView registerSchool(@ModelAttribute School schoolDto, HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
 						
 		ISchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
 		
-		School schoolDto = new School();
-		schoolDto.setAddress1(request.getParameter("address1"));
-		schoolDto.setAddress2(request.getParameter("address2"));
-		schoolDto.setSchoolName(request.getParameter("schoolName"));
-		schoolDto.setEmailAddress(request.getParameter("emailAddress"));
 		schoolDto.setApproved("Y");
 		schoolDto.setActive("Y");
 		
 		schoolBO.createSchool(schoolDto, model);
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName(viewName);
 		return new ModelAndView("redirect:/loadSchool","model", model);
 	}
 	/**
@@ -225,20 +209,6 @@ public class HomeController {
 	 */
 	public void setSchool(School school) {
 		this.school = school;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	/**

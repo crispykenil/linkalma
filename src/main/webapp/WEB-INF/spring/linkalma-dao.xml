@@ -34,4 +34,14 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>
 
+	<bean id="schoolUpdateDAO" 
+      class="com.linkalma.dao.impl.SchoolUpdateDAO">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+	
+	<bean id="userUpdateDAO" 
+      class="com.linkalma.dao.impl.UserUpdateDAO">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+	
 </beans>

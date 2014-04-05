@@ -246,5 +246,11 @@ public class UserSchoolDTO
 		this.userSchoolID = userSchoolID;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Batch: "+passOutBatch+"\nFrom Year: "+fromYear+"\nTo Year: "+toYear+"\nSchoolID: "+schoolID);
+		return sb.toString();
+	}
 	
 }

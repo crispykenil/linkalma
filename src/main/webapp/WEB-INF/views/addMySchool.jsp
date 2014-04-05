@@ -3,20 +3,19 @@
 				<div id="addMydSchool" class="addMydSchoolContainer">
 				<span>${model.succesMsg}</span>
 						<h2>Add school to your profile</h2>
-						<form action="addMySchool" name="addMySchool" method="post">
-						<select name="schoolID">
-						<c:forEach var="schoolList" items="${model.schoolList}">
-							<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
-						</c:forEach>
-
-						</select> 
-						<input type="text" value="" placeholder="From Year" name="fromYear" />
+						<form:form action="addMySchool" name="addMySchool" method="post">
+							<select name="schoolID">
+								<c:forEach var="schoolList" items="${model.schoolList}">
+									<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
+								</c:forEach>
+							</select> 
+							<input type="text" value="" placeholder="From Year" name="fromYear" />
 							<input type="text" value="" placeholder="Last Name" name="toYear" />
-							<input type="text" value="" placeholder="Batch" name="batch" />
+							<input type="text" value="" placeholder="Batch" name="passOutBatch" />
 							<input type="text" value="" placeholder="Branch" name="branch" />
 							<input type="submit" class="button large" value="Add School" />
 							<input type="button" class="button large" value="Cancel"  />
-						</form>
+						</form:form>
 					
 					<table class="dataTable">
 					<thead>

@@ -21,11 +21,11 @@ public class UserSchoolBO implements IUserSchoolBO {
 	private IUserSchoolDAO userSchoolDAO;
 	
 	@Override
-	public Model createUserSchool(UserSchoolDTO userSchoolDto, Model model) {
-		
+	public void createUserSchool(UserSchoolDTO userSchoolDto) {
+		System.out.println("UserSchool Obj: \n"+userSchoolDto);
 		getUserSchoolDAO().addUserSchool(userSchoolDto);
-		model.addAttribute("successMsg","School Added to your Profile");
-		return model;
+		/*model.addAttribute("successMsg","School Added to your Profile");
+		return model;*/
 	}
 
 	@Override

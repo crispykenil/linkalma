@@ -16,5 +16,12 @@
 		<property name="schoolDAO" ref="schoolDAO" />   
 		<property name="userSchoolDAO" ref="userSchoolDAO" />   
    </bean>
+   
+   <bean id="dashboardBO" class="com.linkalma.bo.impl.DashboardBO">
+		<property name="schoolUpdateDAO" ref="schoolUpdateDAO" />   
+		<property name="userUpdateDAO" ref="userUpdateDAO" />   
+   		<property name="schoolDAO" ref="schoolDAO" />   
+	</bean>
+   
 
 </beans>
