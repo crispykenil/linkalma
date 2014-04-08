@@ -16,6 +16,7 @@ import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.UserUpdateDTO;
+import com.linkalma.dto.WallPostDto;
 
 public class DashboardBO implements IDashboardBO {
 
@@ -33,18 +34,18 @@ public class DashboardBO implements IDashboardBO {
 	
 	
 	@Override
-	public Map<Long,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {
+	public Map<String,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {
 		
 		List<UserSchoolDTO> userSchoolDtoList = getSchoolDAO().listLinkedSchools(userDto.getUserID());
 		System.out.println("userSchoolDtoList Size: "+userSchoolDtoList.size());
 		
 		List<SchoolUpdateDTO> schoolUpdateDtoList = null;
-		Map<Long,List<SchoolUpdateDTO>> schoolUpdatesMap = new HashMap<Long,List<SchoolUpdateDTO>>();
+		Map<String,List<SchoolUpdateDTO>> schoolUpdatesMap = new HashMap<String,List<SchoolUpdateDTO>>();
 		
 		for(UserSchoolDTO userschoolDto :userSchoolDtoList )
 		{
 			schoolUpdateDtoList = getSchoolUpdateDAO().getSchoolUpdates(userschoolDto.getSchoolID());
-			schoolUpdatesMap.put(userschoolDto.getSchoolID(), schoolUpdateDtoList);
+			schoolUpdatesMap.put(userschoolDto.getSchoolName(), schoolUpdateDtoList);
 			System.out.println("Adding school updates for schoolID : "+userschoolDto.getSchoolID());
 		}
 		return schoolUpdatesMap;
@@ -57,7 +58,7 @@ public class DashboardBO implements IDashboardBO {
 	}
 
 	@Override
-	public List<UserUpdateDTO> getUserUpdates(User userDto) {
+	public List<UserUpdateDTO> getUserUpdates(User userDto) {	
 		List<UserUpdateDTO> userUpdateDto = getUserUpdateDAO().getUserWallPost(userDto.getUserID());
 		return userUpdateDto;
 	}
@@ -67,12 +68,14 @@ public class DashboardBO implements IDashboardBO {
 	public Model getAllDashboardDetails(User userDto, Model model) {
 		
 		
-		Map<Long,List<SchoolUpdateDTO>> schoolUpdatesDtoMap = getSchoolUpdates(userDto);
+		Map<String,List<SchoolUpdateDTO>> schoolUpdatesDtoMap = getSchoolUpdates(userDto);
+		
+		
 		
 		List<UserUpdateDTO> userUpdateDto = getUserUpdates(userDto);
 		
-		System.out.println(schoolUpdatesDtoMap.size());
-		System.out.println(userUpdateDto.size());
+		System.out.println("School Update Size: "+schoolUpdatesDtoMap.size());
+		System.out.println("User Update Size :"+userUpdateDto.size());
 		
 		model.addAttribute("schoolUpdatesDtoMap", schoolUpdatesDtoMap );
 		model.addAttribute("userUpdateDto", userUpdateDto );
@@ -135,6 +138,12 @@ public class DashboardBO implements IDashboardBO {
 	 */
 	public void setSchoolDAO(ISchoolDAO schoolDAO) {
 		this.schoolDAO = schoolDAO;
+	}
+
+	@Override
+	public Model addWallPost(WallPostDto wallPost, Model model) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

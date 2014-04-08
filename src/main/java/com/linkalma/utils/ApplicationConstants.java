@@ -51,5 +51,5 @@ public class ApplicationConstants {
 			+ " UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME "
 			+ " FROM USERUPDATES UU, USER U "
 			+ " WHERE UU.USERID = U.USERID"
-			+ " AND U.USERID = 1" ;
+			+ " AND U.USERID = 11" ;
 }
