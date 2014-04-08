@@ -15,8 +15,8 @@
 							
 						</ul>
 						<div class="posting-panel">
-							<form>
-								<textarea placeholder="Share your views"></textarea>
+							<form:form action="addWallPost">
+								<textarea placeholder="Share your views" name="wallPost"></textarea>
 								<div class="posting-options border-box clear-fix">
 									<div class="fl">
 										Post At:
@@ -26,7 +26,7 @@
 									</div>
 									
 								</div>
-							</form>
+								</form:form>
 						</div>
 					</div>
 					
@@ -37,8 +37,13 @@
 							<h3>My School's Update</h3>
 						</div>
 						<div class="panel-content">
-							<h3>Ryan International</h3>
-							<p>Lorum epusm kapsup repsm kolika,lorum epsum kapsu usssum kaliupam dihlka, lorum epsum</p>
+						<c:forEach var='schoolMap' items='${model.schoolUpdatesDtoMap}'>
+								<h3>${schoolMap.key}</h3>
+						    <c:forEach var='schoolUpdateDto' items='${schoolMap.value}' >
+								<p><b>${schoolUpdateDto.subject }</b></p>
+								<p>${schoolUpdateDto.description }</p>
+						    </c:forEach>
+						</c:forEach>
 						</div>
 					</div>
 					<div class="panel">
@@ -57,8 +62,10 @@
 								<h3>My Updates</h3>
 							</div>
 							<div class="panel-content">
-								<h3>Ryan International</h3>
-								<p>Lorum epusm kapsup repsm kolika,lorum epsum kapsu usssum kaliupam dihlka, lorum epsum</p>
+								<c:forEach var='userUpdateDto' items='${model.userUpdateDto}' >
+								<p><b>${userUpdateDto.subject }</b></p>
+								<p>${userUpdateDto.description }</p>
+						    </c:forEach>
 							</div>
 						</div>
 						<div class="panel">

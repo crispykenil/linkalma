@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +31,7 @@ import com.linkalma.dto.User;
 import com.linkalma.dto.School;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.dto.WallPostDto;
 
 /**
  * Handles requests for the application home page.
@@ -84,7 +86,27 @@ public class HomeController {
 		
 		return new ModelAndView("dashboard", "model", model);
 	}
+	
+	@RequestMapping(value = "/school/{id}", method = RequestMethod.GET)
+	public ModelAndView school(@PathVariable ("id") String schoolName ) {
+		logger.info("Welcome home! Redirecting to School page.");
+		
+		System.out.println(schoolName);
+		
+		return new ModelAndView("school", "model", new ModelAndView());
+	}
 
+	@RequestMapping(value = "/addWallPost")
+	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto, Model model) {
+		logger.info("Welcome home! Saving Wall Post.");
+		
+		IDashboardBO dashboardBO = (IDashboardBO)context.getBean("dashboardBO");
+		
+		model = dashboardBO.addWallPost(wallPostDto, model);
+		
+		return new ModelAndView("dashboard", "model", model);
+	}
+	
 	@RequestMapping(value = "/school")
 	public ModelAndView school(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
