@@ -209,3 +209,14 @@ CREATE TABLE IF NOT EXISTS `StaticCodes` (  `CategoryID` INTEGER NOT NULL ,
 `PrimaryDecode` VARCHAR(30),  
 `SecondaryDecode` VARCHAR(60))
 ENGINE=myisam DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `userhistory` (
+  `UserID` int(11) NOT NULL,
+  `FieldsChanged` varchar(45) NOT NULL,
+  `FromValue` varchar(45) DEFAULT NULL,
+  `ToValue` varchar(45) DEFAULT NULL,
+  `ActionPerformed` char(1) NOT NULL,
+  `CreateDTTM` datetime DEFAULT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
