@@ -1,5 +1,7 @@
 package com.linkalma.bo.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.ui.Model;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
+import com.linkalma.dto.UserUpdateDTO;
 
 public class UserBO implements IUserBO 
 {
@@ -34,6 +37,13 @@ public class UserBO implements IUserBO
 		return getUserDAO().createCredentials(userDto);
 	}
 	
+	@Override
+	public Model getUserProfileDetails(User userDto, Model model) 
+	{
+		model.addAttribute("userProfile", "");
+		
+		return model;
+	}
 	/**
 	 * @return the userDAO
 	 */
