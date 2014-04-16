@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
 import com.linkalma.bo.ISchoolBO;
+import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.bo.impl.UserBO;
@@ -96,7 +97,7 @@ public class HomeController {
 		return new ModelAndView("school", "model", new ModelAndView());
 	}
 
-	@RequestMapping(value = "/addWallPost")
+	@RequestMapping(value = "/addwallpost")
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto, Model model) {
 		logger.info("Welcome home! Saving Wall Post.");
 		
@@ -135,7 +136,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/createProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
 	@Transactional
 	public Model createProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
 		logger.info("Welcome home! ");
@@ -153,7 +154,21 @@ public class HomeController {
 		return model;
 	}
 
-	@RequestMapping(value = "/addMySchool", method = RequestMethod.POST)
+	/**
+	 * Simply selects the profile view to render.
+	 */
+	@RequestMapping(value = "/viewprofile", method = RequestMethod.GET)
+	@Transactional
+	public ModelAndView viewProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+		logger.info("Welcome to My Profile! ");
+		
+		IUserBO userBO = (IUserBO)context.getBean("userBO");
+		model = userBO.getUserProfileDetails(user, model);
+		
+		return new ModelAndView("profile", "model", model);
+	}
+	
+	@RequestMapping(value = "/addmyschool", method = RequestMethod.POST)
 	@Transactional
 	public ModelAndView addMySchool(@ModelAttribute UserSchoolDTO userSchoolDto, HttpServletRequest request, Model model) {
 		logger.info("=====Welcome addMySchool!=====");
@@ -171,7 +186,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/loadUserSchool","model", model);
 	}
 
-	@RequestMapping(value = "/deleteMySchool", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletemyschool", method = RequestMethod.GET)
 	@Transactional
 	public ModelAndView deleteMySchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome deleteMySchool!");
@@ -187,7 +202,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/loadUserSchool","model", model);
 	}
 
-	@RequestMapping(value = "/loadUserSchool")
+	@RequestMapping(value = "/loaduserschool")
 	@Transactional
 	public ModelAndView loadUserSchool(@ModelAttribute UserSchoolDTO userSchoolDto, Model model) {
 		logger.info("Loading User School!");
@@ -198,7 +213,7 @@ public class HomeController {
 		return new ModelAndView("addMySchool","model", model);
 	}
 	
-	@RequestMapping(value = "/loadSchool")
+	@RequestMapping(value = "/loadschool")
 	@Transactional
 	public ModelAndView loadAllSchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
@@ -211,7 +226,7 @@ public class HomeController {
 		return new ModelAndView("registerSchool","model", model);
 	}
 	
-	@RequestMapping(value = "/registerSchool")
+	@RequestMapping(value = "/registerschool")
 	@Transactional
 	public ModelAndView registerSchool(@ModelAttribute School schoolDto, HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
@@ -222,7 +237,7 @@ public class HomeController {
 		schoolDto.setActive("Y");
 		
 		schoolBO.createSchool(schoolDto, model);
-		return new ModelAndView("redirect:/loadSchool","model", model);
+		return new ModelAndView("redirect:/loadschool","model", model);
 	}
 	/**
 	 * @return the school
