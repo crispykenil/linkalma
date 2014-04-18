@@ -43,7 +43,7 @@
 <div id="doc">
 	<div id="bd">
 		<div id="main-content-wrapper">
-			<div class="left-content border-box">
+			<div class="left-column border-box">
 				<div class="school-news-and-event">
 					<h2>Ryan News & Events</h2>
 					

@@ -1,6 +1,7 @@
 
 
 <%@ include file="header.jsp" %>
+<div class="home-page">
 			<div id="show-case-area">
 					<div id="signin-signup-panel" class="fl border-box">
 						<div class="sign-in-wrapper">
@@ -32,7 +33,7 @@
 		
 						<h2>New User? Sign Up</h2>
 						<form:form action="createProfile" id="signUpForm" name="userProfile" method="post">
-											<ul class="formFields clear-fix">
+						<ul class="twoColumnForm clear-fix">
 							<li><label>First Name</label>
 							<input type="text" value="" placeholder="" name="userFirstName" class="required" /></li>
 							<li><label>Last Name</label>
@@ -80,7 +81,7 @@
 			<img src="images/show-case.png" />
 		</div>
 	</div><!-- show-case-area -->
-				<div class="left-content border-box">
+				<div class="left-column border-box">
 					<div class="news-and-event">
 						<h2>Linkalma News & Events</h2>
 						<ul>
@@ -107,6 +108,6 @@
 					
 					
 				</div>
-
+</div>
 <%@ include file="footer.jsp" %>
 

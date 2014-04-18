@@ -31,7 +31,7 @@
 					</div>
 					
 				</div>
-				<div class="left-content border-box">
+				<div class="left-column border-box">
 					<div class="panel">
 						<div class="panel-header">
 							<h3>My School's Update</h3>
@@ -56,7 +56,7 @@
 						</div>
 					</div>
 				</div><!-- left-side-wrapper -->
-				<div class="main-content fl border-box">
+				<div class="main-content border-box">
 						<div class="panel">
 							<div class="panel-header">
 								<h3>My Updates</h3>

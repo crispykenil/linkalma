@@ -52,7 +52,7 @@ select, input[type=text], input[type=password], input[type=email], input[type=da
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	border: 1px solid #cacaca;
-	width:100%;
+	width:85%;
 }
 input[type=text], input[type=password],input[type=email], input[type=date] {
 	background-color: #fff;
@@ -72,14 +72,26 @@ input[type=radio]{
 select {
 	padding:7px 5px;	
 }
-.formFields li {
+.twoColumnForm li {
 	width:50%;
 	float:left;
 	height:75px;
 }
-.formFields label {
+.threeColumn li {
+	width:33%;
+	float:left;
+	height:75px;
+}
+ label {
 	display:block
 }
+.inlineForm li {
+	width:auto;
+	float:left;
+	height:75px;
+}
+
+
 
 .dobFields select {
 	width:auto
