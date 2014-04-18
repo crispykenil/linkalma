@@ -10,7 +10,16 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 
 fieldset,img{border:0;}
 address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
-li{list-style:none;}
+ul li{list-style:none;}
+ol li {
+	
+	list-style:lower-roman;
+}
+ol  {
+	margin-left:10px;
+	padding-left:10px;
+
+}
 caption,th{text-align:left;}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
 
@@ -20,17 +29,33 @@ h1 {
 	margin-bottom:20px;
 
 }
-
 h2 {
+	font-size:24px; color:#000;
+	font-family:century gothic, Helvetica, Verdana, Arial,  sans-serif; 
+	margin-bottom:15px;
+	line-height:30px;
+}
+.home-page h2 {
 	font-size:30px; color:#000;
 	font-family:century gothic, Helvetica, Verdana, Arial,  sans-serif; 
 	margin-bottom:15px;
 	line-height:30px;
 }
+
 h3 {
 	color:#0082c8;
 	font-weight:bold;
+	font-size:120%;
+}
+h4 {
+	color:#444444;
+	font-weight:bold;
 	font-size:110%;
+}
+h4 {
+	color:#444444;
+	font-weight:bold;
+	font-size:100%;
 }
 div {margin:auto;}
 a {
