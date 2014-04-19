@@ -1,7 +1,7 @@
 // Semicolon (;) to ensure closing of earlier scripting
 // Encapsulation
 // $ is assigned to jQuery
-(function($) {
+;(function($) {
 
 	// DOM Ready
 	$(function() {
@@ -10,6 +10,7 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
+		editForm();
 	});
 
 })(jQuery);
@@ -134,4 +135,46 @@ function validateForm(form) {
 	
 	return isFormValidate;
 
+}
+/* generic function which make form fields editable */
+function editForm(){
+	var beforeUpdateFormData = "", afterUpdateFormData=""; 
+	$(".editFormBtn").on("click", function() {
+		var formEl = $(this).closest("form");
+		
+		
+		if ($(this).hasClass("editFormBtn")){
+			beforeUpdateFormData = formEl.serialize();
+			$(this).text("Update");
+			formEl.removeClass("readOnlyForm");
+			makeFormReadonly(formEl);
+		} else {
+			afterUpdateFormData = formEl.serialize();
+
+			if (beforeUpdateFormData != afterUpdateFormData){
+				alert("Submit Form");
+				$(this).text("Edit");
+				formEl.addClass("readOnlyForm");
+				makeFormEditable(formEl);
+			} else {
+				$(this).text("Edit");
+				formEl.addClass("readOnlyForm");
+				makeFormEditable(formEl);
+			}
+			
+			
+		}
+		$(this).toggleClass("editFormBtn");
+	});
+}
+function makeFormEditable(form){
+	$("input", form).each(function() {
+		$(this).attr("readonly",true);
+	});
+}
+
+function makeFormReadonly(form){
+	$("input", form).each(function() {
+		$(this).attr("readonly",false);
+	});
 }
