@@ -17,6 +17,8 @@
 	border-radius:2px;
 	opacity:0.8;
 	filter: alpha(opacity=80);
+	font-size:14px;
+	font-family:  Helvetica, Verdana,  sans-serif; 
 	
 }
 input.smalbtn, a.smalbtn {
