@@ -10,7 +10,7 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
-		editForm();
+		eventBindingForProfilePage();
 	});
 
 })(jQuery);
@@ -34,6 +34,19 @@ function getSignUpForm (){
 	$('#sign-up-button').bind('click', function(e) {
 		// Triggering bPopup when click event is fired
 		$('#sign-up').bPopup({
+			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
+			followSpeed : 1500, //can be a string ('slow'/'fast') or int
+			modalColor : 'black'
+		});
+
+	});
+	
+}
+function getAddMySchoolForm (){
+	
+	$('.addMySchool').bind('click', function() {
+		
+		$('#addMydSchool').bPopup({
 			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
 			followSpeed : 1500, //can be a string ('slow'/'fast') or int
 			modalColor : 'black'
@@ -136,30 +149,35 @@ function validateForm(form) {
 	return isFormValidate;
 
 }
+
+function eventBindingForProfilePage(){
+	editForm();
+	cancelUpdateAction();
+	getAddMySchoolForm();
+}
 /* generic function which make form fields editable */
 function editForm(){
 	var beforeUpdateFormData = "", afterUpdateFormData=""; 
 	$(".editFormBtn").on("click", function() {
 		var formEl = $(this).closest("form");
-		
-		
+		$(this).siblings("input[type='reset']").attr("disabled",false);
 		if ($(this).hasClass("editFormBtn")){
 			beforeUpdateFormData = formEl.serialize();
-			$(this).text("Update");
-			formEl.removeClass("readOnlyForm");
-			makeFormReadonly(formEl);
+			$(this).val("Update");
+			
+			makeFormEditable(formEl);
 		} else {
 			afterUpdateFormData = formEl.serialize();
 
 			if (beforeUpdateFormData != afterUpdateFormData){
 				alert("Submit Form");
-				$(this).text("Edit");
-				formEl.addClass("readOnlyForm");
-				makeFormEditable(formEl);
+				$(this).val("Edit");
+				
+				makeFormReadonly(formEl);
 			} else {
-				$(this).text("Edit");
-				formEl.addClass("readOnlyForm");
-				makeFormEditable(formEl);
+				$(this).val("Edit");
+				
+				makeFormReadonly(formEl);
 			}
 			
 			
@@ -167,14 +185,26 @@ function editForm(){
 		$(this).toggleClass("editFormBtn");
 	});
 }
+function cancelUpdateAction(){
+	$(".cancelUpdateAction").on("click", function() {
+		var editUpdateBtn = $(this).siblings("input[type='button']");
+		editUpdateBtn.toggleClass("editFormBtn");
+		editUpdateBtn.val("Edit");
+		var formEl = $(this).closest("form");
+		makeFormReadonly(formEl);
+		$(this).attr("disabled",true);
+	});
+}
 function makeFormEditable(form){
 	$("input", form).each(function() {
-		$(this).attr("readonly",true);
+		$(this).attr("readonly",false);
 	});
+	form.removeClass("readOnlyForm");
 }
 
 function makeFormReadonly(form){
 	$("input", form).each(function() {
-		$(this).attr("readonly",false);
+		$(this).attr("readonly",true);
 	});
+	form.addClass("readOnlyForm");
 }

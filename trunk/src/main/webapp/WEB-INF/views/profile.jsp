@@ -19,7 +19,7 @@
 </div>
 <!-- left-column -->
 <div class="main-content border-box">
-	<div class="profileContainer">
+	<div class="profileContainer" id="profilePage">
 		<h1>My Profile</h1>
 		<div id="personalDetails">
 			<h2>Personal Details <a href="javascript:;" class="button smalbtn fr">Edit</a></h2>
@@ -86,7 +86,7 @@
 		</div>
 		<div id="schoolDetails">
 		<form class="readOnlyForm">
-			<h2>School Details <a href="javascript:;" class="button smalbtn fr editFormBtn">Edit</a></h2>
+			<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
 			
 				<table class="dataTable">
 						<thead>
@@ -113,9 +113,31 @@
 								<td><input type="text" value="First"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
 								<td><input type="text" value="Malad East"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
 							</tr>
-						</tbody>
+						
 				</table>
+				<div class="btn-wrapper">
+					
+					<input type="button" value="Edit" class="editFormBtn" /></td>
+					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/></td>
+				</div>
 			</form>
+			<div id="addMydSchool" class="addMydSchoolContainer popupContent" style="width:450px">
+				<span>${model.succesMsg}</span>
+				<h2>Add school to your profile</h2>
+				<form:form action="addMySchool" name="addMySchool" method="post">
+					<select name="schoolID">
+						<c:forEach var="schoolList" items="${model.schoolList}">
+							<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
+						</c:forEach>
+					</select> 
+					<input type="text" value="" placeholder="From Year" name="fromYear" />
+					<input type="text" value="" placeholder="Last Name" name="toYear" />
+					<input type="text" value="" placeholder="Batch" name="passOutBatch" />
+					<input type="text" value="" placeholder="Branch" name="branch" />
+					<input type="submit" class="button large" value="Add School" />
+					
+				</form:form>
+				</div>
 		</div>
 		<div id="workDetails">
 			<h2>Workplace Details</h2>
