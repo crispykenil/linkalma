@@ -271,7 +271,12 @@ input[type="text"].search-field {
 .tow-col-layout .main-content{
 	float:left;
 }
-
+#profilePage .left-column {
+	width:280px;
+}
+#profilePage .main-content {
+	width:700px;
+}
 .profileContainer h2 {
 	background-color: #efefef;
 	font-size: 20px;

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="header.jsp"%>
-
+<div class="profileContainer" id="profilePage">
 <div class="left-column border-box">
 	<div class="profile-pic">
 		<img src="images/profile-pic.png" width="162px" height="158px" alt="" />
@@ -11,15 +11,15 @@
 			<li><a href="javascript:;">Personal Details</a></li>
 			<li><a href="javascript:;">School Details</a></li>
 			<li><a href="javascript:;">Workplace details</a></li>
+			<!-- 
 			<li><a href="javascript:;">Credit Card Details</a></li>
 			<li><a href="javascript:;">Hobbies</a></li>
-			<li><a href="javascript:;">Any Other information</a></li>
+			<li><a href="javascript:;">Any Other information</a></li>  -->
 		</ul>
 	</div>
 </div>
 <!-- left-column -->
 <div class="main-content border-box">
-	<div class="profileContainer" id="profilePage">
 		<h1>My Profile</h1>
 		<div id="personalDetails">
 			<h2>Personal Details <a href="javascript:;" class="button smalbtn fr">Edit</a></h2>
@@ -42,7 +42,7 @@
 			</div>
 			<div>
 				<h4>Family Details</h4>
-				<ul>
+				<ul class="threeColumn clear-fix">
 					<li><label>Married To</label> <input type="text" value=""
 						placeholder="" name="userLastName" class="required" /></li>
 					<li>
