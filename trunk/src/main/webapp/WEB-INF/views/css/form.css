@@ -86,10 +86,14 @@ select {
 	float:left;
 	height:75px;
 }
-.threeColumn li {
+.threeColumn > li {
 	width:33%;
 	float:left;
-	height:75px;
+	
+}
+.fourColumn > li {
+	width:25%;
+	float:left;
 }
  label {
 	display:block
