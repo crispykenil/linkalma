@@ -14,10 +14,11 @@ ul li{list-style:none;}
 ol li {
 	
 	list-style:lower-roman;
+	margin-left:20px;
 }
 ol  {
-	margin-left:10px;
-	padding-left:10px;
+	margin-left:0px;
+	padding-left:0px;
 
 }
 caption,th{text-align:left;}

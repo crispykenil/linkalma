@@ -42,12 +42,12 @@
 			</div>
 			<div>
 				<h4>Family Details</h4>
-				<ul class="threeColumn clear-fix">
+				<ul class="twoColumn_1-3 clear-fix">
 					<li><label>Married To</label> <input type="text" value=""
 						placeholder="" name="userLastName" class="required" /></li>
 					<li>
 						<h5>Children</h5>
-						<ol>
+						<ol class="threeColumn clear-fix">
 							<li><input type="text" value="" placeholder=""
 								name="userLastName" class="required" /></li>
 							<li><input type="text" value="" placeholder=""
