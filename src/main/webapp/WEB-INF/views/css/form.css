@@ -61,7 +61,10 @@ select, input[type=text], input[type=password], input[type=email], input[type=da
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	border: 1px solid #cacaca;
-	width:85%;
+	width:100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	
 }
 input[type=text], input[type=password],input[type=email], input[type=date] {
 	background-color: #fff;
@@ -85,15 +88,33 @@ select {
 	width:50%;
 	float:left;
 	height:75px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 .threeColumn > li {
 	width:33%;
 	float:left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	
 }
 .fourColumn > li {
 	width:25%;
 	float:left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.twoColumn_1-3 > li:last-child {
+	width:75%;
+	float:left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.twoColumn_1-3 > li:first-child {
+	width:25%;
+	float:left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
  label {
 	display:block
@@ -102,9 +123,13 @@ select {
 	width:auto;
 	float:left;
 	height:75px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
-
+#profilePage .main-content ul li {
+	padding-right:10px;
+}
 
 .dobFields select {
 	width:auto
