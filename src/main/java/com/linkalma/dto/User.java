@@ -1,6 +1,7 @@
 package com.linkalma.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class User 
 {
@@ -57,6 +58,12 @@ public class User
 	
 	private String active;
 	
+	private String role;
+	
+	private int roleID;
+	
+	private String photoLocation;
+	
 	private Date createDttm;
 	
 	private String createUserID;
@@ -64,6 +71,10 @@ public class User
 	private Date updateDttm;
 	
 	private String updateUserID;
+	
+	private String category; // This includes type - Personal, School, Workplace, Other
+	
+	private List<UserSchoolDTO> userSchoolList;
 	
 	/**
 	 * @return the approved
@@ -434,23 +445,24 @@ public class User
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("FName: "+this.userFirstName);
-		sb.append("LName: "+this.userFirstName);
-		sb.append("MName: "+this.userMiddleName);
-		sb.append("DOB  : "+this.dob);
-		sb.append("Email: "+this.emailAddress);
-		sb.append("Addr1: "+this.addres1);
-		sb.append("Addr2: "+this.address2);
-		sb.append("Phon1: "+this.phone1);
-		sb.append("Phon2: "+this.phone2);
-		sb.append("Phon3: "+this.phone3);
-		sb.append("Phon4: "+this.phone4);
-		sb.append("Gendr: "+this.gender);
-		sb.append("City : "+this.city);
-		sb.append("State: "+this.state);
-		sb.append("Cntry: "+this.country);
-		sb.append("Photo: "+this.photo);
-		sb.append("Apprv: "+this.approved);
+		sb.append("UserID : "+this.userID);
+		sb.append("\nFName: "+this.userFirstName);
+		sb.append("\nLName: "+this.userFirstName);
+		sb.append("\nMName: "+this.userMiddleName);
+		sb.append("\nDOB  : "+this.dob);
+		sb.append("\nEmail: "+this.emailAddress);
+		sb.append("\nAddr1: "+this.addres1);
+		sb.append("\nAddr2: "+this.address2);
+		sb.append("\nPhon1: "+this.phone1);
+		sb.append("\nPhon2: "+this.phone2);
+		sb.append("\nPhon3: "+this.phone3);
+		sb.append("\nPhon4: "+this.phone4);
+		sb.append("\nGendr: "+this.gender);
+		sb.append("\nCity : "+this.city);
+		sb.append("\nState: "+this.state);
+		sb.append("\nCntry: "+this.country);
+		sb.append("\nPhoto: "+this.photo);
+		sb.append("\nApprv: "+this.approved);
 		
 		return sb.toString();
 	}
@@ -509,5 +521,75 @@ public class User
 	 */
 	public void setMonth(String month) {
 		this.month = month;
+	}
+
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
+	 * @return the roleID
+	 */
+	public int getRoleID() {
+		return roleID;
+	}
+
+	/**
+	 * @param roleID the roleID to set
+	 */
+	public void setRoleID(int roleID) {
+		this.roleID = roleID;
+	}
+
+	/**
+	 * @return the photoLocation
+	 */
+	public String getPhotoLocation() {
+		return photoLocation;
+	}
+
+	/**
+	 * @param photoLocation the photoLocation to set
+	 */
+	public void setPhotoLocation(String photoLocation) {
+		this.photoLocation = photoLocation;
+	}
+
+	/**
+	 * @return the userSchoolList
+	 */
+	public List<UserSchoolDTO> getUserSchoolList() {
+		return userSchoolList;
+	}
+
+	/**
+	 * @param userSchoolList the userSchoolList to set
+	 */
+	public void setUserSchoolList(List<UserSchoolDTO> userSchoolList) {
+		this.userSchoolList = userSchoolList;
 	}
 }

@@ -1,9 +1,9 @@
 <%@ include file="header.jsp" %>
 		
-				<div id="addMydSchool" class="addMydSchoolContainer">
+				<div id="addMySchool" class="addMydSchoolContainer">
 				<span>${model.succesMsg}</span>
 						<h2>Add school to your profile</h2>
-						<form:form action="addMySchool" name="addMySchool" method="post">
+						<form:form action="addmyschool" name="addMySchool" method="post">
 							<select name="schoolID">
 								<c:forEach var="schoolList" items="${model.schoolList}">
 									<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }

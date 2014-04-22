@@ -220,3 +220,24 @@ CREATE TABLE `userhistory` (
   `CreateDTTM` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `friendrequest` (
+  `FriendRequestID` int(11) NOT NULL AUTO_INCREMENT,
+  `FromUserID` int(11) NOT NULL,
+  `ToUserID` int(11) DEFAULT NULL,
+  `Status` int(1) DEFAULT NULL,
+  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`FriendRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `grouprequest` (
+  `GroupRequestID` int(11) NOT NULL AUTO_INCREMENT,
+  `FromUserID` int(11) NOT NULL,
+  `ForGroupID` int(11) NOT NULL,
+  `Status` int(1) DEFAULT NULL,
+  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`GroupRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

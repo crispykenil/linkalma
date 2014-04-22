@@ -99,46 +99,58 @@
 			</form>
 			</div>
 			<div id="schoolDetails">
-			<form class="readOnlyForm schoolDetailsForm">
-				<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
-				
-					<table class="dataTable">
-							<thead>
-								<tr>
-									<th> School Name </th>
-									<th> From Year </th>
-									<th> To Year </th>
-									<th> Batch</th>
-									<th> Branch</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><input type="text" value="Paddar School"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="1990"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="2000"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="First"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="Malad East"	 name="emailAddress"  readonly="readonly" /></td>
-								</tr>
-								<tr>
-									<td><input type="text" value="Paddar School"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="1990"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="2000"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="First"	 name="emailAddress"  readonly="readonly" /></td>
-									<td><input type="text" value="Malad East"	 name="emailAddress"  readonly="readonly" /></td>
-								</tr>
-							
-					</table>
-					<div class="btn-wrapper">
+			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile">
+			<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
+			<input type="hidden" name="totalUserSchoolCount" value="${model.userSchoolList.size()}" />
+				<table class="dataTable">
+						<thead>
+							<tr>
+								<th> School Name </th>
+								<th> From Year </th>
+								<th> To Year </th>
+								<th> Batch</th>
+								<th> Branch</th>
+								<th> &nbsp;</th>
+								<th> &nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
 						
-						<input type="button" value="Edit" class="editFormBtn" />
-						<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
-					</div>
-				</form>
+						<c:forEach var="userSchoolList" items="${model.userSchoolList}" varStatus="count">
+							<tr>
+								<td>
+								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}" readonly="readonly" />
+								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
+								<select name="schoolID">
+									<c:forEach var="schoolList" items="${model.schoolList}">
+										<option value="${schoolList.schoolID}"
+										<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
+										${schoolList.schoolName } - ${schoolList.branch }
+										</option>
+									</c:forEach>
+								</select> 
+								</td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}" readonly="readonly" /></td>
+								<td> <button onclick="update(${userSchoolList.userSchoolID})">Update</button></td>
+								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+				<div class="btn-wrapper">
+					
+					<input type="button" value="Edit" class="editFormBtn" />
+					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
+				</div>
+			</form:form>
 				<div id="addMydSchool" class="addMydSchoolContainer popupContent" style="width:450px">
 	
 					<h2>Add school to your profile</h2>
-					<form:form action="addMySchool" name="addMySchool" method="post">
+					<form:form action="addmyschool" name="addMySchool" method="post">
 						<select name="schoolID">
 							<c:forEach var="schoolList" items="${model.schoolList}">
 								<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }

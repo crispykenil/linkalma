@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>::MY SCHOOL ::</title>
 
-	<link href="css/reset.css" rel="stylesheet" type="text/css" media="screen" />
-	<link href="css/form.css" rel="stylesheet" type="text/css" media="screen" />
-	<link href="css/application.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="../css/reset.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="../css/form.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="../css/application.css" rel="stylesheet" type="text/css" media="screen" />
 
-	<link href="css/school.css" rel="stylesheet" type="text/css" media="screen" />
-	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="js/jquery.bpopup.min.js"></script>
-	<script type="text/javascript" src="js/application.js"></script>
+	<link href="../css/school.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../js/jquery.bpopup.min.js"></script>
+	<script type="text/javascript" src="../js/application.js"></script>
 
 </head>
 <body>
@@ -34,7 +34,7 @@
 <div id="hd" class="school-header" >
 	<div class="header-content-wrapper">
 		<div class="school-logo">
-			<a href="/linkalma">RYAN INTERNATIONAL</a>
+			<a href="../linkalma">RYAN INTERNATIONAL</a>
 		</div>
 		
 	</div><!-- header-content-wrapper -->
@@ -82,7 +82,7 @@
 			<div class="main-content border-box clear-fix">
 				<div class="home-intro-section">
 					<h2>Welcome to Ryan International</h2>
-					<div><img src="images/show-case.png" width="650" /></div>
+					<div><img src="../images/show-case.png" width="650" /></div>
 					<br />
 					<p>LinkAlma.com is an Alumni Relationship Platform (ARM) founded to create an ecosystem of educational institutes in India and its alumni. This is fully owned by Arghya Consulting Services Pvt. Ltd and is inspired by combination of its founder's own schooling experience, our exposure to the western education system and our current experience with our kid's education institutes and in general state of education in India.</p>
 					<a href="#" class="button">Read More</a>

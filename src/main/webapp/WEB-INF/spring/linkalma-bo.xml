@@ -6,6 +6,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="userBO" class="com.linkalma.bo.impl.UserBO">
 		<property name="userDAO" ref="userDAO" />   
+		<property name="userSchoolBO" ref="userSchoolBO" />   
    </bean>
    
 	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
