@@ -30,7 +30,7 @@
 					<div id="sign-up" class="sign-up-container">
 		
 						<h2>New User? Sign Up</h2>
-						<form:form action="createProfile" id="signUpForm" name="userProfile" method="post">
+						<form:form action="createprofile" id="signUpForm" name="userProfile" method="post">
 						<ul class="twoColumnForm clear-fix">
 							<li><label>First Name</label>
 							<input type="text" value="" placeholder="" name="userFirstName" class="required" /></li>

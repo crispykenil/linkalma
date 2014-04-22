@@ -3,6 +3,7 @@ package com.linkalma.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -13,6 +14,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.linkalma.dao.IUserDAO;
+import com.linkalma.dao.mapper.UserMapper;
+import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.User;
 import com.linkalma.utils.ApplicationConstants;
 
@@ -64,39 +67,60 @@ public class UserDAO implements IUserDAO {
 	      return newPersonId;
 	}
  
- public int createCredentials(User alumni) {
+	public int createCredentials(User alumni) {
 	      
 	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_CREDENTIALS_QUERY, 
 	    		  alumni.getUserID(), alumni.getPassword());
 	      
 	   }
 
-/**
- * @return the jdbcTemplateObject
- */
-public JdbcTemplate getJdbcTemplateObject() {
-	return jdbcTemplateObject;
-}
+	/**
+	 * @return the jdbcTemplateObject
+	 */
+	public JdbcTemplate getJdbcTemplateObject() {
+		return jdbcTemplateObject;
+	}
+	
+	/**
+	 * @param jdbcTemplateObject the jdbcTemplateObject to set
+	 */
+	public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
+		this.jdbcTemplateObject = jdbcTemplateObject;
+	}
+	
+	/**
+	 * @return the dataSource
+	 */
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+	
+	/**
+	 * @param dataSource the dataSource to set
+	 */
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public long updateUser(User alumni) 
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-/**
- * @param jdbcTemplateObject the jdbcTemplateObject to set
- */
-public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
-	this.jdbcTemplateObject = jdbcTemplateObject;
-}
+	@Override
+	public User getUserProfile(User alumni) {
+		
+		User user = getJdbcTemplateObject().queryForObject( ApplicationConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY,
+				new UserMapper());
+		return null;
+	}
 
-/**
- * @return the dataSource
- */
-public DataSource getDataSource() {
-	return dataSource;
-}
-
-/**
- * @param dataSource the dataSource to set
- */
-public void setDataSource(DataSource dataSource) {
-	this.dataSource = dataSource;
-    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-}
+	@Override
+	public List<User> getAllUserProfile(User alumni) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

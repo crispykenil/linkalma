@@ -4,7 +4,7 @@
 
 				<div class="registerSchoolContainer">
 						<h2>Register New School</h2>
-						<form action="registerSchool" name="registerSchool" method="post" id="registerSchoolForm" >
+						<form action="registerschool" name="registerSchool" method="post" id="registerSchoolForm" >
 							<ul>
 								<li><label>School Name</label> <input type="text" value="" placeholder="" name="schoolName" class="required"/></li>
 								<li><label>Address1</label><input type="text" value="" placeholder="" name="address1" class="required" /></li>

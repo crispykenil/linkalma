@@ -148,7 +148,7 @@ public class HomeController {
 			user.setUserID(0);
 		
 		System.out.println("UserID : "+ user.getUserID());
-		UserBO userBO = (UserBO)context.getBean("userBO");
+		IUserBO userBO = (IUserBO)context.getBean("userBO");
 		model = userBO.createUser(user, model);
 		
 		return model;
@@ -163,7 +163,25 @@ public class HomeController {
 		logger.info("Welcome to My Profile! ");
 		
 		IUserBO userBO = (IUserBO)context.getBean("userBO");
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		user.setUserID(userBean.getUserID());
+		System.out.println(user);
 		model = userBO.getUserProfileDetails(user, model);
+		
+		return new ModelAndView("profile", "model", model);
+	}
+	
+	/**
+	 * Simply selects the profile view to render.
+	 */
+	@RequestMapping(value = "/updateprofile", method = RequestMethod.POST)
+	@Transactional
+	public ModelAndView updateProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+		logger.info("Welcome to My Profile! ");
+		
+		IUserBO userBO = (IUserBO)context.getBean("userBO");
+		user.setCategory(request.getParameter("cat"));
+		model = userBO.updateUserProfileDetails(user, model);
 		
 		return new ModelAndView("profile", "model", model);
 	}
@@ -183,7 +201,7 @@ public class HomeController {
 		userSchoolBO.createUserSchool(userSchoolDto);
 		
 		System.out.println("Redirecting to LoadUser School");
-		return new ModelAndView("redirect:/loadUserSchool","model", model);
+		return new ModelAndView("redirect:/viewprofile","model", model);
 	}
 
 	@RequestMapping(value = "/deletemyschool", method = RequestMethod.GET)
