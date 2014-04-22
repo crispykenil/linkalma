@@ -22,70 +22,84 @@
 <div class="main-content border-box">
 		<h1>My Profile</h1>
 		<div id="personalDetails">
-			<h2>Personal Details <a href="javascript:;" class="button smalbtn fr">Edit</a></h2>
+			<form action="" class="personalDetailsForm">
+				<h2>Personal Details <a href="javascript:;" class="button smalbtn fr">Edit</a></h2>
+				<div>
+					<ul class="threeColumn clear-fix">
+						<li><label>First Name</label> <input type="text" value=""
+							 name="userFirstName" class="required" maxlength="50" /></li>
+						<li><label>Last Name</label> <input type="text" value=""
+							 name="userLastName" class="required" maxlength="50" /></li>
+						<li><label>Email</label> <input type="text" value=""
+							 name="emailAddress" class="emailField required" /></li>
+						<li><label>Password</label> <input type="password" value=""
+							 name="password" class="required" /></li>
+						<li><label>Confirm Password</label> <input type="password"
+							value=""  class="required" /></li>
+						<li>
+								<ul class="twoColumn" style="margin-top:22px;">
+									<li><label class="fl">Male </label>
+									<input type="radio" value=""  name="gender" checked /></li>
+									<li><label class="fl">Female </label>
+									<input type="radio" value=""  name="gender" /></li>
+								</ul>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h4>Family Details</h4>
+					<ul class="twoColumn clear-fix">
+						<li><label>Married To</label> <input type="text" value=""  name="userLastName" class="required" /></li>
+						<li>
+							<h5>No of Children</h5>
+							<select disabled="disabled">
+								<option>One</option>
+								<option>Two</option>
+								<option>Three</option>
+								<option>Four</option>
+								<option>Five</option>
+							</select>
+						</li>
+		
+					</ul>
+				</div>
+			
+			
 			<div>
+				<h4>Contact Info</h4>
 				<ul class="threeColumn clear-fix">
-					<li><label>First Name</label> <input type="text" value=""
-						placeholder="" name="userFirstName" class="required" /></li>
-					<li><label>Last Name</label> <input type="text" value=""
-						placeholder="" name="userLastName" class="required" /></li>
-					<li><label>Email</label> <input type="text" value=""
-						placeholder="" name="emailAddress" class="required" /></li>
 	
-					<li><label>Password</label> <input type="password" value=""
-						placeholder="" name="password" class="required" /></li>
-					<li><label>Confirm Password</label> <input type="password"
-						value="" placeholder="" class="required" /></li>
-					<li><label>Residence</label><input type="text" value=""
-						placeholder="" name="userLastName" class="required" /></li>
-				</ul>
-			</div>
-			<div>
-				<h4>Family Details</h4>
-				<ul class="twoColumn_1-3 clear-fix">
-					<li><label>Married To</label> <input type="text" value=""
-						placeholder="" name="userLastName" class="required" /></li>
-					<li>
-						<h5>Children</h5>
-						<ol class="threeColumn clear-fix">
-							<li><input type="text" value="" placeholder=""
-								name="userLastName" class="required" /></li>
-							<li><input type="text" value="" placeholder=""
-								name="userLastName" class="required" /></li>
-						</ol>
-					</li>
+					<li><label>Address 1</label> <input type="text" value=""
+						 name="userLastName" class="required" /></li>
+					<li><label>Address 2</label> <input type="text" value=""
+						 name="userLastName" class="" /></li>
+					<li><label>City</label> <input type="text" value=""
+						 name="userLastName" class="required" /></li>
+					<li><label>State</label> <input type="text" value=""
+						 name="userLastName" class="" /></li>
+					<li><label>Country of Residence</label> <input type="text" value=""
+						 name="userLastName" class="required" /></li>
+					<li><label>Zip Code</label> <input type="text" value=""
+						 name="userLastName" class="" /></li>
+					<li><label>Cell</label> <input type="text" value=""
+						 name="userLastName" class="numeric" /></li>
+					<li><label>Work</label> <input type="text" value=""
+						 name="userLastName"class="numeric" /></li>
+					<li><label>Residence</label> <input type="text" value=""
+						 name="userLastName" class="numeric" maxlength="10"/></li>
 	
 				</ul>
+
 			</div>
-			<div>
-			<h4>Contact Info</h4>
-			<ul class="threeColumn clear-fix">
-
-				<li><label>Address 1</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Address 1</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>City</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>State</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Country</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Zip Code</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Cell</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Work</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-				<li><label>Residence</label> <input type="text" value=""
-					placeholder="" name="userLastName" class="required" /></li>
-
-			</ul>
-
-		</div>
+			
+				<div class="btn-wrapper">
+					<input type="button" value="Edit" class="editFormBtn" />
+					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
+				</div>
+		</form>
 		</div>
 		<div id="schoolDetails">
-		<form class="readOnlyForm">
+		<form class="readOnlyForm schoolDetailsForm">
 			<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
 			
 				<table class="dataTable">
@@ -100,29 +114,29 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input type="text" value="Paddar School"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="1990"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="2000"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="First"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="Malad East"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="Paddar School"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="1990"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="2000"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="First"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="Malad East"	 name="emailAddress"  readonly="readonly" /></td>
 							</tr>
 							<tr>
-								<td><input type="text" value="Paddar School"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="1990"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="2000"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="First"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
-								<td><input type="text" value="Malad East"	placeholder="" name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="Paddar School"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="1990"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="2000"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="First"	 name="emailAddress"  readonly="readonly" /></td>
+								<td><input type="text" value="Malad East"	 name="emailAddress"  readonly="readonly" /></td>
 							</tr>
 						
 				</table>
 				<div class="btn-wrapper">
 					
-					<input type="button" value="Edit" class="editFormBtn" /></td>
-					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/></td>
+					<input type="button" value="Edit" class="editFormBtn" />
+					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
 				</div>
 			</form>
 			<div id="addMydSchool" class="addMydSchoolContainer popupContent" style="width:450px">
-				<span>${model.succesMsg}</span>
+
 				<h2>Add school to your profile</h2>
 				<form:form action="addMySchool" name="addMySchool" method="post">
 					<select name="schoolID">
@@ -130,10 +144,10 @@
 							<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
 						</c:forEach>
 					</select> 
-					<input type="text" value="" placeholder="From Year" name="fromYear" />
-					<input type="text" value="" placeholder="Last Name" name="toYear" />
-					<input type="text" value="" placeholder="Batch" name="passOutBatch" />
-					<input type="text" value="" placeholder="Branch" name="branch" />
+					<input type="text" value=""  name="fromYear" />
+					<input type="text" value=""  name="toYear" />
+					<input type="text" value=""  name="passOutBatch" />
+					<input type="text" value=""  name="branch" />
 					<input type="submit" class="button large" value="Add School" />
 					
 				</form:form>
