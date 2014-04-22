@@ -1,5 +1,3 @@
-
-
 <%@ include file="header.jsp" %>
 <div class="home-page">
 			<div id="show-case-area">
@@ -39,7 +37,7 @@
 							<li><label>Last Name</label>
 							<input type="text" value="" placeholder="" name="userLastName" class="required" /></li>
 							<li><label>Email</label>
-							<input type="text" value="" placeholder="" name="emailAddress"  class="required" /></li>
+							<input type="text" value="" placeholder="" name="emailAddress"  class="emailField required" /></li>
 							<li><label>DOB</label>
 							<span class="dobFields">
 								<select class="month" id="month" name="birthday_month"><option selected="1" value="0">Month</option><option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select>
@@ -48,8 +46,7 @@
 								
 							</span>
 							</li>
-							<li><label>Password</label>
-							<input type="password" value="" placeholder="" name="password"  class="required" /></li>
+							<li><label>Password</label>		<input type="password" value="" placeholder="" name="password"  class="required" /></li>
 								<li><label>Confirm Password</label>
 							<input type="password" value="" placeholder=""  class="required" /></li>
 							

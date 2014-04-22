@@ -87,7 +87,12 @@ select {
 .twoColumnForm li {
 	width:50%;
 	float:left;
-	height:75px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.twoColumn > li {
+	width:50%;
+	float:left;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
@@ -134,7 +139,7 @@ select {
 .dobFields select {
 	width:auto
 }
-.readOnlyForm input[type="text"]{
+.readOnlyForm input[type="text"], .readOnlyForm input[type="password"]{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: medium none;
     margin: 0;
