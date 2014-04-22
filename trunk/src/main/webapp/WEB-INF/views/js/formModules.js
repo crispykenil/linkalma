@@ -93,37 +93,42 @@ var form = {
 		// color : "#556b2f",
 		// backgroundColor : "white"
 		// }, options);
+		if (myForm.hasClass("readOnlyForm")){
+			form.makeFormReadonly(myForm);
+		}
 		
-			editFormBtn.on("click",	function() {
-				$(this).siblings("input[type='reset']").attr(
-						"disabled", false);
-				if ($(this).hasClass("editFormBtn")) {
-					beforeUpdateFormData = myForm.serialize();
-					$(this).val("Update");
-					form.makeFormEditable(myForm);
-				} else {
-					afterUpdateFormData = myForm.serialize();
-					if (beforeUpdateFormData != afterUpdateFormData) {
-						alert("found some updation so please valid form and submit it");
-						if (form.validateForm(myForm)) {
-							alert("form is valid submit now");
-						}
-
-					} else {
-						alert("please change something before update");
-						return false;
+		editFormBtn.on("click",	function() {
+			$(this).siblings("input[type='reset']").attr(
+					"disabled", false);
+			if ($(this).hasClass("editFormBtn")) {
+				beforeUpdateFormData = myForm.serialize();
+				$(this).val("Update");
+				form.makeFormEditable(myForm);
+			} else {
+				afterUpdateFormData = myForm.serialize();
+				if (beforeUpdateFormData != afterUpdateFormData) {
+					alert("found some updation so please valid form and submit it");
+					if (form.validateForm(myForm)) {
+						alert("form is valid submit now");
 					}
+
+				} else {
+					alert("please change something before update");
+					return false;
 				}
-				$(this).toggleClass("editFormBtn");
-			});
+			}
+			$(this).toggleClass("editFormBtn");
+		});
+		
+		cancelUpdateAction.on("click", function() {
+			var editUpdateBtn = editFormBtn;
+			editUpdateBtn.toggleClass("editFormBtn");
+			editUpdateBtn.val("Edit");
 			
-			cancelUpdateAction.on("click", function() {
-				var editUpdateBtn = editFormBtn;
-				editUpdateBtn.toggleClass("editFormBtn");
-				editUpdateBtn.val("Edit");
-				form.makeFormReadonly(myForm);
-				$(this).attr("disabled",true);
-			});
+			$(this).attr("disabled",true);
+			form.makeFormReadonly(myForm);
+	
+		});
 	};
 	
 }(jQuery));
