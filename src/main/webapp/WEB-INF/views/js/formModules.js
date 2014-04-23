@@ -1,15 +1,15 @@
 var form = {
-	formFields : "input[type='text'],input[type='password']",
+	formFields : "input[type='text'],input[type='password'],select",
 
 	makeFormReadonly : function(form) {
 		$(this.formFields, form).each(function() {
-			$(this).attr("readonly", true);
+			$(this).attr("disabled", true);
 		});
 		form.addClass("readOnlyForm");
 	},
 	makeFormEditable : function(form) {
 		$(this.formFields, form).each(function() {
-			$(this).attr("readonly", false);
+			$(this).attr("disabled", false);
 		});
 		form.removeClass("readOnlyForm");
 	},
@@ -25,7 +25,14 @@ var form = {
 				$(this).removeClass("vError");
 			}
 		});
-
+		$(".numeric", form).each(function() {
+			if (isNaN($(this).val())) {
+				$(this).addClass("vError");
+			} else {
+				$(this).removeClass("vError");
+			
+			}
+		});
 		// password match validation
 		if ($("input[type='password']", form).length > 1) {
 			var errContainer = $("<div class='errorMsg'></div>");
@@ -82,49 +89,61 @@ var form = {
 (function($) {
 	$.fn.bindEditUpdateFunctionality = function(options) {
 		var myForm = this;
+		//this two variable will decide is any changes done in form
 		var beforeUpdateFormData = "", afterUpdateFormData = "";
-		var editFormBtn = $(".editFormBtn", myForm);
-		var cancelUpdateAction = $(".cancelUpdateAction", myForm);
+		
+		//var editFormBtn = $(".editFormBtn", myForm);
+		//var updateFormBtn = $(".updateFormBtn", myForm);
+		var editUpdateFormBtn = $(".editUpdateFormBtn", myForm);
+		var cancelUpdateActionBtn = $(".cancelUpdateAction", myForm);
 		
 
 		// This is the easiest way to have default options.
-		// var settings = $.extend({
+		 var settings = $.extend({
 		// These are the defaults.
-		// color : "#556b2f",
-		// backgroundColor : "white"
-		// }, options);
+		 callback :"modal callback"
+		 }, options);
+		
+		//make form readonly on onload
 		if (myForm.hasClass("readOnlyForm")){
 			form.makeFormReadonly(myForm);
 		}
-		
-		editFormBtn.on("click",	function() {
-			$(this).siblings("input[type='reset']").attr(
-					"disabled", false);
-			if ($(this).hasClass("editFormBtn")) {
-				beforeUpdateFormData = myForm.serialize();
-				$(this).val("Update");
-				form.makeFormEditable(myForm);
-			} else {
-				afterUpdateFormData = myForm.serialize();
-				if (beforeUpdateFormData != afterUpdateFormData) {
-					alert("found some updation so please valid form and submit it");
-					if (form.validateForm(myForm)) {
-						alert("form is valid submit now");
-					}
 
-				} else {
-					alert("please change something before update");
-					return false;
-				}
-			}
-			$(this).toggleClass("editFormBtn");
-		});
-		
-		cancelUpdateAction.on("click", function() {
-			var editUpdateBtn = editFormBtn;
-			editUpdateBtn.toggleClass("editFormBtn");
-			editUpdateBtn.val("Edit");
+		editUpdateFormBtn.on("click", function() {
 			
+			if($(this).hasClass("editForm")){
+				executeEditAction();
+				$(this).removeClass("editForm").addClass("updateForm").val("Update");
+			} else {
+				executeUpdateAction();
+				
+			}
+			
+		});
+		function executeEditAction(){
+			cancelUpdateActionBtn.attr("disabled", false);
+			beforeUpdateFormData = myForm.serialize();
+			form.makeFormEditable(myForm);
+			
+		}
+		function executeUpdateAction(){
+			afterUpdateFormData = myForm.serialize();
+			if (beforeUpdateFormData != afterUpdateFormData) {
+				alert("found some updation so please valid form and submit it");
+				if (form.validateForm(myForm)) {
+					settings.callback();
+				} else
+					return false;
+				
+
+			} else {
+				alert("please change something before update");
+				return false;
+			}
+			$(this).removeClass("updateForm").addClass("editForm").val("Edit");
+		}
+		cancelUpdateActionBtn.on("click", function() {
+			editUpdateFormBtn.removeClass("updateForm").addClass("editForm").val("Edit");
 			$(this).attr("disabled",true);
 			form.makeFormReadonly(myForm);
 	

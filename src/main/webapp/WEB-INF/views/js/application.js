@@ -75,16 +75,20 @@ function submitFormThroughAjax(form) {
 		console.log(data);
 	});
 }
-
+var submitPersonalDetails = function(){
+	alert("submit personal detials");
+};
 
 function eventBindingForProfilePage(){
 	//editForm();
 	//cancelUpdateAction();
 	getAddMySchoolForm();
 	//submitPersonalDetails();
-	$(".personalDetailsForm").bindEditUpdateFunctionality();
+
+	$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
 	$(".schoolDetailsForm").bindEditUpdateFunctionality();
 }
+
 function getAddMySchoolForm (){
 	$('.addMySchool').bind('click', function() {
 		$('#addMydSchool').bPopup({
