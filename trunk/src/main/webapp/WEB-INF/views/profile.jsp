@@ -81,11 +81,11 @@
 							 name="userLastName" class="required" /></li>
 						<li><label>Zip Code</label> <input type="text" value=""
 							 name="userLastName" class="" /></li>
-						<li><label>Cell</label> <input type="text" value=""
-							 name="userLastName" class="numeric" /></li>
-						<li><label>Work</label> <input type="text" value=""
-							 name="userLastName"class="numeric" /></li>
-						<li><label>Residence</label> <input type="text" value=""
+						<li><label>Cell</label> <input type="text" value="9324445952"
+							 name="userLastName" class="numeric"  maxlength="10" /></li>
+						<li><label>Work</label> <input type="text" value="02226165555"
+							 name="userLastName"class="numeric"  maxlength="10" /></li>
+						<li><label>Residence</label> <input type="text" value="02228730217"
 							 name="userLastName" class="numeric" maxlength="10"/></li>
 		
 					</ul>
@@ -93,8 +93,8 @@
 				</div>
 				
 					<div class="btn-wrapper">
-						<input type="button" value="Edit" class="editFormBtn" />
-						<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
+						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
 					</div>
 			</form>
 			</div>
@@ -110,8 +110,8 @@
 								<th> To Year </th>
 								<th> Batch</th>
 								<th> Branch</th>
-								<th> &nbsp;</th>
-								<th> &nbsp;</th>
+								<th>Action</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -134,7 +134,7 @@
 								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}" readonly="readonly" /></td>
 								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}" readonly="readonly" /></td>
 								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}" readonly="readonly" /></td>
-								<td> <button onclick="update(${userSchoolList.userSchoolID})">Update</button></td>
+							
 								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
 							</tr>
 						</c:forEach>
@@ -142,9 +142,8 @@
 					</tbody>
 				</table>
 				<div class="btn-wrapper">
-					
-					<input type="button" value="Edit" class="editFormBtn" />
-					<input type="reset" value="cancel" class="button cancelUpdateAction" disabled="disabled"/>
+						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
 				</div>
 			</form:form>
 				<div id="addMydSchool" class="addMydSchoolContainer popupContent" style="width:450px">
