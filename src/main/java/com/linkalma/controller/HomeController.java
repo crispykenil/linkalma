@@ -1,8 +1,10 @@
 package com.linkalma.controller;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -26,8 +29,8 @@ import com.linkalma.bo.ISchoolBO;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
-import com.linkalma.bo.impl.UserBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
+import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
 import com.linkalma.dto.School;
 import com.linkalma.dto.UserBean;
@@ -119,7 +122,6 @@ public class HomeController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(HttpServletRequest request, Model model) {
 		
-		System.out.println("Template Obj: "+schoolJDBCTemplate);
 		school.setAddress1(request.getParameter("schoolAddress1"));
 		school.setAddress2(request.getParameter("schoolAddress2"));
 		school.setSchoolName(request.getParameter("schoolName"));
@@ -165,22 +167,72 @@ public class HomeController {
 		IUserBO userBO = (IUserBO)context.getBean("userBO");
 		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
 		user.setUserID(userBean.getUserID());
-		System.out.println(user);
 		model = userBO.getUserProfileDetails(user, model);
 		
 		return new ModelAndView("profile", "model", model);
 	}
 	
+	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
+	@Transactional
+	public ModelAndView fileUPload(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, HttpServletRequest request, Model model) {
+		logger.info("Welcome to File Upload! ");
+		
+//		IUserBO userBO = (IUserBO)context.getBean("userBO");
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		
+			InputStream inputStream = null;  
+		  OutputStream outputStream = null;  
+		  
+		  MultipartFile file = uploadedFile.getFile();  
+		  
+		  String fileName = String.valueOf(userBean.getUserID()) + "_profilePic";   
+		  
+		  try {  
+		   inputStream = file.getInputStream();  
+		  
+		   File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"+fileName+".jpg");  
+		   if (newFile.exists()) { 
+			   newFile.delete();
+		    newFile.createNewFile();  
+		   }  
+		   else
+			   newFile.createNewFile();
+		   outputStream = new FileOutputStream(newFile);  
+		   int read = 0;  
+		   byte[] bytes = new byte[1024];  
+		  
+		   while ((read = inputStream.read(bytes)) != -1) {  
+		    outputStream.write(bytes, 0, read); 
+		    fileName = newFile.getName();
+		   }  
+		  } catch (IOException e) {  
+			  
+		   e.printStackTrace();  
+		  }
+		  finally
+		  {
+			  try {
+				  if(outputStream != null)
+					  outputStream.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  }
+		  model.addAttribute("profileImageURI", fileName);
+		
+		return new ModelAndView("redirect:/viewprofile", "model", model);
+	}
 	/**
 	 * Simply selects the profile view to render.
 	 */
 	@RequestMapping(value = "/updateprofile", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView updateProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+	public ModelAndView updateProfile(@ModelAttribute("userProfile") User user, HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
 		
 		IUserBO userBO = (IUserBO)context.getBean("userBO");
-		user.setCategory(request.getParameter("cat"));
 		model = userBO.updateUserProfileDetails(user, model);
 		
 		return new ModelAndView("profile", "model", model);
@@ -216,7 +268,6 @@ public class HomeController {
 		userSchoolDto.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
 
 		userSchoolBO.deleteUserSchool(userSchoolDto, model);
-		System.out.println("Redirecting to LoadUser School");
 		return new ModelAndView("redirect:/loadUserSchool","model", model);
 	}
 

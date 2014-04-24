@@ -75,8 +75,23 @@ function submitFormThroughAjax(form) {
 		console.log(data);
 	});
 }
+
 var submitPersonalDetails = function(){
-	alert("submit personal detials");
+
+var form = $('#personalDetails');
+	var formData = form.serialize();
+	var url = form.attr("action");
+	alert(formData);
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : formData
+
+	}).done(function(data) {
+		console.log(data);
+		alert('done dona done.. done....')
+	});
+	
 };
 
 function eventBindingForProfilePage(){
