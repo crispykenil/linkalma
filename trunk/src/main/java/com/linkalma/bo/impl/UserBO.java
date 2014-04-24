@@ -1,7 +1,5 @@
 package com.linkalma.bo.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -11,8 +9,6 @@ import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
-import com.linkalma.dto.UserUpdateDTO;
-import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.MessageConstants;
 
 public class UserBO implements IUserBO 
@@ -30,7 +26,6 @@ public class UserBO implements IUserBO
 	@Transactional
 	public Model createUser(User userDto, Model model)
 	{
-		System.out.println("In create User UserBO");
 		long userID = getUserDAO().createUser(userDto);
 		userDto.setUserID(userID);
 		getUserDAO().createCredentials(userDto);
@@ -43,7 +38,6 @@ public class UserBO implements IUserBO
 	
 	public int createCredentials(User userDto)
 	{
-		System.out.println("In create Cred UserBO");
 		return getUserDAO().createCredentials(userDto);
 	}
 	
@@ -52,7 +46,6 @@ public class UserBO implements IUserBO
 	@Transactional
 	public Model updateUser(User userDto, Model model)
 	{
-		System.out.println("In create User UserBO");
 		long userID = getUserDAO().createUser(userDto);
 		userDto.setUserID(userID);
 		getUserDAO().createCredentials(userDto);
@@ -72,7 +65,7 @@ public class UserBO implements IUserBO
 		userSchoolBO.getUserSchoolList(userSchoolDto, model);
 
 		model.addAttribute("userProfile", "");
-
+		model.addAttribute("profileImageURI", userDto.getUserID()+"_profilePic.jpg");
 		return model;
 	}
 	
@@ -80,10 +73,8 @@ public class UserBO implements IUserBO
 	public Model updateUserProfileDetails(User userDto, Model model) 
 	{
 		
-		System.out.println(userDto.getCategory());
 		System.out.println(userDto.getUserFirstName());
-		
-		
+		System.out.println("Printing...User\n"+userDto);
 		model.addAttribute("userProfile", "");
 		
 		return model;

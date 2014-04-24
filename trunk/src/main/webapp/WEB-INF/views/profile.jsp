@@ -1,10 +1,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="header.jsp"%>
+
+<script type="text/javascript">
+
+function fileUpload()
+{
+
+    document.forms["fileupload"].submit();
+}
+</script>
+
 <div class="profilePage" id="profilePage">
 	<div class="left-column border-box">
 		<div class="profile-pic">
-			<img src="images/profile-pic.png" width="162px" height="158px" alt="" />
+		<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
+      		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="162px" height="158px" alt="" modelAttribute="uploadedFile" />
+			<br> 
+			<input type="file" name="file" accept="image/*" onchange="javascript:fileUpload();">
+	  	</form:form>		
+			
 		</div>
 		<div class="navigation">
 			<ul>
@@ -22,7 +37,7 @@
 	<div class="main-content border-box">
 			<h1>My Profile</h1>
 			<div id="personalDetails">
-				<form action="" class="personalDetailsForm readOnlyForm">
+				<form:form action="updatepersonaldetails" name="personalDetails" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetails">
 					<h2>Personal Details </h2>
 					<div>
 						<ul class="twoColumn clear-fix">
@@ -70,23 +85,23 @@
 					<ul class="twoColumn clear-fix">
 		
 						<li><label>Address 1</label> <input type="text" value=""
-							 name="userLastName" class="required" /></li>
+							 name="address1" class="required" /></li>
 						<li><label>Address 2</label> <input type="text" value=""
-							 name="userLastName" class="" /></li>
+							 name="address2" class="" /></li>
 						<li><label>City</label> <input type="text" value=""
-							 name="userLastName" class="required" /></li>
+							 name="city" class="required" /></li>
 						<li><label>State</label> <input type="text" value=""
-							 name="userLastName" class="" /></li>
+							 name="state" class="" /></li>
 						<li><label>Country of Residence</label> <input type="text" value=""
-							 name="userLastName" class="required" /></li>
+							 name="country" class="required" /></li>
 						<li><label>Zip Code</label> <input type="text" value=""
-							 name="userLastName" class="" /></li>
-						<li><label>Cell</label> <input type="text" value="9324445952"
-							 name="userLastName" class="numeric"  maxlength="10" /></li>
-						<li><label>Work</label> <input type="text" value="02226165555"
-							 name="userLastName"class="numeric"  maxlength="10" /></li>
-						<li><label>Residence</label> <input type="text" value="02228730217"
-							 name="userLastName" class="numeric" maxlength="10"/></li>
+							 name="zipCode" class="" /></li>
+						<li><label>Cell</label> <input type="text" value=""
+							 name="phone1" class="numeric" /></li>
+						<li><label>Work</label> <input type="text" value=""
+							 name="phone2"class="numeric" /></li>
+						<li><label>Residence</label> <input type="text" value=""
+							 name="phone3" class="numeric" maxlength="10"/></li>
 		
 					</ul>
 	
@@ -96,7 +111,7 @@
 						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
 						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
 					</div>
-			</form>
+			</form:form>
 			</div>
 			<div id="schoolDetails">
 			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile">
