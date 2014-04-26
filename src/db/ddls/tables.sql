@@ -1,25 +1,7 @@
 
-DROP TABLE `userupdates`;
-CREATE TABLE IF NOT EXISTS `userupdates` (
-  `PostID` int(20) NOT NULL AUTO_INCREMENT,
-  `UserID` int(20) DEFAULT NULL,
-  `Subject` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `UploadedOn` varchar(255) DEFAULT NULL,
-  `CreateUserID` int(20) DEFAULT NULL,
-  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UpdateUserID` int(20) DEFAULT NULL,
-  `UpdateDttm` datetime DEFAULT NULL,
-  PRIMARY KEY (`PostID`),
-  KEY `CreateUserID` (`CreateUserID`),
-  KEY `UserID` (`UserID`),
-  KEY `UpdateUserID` (`UpdateUserID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
-DROP TABLE `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
-  `CommentID` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `CommentID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupID` int(20) DEFAULT NULL,
   `TopicID` int(20) DEFAULT NULL,
   `ActiveYN` char(1) DEFAULT NULL,
@@ -31,19 +13,17 @@ CREATE TABLE IF NOT EXISTS `comments` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `credentials`;
-CREATE TABLE IF NOT EXISTS `credentials` (
+
+CREATE TABLE `credentials` (
   `UserID` int(11) NOT NULL,
   `Password` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `donation`;
-CREATE TABLE IF NOT EXISTS `donation` (
+
+CREATE TABLE `donation` (
   `DonationID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `SchoolID` int(20) DEFAULT NULL,
@@ -55,22 +35,66 @@ CREATE TABLE IF NOT EXISTS `donation` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `groups`;
-CREATE TABLE IF NOT EXISTS `groups` (
-  `GroupID` int(20) NOT NULL AUTO_INCREMENT,
+
+CREATE TABLE `friendrequest` (
+  `FriendRequestID` int(11) NOT NULL AUTO_INCREMENT,
+  `FromUserID` int(11) NOT NULL,
+  `ToUserID` int(11) DEFAULT NULL,
+  `Status` int(1) DEFAULT NULL,
+  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`FriendRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `groupmembers` (
+  `GroupID` int(11) NOT NULL AUTO_INCREMENT,
+  `UserID` int(13) NOT NULL,
+  PRIMARY KEY (`GroupID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `grouprequest` (
+  `GroupRequestID` int(11) NOT NULL AUTO_INCREMENT,
+  `FromUserID` int(11) NOT NULL,
+  `ForGroupID` int(11) NOT NULL,
+  `Status` int(1) DEFAULT NULL,
+  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`GroupRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `groups` (
+  `GroupID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupName` varchar(255) DEFAULT NULL,
   `GroupAdmin` varchar(255) DEFAULT NULL,
   `SchoolID` varchar(255) DEFAULT NULL,
-  `GroupType` varchar(255) DEFAULT NULL comment "Custom OR Alumni",
+  `GroupType` varchar(255) DEFAULT NULL COMMENT 'Custom OR Alumni',
   `PublicViewYN` char(1) DEFAULT NULL,
   PRIMARY KEY (`GroupID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE `referrals`;
-CREATE TABLE IF NOT EXISTS `referrals` (
+
+
+CREATE TABLE `messages` (
+  `MessageID` int(13) NOT NULL AUTO_INCREMENT,
+  `FromUserID` int(13) NOT NULL,
+  `DestinationType` varchar(10) NOT NULL COMMENT 'Group or User',
+  `DestinationID` int(13) NOT NULL COMMENT 'GroupID or UserID',
+  PRIMARY KEY (`MessageID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `referrals` (
   `ReferralID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(20) DEFAULT NULL,
   `ReferralEmailID` varchar(40) DEFAULT NULL,
@@ -81,10 +105,9 @@ CREATE TABLE IF NOT EXISTS `referrals` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `school`;
-CREATE TABLE IF NOT EXISTS `school` (
+
+CREATE TABLE `school` (
   `SchoolID` int(20) NOT NULL AUTO_INCREMENT,
   `SchoolName` varchar(255) DEFAULT NULL,
   `Address1` varchar(255) DEFAULT NULL,
@@ -102,13 +125,12 @@ CREATE TABLE IF NOT EXISTS `school` (
   PRIMARY KEY (`SchoolID`),
   KEY `CreateUserID` (`CreateUserID`),
   KEY `UpdateUserID` (`UpdateUserID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `schoolnews`;
-CREATE TABLE IF NOT EXISTS `schoolnews` (
+
+CREATE TABLE `schoolnews` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `SchoolID` int(20) DEFAULT NULL,
   `NewsDescription` varchar(255) DEFAULT NULL,
@@ -117,10 +139,9 @@ CREATE TABLE IF NOT EXISTS `schoolnews` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `schoolupdates`;
-CREATE TABLE IF NOT EXISTS `schoolupdates` (
+
+CREATE TABLE `schoolupdates` (
   `PostID` int(11) NOT NULL AUTO_INCREMENT,
   `SchoolID` int(20) DEFAULT NULL,
   `Subject` varchar(255) DEFAULT NULL,
@@ -134,13 +155,22 @@ CREATE TABLE IF NOT EXISTS `schoolupdates` (
   KEY `CreateUserID` (`CreateUserID`),
   KEY `SchoolID` (`SchoolID`),
   KEY `UpdateUserID` (`UpdateUserID`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `staticcodes` (
+  `CategoryID` int(11) NOT NULL,
+  `Code` int(10) NOT NULL,
+  `PrimaryDecode` varchar(30) DEFAULT NULL,
+  `SecondaryDecode` varchar(60) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `topics`;
-CREATE TABLE IF NOT EXISTS `topics` (
+
+CREATE TABLE `topics` (
   `TopicID` int(20) NOT NULL AUTO_INCREMENT,
   `TopicTitle` varchar(255) DEFAULT NULL,
   `TopicStartDate` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -154,20 +184,20 @@ CREATE TABLE IF NOT EXISTS `topics` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
- 
 
-DROP TABLE `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+
+CREATE TABLE `user` (
   `UserID` int(20) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(255) NOT NULL,
   `MiddleName` varchar(255) DEFAULT NULL,
   `LastName` varchar(255) DEFAULT NULL,
   `Address1` varchar(255) DEFAULT NULL,
   `Address2` varchar(255) DEFAULT NULL,
-  `Phone1` int(11) DEFAULT NULL,
-  `Phone2` int(11) DEFAULT NULL,
-  `Phone3` int(11) DEFAULT NULL,
-  `Phone4` int(11) DEFAULT NULL,
+  `CountryCode` varchar(4) DEFAULT NULL,
+  `Phone1` bigint(20) DEFAULT NULL,
+  `Phone2` bigint(20) DEFAULT NULL,
+  `Phone3` bigint(20) DEFAULT NULL,
+  `Phone4` bigint(20) DEFAULT NULL,
   `Gender` varchar(10) DEFAULT NULL,
   `City` varchar(30) DEFAULT NULL,
   `State` varchar(30) DEFAULT NULL,
@@ -182,33 +212,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
   `UpdateDttm` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
- 
-
-DROP TABLE `userschool`;
-CREATE TABLE IF NOT EXISTS `userschool` (
-  `UserSchoolID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserID` int(20) DEFAULT NULL,
-  `SchoolID` int(20) DEFAULT NULL,
-  `FromYear` date DEFAULT NULL,
-  `ToYear` date DEFAULT NULL,
-  `PassoutBatch` int(4) DEFAULT NULL,
-  `CreateUserID` int(20) DEFAULT NULL,
-  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UpdateUserID` int(20) DEFAULT NULL,
-  `UpdateDttm` datetime DEFAULT NULL,
-  PRIMARY KEY (`UserSchoolID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-DROP TABLE `StaticCodes`;
-CREATE TABLE IF NOT EXISTS `StaticCodes` (  `CategoryID` INTEGER NOT NULL ,
-`Code` int(10) NOT NULL,  
-`PrimaryDecode` VARCHAR(30),  
-`SecondaryDecode` VARCHAR(60))
-ENGINE=myisam DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `userhistory` (
@@ -223,21 +229,38 @@ CREATE TABLE `userhistory` (
 
 
 
-CREATE TABLE `friendrequest` (
-  `FriendRequestID` int(11) NOT NULL AUTO_INCREMENT,
-  `FromUserID` int(11) NOT NULL,
-  `ToUserID` int(11) DEFAULT NULL,
-  `Status` int(1) DEFAULT NULL,
-  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`FriendRequestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `grouprequest` (
-  `GroupRequestID` int(11) NOT NULL AUTO_INCREMENT,
-  `FromUserID` int(11) NOT NULL,
-  `ForGroupID` int(11) NOT NULL,
-  `Status` int(1) DEFAULT NULL,
-  `RequestSentDTTM` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`GroupRequestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `userschool` (
+  `UserSchoolID` int(11) NOT NULL AUTO_INCREMENT,
+  `UserID` int(20) DEFAULT NULL,
+  `SchoolID` int(20) DEFAULT NULL,
+  `fromyear` int(4) DEFAULT NULL,
+  `toyear` int(4) DEFAULT NULL,
+  `PassoutBatch` int(4) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
+  PRIMARY KEY (`UserSchoolID`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `userupdates` (
+  `PostID` int(11) NOT NULL AUTO_INCREMENT,
+  `UserID` int(20) DEFAULT NULL,
+  `Subject` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `UploadedOn` varchar(255) DEFAULT NULL,
+  `CreateUserID` int(20) DEFAULT NULL,
+  `CreateDttm` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUserID` int(20) DEFAULT NULL,
+  `UpdateDttm` datetime DEFAULT NULL,
+  PRIMARY KEY (`PostID`),
+  KEY `CreateUserID` (`CreateUserID`),
+  KEY `UserID` (`UserID`),
+  KEY `UpdateUserID` (`UpdateUserID`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
 
