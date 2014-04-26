@@ -12,6 +12,8 @@ public interface IUserDAO {
 
 	public int createCredentials(User alumni);
 
+	public int updateCredentials(User alumni);
+
 	public User getUserProfile(User alumni);
 
 	public List<User> getAllUserProfile(User alumni);

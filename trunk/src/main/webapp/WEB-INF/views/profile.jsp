@@ -37,27 +37,29 @@ function fileUpload()
 	<div class="main-content border-box">
 			<h1>My Profile</h1>
 			<div id="personalDetails">
-				<form:form action="updatepersonaldetails" name="personalDetails" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetails">
+				<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
 					<h2>Personal Details </h2>
 					<div>
 						<ul class="twoColumn clear-fix">
-							<li><label>First Name</label> <input type="text" value="Gautam"
+							<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
 								 name="userFirstName" class="required" maxlength="50" /></li>
-							<li><label>Last Name</label> <input type="text" value="Sharma"
+							<li><label>Last Name</label> <input type="text" value="${model.userProfile.userLastName }"
 								 name="userLastName" class="required" maxlength="50" /></li>
-							<li><label>Email</label> <input type="text" value="gautam@gmail.com"
+							<li><label>Email</label> <input type="text" value="${model.userProfile.emailAddress }"
 								 name="emailAddress" class="emailField required" /></li>
-							<li><label>Password</label> <input type="password" value="test"
+							<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
 								 name="password" class="required" /></li>
 							<li><label>Confirm Password</label> <input type="password"
-								value="test"  class="required" /></li>
+								value="${model.userProfile.password }"  class="required" /></li>
 							<li>
-								<ul class="twoColumn" style="margin-top:22px;">
-									<li><label class="fl">Male </label>
-									<input type="radio" value=""  name="gender" checked /></li>
-									<li><label class="fl">Female </label>
-									<input type="radio" value=""  name="gender" /></li>
-								</ul>
+									<ul class="twoColumn" style="margin-top:22px;">
+										<li><label class="fl">Male </label>
+										<input type="radio" value="M"  
+											name="gender" <c:if test="${model.userProfile.gender == 'M'}">checked</c:if> /></li>
+										<li><label class="fl">Female </label>
+										<input type="radio" value="F"  
+										name="gender" <c:if test="${model.userProfile.gender == 'F'}">checked</c:if> /></li>
+									</ul>
 							</li>
 						</ul>
 					</div>
@@ -90,26 +92,26 @@ function fileUpload()
 					<h4>Contact Info</h4>
 					<ul class="twoColumn clear-fix">
 		
-						<li><label>Address 1</label> <input type="text" value=""
+						<li><label>Address 1</label> <input type="text" value="${model.userProfile.address1 }"
 							 name="address1" class="required" /></li>
-						<li><label>Address 2</label> <input type="text" value=""
+						<li><label>Address 2</label> <input type="text" value="${model.userProfile.address2 }"
 							 name="address2" class="" /></li>
-						<li><label>City</label> <input type="text" value=""
+						<li><label>City</label> <input type="text" value="${model.userProfile.city }"
 							 name="city" class="required" /></li>
-						<li><label>State</label> <input type="text" value=""
+						<li><label>State</label> <input type="text" value="${model.userProfile.state }"
 							 name="state" class="" /></li>
-						<li><label>Country of Residence</label> <input type="text" value=""
+						<li><label>Country of Residence</label> <input type="text" value="${model.userProfile.country }"
 							 name="country" class="required" /></li>
 						<li><label>Zip Code</label> <input type="text" value=""
 							 name="zipCode" class="" /></li>
 						<li><label>Cell</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
 							 name="phone1" class="numeric" size="10"/></li>
 						<li><label>Work</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
 							 name="phone2"class="numeric" size="10" /></li>
 						<li><label>Residence</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
 							 name="phone3" class="numeric" maxlength="10" size="10" /></li>
 		
 					</ul>
@@ -123,9 +125,9 @@ function fileUpload()
 			</form:form>
 			</div>
 			<div id="schoolDetails">
-			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile">
+			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile" modelAttribute="userSchool" method="post">
 			<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
-			<input type="hidden" name="totalUserSchoolCount" value="${model.userSchoolList.size()}" />
+			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 				<table class="dataTable">
 						<thead>
 							<tr>
@@ -140,7 +142,7 @@ function fileUpload()
 						</thead>
 						<tbody>
 						
-						<c:forEach var="userSchoolList" items="${model.userSchoolList}" varStatus="count">
+						<c:forEach var="userSchoolList" items="${model.userProfile.userSchoolList}" varStatus="count">
 							<tr>
 								<td>
 								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}" readonly="readonly" />
@@ -154,10 +156,10 @@ function fileUpload()
 									</c:forEach>
 								</select> 
 								</td>
-								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch" readonly="readonly" /></td>
 							
 								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
 							</tr>

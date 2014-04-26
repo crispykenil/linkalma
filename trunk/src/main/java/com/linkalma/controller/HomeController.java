@@ -42,30 +42,30 @@ import com.linkalma.dto.WallPostDto;
  */
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("linkalma-beans.xml");
-	
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(HomeController.class);
+
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+			"linkalma-beans.xml");
+
 	@Autowired
 	School school;
-	
+
 	@Autowired
 	SchoolJDBCTemplate schoolJDBCTemplate;
-	
+
 	@Autowired
 	Validator validator;
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
-		if(request.getSession().getAttribute("userBean") == null)
-		{
+		if (request.getSession().getAttribute("userBean") == null) {
 			UserBean userBean = new UserBean();
 			userBean.setUserID(1);
 			request.getSession().setAttribute("userBean", userBean);
@@ -73,86 +73,93 @@ public class HomeController {
 		}
 		return new ModelAndView("index");
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to login page.");
 		return new ModelAndView("redirect:/dashboard");
 	}
-	
+
 	@RequestMapping(value = "/dashboard")
 	public ModelAndView dashboard(@ModelAttribute User userDto, Model model) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
-		
-		IDashboardBO dashboardBO = (IDashboardBO)context.getBean("dashboardBO");
-		
+
+		IDashboardBO dashboardBO = (IDashboardBO) context
+				.getBean("dashboardBO");
+
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
-		
+
 		return new ModelAndView("dashboard", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/school/{id}", method = RequestMethod.GET)
-	public ModelAndView school(@PathVariable ("id") String schoolName ) {
+	public ModelAndView school(@PathVariable("id") String schoolName) {
 		logger.info("Welcome home! Redirecting to School page.");
-		
+
 		System.out.println(schoolName);
-		
+
 		return new ModelAndView("school", "model", new ModelAndView());
 	}
 
 	@RequestMapping(value = "/addwallpost")
-	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto, Model model) {
+	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
+			Model model) {
 		logger.info("Welcome home! Saving Wall Post.");
-		
-		IDashboardBO dashboardBO = (IDashboardBO)context.getBean("dashboardBO");
-		
+
+		IDashboardBO dashboardBO = (IDashboardBO) context
+				.getBean("dashboardBO");
+
 		model = dashboardBO.addWallPost(wallPostDto, model);
-		
+
 		return new ModelAndView("dashboard", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/school")
 	public ModelAndView school(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
 		return new ModelAndView("school");
 	}
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(HttpServletRequest request, Model model) {
-		
+
 		school.setAddress1(request.getParameter("schoolAddress1"));
 		school.setAddress2(request.getParameter("schoolAddress2"));
 		school.setSchoolName(request.getParameter("schoolName"));
 		school.setBranch(request.getParameter("branch"));
-		
-		schoolJDBCTemplate.createSchool(school);;
+
+		schoolJDBCTemplate.createSchool(school);
+		;
 		List<School> schoolList = schoolJDBCTemplate.listSchools();
-		model.addAttribute("schoolList", schoolList );
-		
+		model.addAttribute("schoolList", schoolList);
+
 		logger.info("Forwarding to Search Page!");
 		return "search";
 	}
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
 	@Transactional
-	public Model createProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+	public Model createProfile(@ModelAttribute User user,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! ");
-		
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
 		else
 			user.setUserID(0);
-		
-		System.out.println("UserID : "+ user.getUserID());
-		IUserBO userBO = (IUserBO)context.getBean("userBO");
+
+		System.out.println("UserID : " + user.getUserID());
+		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.createUser(user, model);
-		
+
 		return model;
 	}
 
@@ -161,153 +168,202 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/viewprofile", method = RequestMethod.GET)
 	@Transactional
-	public ModelAndView viewProfile(@ModelAttribute User user, HttpServletRequest request, Model model) {
+	public ModelAndView viewProfile(@ModelAttribute User user,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
-		
-		IUserBO userBO = (IUserBO)context.getBean("userBO");
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+
+		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
 		user.setUserID(userBean.getUserID());
 		model = userBO.getUserProfileDetails(user, model);
-		
+
 		return new ModelAndView("profile", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView fileUPload(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, HttpServletRequest request, Model model) {
+	public ModelAndView fileUPload(
+			@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome to File Upload! ");
-		
-//		IUserBO userBO = (IUserBO)context.getBean("userBO");
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
-		
-			InputStream inputStream = null;  
-		  OutputStream outputStream = null;  
-		  
-		  MultipartFile file = uploadedFile.getFile();  
-		  
-		  String fileName = String.valueOf(userBean.getUserID()) + "_profilePic";   
-		  
-		  try {  
-		   inputStream = file.getInputStream();  
-		  
-		   File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"+fileName+".jpg");  
-		   if (newFile.exists()) { 
-			   newFile.delete();
-		    newFile.createNewFile();  
-		   }  
-		   else
-			   newFile.createNewFile();
-		   outputStream = new FileOutputStream(newFile);  
-		   int read = 0;  
-		   byte[] bytes = new byte[1024];  
-		  
-		   while ((read = inputStream.read(bytes)) != -1) {  
-		    outputStream.write(bytes, 0, read); 
-		    fileName = newFile.getName();
-		   }  
-		  } catch (IOException e) {  
-			  
-		   e.printStackTrace();  
-		  }
-		  finally
-		  {
-			  try {
-				  if(outputStream != null)
-					  outputStream.close();
-				
+
+		// IUserBO userBO = (IUserBO)context.getBean("userBO");
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+
+		MultipartFile file = uploadedFile.getFile();
+
+		String fileName = String.valueOf(userBean.getUserID()) + "_profilePic";
+
+		try {
+			inputStream = file.getInputStream();
+
+			File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"
+					+ fileName + ".jpg");
+			if (newFile.exists()) {
+				newFile.delete();
+				newFile.createNewFile();
+			} else
+				newFile.createNewFile();
+			outputStream = new FileOutputStream(newFile);
+			int read = 0;
+			byte[] bytes = new byte[1024];
+
+			while ((read = inputStream.read(bytes)) != -1) {
+				outputStream.write(bytes, 0, read);
+				fileName = newFile.getName();
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				if (outputStream != null)
+					outputStream.close();
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		  }
-		  model.addAttribute("profileImageURI", fileName);
-		
+		}
+		model.addAttribute("profileImageURI", fileName);
+
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
+
 	/**
 	 * Simply selects the profile view to render.
 	 */
 	@RequestMapping(value = "/updateprofile", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView updateProfile(@ModelAttribute("userProfile") User user, HttpServletRequest request, Model model) {
+	public ModelAndView updateProfile(@ModelAttribute("userProfile") User user,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
+
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		if (userBean != null)
+			user.setUserID(userBean.getUserID());
+		else
+			user.setUserID(0);
 		
-		IUserBO userBO = (IUserBO)context.getBean("userBO");
+		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.updateUserProfileDetails(user, model);
-		
+
 		return new ModelAndView("profile", "model", model);
 	}
+
+	
+	@RequestMapping(value = "/updateuserschool", method = RequestMethod.POST)
+	@Transactional
+	public ModelAndView updateUserSchool(@ModelAttribute("userSchool") User user,
+			HttpServletRequest request, Model model) {
+		logger.info("Welcome to My Profile! ");
+
+		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		if (userBean != null)
+			user.setUserID(userBean.getUserID());
+		else
+			user.setUserID(0);
+		List<UserSchoolDTO> userSchoolList= user.getUserSchoolList();
+		System.out.println("UserSchoolList Size - Update: "+userSchoolList.size());
+		IUserBO userBO = (IUserBO) context.getBean("userBO");
+//		model = userBO.updateUserProfileDetails(user, model);
+
+		return new ModelAndView("redirect:/viewprofile", "model", model);
+	}
+	
 	
 	@RequestMapping(value = "/addmyschool", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView addMySchool(@ModelAttribute UserSchoolDTO userSchoolDto, HttpServletRequest request, Model model) {
+	public ModelAndView addMySchool(
+			@ModelAttribute UserSchoolDTO userSchoolDto,
+			HttpServletRequest request, Model model) {
 		logger.info("=====Welcome addMySchool!=====");
-		
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
-		
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
+				.getBean("userSchoolBO");
+
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
 		if (userBean != null)
 			userSchoolDto.setUserID(userBean.getUserID());
 		else
 			userSchoolDto.setUserID(0);
 		userSchoolBO.createUserSchool(userSchoolDto);
-		
+
 		System.out.println("Redirecting to LoadUser School");
-		return new ModelAndView("redirect:/viewprofile","model", model);
+		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
 	@RequestMapping(value = "/deletemyschool", method = RequestMethod.GET)
 	@Transactional
 	public ModelAndView deleteMySchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome deleteMySchool!");
-		
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
-		
+
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
+				.getBean("userSchoolBO");
+
 		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
-		
-		userSchoolDto.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
+
+		userSchoolDto
+				.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
 
 		userSchoolBO.deleteUserSchool(userSchoolDto, model);
-		return new ModelAndView("redirect:/loadUserSchool","model", model);
+		return new ModelAndView("redirect:/loadUserSchool", "model", model);
 	}
 
 	@RequestMapping(value = "/loaduserschool")
 	@Transactional
-	public ModelAndView loadUserSchool(@ModelAttribute UserSchoolDTO userSchoolDto, Model model) {
+	public ModelAndView loadUserSchool(@ModelAttribute User userDto,
+			HttpServletRequest request, Model model) {
 		logger.info("Loading User School!");
-						
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO)context.getBean("userSchoolBO");
-		
-		model = userSchoolBO.getUserSchoolList(userSchoolDto, model);
-		return new ModelAndView("addMySchool","model", model);
+
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
+				.getBean("userSchoolBO");
+
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+		if (userBean != null)
+			userDto.setUserID(userBean.getUserID());
+		else
+			userDto.setUserID(0);
+
+		model = userSchoolBO.getUserSchoolList(userDto, model);
+		return new ModelAndView("addMySchool", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/loadschool")
 	@Transactional
 	public ModelAndView loadAllSchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
-						
-		ISchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
-		
+
+		ISchoolBO schoolBO = (SchoolBO) context.getBean("schoolBO");
+
 		School schoolDto = new School();
-		
+
 		model = schoolBO.getSchoolList(schoolDto, model);
-		return new ModelAndView("registerSchool","model", model);
+		return new ModelAndView("registerSchool", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/registerschool")
 	@Transactional
-	public ModelAndView registerSchool(@ModelAttribute School schoolDto, HttpServletRequest request, Model model) {
+	public ModelAndView registerSchool(@ModelAttribute School schoolDto,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
-						
-		ISchoolBO schoolBO = (SchoolBO)context.getBean("schoolBO");
-		
+
+		ISchoolBO schoolBO = (SchoolBO) context.getBean("schoolBO");
+
 		schoolDto.setApproved("Y");
 		schoolDto.setActive("Y");
-		
+
 		schoolBO.createSchool(schoolDto, model);
-		return new ModelAndView("redirect:/loadschool","model", model);
+		return new ModelAndView("redirect:/loadschool", "model", model);
 	}
+
 	/**
 	 * @return the school
 	 */
@@ -316,7 +372,8 @@ public class HomeController {
 	}
 
 	/**
-	 * @param school the school to set
+	 * @param school
+	 *            the school to set
 	 */
 	public void setSchool(School school) {
 		this.school = school;
@@ -330,10 +387,11 @@ public class HomeController {
 	}
 
 	/**
-	 * @param schoolJDBCTemplate the schoolJDBCTemplate to set
+	 * @param schoolJDBCTemplate
+	 *            the schoolJDBCTemplate to set
 	 */
 	public void setSchoolJDBCTemplate(SchoolJDBCTemplate schoolJDBCTemplate) {
 		this.schoolJDBCTemplate = schoolJDBCTemplate;
 	}
-	
+
 }

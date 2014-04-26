@@ -60,22 +60,26 @@ public class UserBO implements IUserBO
 	@Override
 	public Model getUserProfileDetails(User userDto, Model model) 
 	{
-		userSchoolDto = new UserSchoolDTO();
-		userSchoolDto.setUserID(userDto.getUserID());
-		userSchoolBO.getUserSchoolList(userSchoolDto, model);
-
-		model.addAttribute("userProfile", "");
+		userDto = getUserDAO().getUserProfile(userDto);
+		getUserSchoolBO().getUserSchoolList(userDto, model);
+		System.out.println("Printingzz - "+userDto);
+		model.addAttribute("userProfile", userDto);
 		model.addAttribute("profileImageURI", userDto.getUserID()+"_profilePic.jpg");
+		
 		return model;
 	}
 	
+	@Transactional
 	@Override
 	public Model updateUserProfileDetails(User userDto, Model model) 
 	{
 		
 		System.out.println(userDto.getUserFirstName());
 		System.out.println("Printing...User\n"+userDto);
-		model.addAttribute("userProfile", "");
+		
+		getUserDAO().updateUser(userDto);
+		getUserDAO().updateCredentials(userDto);
+		model.addAttribute("userProfile", userDto);
 		
 		return model;
 	}
