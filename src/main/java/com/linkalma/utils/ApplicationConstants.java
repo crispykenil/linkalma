@@ -52,4 +52,33 @@ public class ApplicationConstants {
 			+ " FROM USERUPDATES UU, USER U "
 			+ " WHERE UU.USERID = U.USERID"
 			+ " AND U.USERID = 11" ;
+	
+	public static String UPDATE_USER_PROFILE_PERSONAL_DETAILS = 
+			" UPDATE user SET FirstName = ?,    MiddleName = ?,    LastName = ?, "
+			+ " Address1 = ?, Address2 = ?, CountryCode = ?, Phone1 = ?, Phone2 = ?, Phone3 = ?, Phone4 = ?, "
+			+ " Gender = ?, City = ?, State = ?, Country = ?, "
+			+ " EmailAddress = ?, DOB = ?, AboutMe = ?, "
+			+ " UpdateDttm = CURRENT_TIMESTAMP "
+			+ " WHERE UserID = ?";
+	
+	public static String SELECT_USER_DETAILS = 
+			" SELECT U.UserID, UC.PASSWORD, RoleID, SC.PrimaryDecode as Role, FirstName, MiddleName, LastName, Address1, Address2, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, EmailAddress, DOB, "
+			+ " AboutMe, Photo, Approved, ActiveYN, CreateDttm, UpdateDttm "
+			+ " FROM user U , CREDENTIALS UC, STATICCODES SC "
+			+ " WHERE U.USERID = UC.USERID"
+			+ " AND U.ROLEID = SC.CODE AND SC.CATEGORYID = 1 "	// CATEGORY_CD = 1 defines Roles
+			+ " AND U.USERID = ?";
+	
+	public static String UPDATE_USER_CREDENTIALS = 
+			" UPDATE CREDENTIALS SET PASSWORD = ?"
+			+ " WHERE USERID = ?";
+	
+	public static String UPDATE_USER_SCHOOL_DETAILS = 
+			" UPDATE USERSCHOOL "
+			+ " SET SCHOOLID=?, FROMYEAR=?, TOYEAR=?, "
+			+ " PASSOUTBATCH=?, UPDATEUSERID=?, UPDATEDTTM=CURRENT_TIMESTAMP "
+			+ " WHERE USERSCHOOLID=?";
+	
+	
 }

@@ -1,6 +1,7 @@
 package com.linkalma.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -41,7 +42,7 @@ public class UserDAO implements IUserDAO {
 	    	  	ps.setString(1, alumni.getUserFirstName());
 	    	  	ps.setString(2, alumni.getUserMiddleName());
 	    	  	ps.setString(3, alumni.getUserLastName());
-	    	  	ps.setString(4, alumni.getAddres1());
+	    	  	ps.setString(4, alumni.getAddress1());
 	    	  	ps.setString(5, alumni.getAddress2());
 	    	  	ps.setLong(6, alumni.getPhone1());
 	    	  	ps.setLong(7, alumni.getPhone2());
@@ -104,23 +105,60 @@ public class UserDAO implements IUserDAO {
 	}
 	
 	@Override
-	public long updateUser(User alumni) 
+	public long updateUser(final User alumni) 
 	{
-		// TODO Auto-generated method stub
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_PROFILE_PERSONAL_DETAILS);
+	    		ps.setString(1, alumni.getUserFirstName());
+	    		ps.setString(2, alumni.getUserMiddleName());
+	    		ps.setString(3, alumni.getUserLastName());
+	    		ps.setString(4, alumni.getAddress1());
+	    		ps.setString(5, alumni.getAddress2());
+	    		ps.setShort(6, alumni.getCountryCode());
+	    		ps.setLong(7, alumni.getPhone1());
+	    		ps.setLong(8, alumni.getPhone2());
+	    		ps.setLong(9, alumni.getPhone3());
+	    		ps.setLong(10, alumni.getPhone4());
+	    		ps.setString(11, alumni.getGender());
+	    		ps.setString(12, alumni.getCity());
+	    		ps.setString(13, alumni.getState());
+	    		ps.setString(14, alumni.getCountry());
+	    		ps.setString(15, alumni.getEmailAddress());
+	    		ps.setDate(16, alumni.getDob());
+	    		ps.setString(17, alumni.getAboutMe());
+
+	    		ps.setLong(18, alumni.getUserID());
+	    	  	return ps;
+    	  	}
+    });
 		return 0;
 	}
 
 	@Override
-	public User getUserProfile(User alumni) {
+	public User getUserProfile(final User alumni) {
 		
-		User user = getJdbcTemplateObject().queryForObject( ApplicationConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY,
-				new UserMapper());
-		return null;
+		User user = getJdbcTemplateObject().queryForObject(ApplicationConstants.SELECT_USER_DETAILS, new Object[]{alumni.getUserID()}, new UserMapper());
+		return user;
 	}
 
 	@Override
 	public List<User> getAllUserProfile(User alumni) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int updateCredentials(final User alumni) {
+
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_CREDENTIALS);
+	    		ps.setString(1, alumni.getPassword());
+	    		ps.setLong(2, alumni.getUserID());
+	    		return ps;
+    	  	}
+    });
+	  return 0;
 	}
 }

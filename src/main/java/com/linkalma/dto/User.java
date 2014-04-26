@@ -32,9 +32,11 @@ public class User
 	
 	private String month;
 	
-	private String addres1;
+	private String address1;
 	
 	private String address2;
+	
+	private short countryCode;
 	
 	private long phone1;
 	
@@ -275,15 +277,15 @@ public class User
 	/**
 	 * @return the addres1
 	 */
-	public String getAddres1() {
-		return addres1;
+	public String getAddress1() {
+		return address1;
 	}
 
 	/**
 	 * @param addres1 the addres1 to set
 	 */
-	public void setAddres1(String addres1) {
-		this.addres1 = addres1;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
 
 	/**
@@ -451,7 +453,7 @@ public class User
 		sb.append("\nMName: "+this.userMiddleName);
 		sb.append("\nDOB  : "+this.dob);
 		sb.append("\nEmail: "+this.emailAddress);
-		sb.append("\nAddr1: "+this.addres1);
+		sb.append("\nAddr1: "+this.address1);
 		sb.append("\nAddr2: "+this.address2);
 		sb.append("\nPhon1: "+this.phone1);
 		sb.append("\nPhon2: "+this.phone2);
@@ -591,5 +593,19 @@ public class User
 	 */
 	public void setUserSchoolList(List<UserSchoolDTO> userSchoolList) {
 		this.userSchoolList = userSchoolList;
+	}
+
+	/**
+	 * @return the countryCode
+	 */
+	public short getCountryCode() {
+		return countryCode;
+	}
+
+	/**
+	 * @param countryCode the countryCode to set
+	 */
+	public void setCountryCode(short countryCode) {
+		this.countryCode = countryCode;
 	}
 }

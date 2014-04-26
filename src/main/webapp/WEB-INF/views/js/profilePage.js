@@ -27,7 +27,9 @@ function hideShowMairrageInfo(){
 		}
 	});
 }
+
+
 var submitPersonalDetails = function(){
-	var form = $('#personalDetails');
+	var form = $('#personalDetailsForm');
 	form.submitFormThroughAjax(form);
 };

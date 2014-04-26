@@ -10,6 +10,7 @@ import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.IUserSchoolDAO;
 import com.linkalma.dto.School;
+import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 
 public class UserSchoolBO implements IUserSchoolBO {
@@ -30,15 +31,17 @@ public class UserSchoolBO implements IUserSchoolBO {
 
 	@Override
 	@Transactional
-	public Model getUserSchoolList(UserSchoolDTO userSchoolDto, Model model) {
+	public Model getUserSchoolList(User userDto, Model model) {
 		
 		List<School> schoolList = getSchoolDAO().listSchools();
 		System.out.println("School List Size:"+schoolList.size());
 		
-		List<UserSchoolDTO> userSchoolList = getSchoolDAO().listLinkedSchools(userSchoolDto.getUserID());
+		List<UserSchoolDTO> userSchoolList = getSchoolDAO().listLinkedSchools(userDto.getUserID());
 		System.out.println("UserSchool List Size:"+userSchoolList.size());
 		
-		model.addAttribute("userSchoolList",userSchoolList );
+		userDto.setUserSchoolList(userSchoolList);
+		
+		model.addAttribute("userProfile",userDto);
 		model.addAttribute("schoolList",schoolList );
 		
 		return model;

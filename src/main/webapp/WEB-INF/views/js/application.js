@@ -10,7 +10,7 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
-
+		eventBindingForProfilePage();
 		
 	});
 
@@ -47,7 +47,7 @@ function submitSignUpForm() {
 	$("#signUpForm").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			form.submitFormThroughAjax($(this));
+			submitFormThroughAjax($(this));
 		}
 
 	});
@@ -63,6 +63,18 @@ function registerNewSchool() {
 	});
 }
 
+function submitFormThroughAjax(form) {
+	var formData = form.serialize();
+	var url = form.attr("action");
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : formData
+
+	}).done(function(data) {
+		console.log(data);
+	});
+}
 
 
 
