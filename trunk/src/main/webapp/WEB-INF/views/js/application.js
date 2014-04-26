@@ -10,7 +10,7 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
-		eventBindingForProfilePage();
+
 		
 	});
 
@@ -47,7 +47,7 @@ function submitSignUpForm() {
 	$("#signUpForm").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			submitFormThroughAjax($(this));
+			form.submitFormThroughAjax($(this));
 		}
 
 	});
@@ -63,46 +63,11 @@ function registerNewSchool() {
 	});
 }
 
-function submitFormThroughAjax(form) {
-	var formData = form.serialize();
-	var url = form.attr("action");
-	$.ajax({
-		type : "POST",
-		url : url,
-		data : formData
 
-	}).done(function(data) {
-		console.log(data);
-	});
-}
 
-var submitPersonalDetails = function(){
 
-var form = $('#personalDetails');
-	var formData = form.serialize();
-	var url = form.attr("action");
-	alert(formData);
-	$.ajax({
-		type : "POST",
-		url : url,
-		data : formData
 
-	}).done(function(data) {
-		console.log(data);
-		alert('done dona done.. done....')
-	});
-	
-};
 
-function eventBindingForProfilePage(){
-	//editForm();
-	//cancelUpdateAction();
-	getAddMySchoolForm();
-	//submitPersonalDetails();
-
-	$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
-	$(".schoolDetailsForm").bindEditUpdateFunctionality();
-}
 
 function getAddMySchoolForm (){
 	$('.addMySchool').bind('click', function() {

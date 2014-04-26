@@ -282,7 +282,14 @@ input[type="text"].search-field {
     text-align: right;
     width: 135px;
 }
-.profilePage form input{ 
+.profilePage .family-details label {
+	width:auto
+}
+.profilePage .family-details li {
+	height:50px;
+	line-height:50px
+}
+.profilePage form input, .profilePage form select{ 
     width:auto;
 }
 .profilePage h2 {

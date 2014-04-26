@@ -17,7 +17,7 @@ function fileUpload()
 		<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
       		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="162px" height="158px" alt="" modelAttribute="uploadedFile" />
 			<br> 
-			<input type="file" name="file" accept="image/*" onchange="javascript:fileUpload();">
+			<input type="file" name="file" accept="image/*" class="button" onchange="javascript:fileUpload();">
 	  	</form:form>		
 			
 		</div>
@@ -52,21 +52,28 @@ function fileUpload()
 							<li><label>Confirm Password</label> <input type="password"
 								value="test"  class="required" /></li>
 							<li>
-									<ul class="twoColumn" style="margin-top:22px;">
-										<li><label class="fl">Male </label>
-										<input type="radio" value=""  name="gender" checked /></li>
-										<li><label class="fl">Female </label>
-										<input type="radio" value=""  name="gender" /></li>
-									</ul>
+								<ul class="twoColumn" style="margin-top:22px;">
+									<li><label class="fl">Male </label>
+									<input type="radio" value=""  name="gender" checked /></li>
+									<li><label class="fl">Female </label>
+									<input type="radio" value=""  name="gender" /></li>
+								</ul>
 							</li>
 						</ul>
 					</div>
-					<div>
+					<div class="family-details">
 						<h4>Family Details</h4>
-						<ul class="twoColumn clear-fix">
-							<li><label>Married To</label> <input type="text" value=""  name="userLastName" class="required" /></li>
-							<li>
-								<h5>No of Children</h5>
+						<ul class="twoColumn_1-3 clear-fix">
+						<li>
+						<div id="maritalStatus">
+							<label>Single</label> <input type="radio" value="" name="maritalStatus" class="single" checked="checked" />
+							<label>Married</label> <input type="radio" value="" name="maritalStatus" class="married">
+						</div>
+						</li>
+						<li>
+							<div id="mairrageInfo">
+								<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
+								<label>No of Children</label>
 								<select disabled="disabled">
 									<option>One</option>
 									<option>Two</option>
@@ -74,12 +81,11 @@ function fileUpload()
 									<option>Four</option>
 									<option>Five</option>
 								</select>
+							</div>
+							
 							</li>
-			
 						</ul>
 					</div>
-				
-				
 				<div>
 					<h4>Contact Info</h4>
 					<ul class="twoColumn clear-fix">
@@ -97,11 +103,14 @@ function fileUpload()
 						<li><label>Zip Code</label> <input type="text" value=""
 							 name="zipCode" class="" /></li>
 						<li><label>Cell</label> <input type="text" value=""
-							 name="phone1" class="numeric" /></li>
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="phone1" class="numeric" size="10"/></li>
 						<li><label>Work</label> <input type="text" value=""
-							 name="phone2"class="numeric" /></li>
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="phone2"class="numeric" size="10" /></li>
 						<li><label>Residence</label> <input type="text" value=""
-							 name="phone3" class="numeric" maxlength="10"/></li>
+							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value=""
+							 name="phone3" class="numeric" maxlength="10" size="10" /></li>
 		
 					</ul>
 	

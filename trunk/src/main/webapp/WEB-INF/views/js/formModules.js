@@ -1,15 +1,32 @@
 var form = {
 	formFields : "input[type='text'],input[type='password'],select",
+	submitFormThroughAjax: function (form) {
+		var formData = form.serialize();
+		var url = form.attr("action");
+		$.ajax({
+			type : "POST",
+			url : url,
+			data : formData
 
+		}).done(function(data) {
+			console.log(data);
+		});
+	},
 	makeFormReadonly : function(form) {
 		$(this.formFields, form).each(function() {
 			$(this).attr("disabled", true);
+			if ($(this).is("select")){
+				$(this).hide();
+			}
 		});
 		form.addClass("readOnlyForm");
 	},
 	makeFormEditable : function(form) {
 		$(this.formFields, form).each(function() {
 			$(this).attr("disabled", false);
+			if ($(this).is("select")){
+				$(this).show();
+			}
 		});
 		form.removeClass("readOnlyForm");
 	},
@@ -58,7 +75,6 @@ var form = {
 			if ($.trim(emailFields.val()).length > 0) {
 				var errMsg = "Pleae enter a valid email address";
 				var reg = /^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-
 				if (reg.test(emailFields.val())) {
 					emailFields.removeClass("vError");
 					emailFields.next("div").remove();
@@ -76,10 +92,7 @@ var form = {
 
 		}
 
-		if ($(".vError", form).length > 0) {
-			isFormValidate = false;
-		}
-
+		if ($(".vError", form).length > 0) {isFormValidate = false;	}
 		return isFormValidate;
 
 	}
@@ -134,8 +147,6 @@ var form = {
 					settings.callback();
 				} else
 					return false;
-				
-
 			} else {
 				alert("please change something before update");
 				return false;
