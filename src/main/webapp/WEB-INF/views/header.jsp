@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="js/jquery.bpopup.min.js"></script>
 	<script type="text/javascript" src="js/formModules.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
+	<script type="text/javascript" src="js/profilePage.js"></script>
 	
 	
 
@@ -32,7 +33,7 @@
 	</div>
 	<div class="status-info-bar fr">
 		<ul>
-			<li><a href="#">My Profile</a> | <a href="#">Logout</a></li>
+			<li><a href="/linkalma/viewprofile">My Profile</a> | <a href="#">Logout</a></li>
 		</ul>
 	</div>
 </div>
