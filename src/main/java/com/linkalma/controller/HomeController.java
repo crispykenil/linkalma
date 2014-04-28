@@ -101,6 +101,15 @@ public class HomeController {
 		return new ModelAndView("school", "model", new ModelAndView());
 	}
 
+	@RequestMapping(value = "/school/{id}/{page}", method = RequestMethod.GET)
+	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage) {
+		logger.info("Welcome home! Redirecting to School page.");
+
+		System.out.println(schoolName);
+		System.out.println("innerpage: "+innerPage);
+		return new ModelAndView(innerPage, "model", new ModelAndView());
+	}
+	
 	@RequestMapping(value = "/addwallpost")
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
 			Model model) {
