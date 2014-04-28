@@ -80,7 +80,8 @@ public class UserBO implements IUserBO
 		getUserDAO().updateUser(userDto);
 		getUserDAO().updateCredentials(userDto);
 		model.addAttribute("userProfile", userDto);
-		
+		model.addAttribute("errorCode", "200");
+		model.addAttribute("message", "Profile updated successfully");
 		return model;
 	}
 	
