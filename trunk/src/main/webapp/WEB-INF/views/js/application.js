@@ -10,7 +10,7 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
-		eventBindingForProfilePage();
+		
 		
 	});
 
