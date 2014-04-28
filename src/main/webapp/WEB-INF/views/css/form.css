@@ -93,6 +93,7 @@ input[type=radio]{
 }
 select {
 	padding:7px 5px;	
+	margin-bottom: 10px;
 }
 .twoColumnForm li {
 	width:50%;
@@ -159,7 +160,9 @@ select {
 #profilePage .dataTable td {
 	padding:0px;
 }
-
+ .dataTable select {
+ 	margin-bottom:0px;
+ }
  .dataTable input[type="text"], .readOnlyForm .dataTable input[type="password"] {
 	margin:0px;
 	width:100%;

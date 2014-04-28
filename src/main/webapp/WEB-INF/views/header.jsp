@@ -53,4 +53,4 @@
 	</div><!-- hd -->
 		<div id="bd">
 		
-			<div id="main-content-wrapper">
+			<div id="main-content-wrapper" class="clear-fix">

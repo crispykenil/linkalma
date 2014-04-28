@@ -1,11 +1,19 @@
+// Semicolon (;) to ensure closing of earlier scripting
+// Encapsulation
+// $ is assigned to jQuery
+;(function($) {
 
-$( document ).ready(function() {
-	getAddMySchoolForm();
-	hideShowMairrageInfo();
-	$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
-	$(".schoolDetailsForm").bindEditUpdateFunctionality();
-});
+	// DOM Ready
+	$(function() {
+		getAddMySchoolForm();
+		getAddMyWorkDetailsForm();
+		hideShowMairrageInfo();
+		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
+		$(".schoolDetailsForm").bindEditUpdateFunctionality();
+		
+	});
 
+})(jQuery);
 function hideShowMairrageInfo(){
 	if ($("#maritalStatus input[type='radio'].single:checked").length > 0) {
 		$("#mairrageInfo").hide();
@@ -20,9 +28,26 @@ function hideShowMairrageInfo(){
 		}
 	});
 }
-
-
 var submitPersonalDetails = function(){
-	var formEl = $('#personalDetailsForm');
-	form.submitFormThroughAjax(formEl);
+	var form = $('#personalDetails');
+	form.submitFormThroughAjax(form);
 };
+function getAddMyWorkDetailsForm(){
+	$('.addMyWorkDetaitsBtn').bind('click', function() {
+		$('#addMyWorkDetails').bPopup({
+			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
+			followSpeed : 1500, //can be a string ('slow'/'fast') or int
+			modalColor : 'black'
+		});
+	});
+}
+
+function getAddMySchoolForm(){
+	$('.addMySchool').bind('click', function() {
+		$('#addMySchool').bPopup({
+			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
+			followSpeed : 1500, //can be a string ('slow'/'fast') or int
+			modalColor : 'black'
+		});
+	});
+}

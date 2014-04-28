@@ -126,7 +126,7 @@ function fileUpload()
 			</div>
 			<div id="schoolDetails">
 			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile" modelAttribute="userSchool" method="post">
-			<h2>School Details <a href="javascript:;" class="button  fr addMySchool">Add School</a></h2>
+			<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 				<table class="dataTable">
 						<thead>
@@ -172,7 +172,7 @@ function fileUpload()
 						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
 				</div>
 			</form:form>
-				<div id="addMydSchool" class="addMydSchoolContainer popupContent" style="width:450px">
+				<div id="addMySchool" class="addMydSchoolContainer popupContent" style="width:450px">
 	
 					<h2>Add school to your profile</h2>
 					<form:form action="addmyschool" name="addMySchool" method="post">
@@ -188,10 +188,80 @@ function fileUpload()
 						<input type="submit" class="button large" value="Add School" />
 						
 					</form:form>
-					</div>
+				
+				</div>
 			</div>
 			<div id="workDetails">
-				<h2>Workplace Details</h2>
+				<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile">
+					<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
+					<input type="hidden" name="totalUserSchoolCount" value="${model.userSchoolList.size()}" />
+					<table class="dataTable" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th> School Name </th>
+									<th> From Year </th>
+									<th> To Year </th>
+									<th> Batch</th>
+									<th> Branch</th>
+									<th>Action</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+							
+							<c:forEach var="userSchoolList" items="${model.userSchoolList}" varStatus="count">
+								<tr>
+									<td>
+									<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}" readonly="readonly" />
+									<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
+									<select name="schoolID">
+										<c:forEach var="schoolList" items="${model.schoolList}">
+											<option value="${schoolList.schoolID}"
+											<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
+											${schoolList.schoolName } - ${schoolList.branch }
+											</option>
+										</c:forEach>
+									</select> 
+									</td>
+									<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}" readonly="readonly" /></td>
+									<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}" readonly="readonly" /></td>
+									<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}" readonly="readonly" /></td>
+									<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}" readonly="readonly" /></td>
+								
+									<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
+								</tr>
+							</c:forEach>
+	
+						</tbody>
+					</table>
+					<div class="btn-wrapper">
+							<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+							<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
+					</div>
+				</form:form>
+				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">
+					<h2>Add Work Details</h2>
+					<form:form action="addmyschool" name="addMySchool" method="post">
+						<label>School Name</label>
+						<select name="schoolID">
+							<c:forEach var="schoolList" items="${model.schoolList}">
+								<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
+							</c:forEach>
+						</select> 
+						<label>From Year</label>
+						<input type="text" value=""  name="fromYear" />
+						<label>To Year</label>
+						<input type="text" value=""  name="toYear" />
+						<label>Passout</label>
+						<input type="text" value=""  name="passOutBatch" />
+						<label>Branch</label>
+						<input type="text" value=""  name="branch" />
+						<div class="btn-wrapper">
+							<input type="submit" class="button large" value="Add Work Details" />
+						</div>
+						
+					</form:form>
+				</div>
 			</div>
 	</div><!-- main-content -->
 </div>

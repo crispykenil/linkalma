@@ -1,6 +1,3 @@
-var form1 = {
-	formFields : "input[type='text'],input[type='password'],select"
-};
 var form = {
 	formFields : "input[type='text'],input[type='password'],select",
 	submitFormThroughAjax: function (form) {
