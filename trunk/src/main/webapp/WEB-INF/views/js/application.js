@@ -47,7 +47,7 @@ function submitSignUpForm() {
 	$("#signUpForm").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			submitFormThroughAjax($(this));
+			form.submitFormThroughAjax($(this));
 		}
 
 	});
@@ -63,31 +63,9 @@ function registerNewSchool() {
 	});
 }
 
-function submitFormThroughAjax(form) {
-	var formData = form.serialize();
-	var url = form.attr("action");
-	$.ajax({
-		type : "POST",
-		url : url,
-		data : formData
-
-	}).done(function(data) {
-		console.log(data);
-	});
-}
 
 
 
 
 
-
-function getAddMySchoolForm (){
-	$('.addMySchool').bind('click', function() {
-		$('#addMydSchool').bPopup({
-			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
-			followSpeed : 1500, //can be a string ('slow'/'fast') or int
-			modalColor : 'black'
-		});
-	});
-}
 

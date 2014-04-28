@@ -179,19 +179,20 @@ input[type="text"].search-field {
 .title-image {
 	float:right;
 }
-#ft * {
-	color:#fff;
-	font-size:12px;
-}
+
 #ft{
 	clear:both;  
 	padding:15px; 
     overflow:hidden;
 	border-top:5px solid #0082c8;
 	background-color:#444444;
+	margin-top:20px;
 	
 }
-
+#ft * {
+	color:#fff;
+	font-size:12px;
+}
 #ft ul li{
 	display:list-item;
 	margin-left:20px;
@@ -272,10 +273,10 @@ input[type="text"].search-field {
 	float:left;
 }
 .profilePage .left-column {
-	width:280px;
+	width:200px;
 }
 .profilePage .main-content {
-	width:700px;
+	width:765px;
 }
 .profilePage form label{ 
 	display: inline-block;
@@ -296,8 +297,12 @@ input[type="text"].search-field {
 	background-color: #efefef;
 	font-size: 20px;
 	padding: 5px;
-	margin: 25px 0px;
-
+	margin: 25px 0px 10px 0px;
+}
+.profilePage .profile-pic input[type="file"]{
+	font-size:11px;
+	padding:8px 3px;
+	width:100%
 }
 .popupContent {
 	background-color: #fff;
