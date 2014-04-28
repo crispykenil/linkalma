@@ -108,10 +108,10 @@ function fileUpload()
 							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
 							 name="phone1" class="numeric" size="10"/></li>
 						<li><label>Work</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
+							 name="code2" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
 							 name="phone2"class="numeric" size="10" /></li>
 						<li><label>Residence</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
+							 name="code3" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
 							 name="phone3" class="numeric" maxlength="10" size="10" /></li>
 		
 					</ul>
