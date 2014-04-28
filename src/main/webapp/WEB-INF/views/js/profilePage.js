@@ -1,18 +1,11 @@
-// Semicolon (;) to ensure closing of earlier scripting
-// Encapsulation
-// $ is assigned to jQuery
-;(function($) {
 
-	// DOM Ready
-	$(function() {
-		getAddMySchoolForm();
-		hideShowMairrageInfo();
-		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
-		$(".schoolDetailsForm").bindEditUpdateFunctionality();
-		
-	});
+$( document ).ready(function() {
+	getAddMySchoolForm();
+	hideShowMairrageInfo();
+	$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
+	$(".schoolDetailsForm").bindEditUpdateFunctionality();
+});
 
-})(jQuery);
 function hideShowMairrageInfo(){
 	if ($("#maritalStatus input[type='radio'].single:checked").length > 0) {
 		$("#mairrageInfo").hide();
@@ -30,6 +23,6 @@ function hideShowMairrageInfo(){
 
 
 var submitPersonalDetails = function(){
-	var form = $('#personalDetailsForm');
-	form.submitFormThroughAjax(form);
+	var formEl = $('#personalDetailsForm');
+	form.submitFormThroughAjax(formEl);
 };
