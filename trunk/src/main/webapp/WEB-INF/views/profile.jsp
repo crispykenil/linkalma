@@ -145,7 +145,7 @@ function fileUpload()
 						<c:forEach var="userSchoolList" items="${model.userProfile.userSchoolList}" varStatus="count">
 							<tr>
 								<td>
-								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}" readonly="readonly" />
+								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}"  />
 								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
 								<select name="schoolID">
 									<c:forEach var="schoolList" items="${model.schoolList}">
@@ -156,10 +156,10 @@ function fileUpload()
 									</c:forEach>
 								</select> 
 								</td>
-								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch" readonly="readonly" /></td>
-								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch" readonly="readonly" /></td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  /></td>
+								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  /></td>
+								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch"  /></td>
 							
 								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
 							</tr>
@@ -192,7 +192,7 @@ function fileUpload()
 				</div>
 			</div>
 			<div id="workDetails">
-				<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile">
+				<form:form class="readOnlyForm workDetailsForm" action="updateprofile">
 					<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
 					<input type="hidden" name="totalUserSchoolCount" value="${model.userSchoolList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
@@ -212,7 +212,7 @@ function fileUpload()
 							<c:forEach var="userSchoolList" items="${model.userSchoolList}" varStatus="count">
 								<tr>
 									<td>
-									<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}" readonly="readonly" />
+									<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}"  />
 									<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
 									<select name="schoolID">
 										<c:forEach var="schoolList" items="${model.schoolList}">
@@ -223,10 +223,10 @@ function fileUpload()
 										</c:forEach>
 									</select> 
 									</td>
-									<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}" readonly="readonly" /></td>
-									<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}" readonly="readonly" /></td>
-									<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}" readonly="readonly" /></td>
-									<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}" readonly="readonly" /></td>
+									<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}"  /></td>
+									<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}"  /></td>
+									<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}"  /></td>
+									<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}"  /></td>
 								
 									<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
 								</tr>
