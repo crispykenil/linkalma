@@ -29,8 +29,8 @@ function hideShowMairrageInfo(){
 	});
 }
 var submitPersonalDetails = function(){
-	var form = $('#personalDetails');
-	form.submitFormThroughAjax(form);
+	var formEl = $('#personalDetailsForm');
+	form.submitFormThroughAjax(formEl);
 };
 function getAddMyWorkDetailsForm(){
 	$('.addMyWorkDetaitsBtn').bind('click', function() {
