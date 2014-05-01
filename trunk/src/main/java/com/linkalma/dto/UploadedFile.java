@@ -16,6 +16,8 @@ public class UploadedFile {
 
 	private String imageURL;
 	
+	private String destination;
+	
 	 public MultipartFile getFile() {  
 	  return file;  
 	 }  
@@ -36,5 +38,19 @@ public class UploadedFile {
 	 */
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
+	}
+
+	/**
+	 * @return the destination
+	 */
+	public String getDestination() {
+		return destination;
+	}
+
+	/**
+	 * @param destination the destination to set
+	 */
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}  
 }

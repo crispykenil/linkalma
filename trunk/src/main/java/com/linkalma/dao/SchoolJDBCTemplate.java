@@ -86,4 +86,10 @@ public int deleteSchool(long userSchoolID) {
 	return 0;
 }
 
+@Override
+public School getSchoolBySchoolEmailID(String emailID) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }

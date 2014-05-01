@@ -45,5 +45,8 @@ public interface ISchoolDAO {
 	   
 	   public List<UserSchoolDTO> listLinkedSchools(long userID);
 
-	public int deleteSchool(long userSchoolID);
+	   public int deleteSchool(long userSchoolID);
+	   
+	   public School getSchoolBySchoolEmailID(String emailID);
+
 }

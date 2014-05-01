@@ -122,4 +122,11 @@ public class SchoolDAO implements ISchoolDAO {
 		return 0;
 	}
 
+	@Override
+	public School getSchoolBySchoolEmailID(String emailID) {
+		School school = getJdbcTemplateObject().queryForObject( ApplicationConstants.GET_SCHOOL_BY_EMAILID, new Object[]{emailID},
+					new SchoolMapper());
+		return school;
+	}
+
 }

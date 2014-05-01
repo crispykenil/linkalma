@@ -125,7 +125,7 @@ function fileUpload()
 			</form:form>
 			</div>
 			<div id="schoolDetails">
-			<form:form class="readOnlyForm schoolDetailsForm" action="updateprofile" modelAttribute="userSchool" method="post">
+			<form:form name="userSchoolDetailsForm" class="readOnlyForm schoolDetailsForm" action="updateuserschool" modelAttribute="userSchool" method="post">
 			<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 				<table class="dataTable">

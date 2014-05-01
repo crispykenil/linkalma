@@ -25,10 +25,18 @@ public class SchoolBO implements ISchoolBO
 	@Override
 	public Model getSchoolList(School schoolDto, Model model) {
 		// TODO Auto-generated method stub
-		List<School> schoolList = schoolDAO.listSchools();
+		List<School> schoolList = getSchoolDAO().listSchools();
 		System.out.println("SchoolList Size : "+schoolList.size());
 		model.addAttribute("schoolList",schoolList );
 		return model;
+	}
+
+	@Override
+	public School getSchoolBySchoolEmailID(String emailID, Model model) {
+
+		School school = getSchoolDAO().getSchoolBySchoolEmailID(emailID);
+		
+		return school;
 	}
 
 	/**
@@ -44,7 +52,5 @@ public class SchoolBO implements ISchoolBO
 	public void setSchoolDAO(ISchoolDAO schoolDAO) {
 		this.schoolDAO = schoolDAO;
 	}
-
-	
 
 }

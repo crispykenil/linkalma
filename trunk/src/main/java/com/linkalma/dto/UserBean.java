@@ -9,6 +9,8 @@ public class UserBean {
 	private String emailId;
 	
 	private String role;
+	
+	private String loginType;
 
 	/**
 	 * @return the userID
@@ -64,6 +66,20 @@ public class UserBean {
 	 */
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the loginType
+	 */
+	public String getLoginType() {
+		return loginType;
+	}
+
+	/**
+	 * @param loginType the loginType to set
+	 */
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
 	}
 
 }
