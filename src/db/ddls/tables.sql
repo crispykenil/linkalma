@@ -264,3 +264,13 @@ CREATE TABLE `userupdates` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
+CREATE  TABLE `userworkplace` (
+  `UserWorkplaceID` INT NOT NULL AUTO_INCREMENT ,
+  `UserID` INT(11) NOT NULL ,
+  `OrganisationName` VARCHAR(45) NOT NULL ,
+  `FromMonth` VARCHAR(2) NULL ,
+  `FromYear` INT(4) NULL ,
+  `ToMonth` VARCHAR(2) NULL ,
+  `ToYear` INT(4) NULL ,
+  `Description` VARCHAR(255) NULL ,
+  PRIMARY KEY (`UserWorkplaceID`) );

@@ -10,4 +10,6 @@ public interface ISchoolBO {
 	
 	public Model getSchoolList(School schoolDto, Model model);
 	
+	public School getSchoolBySchoolEmailID(String emailID, Model model);
+	
 }

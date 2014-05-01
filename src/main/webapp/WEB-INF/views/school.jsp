@@ -71,6 +71,7 @@
 						</ul>
 							<!-- <a href="#" class="button">Add News & Event</a> -->
 					</div>
+					<h3><a href="/linkalma/schooladmin">Admin Page</a></h3>
 					<div class="home-intro-section">
 						<h2>Welcome to Ryan International</h2>
 						<div><img src="/linkalma/images/show-case.png" width="650" /></div>

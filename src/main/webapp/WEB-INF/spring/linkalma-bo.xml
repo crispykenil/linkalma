@@ -24,5 +24,9 @@
    		<property name="schoolDAO" ref="schoolDAO" />   
 	</bean>
    
+   <bean id="fileUploadBO" class="com.linkalma.bo.impl.FileUploadBO">
+		<property name="userDAO" ref="userDAO" />   
+		<property name="schoolDAO" ref="schoolDAO" />
+	</bean>
 
 </beans>

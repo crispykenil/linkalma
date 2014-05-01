@@ -6,14 +6,14 @@
 						<h2>Login</h2>
 						<form:form action="login" modelAttribute="loginForm" >
 							<ul>
-								<li><label>Username</label><input type="text" value="" /> </li>
-								<li><label>Password</label><input type="password" value="" /> </li>
+								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
+								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 								<a href="javascript:;" class="smallestFont fr">Forgot your password?</a>
 								</li>
 								<li class="smallFont"> 
-									<label>Alumni Login	<input type="radio" value="" name="loginType" checked />	</label>
-									<label class="fr">School Login <input type="radio" value="" name="loginType" />	</label>
+									<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
+									<label class="fr">School Login <input type="radio" value="S" name="loginType" />	</label>
 								</li>
 							</ul>
 						</form:form>

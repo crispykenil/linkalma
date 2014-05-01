@@ -9,7 +9,7 @@
 		getAddMyWorkDetailsForm();
 		hideShowMairrageInfo();
 		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
-		$(".schoolDetailsForm").bindEditUpdateFunctionality();
+		$(".schoolDetailsForm").bindEditUpdateFunctionality({callback:submitSchoolDetails});
 		$(".workDetailsForm").bindEditUpdateFunctionality();
 
 	});
@@ -49,6 +49,12 @@ var submitPersonalDetails = function(){
 		alert("error");
 	});
 };
+
+var submitSchoolDetails = function(){
+	var form = $('#userSchoolDetailsForm');
+	form.submitFormThroughAjax(form);
+};
+
 function getAddMyWorkDetailsForm(){
 	$('.addMyWorkDetaitsBtn').bind('click', function() {
 		$('#addMyWorkDetails').bPopup({

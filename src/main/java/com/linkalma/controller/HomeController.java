@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
+import com.linkalma.bo.IFileUploadBO;
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
@@ -65,19 +66,12 @@ public class HomeController {
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
-		if (request.getSession().getAttribute("userBean") == null) {
+		request.getSession().invalidate();
 			UserBean userBean = new UserBean();
 			userBean.setUserID(1);
 			request.getSession().setAttribute("userBean", userBean);
-			System.out.println("User Bean set in session");
-		}
+			logger.info("User Bean set in session");
 		return new ModelAndView("index");
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, Model model) {
-		logger.info("Welcome home! Redirecting to login page.");
-		return new ModelAndView("redirect:/dashboard");
 	}
 
 	@RequestMapping(value = "/dashboard")
@@ -92,24 +86,67 @@ public class HomeController {
 		return new ModelAndView("dashboard", "model", model);
 	}
 
-	@RequestMapping(value = "/school/{id}", method = RequestMethod.GET)
-	public ModelAndView school(@PathVariable("id") String schoolName) {
-		logger.info("Welcome home! Redirecting to School page.");
-
-		System.out.println(schoolName);
-
-		return new ModelAndView("school", "model", new ModelAndView());
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("loginForm") UserBean userBean, HttpServletRequest request, Model model) {
+		logger.info("Welcome home! Redirecting to login page.");
+		
+			userBean.setUserID(1);
+			request.getSession().setAttribute("userBean", userBean);
+			
+		// Checking whether Alumni signing in or School Signing.
+		if (userBean.getLoginType().equalsIgnoreCase("A"))
+		{
+//			authenticate();
+			return new ModelAndView("redirect:/dashboard");
+		}
+		else if ("S".equalsIgnoreCase(userBean.getLoginType()))
+		{
+//			authenticate();
+			ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+			logger.info("UserName:"+userBean.getUserName());
+			School school = schoolBO.getSchoolBySchoolEmailID(userBean.getUserName(), model);
+			
+			model.addAttribute("school", school);
+			model.addAttribute("linkalmaaddress", school.getLinkalmaAddress());
+			logger.info("Linkalma Address : "+school.getLinkalmaAddress());
+			return new ModelAndView("redirect:school/"+school.getLinkalmaAddress(), "model", model);
+		}
+		else
+			return new ModelAndView("redirect:/error");
 	}
 
-	@RequestMapping(value = "/school/{id}/{page}", method = RequestMethod.GET)
-	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage) {
+	@RequestMapping(value = "/school/{id}")
+	public ModelAndView school(@PathVariable("id") String schoolName, Model model) {
 		logger.info("Welcome home! Redirecting to School page.");
 
-		System.out.println(schoolName);
-		System.out.println("innerpage: "+innerPage);
+		logger.info(schoolName+"--"+model.containsAttribute("linkalmaaddress"));
+
+		model.addAttribute("schoolName", schoolName);
+		return new ModelAndView("school", "model", model);
+	}
+
+	@RequestMapping(value = "/school/{id}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage) {
+		logger.info("Welcome home! Redirecting to School Inner page.");
+
+		logger.info(schoolName);
+		logger.info("innerpage: "+innerPage);
 		return new ModelAndView(innerPage, "model", new ModelAndView());
 	}
 	
+	@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
+	public ModelAndView schoolAdmin() {
+		logger.info("Redirecting to default admin page:");
+		return new ModelAndView("/schooladmin/addaboutschool", "model", new ModelAndView());
+	}
+	
+	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
+	public ModelAndView schoolAdminInnerPages(@PathVariable("page") String page) {
+		logger.info("Redirecting to admin page:"+page);
+		return new ModelAndView("/schooladmin/"+page, "model", new ModelAndView());
+	}
+
 	@RequestMapping(value = "/addwallpost")
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
 			Model model) {
@@ -121,12 +158,6 @@ public class HomeController {
 		model = dashboardBO.addWallPost(wallPostDto, model);
 
 		return new ModelAndView("dashboard", "model", model);
-	}
-
-	@RequestMapping(value = "/school")
-	public ModelAndView school(HttpServletRequest request, Model model) {
-		logger.info("Welcome home! Redirecting to Dashboard page.");
-		return new ModelAndView("school");
 	}
 
 	/**
@@ -165,7 +196,7 @@ public class HomeController {
 		else
 			user.setUserID(0);
 
-		System.out.println("UserID : " + user.getUserID());
+		logger.info("UserID : " + user.getUserID());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.createUser(user, model);
 
@@ -200,47 +231,9 @@ public class HomeController {
 		// IUserBO userBO = (IUserBO)context.getBean("userBO");
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
-
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
-
-		MultipartFile file = uploadedFile.getFile();
-
-		String fileName = String.valueOf(userBean.getUserID()) + "_profilePic";
-
-		try {
-			inputStream = file.getInputStream();
-
-			File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"
-					+ fileName + ".jpg");
-			if (newFile.exists()) {
-				newFile.delete();
-				newFile.createNewFile();
-			} else
-				newFile.createNewFile();
-			outputStream = new FileOutputStream(newFile);
-			int read = 0;
-			byte[] bytes = new byte[1024];
-
-			while ((read = inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0, read);
-				fileName = newFile.getName();
-			}
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		} finally {
-			try {
-				if (outputStream != null)
-					outputStream.close();
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		model.addAttribute("profileImageURI", fileName);
-
+		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
+		
+		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
@@ -278,7 +271,7 @@ public class HomeController {
 		else
 			user.setUserID(0);
 		List<UserSchoolDTO> userSchoolList= user.getUserSchoolList();
-		System.out.println("UserSchoolList Size - Update: "+userSchoolList.size());
+		logger.info("UserSchoolList Size - Update: "+userSchoolList.size());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 //		model = userBO.updateUserProfileDetails(user, model);
 
@@ -304,7 +297,7 @@ public class HomeController {
 			userSchoolDto.setUserID(0);
 		userSchoolBO.createUserSchool(userSchoolDto);
 
-		System.out.println("Redirecting to LoadUser School");
+		logger.info("Redirecting to LoadUser School");
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
