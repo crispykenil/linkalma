@@ -176,16 +176,24 @@ function fileUpload()
 	
 					<h2>Add school to your profile</h2>
 					<form:form action="addmyschool" name="addMySchool" method="post">
+						<label>School Name</label>
 						<select name="schoolID">
 							<c:forEach var="schoolList" items="${model.schoolList}">
 								<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
 							</c:forEach>
 						</select> 
+						<label>From Year</label>
 						<input type="text" value=""  name="fromYear" />
+						<label>To Year</label>
 						<input type="text" value=""  name="toYear" />
+						<label>Passout</label>
 						<input type="text" value=""  name="passOutBatch" />
+						<label>Branch</label>
 						<input type="text" value=""  name="branch" />
-						<input type="submit" class="button large" value="Add School" />
+						<div class="btn-wrapper">
+							<input type="submit" class="button large" value="Add Work Details" />
+						</div>
+						
 						
 					</form:form>
 				
@@ -208,29 +216,23 @@ function fileUpload()
 								</tr>
 							</thead>
 							<tbody>
+							<tr>
+								<td>
+								<input type="text" name="schoolName_0" placeholder="" value="Ryan - " disabled="disabled">
+								<input type="hidden" name="schoolID_0" value="16">
+								<select name="schoolID" disabled="disabled" style="display: none;">
+									<option value="17"> Ryan1 - 			</option>
 							
-							<c:forEach var="userSchoolList" items="${model.userSchoolList}" varStatus="count">
-								<tr>
-									<td>
-									<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}"  />
-									<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
-									<select name="schoolID">
-										<c:forEach var="schoolList" items="${model.schoolList}">
-											<option value="${schoolList.schoolID}"
-											<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
-											${schoolList.schoolName } - ${schoolList.branch }
-											</option>
-										</c:forEach>
-									</select> 
-									</td>
-									<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="fromYear_${count.index}"  /></td>
-									<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="toYear_${count.index}"  /></td>
-									<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="passOutBatch_${count.index}"  /></td>
-									<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="branch_${count.index}"  /></td>
-								
-									<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
-								</tr>
-							</c:forEach>
+									
+								</select> 
+								</td>
+								<td><input type="text"  name="userSchoolList[0].fromYear" placeholder="" value="2004" disabled="disabled"></td>
+								<td><input type="text"  name="userSchoolList[0].toYear" placeholder="" value="2001" disabled="disabled"></td>
+								<td><input type="text"  name="userSchoolList[0].passOutBatch" placeholder="" value="2004" disabled="disabled"></td>
+								<td><input type="text"  name="userSchoolList[0].branch" placeholder="" value="" disabled="disabled"></td>
+							
+								<td> <a href="deletemyschool?ID=1">Delete</a></td>
+							</tr>
 	
 						</tbody>
 					</table>
