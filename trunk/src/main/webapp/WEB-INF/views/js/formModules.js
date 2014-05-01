@@ -149,7 +149,7 @@ var form = {
 				alert("found some updation so please valid form and submit it");
 				if (form.validateForm(myForm)) {
 					settings.callback();
-					resetForm();
+					//window.location.reload(true);
 				} else
 					return false;
 			} else {
