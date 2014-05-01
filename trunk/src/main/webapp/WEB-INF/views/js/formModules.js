@@ -149,6 +149,7 @@ var form = {
 				alert("found some updation so please valid form and submit it");
 				if (form.validateForm(myForm)) {
 					settings.callback();
+					resetForm();
 				} else
 					return false;
 			} else {
@@ -157,10 +158,13 @@ var form = {
 			}
 			$(this).removeClass("updateForm").addClass("editForm").val("Edit");
 		}
-		cancelUpdateActionBtn.on("click", function() {
+		function resetForm(){
 			editUpdateFormBtn.removeClass("updateForm").addClass("editForm").val("Edit");
-			$(this).attr("disabled",true);
+			cancelUpdateActionBtn.attr("disabled",true);
 			form.makeFormReadonly(myForm);
+		}
+		cancelUpdateActionBtn.on("click", function() {
+			resetForm();
 	
 		});
 	};

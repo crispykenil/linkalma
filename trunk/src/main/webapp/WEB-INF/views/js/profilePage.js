@@ -11,8 +11,7 @@
 		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
 		$(".schoolDetailsForm").bindEditUpdateFunctionality();
 		$(".workDetailsForm").bindEditUpdateFunctionality();
-		
-		
+
 	});
 
 })(jQuery);
