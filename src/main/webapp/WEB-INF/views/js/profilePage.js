@@ -31,7 +31,23 @@ function hideShowMairrageInfo(){
 }
 var submitPersonalDetails = function(){
 	var formEl = $('#personalDetailsForm');
-	form.submitFormThroughAjax(formEl);
+	var formData = formEl.serialize();
+	var url = formEl.attr("action");
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : formData
+
+	}).done(function(data) {
+		html = $.parseHTML( data );
+		
+		
+		formEl.html($(html).find('#personalDetailsForm'));
+		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
+		hideShowMairrageInfo();
+	}).error(function(data) {
+		alert("error");
+	});
 };
 function getAddMyWorkDetailsForm(){
 	$('.addMyWorkDetaitsBtn').bind('click', function() {
