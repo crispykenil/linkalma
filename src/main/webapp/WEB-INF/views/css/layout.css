@@ -1,0 +1,8 @@
+/* one column layout */
+.one-column-layout .left-column {
+	display: none;
+}
+.one-column-layout .main-content {
+	width: 100%;
+	float:none
+}
