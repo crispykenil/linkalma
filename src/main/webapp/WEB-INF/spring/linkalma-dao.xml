@@ -43,5 +43,10 @@
       class="com.linkalma.dao.impl.UserUpdateDAO">
       <property name="dataSource"  ref="dataSource" />    
    </bean>
+   
+   <bean id="loginDAO" 
+      class="com.linkalma.dao.impl.LoginDAO">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
 	
 </beans>
