@@ -17,6 +17,7 @@ import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.School;
+import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.utils.ApplicationConstants;
 
@@ -34,6 +35,14 @@ public class SchoolDAO implements ISchoolDAO {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
+	@Override
+	public int createSchoolCredentials(School school) {
+	      
+	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_SCHOOL_CREDENTIALS_QUERY, 
+	    		  school.getSchoolID(), school.getPassword());
+	      
+	   }
+
 	@Override
 	public long createSchool(final School school) {
 		

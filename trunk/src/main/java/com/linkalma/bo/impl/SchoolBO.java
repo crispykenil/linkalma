@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.dao.ISchoolDAO;
+import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.School;
 
 public class SchoolBO implements ISchoolBO 
@@ -14,10 +15,18 @@ public class SchoolBO implements ISchoolBO
 	@Autowired
 	private ISchoolDAO schoolDAO;
 
+	@Autowired
+	private IUserDAO userDAO;
+
 	@Override
 	public Model createSchool(School schoolDto, Model model) {
-		long result = schoolDAO.createSchool(schoolDto);
-		System.out.println("School Insert Success : "+result);
+		
+		long schoolID = schoolDAO.createSchool(schoolDto);
+		System.out.println("School Insert Success : "+schoolID);
+		schoolDto.setSchoolID(schoolID);
+		int updateStatus = schoolDAO.createSchoolCredentials(schoolDto);
+		System.out.println("Credentials Update Status: "+updateStatus);
+		
 		model.addAttribute("successMsg","School Registered");
 		return model;
 	}

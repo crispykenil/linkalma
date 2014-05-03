@@ -69,14 +69,15 @@ public class HomeController {
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
-		request.getSession().invalidate();
-			UserBean userBean = new UserBean();
-			userBean.setUserID(1);
-			request.getSession().setAttribute("userBean", userBean);
+//		request.getSession().invalidate();
+//			UserBean userBean = new UserBean();
+//			userBean.setUserID(1);
+//			request.getSession().setAttribute("userBean", userBean);
 			logger.info("User Bean set in session");
 		return new ModelAndView("index");
 	}
 
+	
 	@RequestMapping(value = "/dashboard")
 	public ModelAndView dashboard(@ModelAttribute User userDto, Model model) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
@@ -97,7 +98,7 @@ public class HomeController {
 		// Checking whether Alumni signing in or School Signing.
 		if (userBean.getLoginType().equalsIgnoreCase("A"))
 		{
-			if(authenticateLogin(userName,password,userBean)){
+			if(authenticateLogin(userName,password,userBean, userBean.getLoginType())){
 				request.getSession().setAttribute("userBean", userBean);
 				return new ModelAndView("redirect:/dashboard");
 			}
@@ -107,8 +108,7 @@ public class HomeController {
 		}
 		else if ("S".equalsIgnoreCase(userBean.getLoginType()))
 		{
-			if(authenticateLogin(userName,password,userBean)){
-				request.getSession().setAttribute("userBean", userBean);
+			if(authenticateLogin(userName,password,userBean, userBean.getLoginType())){
 				ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
 				logger.info("UserName:"+userBean.getUserName());
 				School school = schoolBO.getSchoolBySchoolEmailID(userBean.getUserName(), model);
@@ -126,30 +126,55 @@ public class HomeController {
 			return new ModelAndView("redirect:/error");
 	}
 	
-	private boolean authenticateLogin(String userName,String password,UserBean userBean){
+	
+	
+	private boolean authenticateLogin(String userName,String password,UserBean userBean, String loginType){
 		
 		boolean isValid = false;
 		
 		LoginDAO loginDAO = (LoginDAO) context.getBean("loginDAO");
-		UserBean userBeanResult = loginDAO.validateCredentials(userName, password);
+		UserBean userBeanResult = null;
 		
-		if(userBeanResult!=null 
-				&& Utils.isValidString(userBeanResult.getEmailId())
-					&& Utils.isValidIntegerValue(userBeanResult.getRole())
+		if (loginType.equalsIgnoreCase("A"))
+		{
+			userBeanResult = loginDAO.validateUserCredentials(userName, password);
+			if(userBeanResult!=null 
+					&& Utils.isValidString(userBeanResult.getEmailId())
+						&& Utils.isValidIntegerValue(userBeanResult.getRole())
+							&& Utils.isValidLongValue(userBeanResult.getUserID())
+								&& Utils.isValidString(userBeanResult.getUserName())){
+				
+				userBean.setEmailId(userBeanResult.getEmailId());
+				userBean.setRole(userBeanResult.getRole());
+				userBean.setUserID(userBeanResult.getUserID());
+				userBean.setUserName(userBeanResult.getUserName());
+				
+				isValid = true;
+			}else{
+				
+				isValid = false;
+			}
+		}
+		else
+		{	
+			userBeanResult = loginDAO.validateSchoolCredentials(userName, password);
+
+			if(userBeanResult!=null 
+					&& Utils.isValidString(userBeanResult.getEmailId())
 						&& Utils.isValidLongValue(userBeanResult.getUserID())
 							&& Utils.isValidString(userBeanResult.getUserName())){
-			
-			userBean.setEmailId(userBeanResult.getEmailId());
-			userBean.setRole(userBeanResult.getRole());
-			userBean.setUserID(userBeanResult.getUserID());
-			userBean.setUserName(userBeanResult.getUserName());
-			
-			isValid = true;
-		}else{
-			
-			isValid = false;
+				
+				userBean.setEmailId(userBeanResult.getEmailId());
+				userBean.setRole(userBeanResult.getRole());
+				userBean.setUserID(userBeanResult.getUserID());
+				userBean.setUserName(userBeanResult.getUserName());
+				
+				isValid = true;
+			}else{
+				
+				isValid = false;
+			}
 		}
-		
 		return isValid;
 	}
 
@@ -208,10 +233,10 @@ public class HomeController {
 		school.setSchoolName(request.getParameter("schoolName"));
 		school.setBranch(request.getParameter("branch"));
 
-		schoolJDBCTemplate.createSchool(school);
-		;
-		List<School> schoolList = schoolJDBCTemplate.listSchools();
-		model.addAttribute("schoolList", schoolList);
+//		schoolJDBCTemplate.createSchool(school);
+//		;
+//		List<School> schoolList = schoolJDBCTemplate.listSchools();
+//		model.addAttribute("schoolList", schoolList);
 
 		logger.info("Forwarding to Search Page!");
 		return "search";
@@ -403,6 +428,13 @@ public class HomeController {
 		return new ModelAndView("redirect:/loadschool", "model", model);
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, Model model) {
+		logger.info("Welcome home! Redirecting to Index page.");
+
+		request.getSession().invalidate();
+		return new ModelAndView("redirect:/");
+	}
 	/**
 	 * @return the school
 	 */

@@ -7,14 +7,14 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.linkalma.dto.UserBean;
 
-public class UserLoginMapper implements RowMapper<UserBean>{
+public class SchoolLoginMapper implements RowMapper<UserBean>{
 
 	public UserBean mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserBean userBean = new UserBean();
 		userBean.setUserName(rs.getString("EmailAddress"));
-		userBean.setRole(rs.getInt("RoleID"));
-		userBean.setUserID(rs.getInt("UserID"));
+		userBean.setUserID(rs.getInt("SchoolID"));
 		userBean.setEmailId(rs.getString("EmailAddress"));
+		
 		return userBean;
 	}
 	

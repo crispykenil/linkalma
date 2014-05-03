@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.linkalma.dao.ILoginDAO;
+import com.linkalma.dao.mapper.SchoolLoginMapper;
 import com.linkalma.dao.mapper.UserLoginMapper;
 import com.linkalma.dto.UserBean;
 import com.linkalma.utils.ApplicationConstants;
@@ -31,12 +32,24 @@ public class LoginDAO implements ILoginDAO{
 	
 	
 	@Override
-	public UserBean validateCredentials(String userName, String password) {
+	public UserBean validateUserCredentials(String userName, String password) {
 		
-		UserBean userBean = (UserBean)getJdbcTemplateObject().queryForObject(ApplicationConstants.VALIDATE_USER_QUERY, new Object[] { userName, password}, new UserLoginMapper());
-	 
+		UserBean userBean = (UserBean) getJdbcTemplateObject().queryForObject(
+				ApplicationConstants.VALIDATE_USER_QUERY,
+				new Object[] { userName, password }, new UserLoginMapper());
+
 		return userBean;
 		
 	}
 
+	@Override
+	public UserBean validateSchoolCredentials(String userName, String password) {
+		
+		UserBean userBean = (UserBean) getJdbcTemplateObject().queryForObject(
+				ApplicationConstants.VALIDATE_SCHOOL_QUERY,
+				new Object[] { userName, password }, new SchoolLoginMapper());
+
+		return userBean;
+		
+	}
 }

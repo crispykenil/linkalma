@@ -11,7 +11,7 @@ import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dto.School;
 import com.linkalma.dto.UserSchoolDTO;
 
-public class SchoolJDBCTemplate implements ISchoolDAO {
+public class SchoolJDBCTemplate  {
    
 	@Autowired
 	private DataSource dataSource;
@@ -74,22 +74,5 @@ public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
 	this.jdbcTemplateObject = jdbcTemplateObject;
 }
 
-@Override
-public List<UserSchoolDTO> listLinkedSchools(long userID) {
-		// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public int deleteSchool(long userSchoolID) {
-	// TODO Auto-generated method stub
-	return 0;
-}
-
-@Override
-public School getSchoolBySchoolEmailID(String emailID) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 }
