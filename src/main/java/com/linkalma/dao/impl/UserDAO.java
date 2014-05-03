@@ -70,7 +70,7 @@ public class UserDAO implements IUserDAO {
  
 	public int createCredentials(User alumni) {
 	      
-	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_CREDENTIALS_QUERY, 
+	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_USER_CREDENTIALS_QUERY, 
 	    		  alumni.getUserID(), alumni.getPassword());
 	      
 	   }

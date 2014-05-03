@@ -48,7 +48,7 @@ public class FileUploadBO implements IFileUploadBO {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"
+			File newFile = new File("/linkalma/images/"
 					+ fileName + ".jpg");
 			if (newFile.exists()) {
 				newFile.delete();

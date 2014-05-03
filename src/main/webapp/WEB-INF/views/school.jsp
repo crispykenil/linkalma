@@ -18,7 +18,7 @@
 	</div>
 	<div class="status-info-bar fr">
 		<ul>
-			<li><a href="#">My Profile</a> | <a href="#">Logout</a></li>
+			<li><a href="#">My Profile</a> | <a href="/linkalma/logout">Logout</a></li>
 		</ul>
 	</div>
 </div>

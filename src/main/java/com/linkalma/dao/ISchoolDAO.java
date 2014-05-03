@@ -20,6 +20,13 @@ public interface ISchoolDAO {
 	    * a record in the School table.
 	    */
 	   public long createSchool(School school);
+
+	   /** 
+	    * This is the method to be used to create
+	    * a record in the Credentials table for school.
+	    */
+	   public int createSchoolCredentials(School school);
+
 	   /** 
 	    * This is the method to be used to list down
 	    * a record from the School table corresponding

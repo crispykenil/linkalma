@@ -6,7 +6,14 @@ public class ApplicationConstants {
 	
 	public static String GET_ALL_SCHOOLS_QUERY = "SELECT * FROM SCHOOL WHERE APPROVED = 'Y' AND ACTIVEYN = 'Y' ORDER BY CREATEDTTM DESC";
 	
-	public static String VALIDATE_USER_QUERY ="SELECT u.UserID,u.RoleID,u.EmailAddress FROM USER u,CREDENTIALS  c,STATICCODES s WHERE u.EmailAddress = ? AND c.Password = ? AND u.UserID = c.UserID AND u.RoleID = s.Code AND s.CategoryID = 1";
+	public static String VALIDATE_USER_QUERY ="SELECT U.USERID,U.ROLEID,U.EMAILADDRESS "
+			+ " FROM USER U, USERCREDENTIALS  C, STATICCODES S "
+			+ " WHERE U.EMAILADDRESS = ? AND C.PASSWORD = ? AND U.USERID = C.USERID "
+			+ " AND U.ROLEID = S.CODE AND S.CATEGORYID = 1";
+
+	public static String VALIDATE_SCHOOL_QUERY ="SELECT S.SchoolID, S.SchoolName, S.LinkAlmaURL, S.EmailAddress, SC.SCHOOLID, SC.PASSWORD "
+			+ " FROM SCHOOL S, SCHOOLCREDENTIALS SC "
+			+ " WHERE S.SCHOOLID = SC.SCHOOLID AND S.EmailAddress = ? AND SC.PASSWORD = ?";
 	
 	public static String GET_ALL_SCHOOLS_BY_USERID_QUERY = "SELECT US.USERID, S.SCHOOLID, US.USERSCHOOLID, "
 			+ "US.FROMYEAR, TOYEAR, US.PASSOUTBATCH, S.SCHOOLNAME, S.ADDRESS1, S.BRANCH "
@@ -19,9 +26,12 @@ public class ApplicationConstants {
 		 		+ "EMAILADDRESS, WEBSITEURL, LINKALMAURL, APPROVED, ACTIVEYN, CREATEDTTM, UPDATEDTTM, CREATEUSERID, UPDATEUSERID) "
 	      		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	public static String INSER_CREDENTIALS_QUERY = "INSERT INTO CREDENTIALS (USERID,PASSWORD) "
+	public static String INSER_USER_CREDENTIALS_QUERY = "INSERT INTO USERCREDENTIALS (USERID,PASSWORD) "
       		+ "VALUES (?, ?)";
 	
+	public static String INSER_SCHOOL_CREDENTIALS_QUERY = "INSERT INTO SCHOOLCREDENTIALS (USERID,PASSWORD) "
+      		+ "VALUES (?, ?)";
+
 	public static String INSERT_USER_QUERY = "INSERT INTO USER (FIRSTNAME, MIDDLENAME, LASTNAME, ADDRESS1, ADDRESS2, PHONE1, "
 		+ "PHONE2, PHONE3, PHONE4, GENDER, CITY, STATE, COUNTRY, EMAILADDRESS, DOB, ABOUTME, PHOTO, APPROVED, "
 		+ "CREATEDTTM, UPDATEDTTM) "
@@ -67,13 +77,13 @@ public class ApplicationConstants {
 			" SELECT U.UserID, UC.PASSWORD, RoleID, SC.PrimaryDecode as Role, FirstName, MiddleName, LastName, Address1, Address2, "
 			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, EmailAddress, DOB, "
 			+ " AboutMe, Photo, Approved, ActiveYN, CreateDttm, UpdateDttm "
-			+ " FROM user U , CREDENTIALS UC, STATICCODES SC "
+			+ " FROM user U , USERCREDENTIALS UC, STATICCODES SC "
 			+ " WHERE U.USERID = UC.USERID"
 			+ " AND U.ROLEID = SC.CODE AND SC.CATEGORYID = 1 "	// CATEGORY_CD = 1 defines Roles
 			+ " AND U.USERID = ?";
 	
 	public static String UPDATE_USER_CREDENTIALS = 
-			" UPDATE CREDENTIALS SET PASSWORD = ?"
+			" UPDATE USERCREDENTIALS SET PASSWORD = ?"
 			+ " WHERE USERID = ?";
 	
 	public static String UPDATE_USER_SCHOOL_DETAILS = 

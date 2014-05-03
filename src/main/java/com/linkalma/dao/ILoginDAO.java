@@ -6,7 +6,9 @@ import com.linkalma.dto.UserBean;
 
 public interface ILoginDAO {
 
-	public UserBean validateCredentials(String userName,String password);
+	public UserBean validateUserCredentials(String userName,String password);
+	
+	public UserBean validateSchoolCredentials(String userName,String password);
 	
 	/** 
 	    * This is the method to be used to initialize
