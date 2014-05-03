@@ -6,6 +6,8 @@ public class ApplicationConstants {
 	
 	public static String GET_ALL_SCHOOLS_QUERY = "SELECT * FROM SCHOOL WHERE APPROVED = 'Y' AND ACTIVEYN = 'Y' ORDER BY CREATEDTTM DESC";
 	
+	public static String VALIDATE_USER_QUERY ="SELECT u.UserID,u.RoleID,u.EmailAddress FROM USER u,CREDENTIALS  c,STATICCODES s WHERE u.EmailAddress = ? AND c.Password = ? AND u.UserID = c.UserID AND u.RoleID = s.Code AND s.CategoryID = 1";
+	
 	public static String GET_ALL_SCHOOLS_BY_USERID_QUERY = "SELECT US.USERID, S.SCHOOLID, US.USERSCHOOLID, "
 			+ "US.FROMYEAR, TOYEAR, US.PASSOUTBATCH, S.SCHOOLNAME, S.ADDRESS1, S.BRANCH "
 			+ "FROM USERSCHOOL US, SCHOOL S "

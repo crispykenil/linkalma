@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,12 +32,14 @@ import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
+import com.linkalma.dao.impl.LoginDAO;
 import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
 import com.linkalma.dto.School;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
+import com.linkalma.utils.Utils;
 
 /**
  * Handles requests for the application home page.
@@ -88,32 +91,66 @@ public class HomeController {
 
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("loginForm") UserBean userBean, HttpServletRequest request, Model model) {
+	public ModelAndView login(@RequestParam("userName") String userName,@RequestParam("password")String password,@ModelAttribute("loginForm") UserBean userBean, HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to login page.");
 		
-			userBean.setUserID(1);
-			request.getSession().setAttribute("userBean", userBean);
-			
 		// Checking whether Alumni signing in or School Signing.
 		if (userBean.getLoginType().equalsIgnoreCase("A"))
 		{
-//			authenticate();
-			return new ModelAndView("redirect:/dashboard");
+			if(authenticateLogin(userName,password,userBean)){
+				request.getSession().setAttribute("userBean", userBean);
+				return new ModelAndView("redirect:/dashboard");
+			}
+			else{
+				return new ModelAndView("redirect:/error");
+			}
 		}
 		else if ("S".equalsIgnoreCase(userBean.getLoginType()))
 		{
-//			authenticate();
-			ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-			logger.info("UserName:"+userBean.getUserName());
-			School school = schoolBO.getSchoolBySchoolEmailID(userBean.getUserName(), model);
-			
-			model.addAttribute("school", school);
-			model.addAttribute("linkalmaaddress", school.getLinkalmaAddress());
-			logger.info("Linkalma Address : "+school.getLinkalmaAddress());
-			return new ModelAndView("redirect:school/"+school.getLinkalmaAddress(), "model", model);
+			if(authenticateLogin(userName,password,userBean)){
+				request.getSession().setAttribute("userBean", userBean);
+				ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+				logger.info("UserName:"+userBean.getUserName());
+				School school = schoolBO.getSchoolBySchoolEmailID(userBean.getUserName(), model);
+				
+				model.addAttribute("school", school);
+				model.addAttribute("linkalmaaddress", school.getLinkalmaAddress());
+				logger.info("Linkalma Address : "+school.getLinkalmaAddress());
+				return new ModelAndView("redirect:school/"+school.getLinkalmaAddress(), "model", model);
+			}
+			else{
+				return new ModelAndView("redirect:/error");
+			}
 		}
 		else
 			return new ModelAndView("redirect:/error");
+	}
+	
+	private boolean authenticateLogin(String userName,String password,UserBean userBean){
+		
+		boolean isValid = false;
+		
+		LoginDAO loginDAO = (LoginDAO) context.getBean("loginDAO");
+		UserBean userBeanResult = loginDAO.validateCredentials(userName, password);
+		
+		if(userBeanResult!=null 
+				&& Utils.isValidString(userBeanResult.getEmailId())
+					&& Utils.isValidIntegerValue(userBeanResult.getRole())
+						&& Utils.isValidLongValue(userBeanResult.getUserID())
+							&& Utils.isValidString(userBeanResult.getUserName())){
+			
+			userBean.setEmailId(userBeanResult.getEmailId());
+			userBean.setRole(userBeanResult.getRole());
+			userBean.setUserID(userBeanResult.getUserID());
+			userBean.setUserName(userBeanResult.getUserName());
+			
+			isValid = true;
+		}else{
+			
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 
 	@RequestMapping(value = "/school/{id}")

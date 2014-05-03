@@ -8,7 +8,7 @@ public class UserBean {
 	
 	private String emailId;
 	
-	private String role;
+	private int role;
 	
 	private String loginType;
 
@@ -57,14 +57,14 @@ public class UserBean {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 
