@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>::MY SCHOOL ::</title>
-<%@ include file="headerResources.jsp"%>
-<%@ include file="schoolHeaderResources.jsp"%>
+<%@ include file="header.jsp"%>
+
 </head>
 <body>
 <div id="top-bar">

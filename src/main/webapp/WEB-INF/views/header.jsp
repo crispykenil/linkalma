@@ -8,9 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>:: LINK-ALMA ::</title>
 
-	
-	<%@ include file="headerResources.jsp"%>
-
+	<!-- IF Alumni -->
+		<%@ include file="headerResources.jsp"%>
+	<!-- Else -->
+	<c:if test="${model.schoolName != ''}">
+		<%@ include file="schoolHeaderResources.jsp"%>
+	</c:if>
 </head>
 <body>
 <div id="top-bar">
@@ -29,6 +32,8 @@
 	</div>
 </div>
 <div id="doc">
+<c:if test="${model.schoolName != ''}">
+	
 	<div id="hd">
 		<div class="header-content-wrapper">
 			<div class="logo">
@@ -42,6 +47,7 @@
 			</div>
 		</div><!-- header-content-wrapper -->
 	</div><!-- hd -->
+	</c:if>
 		<div id="bd">
 		
 			<div id="main-content-wrapper" class="clear-fix">
