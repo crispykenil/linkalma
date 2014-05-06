@@ -1,5 +1,6 @@
 
 
+
 CREATE TABLE `comments` (
   `CommentID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupID` int(20) DEFAULT NULL,

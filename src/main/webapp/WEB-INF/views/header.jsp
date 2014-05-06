@@ -7,15 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>:: LINK-ALMA ::</title>
-
 	<!-- IF Alumni -->
 		<%@ include file="headerResources.jsp"%>
 	<!-- Else -->
-	<c:if test="${model.schoolName != ''}">
+	<c:if test="${not empty model.schoolName}">
 		<%@ include file="schoolHeaderResources.jsp"%>
 	</c:if>
 </head>
 <body>
+
 <div id="top-bar">
 	<div class="top-navigation fl">
 		<ul>
@@ -32,7 +32,7 @@
 	</div>
 </div>
 <div id="doc">
-<c:if test="${model.schoolName != ''}">
+	<c:if test="${empty model.schoolName}">
 	
 	<div id="hd">
 		<div class="header-content-wrapper">

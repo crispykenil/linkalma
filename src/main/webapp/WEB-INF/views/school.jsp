@@ -7,22 +7,7 @@
 
 </head>
 <body>
-<div id="top-bar">
-	<div class="top-navigation fl">
-		<ul>
-			<li><a href="/linkalma">Home</a></li>
-			<li><a href="/linkalma/dashboard">My Dashboard</a></li>
-			<li><a href="/linkalma">About Us</a></li>
-			<li><a href="/linkalma">Contact Us</a></li>
-		</ul>
-	</div>
-	<div class="status-info-bar fr">
-		<ul>
-			<li><a href="#">My Profile</a> | <a href="/linkalma/logout">Logout</a></li>
-		</ul>
-	</div>
-</div>
-
+<c:out value=""></c:out>
 <div id="hd" class="school-header" >
 	<div class="header-content-wrapper">
 		<div class="school-logo">
@@ -71,7 +56,7 @@
 						</ul>
 							<!-- <a href="#" class="button">Add News & Event</a> -->
 					</div>
-					<h3><a href="/linkalma/schooladmin">Admin Page</a></h3>
+					<h3><a href="/linkalma/schooladmin?schoolName=${model.schoolName }">Admin Page</a></h3>
 					<div class="home-intro-section">
 						<h2>Welcome to Ryan International</h2>
 						<div><img src="/linkalma/images/show-case.png" width="650" /></div>
