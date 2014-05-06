@@ -1,10 +1,6 @@
 package com.linkalma.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -69,11 +64,6 @@ public class HomeController {
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
-//		request.getSession().invalidate();
-//			UserBean userBean = new UserBean();
-//			userBean.setUserID(1);
-//			request.getSession().setAttribute("userBean", userBean);
-			logger.info("User Bean set in session");
 		return new ModelAndView("index");
 	}
 
@@ -189,24 +179,28 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/school/{id}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage) {
+	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage, Model model) {
 		logger.info("Welcome home! Redirecting to School Inner page.");
 
 		logger.info(schoolName);
 		logger.info("innerpage: "+innerPage);
-		return new ModelAndView(innerPage, "model", new ModelAndView());
+		model.addAttribute("schoolName", schoolName);
+		return new ModelAndView(innerPage, "model", model);
 	}
 	
 	@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
-	public ModelAndView schoolAdmin() {
+	public ModelAndView schoolAdmin(@RequestParam("schoolName") String schoolName, Model model) {
 		logger.info("Redirecting to default admin page:");
-		return new ModelAndView("/schooladmin/addaboutschool", "model", new ModelAndView());
+		model.addAttribute("schoolName", schoolName);
+		return new ModelAndView("/schooladmin/addadminprofile", "model", model);
 	}
 	
 	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
-	public ModelAndView schoolAdminInnerPages(@PathVariable("page") String page) {
+	public ModelAndView schoolAdminInnerPages(@PathVariable("page") String page, @RequestParam("schoolName") String schoolName, Model model) {
 		logger.info("Redirecting to admin page:"+page);
-		return new ModelAndView("/schooladmin/"+page, "model", new ModelAndView());
+		model.addAttribute("schoolName", schoolName);
+
+		return new ModelAndView("/schooladmin/"+page, "model", model);
 	}
 
 	@RequestMapping(value = "/addwallpost")
@@ -255,8 +249,6 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
-		else
-			user.setUserID(0);
 
 		logger.info("UserID : " + user.getUserID());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
@@ -311,8 +303,6 @@ public class HomeController {
 		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
-		else
-			user.setUserID(0);
 		
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.updateUserProfileDetails(user, model);
@@ -330,8 +320,7 @@ public class HomeController {
 		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
-		else
-			user.setUserID(0);
+
 		List<UserSchoolDTO> userSchoolList= user.getUserSchoolList();
 		logger.info("UserSchoolList Size - Update: "+userSchoolList.size());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
@@ -355,8 +344,7 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			userSchoolDto.setUserID(userBean.getUserID());
-		else
-			userSchoolDto.setUserID(0);
+
 		userSchoolBO.createUserSchool(userSchoolDto);
 
 		logger.info("Redirecting to LoadUser School");
@@ -393,8 +381,6 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			userDto.setUserID(userBean.getUserID());
-		else
-			userDto.setUserID(0);
 
 		model = userSchoolBO.getUserSchoolList(userDto, model);
 		return new ModelAndView("addMySchool", "model", model);

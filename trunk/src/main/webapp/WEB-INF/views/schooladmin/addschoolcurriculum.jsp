@@ -30,7 +30,17 @@
 	School Curriculum - Admin
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+	<div class="left-column border-box">
+		<div class="navigation">
+			<ul>
+				<li><a href="/linkalma/schooladmin/addschoolbasics?schoolName=${model.schoolName }">School Basics</a></li>
+				<li><a href="/linkalma/schooladmin/addadminprofile?schoolName=${model.schoolName }">Admin Profile</a></li>
+				<li><a href="/linkalma/schooladmin/addschoolcurriculum?schoolName=${model.schoolName }">Curriculum</a></li>
+				<li><a href="/linkalma/schooladmin/addschoolevents?schoolName=${model.schoolName }">School Events</a></li>
+				<li><a href="/linkalma/schooladmin/addaboutschool?schoolName=${model.schoolName }">About School</a></li>
+			</ul>
+		</div>
+	</div>
 
 <form action="search" name="searchForm">
 <input type="text" name ="schoolName" />
@@ -40,7 +50,4 @@
 <input type="text" name ="websiteAddress" />
 <input type="submit" value="Submit" />
 </form>
-					<h3><a href="/linkalma/schooladmin/addschoolbasics">School Basics</a></h3>
-					<h3><a href="/linkalma/schooladmin/addschoolcurriculum">Curriculum</a></h3>
-</body>
 <%@ include file="../footer.jsp"%>
