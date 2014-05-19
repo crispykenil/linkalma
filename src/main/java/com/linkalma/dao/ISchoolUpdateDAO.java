@@ -7,8 +7,9 @@ import com.linkalma.dto.SchoolUpdateDTO;
 
 public interface ISchoolUpdateDAO {
 	
-	public int updateNews(SchoolUpdateDTO schoolUPdateDto);
+	public int updateSchoolDetails(SchoolUpdateDTO schoolUPdateDto);
 	
 	public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID);
 
+	public List<SchoolUpdateDTO> getSchoolUpdatesFromList(List<Long> schoolID);
 }

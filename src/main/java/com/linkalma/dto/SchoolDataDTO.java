@@ -2,9 +2,10 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-public class SchoolUpdateDTO extends BaseDTO {
+import org.springframework.web.multipart.MultipartFile;
 
-	
+public class SchoolDataDTO extends BaseDTO {
+
 	private long id;
 	
 	private long schoolID;
@@ -13,9 +14,17 @@ public class SchoolUpdateDTO extends BaseDTO {
 	
 	private String description;
 	
+	private String documentName;
+
 	private String schoolName;
 
-	private int updateType;
+	private int dataType;
+	
+	private String grade;
+	
+	private String division;
+	
+	private MultipartFile uploadedFile;
 	
 	private long createUserID;
 	
@@ -24,20 +33,6 @@ public class SchoolUpdateDTO extends BaseDTO {
 	private long updateUserID;
 	
 	private Date updateDttm;
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the schoolID
@@ -54,20 +49,6 @@ public class SchoolUpdateDTO extends BaseDTO {
 	}
 
 	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -79,20 +60,6 @@ public class SchoolUpdateDTO extends BaseDTO {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the updateType
-	 */
-	public int getUpdateType() {
-		return updateType;
-	}
-
-	/**
-	 * @param updateType the updateType to set
-	 */
-	public void setUpdateType(int updateType) {
-		this.updateType = updateType;
 	}
 
 	/**
@@ -152,6 +119,90 @@ public class SchoolUpdateDTO extends BaseDTO {
 	}
 
 	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	/**
+	 * @return the grade
+	 */
+	public String getGrade() {
+		return grade;
+	}
+
+	/**
+	 * @param grade the grade to set
+	 */
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	/**
+	 * @return the division
+	 */
+	public String getDivision() {
+		return division;
+	}
+
+	/**
+	 * @param division the division to set
+	 */
+	public void setDivision(String division) {
+		this.division = division;
+	}
+
+	/**
+	 * @return the dataType
+	 */
+	public int getDataType() {
+		return dataType;
+	}
+
+	/**
+	 * @param dataType the dataType to set
+	 */
+	public void setDataType(int dataType) {
+		this.dataType = dataType;
+	}
+
+	/**
+	 * @return the documentName
+	 */
+	public String getDocumentName() {
+		return documentName;
+	}
+
+	/**
+	 * @param documentName the documentName to set
+	 */
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+
+	/**
 	 * @return the schoolName
 	 */
 	public String getSchoolName() {
@@ -165,4 +216,17 @@ public class SchoolUpdateDTO extends BaseDTO {
 		this.schoolName = schoolName;
 	}
 
+	/**
+	 * @return the uploadedFile
+	 */
+	public MultipartFile getUploadedFile() {
+		return uploadedFile;
+	}
+
+	/**
+	 * @param uploadedFile the uploadedFile to set
+	 */
+	public void setUploadedFile(MultipartFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
+	}
 }

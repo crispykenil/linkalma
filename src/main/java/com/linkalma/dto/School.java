@@ -1,41 +1,53 @@
 package com.linkalma.dto;
 
 import java.sql.Date;
+import java.util.List;
 
-public class School 
+public class School extends BaseDTO
 {
 
-	long schoolID;
+	private long schoolID;
 	
-	String password;
+	private String password;
 	
-	String schoolName;
+	private String schoolName;
 	
-	String address1;
+	private String address1;
 	
-	String address2;
+	private String address2;
 	
-	String branch;
+	private String branch;
 	
-	String websiteAddress;
+	private String websiteAddress;
 	
-	String emailAddress;
+	private String emailAddress;
 	
-	String linkalmaAddress;
+	private String linkalmaAddress;
 	
-	String approved;
+	private String approved;
 	
-	String active;
+	private String active;
 	
-	Date createDttm;
+	private String logoFileName;
 	
-	long createUserID;
+	private Date createDttm;
 	
-	Date updateDttm;
+	private long createUserID;
 	
-	long updateUserID;
+	private Date updateDttm;
 	
+	private long updateUserID;
 	
+	private String schoolContact;
+	
+	private List<SchoolUpdateDTO> schoolUpdatesList;
+	
+	private List<SchoolDataDTO> schoolDataList;
+	
+	private String schoolHistory;
+
+	private String adminName;
+
 	/**
 	 * @return the schoolID
 	 */
@@ -245,6 +257,90 @@ public class School
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the logoFileName
+	 */
+	public String getLogoFileName() {
+		return logoFileName;
+	}
+
+	/**
+	 * @param logoFileName the logoFileName to set
+	 */
+	public void setLogoFileName(String logoFileName) {
+		this.logoFileName = logoFileName;
+	}
+
+	/**
+	 * @return the schoolContact
+	 */
+	public String getSchoolContact() {
+		return schoolContact;
+	}
+
+	/**
+	 * @param schoolContact the schoolContact to set
+	 */
+	public void setSchoolContact(String schoolContact) {
+		this.schoolContact = schoolContact;
+	}
+
+	/**
+	 * @return the schoolHistory
+	 */
+	public String getSchoolHistory() {
+		return schoolHistory;
+	}
+
+	/**
+	 * @param schoolHistory the schoolHistory to set
+	 */
+	public void setSchoolHistory(String schoolHistory) {
+		this.schoolHistory = schoolHistory;
+	}
+
+	/**
+	 * @return the schoolUpdatesList
+	 */
+	public List<SchoolUpdateDTO> getSchoolUpdatesList() {
+		return schoolUpdatesList;
+	}
+
+	/**
+	 * @param schoolUpdatesList the schoolUpdatesList to set
+	 */
+	public void setSchoolUpdatesList(List<SchoolUpdateDTO> schoolUpdatesList) {
+		this.schoolUpdatesList = schoolUpdatesList;
+	}
+
+	/**
+	 * @return the schoolDataList
+	 */
+	public List<SchoolDataDTO> getSchoolDataList() {
+		return schoolDataList;
+	}
+
+	/**
+	 * @param schoolDataList the schoolDataList to set
+	 */
+	public void setSchoolDataList(List<SchoolDataDTO> schoolDataList) {
+		this.schoolDataList = schoolDataList;
+	}
+
+	/**
+	 * @return the adminName
+	 */
+	public String getAdminName() {
+		return adminName;
+	}
+
+	/**
+	 * @param adminName the adminName to set
+	 */
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
 
 	

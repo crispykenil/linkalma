@@ -18,6 +18,7 @@ function fileUpload()
       		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="162px" height="158px" alt="" modelAttribute="uploadedFile" />
 			<br> 
 			<input type="file" name="file" accept="image/*" class="button" onchange="javascript:fileUpload();">
+			<input type="hidden" name="destination" value="userprofile" />
 	  	</form:form>		
 			
 		</div>
@@ -26,10 +27,6 @@ function fileUpload()
 				<li><a href="javascript:;">Personal Details</a></li>
 				<li><a href="javascript:;">School Details</a></li>
 				<li><a href="javascript:;">Workplace details</a></li>
-				<!-- 
-				<li><a href="javascript:;">Credit Card Details</a></li>
-				<li><a href="javascript:;">Hobbies</a></li>
-				<li><a href="javascript:;">Any Other information</a></li>  -->
 			</ul>
 		</div>
 	</div>
@@ -145,9 +142,9 @@ function fileUpload()
 						<c:forEach var="userSchoolList" items="${model.userProfile.userSchoolList}" varStatus="count">
 							<tr>
 								<td>
-								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="schoolName_${count.index}"  />
+								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].schoolName"  />
 								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
-								<select name="schoolID">
+								<select name="userSchoolList[${count.index}].schoolID">
 									<c:forEach var="schoolList" items="${model.schoolList}">
 										<option value="${schoolList.schoolID}"
 										<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
@@ -200,40 +197,37 @@ function fileUpload()
 				</div>
 			</div>
 			<div id="workDetails">
-				<form:form class="readOnlyForm workDetailsForm" action="updateprofile">
+				<form:form class="readOnlyForm workDetailsForm" action="updateprofile" name="userWorkplaceDetailsForm" modelAttribute="workDetails">
 					<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
-					<input type="hidden" name="totalUserSchoolCount" value="${model.userSchoolList.size()}" />
+					<input type="hidden" name="totalUserSchoolCount" value="${model.workplaceList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
-							<thead>
-								<tr>
-									<th> School Name </th>
-									<th> From Year </th>
-									<th> To Year </th>
-									<th> Batch</th>
-									<th> Branch</th>
-									<th>Action</th>
-									
-								</tr>
-							</thead>
-							<tbody>
+						<thead>
 							<tr>
-								<td>
-								<input type="text" name="schoolName_0" placeholder="" value="Ryan - " disabled="disabled">
-								<input type="hidden" name="schoolID_0" value="16">
-								<select name="schoolID" disabled="disabled" style="display: none;">
-									<option value="17"> Ryan1 - 			</option>
-							
-									
-								</select> 
-								</td>
-								<td><input type="text"  name="userSchoolList[0].fromYear" placeholder="" value="2004" disabled="disabled"></td>
-								<td><input type="text"  name="userSchoolList[0].toYear" placeholder="" value="2001" disabled="disabled"></td>
-								<td><input type="text"  name="userSchoolList[0].passOutBatch" placeholder="" value="2004" disabled="disabled"></td>
-								<td><input type="text"  name="userSchoolList[0].branch" placeholder="" value="" disabled="disabled"></td>
-							
-								<td> <a href="deletemyschool?ID=1">Delete</a></td>
+								<th> Organisation Name </th>
+								<th> From Month - Year</th>
+								<th> To Month - Year</th>
+								<th> Designation </th>
+								<th> Description </th>
+								<th> Action</th>
 							</tr>
-	
+						</thead>
+						<tbody>
+							<c:forEach var="workplace" items="${model.workplaceList}">
+								<tr>
+									<td><input type=hidden name="userWorkplaceID_${count.index}" value="${workplace.userWorkplaceID }">
+										<input type="text" name="workplace[${count.index}].organisationName" value="${workplace.organisationName }">
+									</td>
+									<td><input type="text" size="2" name="workplace[${count.index}].fromMonth" value="${workplace.fromMonth}"> - 
+										<input type="text" size="4" name="workplace[${count.index}].fromYear" value="${workplace.fromYear}">
+									</td>
+									<td><input type="text" size="2" name="workplace[${count.index}].toMonth" value="${workplace.toMonth}"> -
+										<input type="text" size="4" name="workplace[${count.index}].toYear" value="${workplace.toYear}" >
+									</td>
+									<td><input type="text" name="workplace[${count.index}].designation" value="${workplace.designation}"></td>
+									<td><input type="text" name="workplace[${count.index}].description" value="${workplace.description}"></td>
+									<td> <a href="deletemyschool?ID=1">Delete</a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div class="btn-wrapper">

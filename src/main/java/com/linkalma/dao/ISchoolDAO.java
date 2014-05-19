@@ -1,10 +1,17 @@
 package com.linkalma.dao;
 
+
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.ui.Model;
+
 import com.linkalma.dto.School;
+import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.UserSchoolDTO;
 
 public interface ISchoolDAO {
@@ -55,5 +62,20 @@ public interface ISchoolDAO {
 	   public int deleteSchool(long userSchoolID);
 	   
 	   public School getSchoolBySchoolEmailID(String emailID);
+	   
+	   // newsType can have 1. Projects, 2.Events, 3. Newsletter 
+	   public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID, int updateType);
 
+	   // newsType can have 1. Syllabus, 2. Calendar, 3. Exams 
+	   public List<SchoolDataDTO> getSchoolData(long schoolID, int dataType);
+
+	   // newsType can have 1. Projects, 2.Events, 3. Newsletter 
+	   public long updateSchoolUpdates(SchoolUpdateDTO schoolUpdateDto, int updateType);
+
+	   // newsType can have 1. Syllabus, 2. Calendar, 3. Exams 
+	   public long updateSchoolData(SchoolDataDTO schoolDataDto, int dataType);
+
+	   public Map<String, List<SchoolDataDTO>> getSchoolDataByTypeForSchool(List<StaticCodesDTO> staticCodeList, long schoolID);
+
+	   public Map<String, List<SchoolUpdateDTO>> getSchoolUpdatesByTypeForSchool(List<StaticCodesDTO> staticCodeList, long schoolID);
 }

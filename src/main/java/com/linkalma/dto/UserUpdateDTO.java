@@ -2,7 +2,7 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-public class UserUpdateDTO {
+public class UserUpdateDTO extends BaseDTO {
 
 	private long postID;
 	

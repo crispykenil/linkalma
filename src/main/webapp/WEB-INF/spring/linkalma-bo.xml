@@ -11,6 +11,7 @@
    
 	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
 		<property name="schoolDAO" ref="schoolDAO" />   
+		<property name="categoryCodesDAO" ref="categoryCodesDAO" />   
    </bean>
 
 	<bean id="userSchoolBO" class="com.linkalma.bo.impl.UserSchoolBO">

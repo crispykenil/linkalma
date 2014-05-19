@@ -2,7 +2,7 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-public class UserSchoolDTO 
+public class UserSchoolDTO extends BaseDTO
 {
 
 	long userSchoolID;

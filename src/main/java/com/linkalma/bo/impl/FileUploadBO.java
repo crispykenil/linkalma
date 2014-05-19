@@ -36,7 +36,6 @@ public class FileUploadBO implements IFileUploadBO {
 	
 	@Override
 	public Model uploadFile(UploadedFile uploadedFile, String destination, Model model) {
-		// TODO Auto-generated method stub
 		
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
@@ -48,7 +47,7 @@ public class FileUploadBO implements IFileUploadBO {
 		try {
 			inputStream = file.getInputStream();
 
-			File newFile = new File("/linkalma/images/"
+			File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"+destination+"/"
 					+ fileName + ".jpg");
 			if (newFile.exists()) {
 				newFile.delete();
@@ -62,6 +61,7 @@ public class FileUploadBO implements IFileUploadBO {
 			while ((read = inputStream.read(bytes)) != -1) {
 				outputStream.write(bytes, 0, read);
 				fileName = newFile.getName();
+				
 			}
 		} catch (IOException e) {
 

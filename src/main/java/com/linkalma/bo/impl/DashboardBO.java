@@ -1,5 +1,6 @@
 package com.linkalma.bo.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +42,15 @@ public class DashboardBO implements IDashboardBO {
 		
 		List<SchoolUpdateDTO> schoolUpdateDtoList = null;
 		Map<String,List<SchoolUpdateDTO>> schoolUpdatesMap = new HashMap<String,List<SchoolUpdateDTO>>();
-		
+//		List<Long> userSchoolIDList = new ArrayList<Long>();
 		for(UserSchoolDTO userschoolDto :userSchoolDtoList )
 		{
+//			userSchoolIDList.add(userschoolDto.getSchoolID());
 			schoolUpdateDtoList = getSchoolUpdateDAO().getSchoolUpdates(userschoolDto.getSchoolID());
 			schoolUpdatesMap.put(userschoolDto.getSchoolName(), schoolUpdateDtoList);
+			
 			System.out.println("Adding school updates for schoolID : "+userschoolDto.getSchoolID());
+			
 		}
 		return schoolUpdatesMap;
 	}

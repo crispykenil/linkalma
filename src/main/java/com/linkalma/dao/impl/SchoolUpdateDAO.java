@@ -1,5 +1,6 @@
 package com.linkalma.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import com.linkalma.dao.ISchoolUpdateDAO;
 import com.linkalma.dao.mapper.SchoolUpdateMapper;
@@ -24,14 +26,14 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	private JdbcTemplate jdbcTemplateObject;
 	
 	@Override
-	public int updateNews(SchoolUpdateDTO schoolUPdateDto) {
+	public int updateSchoolDetails(SchoolUpdateDTO schoolUPdateDto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID) {
-		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL,
+		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL, new Long[]{schoolID},
 				new SchoolUpdateMapper());
 		return schoolUpdateDTO;
 		
@@ -64,6 +66,15 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	 */
 	public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
 		this.jdbcTemplateObject = jdbcTemplateObject;
+	}
+
+	@Override
+	public List<SchoolUpdateDTO> getSchoolUpdatesFromList(List<Long> schoolIDList) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("schoolIDList", schoolIDList);
+		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL,
+				new SchoolUpdateMapper());
+		return schoolUpdateDTO;
 	}
 
 }
