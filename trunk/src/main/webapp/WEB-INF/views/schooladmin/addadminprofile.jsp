@@ -16,7 +16,6 @@
 	<div class="left-column border-box">
 		<div class="navigation">
 			<ul>
-				<li><a href="/linkalma/schooladmin/addschoolbasics?schoolName=${model.schoolName }">School Basics</a></li>
 				<li><a href="/linkalma/schooladmin/addadminprofile?schoolName=${model.schoolName }">Admin Profile</a></li>
 				<li><a href="/linkalma/schooladmin/addschoolcurriculum?schoolName=${model.schoolName }">Curriculum</a></li>
 				<li><a href="/linkalma/schooladmin/addschoolevents?schoolName=${model.schoolName }">School Events</a></li>
@@ -28,6 +27,8 @@
 				<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
 					<h2>Personal Details </h2>
 					<div>
+					<input type="hidden" value="${model.school.schoolID}"
+								 name="schoolID" />
 						<ul class="twoColumn clear-fix">
 							<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
 								 name="userFirstName" class="required" maxlength="50" /></li>

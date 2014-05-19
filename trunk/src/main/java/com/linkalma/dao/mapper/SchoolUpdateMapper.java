@@ -10,17 +10,14 @@ import com.linkalma.dto.SchoolUpdateDTO;
 public class SchoolUpdateMapper implements RowMapper<SchoolUpdateDTO> {
 	
 	public SchoolUpdateDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		System.out.println(this.getClass()+" Resultset size: "+rs.getFetchSize());
 		SchoolUpdateDTO schoolUpdateDTO = new SchoolUpdateDTO();
-	      schoolUpdateDTO.setPostID(rs.getLong("POSTID"));
-	      schoolUpdateDTO.setUserID(rs.getLong("USERID"));
+	      schoolUpdateDTO.setId(rs.getLong("SCHOOLUPDATESID"));
 	      schoolUpdateDTO.setSchoolID(rs.getLong("SCHOOLID"));
-	      schoolUpdateDTO.setSubject(rs.getString("SUBJECT"));
+	      schoolUpdateDTO.setTitle(rs.getString("TITLE"));
 	      schoolUpdateDTO.setDescription(rs.getString("DESCRIPTION"));
 	      schoolUpdateDTO.setType(rs.getString("TYPE"));
 	      schoolUpdateDTO.setSchoolName(rs.getString("SCHOOLNAME"));
-	      schoolUpdateDTO.setBranch(rs.getString("BRANCH"));
-	      schoolUpdateDTO.setEmailAddress(rs.getString("EMAILADDRESS"));
-	      schoolUpdateDTO.setLinkAlmaURL(rs.getString("LINKALMAURL"));
 	      schoolUpdateDTO.setCreateDttm(rs.getDate("CREATEDTTM"));
 	      return schoolUpdateDTO;
 	   }

@@ -1,21 +1,17 @@
-package com.linkalma.dao.impl;
+package com.linkalma.utils;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.linkalma.dao.IUserUpdateDAO;
-import com.linkalma.dao.mapper.SchoolMapper;
-import com.linkalma.dao.mapper.UserUpdateMapper;
-import com.linkalma.dto.School;
-import com.linkalma.dto.UserUpdateDTO;
+import com.linkalma.dao.mapper.StaticCodesMapper;
+import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.utils.ApplicationConstants;
 
-public class UserUpdateDAO implements IUserUpdateDAO {
+public class CategoryCodesDAO {
 
 	@Autowired
 	private DataSource dataSource;
@@ -23,18 +19,10 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplateObject;
 	
-
-	@Override
-	public int createWallPost(UserUpdateDTO userUpdateDto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<UserUpdateDTO> getUserWallPost(long userID) {
-		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_USER_WALL_POSTS, new Long[]{userID},
-				new UserUpdateMapper());
-		return userUpdateDtoList;
+	public List<StaticCodesDTO> getStaticCodesForCategoryID(long categoryID) {
+		List<StaticCodesDTO> staticCodesDTOList = getJdbcTemplateObject().query( ApplicationConstants.GET_STATIC_CODES_FOR_CATEGORY_ID, new Long[]{categoryID},
+				new StaticCodesMapper());
+		return staticCodesDTOList;
 	}
 
 	/**
@@ -49,7 +37,6 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-	    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	/**
@@ -65,5 +52,4 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
 		this.jdbcTemplateObject = jdbcTemplateObject;
 	}
-
 }

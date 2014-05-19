@@ -17,7 +17,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dao.mapper.UserMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
+import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
+import com.linkalma.dto.UserWorkplaceDTO;
 import com.linkalma.utils.ApplicationConstants;
 
 public class UserDAO implements IUserDAO {
@@ -160,5 +162,15 @@ public class UserDAO implements IUserDAO {
     	  	}
     });
 	  return 0;
+	}
+
+	@Override
+	public User getUserWorkplace(User alumni) {
+		
+		List<UserWorkplaceDTO> userWorkplaceList = getJdbcTemplateObject().query(ApplicationConstants.GET_USER_WORKPLACE_DETAILS, 
+				new Object[]{alumni.getUserID()}, new UserWorkplaceMapper());
+		alumni.setUserWorkplaceList(userWorkplaceList);
+		return alumni;
+		
 	}
 }

@@ -12,7 +12,10 @@
       <property name="password" value="admin"/>
    </bean>
 
-
+	<bean id="jdbcTemplate" 
+      class="org.springframework.jdbc.core.JdbcTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+      </bean>
    <!-- Definition for studentJDBCTemplate bean -->
    <bean id="schoolJDBCTemplate" 
       class="com.linkalma.dao.SchoolJDBCTemplate">
@@ -42,6 +45,12 @@
 	<bean id="userUpdateDAO" 
       class="com.linkalma.dao.impl.UserUpdateDAO">
       <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <bean id="categoryCodesDAO" 
+      class="com.linkalma.utils.CategoryCodesDAO">
+      <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
    
    <bean id="loginDAO" 

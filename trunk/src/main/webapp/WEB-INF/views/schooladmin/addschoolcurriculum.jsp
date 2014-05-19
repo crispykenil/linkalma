@@ -33,7 +33,6 @@
 	<div class="left-column border-box">
 		<div class="navigation">
 			<ul>
-				<li><a href="/linkalma/schooladmin/addschoolbasics?schoolName=${model.schoolName }">School Basics</a></li>
 				<li><a href="/linkalma/schooladmin/addadminprofile?schoolName=${model.schoolName }">Admin Profile</a></li>
 				<li><a href="/linkalma/schooladmin/addschoolcurriculum?schoolName=${model.schoolName }">Curriculum</a></li>
 				<li><a href="/linkalma/schooladmin/addschoolevents?schoolName=${model.schoolName }">School Events</a></li>
@@ -42,12 +41,61 @@
 		</div>
 	</div>
 
-<form action="search" name="searchForm">
-<input type="text" name ="schoolName" />
-<input type="text" name ="schoolAddress1" />
-<input type="text" name ="schoolAddress2" />
-<input type="text" name ="branch" />
-<input type="text" name ="websiteAddress" />
-<input type="submit" value="Submit" />
+<div>
+<form action="updateschooldata" name="schoolDataForm" >
+	<ul class="threeColumn clear-fix">
+		<li><label>Syllabus</label> 
+		</li><br>
+		<li><label>Title</label> 
+			<input type="text" value="" name="title" class="required" maxlength="50" />
+		</li>
+	 	<li><label>Description</label> 
+			<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
+		</li>
+		<li><label>File</label> 
+			<input type="file" name="uploadedFile" class="required"  enctype="multipart/form-data" />
+			<input type="hidden" name="destination" value="curriculum" />
+			
+		</li>
+		<li><input type="submit" value="Save" />
+		</li>
+	</ul>
+</form>
+</div>
+<table class="dataTable">
+						<thead>
+							<tr>
+								<th>Title </th>
+								<th>Description</th>
+								<th>File</th>
+								<th>Uploaded Date</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="schoolDataDto" items="${model.userProfile.userSchoolList}" varStatus="count">
+							<tr>
+								<td>
+								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].schoolName"  />
+								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
+								<select name="userSchoolList[${count.index}].schoolID">
+									<c:forEach var="schoolList" items="${model.schoolList}">
+										<option value="${schoolList.schoolID}"
+										<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
+										${schoolList.schoolName } - ${schoolList.branch }
+										</option>
+									</c:forEach>
+								</select> 
+								</td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  /></td>
+								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  /></td>
+								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch"  /></td>
+							
+								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
 </form>
 <%@ include file="../footer.jsp"%>

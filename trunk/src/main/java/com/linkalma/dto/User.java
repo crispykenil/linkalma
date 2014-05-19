@@ -3,7 +3,7 @@ package com.linkalma.dto;
 import java.sql.Date;
 import java.util.List;
 
-public class User 
+public class User extends BaseDTO
 {
 
 	private long userID;
@@ -78,6 +78,8 @@ public class User
 	
 	private List<UserSchoolDTO> userSchoolList;
 	
+	private List<UserWorkplaceDTO> userWorkplaceList;
+
 	/**
 	 * @return the approved
 	 */
@@ -607,5 +609,19 @@ public class User
 	 */
 	public void setCountryCode(short countryCode) {
 		this.countryCode = countryCode;
+	}
+
+	/**
+	 * @return the userWorkplaceList
+	 */
+	public List<UserWorkplaceDTO> getUserWorkplaceList() {
+		return userWorkplaceList;
+	}
+
+	/**
+	 * @param userWorkplaceList the userWorkplaceList to set
+	 */
+	public void setUserWorkplaceList(List<UserWorkplaceDTO> userWorkplaceList) {
+		this.userWorkplaceList = userWorkplaceList;
 	}
 }

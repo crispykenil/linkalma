@@ -55,14 +55,16 @@ public class UserBO implements IUserBO
 		return model;
 		
 	}
-
 	
 	@Override
 	public Model getUserProfileDetails(User userDto, Model model) 
 	{
 		userDto = getUserDAO().getUserProfile(userDto);
 		getUserSchoolBO().getUserSchoolList(userDto, model);
-		System.out.println("Printingzz - "+userDto);
+		userDto = getUserDAO().getUserWorkplace(userDto);
+		System.out.println("Workplace List: "+userDto.getUserWorkplaceList().size()+" - for ID:"+userDto.getUserID());
+		
+		model.addAttribute("workplaceList", userDto.getUserWorkplaceList());
 		model.addAttribute("userProfile", userDto);
 		model.addAttribute("profileImageURI", userDto.getUserID()+"_profilePic.jpg");
 		
