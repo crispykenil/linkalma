@@ -32,22 +32,32 @@
 	</div>
 </div>
 <div id="doc">
-	<c:if test="${empty model.schoolName}">
-	
-	<div id="hd">
-		<div class="header-content-wrapper">
-			<div class="logo">
-				<a href="/linkalma"></a>
-			</div>
-			<div class="fr">
-				<div class="search-bar">
-				<label>Search Your Freinds</label>
-					<input type="text" value="" placeholder="" class="search-field"/>
+<c:choose>
+      <c:when test="${empty model.schoolName}">
+	      <div id="hd">
+			<div class="header-content-wrapper">
+				<div class="logo">
+					<a href="/linkalma"></a>
 				</div>
-			</div>
-		</div><!-- header-content-wrapper -->
-	</div><!-- hd -->
-	</c:if>
-		<div id="bd">
-		
-			<div id="main-content-wrapper" class="clear-fix">
+				<div class="fr">
+					<div class="search-bar">
+					<label>Search Your Freinds</label>
+						<input type="text" value="" placeholder="" class="search-field"/>
+					</div>
+				</div>
+			</div><!-- header-content-wrapper -->
+		</div><!-- hd -->
+      </c:when>
+      <c:otherwise>
+      <div id="hd" class="school-header" >
+			<div class="header-content-wrapper">
+				<div class="school-logo">
+					<a href="/linkalma">RYAN INTERNATIONAL</a>
+				</div>
+				
+			</div><!-- header-content-wrapper -->
+		</div><!-- hd -->
+      </c:otherwise>
+</c:choose>
+<div id="bd">
+	<div id="main-content-wrapper" class="clear-fix">
