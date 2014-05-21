@@ -26,6 +26,10 @@ public class ApplicationConstants {
 		 		+ "EMAILADDRESS, WEBSITEURL, LINKALMAURL, APPROVED, ACTIVEYN, CREATEDTTM, UPDATEDTTM, CREATEUSERID, UPDATEUSERID) "
 	      		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
+	public static String INSERT_WALLPOST_QUERY = "INSERT INTO USERUPDATES "
+			+ " (USERID, SUBJECT, DESCRIPTION, UPLOADEDON, CREATEUSERID, UPDATEUSERID) "
+			+ " VALUES (?, ?, ?, ?, ?, ?);";
+
 	public static String INSER_USER_CREDENTIALS_QUERY = "INSERT INTO USERCREDENTIALS (USERID,PASSWORD) "
       		+ "VALUES (?, ?)";
 	
@@ -63,7 +67,8 @@ public class ApplicationConstants {
 			+ " UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME "
 			+ " FROM USERUPDATES UU, USER U "
 			+ " WHERE UU.USERID = U.USERID"
-			+ " AND U.USERID = ?" ;
+			+ " AND U.USERID = ?"
+			+ " ORDER BY UU.CREATEDTTM DESC" ;
 	
 	public static String UPDATE_USER_PROFILE_PERSONAL_DETAILS = 
 			" UPDATE user SET FirstName = ?,    MiddleName = ?,    LastName = ?, "

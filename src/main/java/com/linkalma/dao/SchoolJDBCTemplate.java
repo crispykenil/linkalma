@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dto.School;
-import com.linkalma.dto.UserSchoolDTO;
 
 public class SchoolJDBCTemplate  {
    

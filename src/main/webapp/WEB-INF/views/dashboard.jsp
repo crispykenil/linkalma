@@ -15,11 +15,11 @@
 							
 						</ul>
 						<div class="posting-panel">
-							<form:form action="addWallPost">
+							<form:form action="addwallpost" method="post">
 								<textarea placeholder="Share your views" name="wallPost"></textarea>
 								<div class="posting-options border-box clear-fix">
 									<div class="fl">
-										Post At:
+										Post At: <input type="checkbox" name="postTo" value="1" /> LinkAlma  
 									</div>
 									<div class="fr">
 										<input type="submit" value="Post" class="smalbtn"/>
@@ -56,7 +56,7 @@
 							<div class="panel-content">
 								<c:forEach var='userUpdateDto' items='${model.userUpdateDto}' >
 								<p><b>${userUpdateDto.subject }</b></p>
-								<p>${userUpdateDto.description }</p>
+								<p>${userUpdateDto.description } <br> ${userUpdateDto.createDttm }</p>
 						    </c:forEach>
 							</div>
 						</div>

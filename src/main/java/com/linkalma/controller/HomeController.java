@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -24,17 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.linkalma.bo.IDashboardBO;
 import com.linkalma.bo.IFileUploadBO;
 import com.linkalma.bo.ISchoolBO;
-import com.linkalma.bo.ISchoolUpdateBO;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
+import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
-import com.linkalma.dto.School;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
@@ -140,7 +138,7 @@ public class HomeController {
 		return new ModelAndView("school", "model", model);
 	}
 
-	/*@RequestMapping(value = "/school/{id}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/school/{id}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage, Model model) {
 		logger.info("Welcome home! Redirecting to School Inner page.");
 
@@ -149,8 +147,8 @@ public class HomeController {
 		model.addAttribute("schoolName", schoolName);
 		return new ModelAndView(innerPage, "model", model);
 	}
-*/	
-	@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
+	
+@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
 	public ModelAndView schoolAdmin(@RequestParam("schoolName") String schoolName, Model model, HttpServletRequest request) {
 		logger.info("Redirecting to default admin page");
 		School school = (School)request.getSession().getAttribute("school");
@@ -204,17 +202,22 @@ public class HomeController {
 		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
 	}
 	
-	@RequestMapping(value = "/addwallpost")
+	@RequestMapping(value = "/addwallpost",  method = RequestMethod.POST )
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
-			Model model) {
+			Model model, HttpServletRequest request) {
 		logger.info("Welcome home! Saving Wall Post.");
 
 		IDashboardBO dashboardBO = (IDashboardBO) context
 				.getBean("dashboardBO");
 
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+		if (userBean != null)
+			wallPostDto.setUserID(userBean.getUserID());
+
 		model = dashboardBO.addWallPost(wallPostDto, model);
 
-		return new ModelAndView("dashboard", "model", model);
+		return new ModelAndView("redirect:/dashboard", "model", model);
 	}
 
 	/**

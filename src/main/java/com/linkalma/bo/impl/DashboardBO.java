@@ -48,7 +48,6 @@ public class DashboardBO implements IDashboardBO {
 			schoolUpdatesMap.put(userschoolDto.getSchoolName(), schoolUpdateDtoList);
 			
 			System.out.println("Adding school updates for schoolID : "+userschoolDto.getSchoolID());
-			
 		}
 		return schoolUpdatesMap;
 	}
@@ -65,22 +64,17 @@ public class DashboardBO implements IDashboardBO {
 		return userUpdateDto;
 	}
 
-
 	@Override
 	public Model getAllDashboardDetails(User userDto, Model model) {
 		
-		
 		Map<String,List<SchoolUpdateDTO>> schoolUpdatesDtoMap = getSchoolUpdates(userDto);
-		
-		
-		
-		List<UserUpdateDTO> userUpdateDto = getUserUpdates(userDto);
+		List<UserUpdateDTO> userUpdateDtoList = getUserUpdates(userDto);
 		
 		System.out.println("School Update Size: "+schoolUpdatesDtoMap.size());
-		System.out.println("User Update Size :"+userUpdateDto.size());
+		System.out.println("User Update Size :"+userUpdateDtoList.size());
 		
 		model.addAttribute("schoolUpdatesDtoMap", schoolUpdatesDtoMap );
-		model.addAttribute("userUpdateDto", userUpdateDto );
+		model.addAttribute("userUpdateDto", userUpdateDtoList );
 		
 		return model;
 	}
@@ -145,6 +139,8 @@ public class DashboardBO implements IDashboardBO {
 	@Override
 	public Model addWallPost(WallPostDto wallPost, Model model) {
 		// TODO Auto-generated method stub
+		getUserUpdateDAO().createWallPost(wallPost);
+		
 		return null;
 	}
 
