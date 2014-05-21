@@ -1,6 +1,5 @@
 package com.linkalma.bo.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ public class DashboardBO implements IDashboardBO {
 	
 	@Autowired
 	private KeyHolder keyHolder;
-	
 	
 	@Override
 	public Map<String,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {

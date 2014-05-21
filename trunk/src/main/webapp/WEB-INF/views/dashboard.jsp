@@ -40,21 +40,13 @@
 						<c:forEach var='schoolMap' items='${model.schoolUpdatesDtoMap}'>
 								<h3>${schoolMap.key}</h3>
 						    <c:forEach var='schoolUpdateDto' items='${schoolMap.value}' >
-								<p><b>${schoolUpdateDto.subject }</b></p>
+								<p><b>${schoolUpdateDto.title } </b></p>
 								<p>${schoolUpdateDto.description }</p>
 						    </c:forEach>
 						</c:forEach>
 						</div>
 					</div>
-					<div class="panel">
-						<div class="panel-header">
-							<h3>My School's Update</h3>
-						</div>
-						<div class="panel-content">
-							<h3>Ryan International</h3>
-							<p>Lorum epusm kapsup repsm kolika,lorum epsum kapsu usssum kaliupam dihlka, lorum epsum</p>
-						</div>
-					</div>
+					
 				</div><!-- left-side-wrapper -->
 				<div class="main-content border-box">
 						<div class="panel">
