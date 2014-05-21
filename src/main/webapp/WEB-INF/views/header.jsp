@@ -48,13 +48,22 @@
 			</div><!-- header-content-wrapper -->
 		</div><!-- hd -->
       </c:when>
-      <c:otherwise>
-      <div id="hd" class="school-header" >
+      <c:otherwise><!-- school header -->
+      	<div id="hd" class="school-header" >
 			<div class="header-content-wrapper">
-				<div class="school-logo">
+				<div class="school-logo fl">
 					<a href="/linkalma">RYAN INTERNATIONAL</a>
 				</div>
-				
+				<div class="top-navigation fl">
+					<ul>
+						<li><a href="/linkalma">Home</a></li>
+						<li><a href="/linkalma/dashboard">News & Events</a></li>
+						<li><a href="/linkalma">About Us</a></li>
+						<li><a href="/linkalma">Our Staff</a></li>
+						<li class="adminLink"><a href="/linkalma/schooladmin?schoolName=${model.schoolName }">Administrator</a></li>
+					</ul>
+				</div>
+		
 			</div><!-- header-content-wrapper -->
 		</div><!-- hd -->
       </c:otherwise>
