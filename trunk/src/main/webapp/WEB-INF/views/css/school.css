@@ -3,9 +3,9 @@
 	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
 	-moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
 	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
-
+	position:relative;
 	background: #726b65;
-	margin-bottom: 30px;
+	margin-bottom:0px;
 }
 .school-logo a {
 	font-weight:bold;
@@ -19,6 +19,27 @@
 	line-height:80px;
 	vertical-align:middle
 }
+.school-header .top-navigation  {
+	position:absolute;
+	right:0px;
+	top:0px;
+} 
+.school-header .top-navigation ul {
+	line-height:normal;
+}
+.school-header .top-navigation ul li  {
+	float:left;
+	margin-left:1px;
+} 
+.school-header .top-navigation ul li a {
+	display:inline-block;
+	background-color:#a6b911;
+	color:#fff;
+	border-bottom-right-radius:10px;
+	border-bottom-left-radius:10px;
+	padding:5px 10px;
+} 
+
 .school-news-and-event ul li {
 	margin-bottom:25px;
 }
