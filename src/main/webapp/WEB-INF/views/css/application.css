@@ -161,7 +161,7 @@ input[type="text"].search-field {
 }
 .main-content {
 	min-height:100px;
-	width:650px;
+	width:725px;
 	/*margin-left:374px;*/
 	float:right
 }
@@ -172,7 +172,7 @@ input[type="text"].search-field {
 .left-column {
 	float:left;
 	margin-right: 10px;
-	width:350px;
+	width:275px;
 	padding:0px 10px 0px 0px; 
 	margin-right:24px;
 }
