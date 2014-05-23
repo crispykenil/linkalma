@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -36,6 +38,7 @@ import com.linkalma.dto.User;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
+import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.Utils;
 
 /**
@@ -138,12 +141,20 @@ public class HomeController {
 		return new ModelAndView("school", "model", model);
 	}
 
-	@RequestMapping(value = "/school/{id}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView schoolInnerPages(@PathVariable("id") String schoolName, @PathVariable("page") String innerPage, Model model) {
+	@RequestMapping(value = "/school/{schoolname}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView schoolInnerPages(@PathVariable("schoolname") String schoolName, @PathVariable("page") String innerPage, 
+			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to School Inner page.");
 
 		logger.info(schoolName);
 		logger.info("innerpage: "+innerPage);
+		ISchoolBO schoolBO = (ISchoolBO)context.getBean("schoolBO");
+		School school = (School)request.getSession().getAttribute("school");
+		schoolUpdateDto.setSchoolID(school.getSchoolID());
+		
+		if(innerPage.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_EVENTS))
+			model = schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
+		
 		model.addAttribute("schoolName", schoolName);
 		return new ModelAndView(innerPage, "model", model);
 	}
@@ -184,20 +195,26 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.GET)
-	public ModelAndView updateSchoolData(@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto, Model model) {
-		logger.info("Update School Called for Data: "+schoolDataDto.getType());
+	public ModelAndView updateSchoolData(@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto, 
+			Model model, HttpServletRequest request) {
+		logger.info("Update School Called for Data: "+schoolDataDto.getDataType());
 
-		String url = "addschoolcurriculum?schoolName="+schoolDataDto.getSchoolName()+"&msg="+schoolDataDto.getSuccessMsg();
 		ISchoolBO schoolBO = (ISchoolBO)context.getBean("schoolBO");
+		School school = (School)request.getSession().getAttribute("school");
+		if (null == school)
+			return new ModelAndView("redirect:/logout", "model", model);
 		
-		UploadedFile uploadedFile = new UploadedFile();
+		/*UploadedFile uploadedFile = new UploadedFile();
 		uploadedFile.setDestination("schoolData");
 		uploadedFile.setFile(schoolDataDto.getUploadedFile());
 		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
 		
 		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
-				
+		*/		
+		
+		schoolDataDto.setSchoolID(school.getSchoolID());
 		schoolBO.updateSchoolData(schoolDataDto, model);
+		String url = "addschoolcurriculum?schoolName="+schoolDataDto.getSchoolName()+"&msg="+schoolDataDto.getSuccessMsg();
 		
 		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
 	}

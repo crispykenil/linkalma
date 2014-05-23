@@ -1,23 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Events
-</h1>
+<%@ include file="header.jsp"%>
 
-<P>  The time on the server is ${serverTime}. </P>
+<c:forEach var='schoolUpdatesMap' items='${model.schoolUpdatesMap}'>
+								<h3>${schoolUpdatesMap.key}</h3>
+						    <c:forEach var='schoolUpdateDto' items='${schoolUpdatesMap.value}' >
+								<p><b>${schoolUpdateDto.title } </b></p>
+								<p>${schoolUpdateDto.description }</p>
+						    </c:forEach>
+						</c:forEach>
 
-<form action="" name="searchForm" method="post">
-<input type="text" name ="schoolName" />
-<input type="text" name ="schoolAddress1" />
-<input type="text" name ="schoolAddress2" />
-<input type="text" name ="branch" />
-<input type="text" name ="websiteAddress" />
-<input type="submit" value="Submit" />
-</form>
-</body>
-</html>
+
+<%@ include file="footer.jsp"%>

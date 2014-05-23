@@ -2,7 +2,7 @@ package com.linkalma.dto;
 
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class SchoolDataDTO extends BaseDTO {
 
@@ -24,7 +24,7 @@ public class SchoolDataDTO extends BaseDTO {
 	
 	private String division;
 	
-	private MultipartFile uploadedFile;
+	private CommonsMultipartFile uploadedFile;
 	
 	private long createUserID;
 	
@@ -219,14 +219,15 @@ public class SchoolDataDTO extends BaseDTO {
 	/**
 	 * @return the uploadedFile
 	 */
-	public MultipartFile getUploadedFile() {
+	public CommonsMultipartFile getUploadedFile() {
 		return uploadedFile;
 	}
 
 	/**
 	 * @param uploadedFile the uploadedFile to set
 	 */
-	public void setUploadedFile(MultipartFile uploadedFile) {
+	public void setUploadedFile(CommonsMultipartFile uploadedFile) {
 		this.uploadedFile = uploadedFile;
 	}
+	
 }

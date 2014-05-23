@@ -78,4 +78,6 @@ public interface ISchoolDAO {
 	   public Map<String, List<SchoolDataDTO>> getSchoolDataByTypeForSchool(List<StaticCodesDTO> staticCodeList, long schoolID);
 
 	   public Map<String, List<SchoolUpdateDTO>> getSchoolUpdatesByTypeForSchool(List<StaticCodesDTO> staticCodeList, long schoolID);
+	   
+	   public List<SchoolUpdateDTO> getSchoolAllUpdates(long schoolID);
 }

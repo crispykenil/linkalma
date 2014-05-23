@@ -1,10 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../header.jsp"%>
 
-
-
-
-
 ${model.msg }
 <h5><c:if test="${model.msg!= null } ">${model.msg}</c:if> </h5>
 <div class="left-column border-box">
