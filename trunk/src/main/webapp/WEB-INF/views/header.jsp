@@ -52,7 +52,7 @@
       	<div id="hd" class="school-header" >
 			<div class="header-content-wrapper">
 				<div class="school-logo fl">
-					<a href="/linkalma">RYAN INTERNATIONAL</a>
+					<a href="/linkalma/school/${model.schoolName }" style="text-transform: uppercase;">${model.schoolName }</a>
 				</div>
 				<div class="top-navigation fl">
 					<ul>

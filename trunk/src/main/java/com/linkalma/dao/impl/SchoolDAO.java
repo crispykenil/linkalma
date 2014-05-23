@@ -219,6 +219,7 @@ public class SchoolDAO implements ISchoolDAO {
 			List<SchoolDataDTO> schoolDataDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_CURRICULUM_DATA, 
 					new Long[]{schoolID, staticCodesDTO.getCode()}, new SchoolDataMapper());
 			schoolDataMap.put(staticCodesDTO.getPrimaryDecode(), schoolDataDtoList);
+			System.out.println("SchoolDataList Size "+schoolDataDtoList.size()+" for Categroy Code:"+staticCodesDTO.getPrimaryDecode());
 		}
 		return schoolDataMap;
 	}
