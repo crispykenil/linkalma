@@ -1,11 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../header.jsp"%>
 
-
-
-
-
-
 <div class="left-column border-box">
 	<div class="navigation">
 		<ul>
@@ -20,6 +15,26 @@
 <!-- left-column -->
 <div class="main-content border-box">
 	<h1>Syllabus</h1>
+	<form action="updateschooldata" name="schoolDataForm" enctype="multipart/form-data">
+		<ul class="clear-fix">
+
+			<li><label>Title</label> 
+				<input type="text" value="" name="title" class="required" maxlength="50" />
+			</li>
+		 	<li><label>Description</label> 
+				<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
+			</li>
+			<li><label>File</label> 
+				<input type="file" name="documentName" class="required" />
+				<input type="hidden" name="dataType" value="1" />
+				
+			</li>
+			<li><input type="submit" value="Save" />
+			</li>
+		</ul>
+	</form>
+	<hr />
+	<h1>Calendar</h1>
 	<form action="updateschooldata" name="schoolDataForm" >
 		<ul class="clear-fix">
 
@@ -30,8 +45,34 @@
 				<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
 			</li>
 			<li><label>File</label> 
-				<input type="file" name="uploadedFile" class="required"  enctype="multipart/form-data" />
-				<input type="hidden" name="destination" value="curriculum" />
+				<input type="file" name="documentName" class="required" />
+				<input type="hidden" name="dataType" value="2" />
+				
+			</li>
+			<li><input type="submit" value="Save" />
+			</li>
+		</ul>
+	</form>
+	<hr />
+	<h1>Exams</h1>
+	<form action="updateschooldata" name="schoolDataForm" >
+		<ul class="clear-fix">
+
+			<li><label>Title</label> 
+				<input type="text" value="" name="title" class="required" maxlength="50" />
+			</li>
+		 	<li><label>Description</label> 
+				<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
+			</li>
+			<li><label>Grade</label> 
+				<input type="text" value="" name="grade" class="required" maxlength="20" /> 
+			</li>
+			<li><label>Division</label> 
+				<input type="text" value="" name="division" class="required" maxlength="20" /> 
+			</li>
+			<li><label>File</label> 
+				<input type="file" name="documentName" class="required" />
+				<input type="hidden" name="dataType" value="3" />
 				
 			</li>
 			<li><input type="submit" value="Save" />
@@ -43,6 +84,8 @@
 			<tr>
 				<th>Title </th>
 				<th>Description</th>
+				<th>Grade</th>
+				<th>Division</th>
 				<th>File</th>
 				<th>Uploaded Date</th>
 			</tr>

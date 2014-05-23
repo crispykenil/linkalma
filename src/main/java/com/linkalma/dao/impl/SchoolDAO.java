@@ -200,10 +200,8 @@ public class SchoolDAO implements ISchoolDAO {
 	    	  	ps.setString(5, schoolDataDto.getDescription());
 	    	  	ps.setString(6, schoolDataDto.getGrade());
 	    	  	ps.setString(7, schoolDataDto.getDivision());
-	    	  	ps.setDate(8, schoolDataDto.getCreateDttm());
-	    	  	ps.setDate(9, schoolDataDto.getUpdateDttm());
-	    	  	ps.setLong(10, schoolDataDto.getCreateUserID());
-	    	  	ps.setLong(11, schoolDataDto.getUpdateUserID());
+	    	  	ps.setLong(8, schoolDataDto.getCreateUserID());
+	    	  	ps.setLong(9, schoolDataDto.getUpdateUserID());
 	    	  	
 	    	  	return ps;
     	  	}
@@ -233,8 +231,16 @@ public class SchoolDAO implements ISchoolDAO {
 			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES, 
 					new Long[]{schoolID, staticCodesDTO.getCode()}, new SchoolUpdateMapper());
 			schoolUpdateMap.put(staticCodesDTO.getPrimaryDecode(), schoolUpdateDtoList);
+			System.out.println("SchoolList Size "+schoolUpdateDtoList.size()+" for Categroy Code:"+staticCodesDTO.getPrimaryDecode());
 		}
 		return schoolUpdateMap;
+	}	
+
+	@Override
+	public List<SchoolUpdateDTO> getSchoolAllUpdates(long schoolID) {
+			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_ALL_UPDATES, 
+					new Long[]{schoolID}, new SchoolUpdateMapper());
+		return schoolUpdateDtoList;
 	}	
 
 }
