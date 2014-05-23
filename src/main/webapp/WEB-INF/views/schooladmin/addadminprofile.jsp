@@ -2,16 +2,6 @@
 <%@ include file="../header.jsp"%>
 
 
-
-<div id="hd" class="school-header" >
-	<div class="header-content-wrapper">
-		<div class="school-logo">
-			<a href="../linkalma">RYAN INTERNATIONAL</a>
-		</div>
-		
-	</div><!-- header-content-wrapper -->
-</div><!-- hd -->
-
 	<h1>My Profile</h1>
 	<div class="left-column border-box">
 		<div class="navigation">
