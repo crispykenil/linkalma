@@ -15,7 +15,8 @@ public class SchoolDataMapper implements RowMapper<SchoolDataDTO> {
 	      schoolDataDTO.setSchoolID(rs.getLong("SCHOOLID"));
 	      schoolDataDTO.setTitle(rs.getString("TITLE"));
 	      schoolDataDTO.setDescription(rs.getString("DESCRIPTION"));
-	      schoolDataDTO.setDataType(rs.getInt("TYPE"));
+	      schoolDataDTO.setType(rs.getString("TYPE"));
+	      schoolDataDTO.setDataType(rs.getInt("UPDATETYPE"));
 	      schoolDataDTO.setSchoolName(rs.getString("SCHOOLNAME"));
 	      schoolDataDTO.setGrade(rs.getString("GRADE"));
 	      schoolDataDTO.setDivision(rs.getString("DIVISION"));
