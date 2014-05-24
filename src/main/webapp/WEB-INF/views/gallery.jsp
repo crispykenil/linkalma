@@ -1,23 +1,60 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Gallery
-</h1>
+<%@ include file="header.jsp" %>
+<link rel="stylesheet" type="text/css" href="/linkalma/css/jquery.lightbox-0.5.css" media="screen" />
+<style type="text/css">
+	
+		.main-content a{
+		border:4px solid #ececec;
+		margin:0px 22px 22px 0px;
+		display:inline-block;
+		}
+		.main-content a:hover{
+			border:4px solid #86b52b;
+	
+		}
+		
+		.thumbnail {
+			width:160px; height:140px;
+			float:left;
+			
+		}
+	</style>
+<script type="text/javascript" src="/linkalma/js/jquery.lightbox-0.5.js"></script>
 
-<P>  The time on the server is ${serverTime}. </P>
 
-<form action="search" name="searchForm">
-<input type="text" name ="schoolName" />
-<input type="text" name ="schoolAddress1" />
-<input type="text" name ="schoolAddress2" />
-<input type="text" name ="branch" />
-<input type="text" name ="websiteAddress" />
-<input type="submit" value="Submit" />
-</form>
-</body>
-</html>
+ <script type="text/javascript">
+	$(document).ready(function(){
+		$(function() {
+  			$('#gallery a').lightBox();
+		});
+	});
+
+  </script>
+<div id="gallery">
+	
+<h1>Our Gallery </h1>
+<a href="/linkalma/images/gallery/1.jpg" rel="lightbox"><img src="/linkalma/images/gallery/1.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/2.jpg" rel="lightbox"><img src="/linkalma/images/gallery/2.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/3.jpg" rel="lightbox"><img src="/linkalma/images/gallery/3.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/4.jpg" rel="lightbox"><img src="/linkalma/images/gallery/4.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/5.jpg" rel="lightbox"><img src="/linkalma/images/gallery/5.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/6.jpg" rel="lightbox"><img src="/linkalma/images/gallery/6.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/7.jpg" rel="lightbox"><img src="/linkalma/images/gallery/7.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/8.jpg" rel="lightbox"><img src="/linkalma/images/gallery/8.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/9.jpg" rel="lightbox"><img src="/linkalma/images/gallery/9.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/10.jpg" rel="lightbox"><img src="/linkalma/images/gallery/10.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/11.jpg" rel="lightbox"><img src="/linkalma/images/gallery/11.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/12.jpg" rel="lightbox"><img src="/linkalma/images/gallery/12.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/13.jpg" rel="lightbox"><img src="/linkalma/images/gallery/13.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/14.jpg" rel="lightbox"><img src="/linkalma/images/gallery/14.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/15.jpg" rel="lightbox"><img src="/linkalma/images/gallery/15.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/16.jpg" rel="lightbox"><img src="/linkalma/images/gallery/16.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/17.jpg" rel="lightbox"><img src="/linkalma/images/gallery/17.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/18.jpg" rel="lightbox"><img src="/linkalma/images/gallery/18.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/19.jpg" rel="lightbox"><img src="/linkalma/images/gallery/19.jpg" class="thumbnail" alt="" /></a>
+<a href="/linkalma/images/gallery/20.jpg" rel="lightbox"><img src="/linkalma/images/gallery/20.jpg" class="thumbnail" alt="" /></a>
+
+</div>
+
+<%@ include file="footer.jsp" %>
