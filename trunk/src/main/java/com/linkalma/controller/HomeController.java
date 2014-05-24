@@ -131,11 +131,17 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/school/{id}")
-	public ModelAndView school(@PathVariable("id") String schoolName, Model model) {
+	public ModelAndView school(@PathVariable("id") String schoolName, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! Redirecting to School page.");
 
 		logger.info(schoolName+"--"+model.containsAttribute("linkalmaaddress"));
 		
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		
+		SchoolUpdateDTO schoolUpdateDto = new SchoolUpdateDTO();
+		School school = (School)request.getSession().getAttribute("school");
+		schoolUpdateDto.setSchoolID(school.getSchoolID());
+		schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
 		model.addAttribute("schoolName", schoolName);
 		
 		return new ModelAndView("school", "model", model);
@@ -193,6 +199,17 @@ public class HomeController {
 		
 		schoolBO.updateSchoolUpdates(schoolUpdateDto, model);
 		String url = "addschoolevents?schoolName="+schoolUpdateDto.getSchoolName()+"&msg="+schoolUpdateDto.getSuccessMsg();
+		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
+	}
+	
+	@RequestMapping(value = "/schooladmin/updateschoolgallery", method = RequestMethod.GET)
+	public ModelAndView updateSchoolGallery(@ModelAttribute("schoolGalleryForm") UploadedFile uploadedFile, HttpServletRequest request, Model model) {
+		logger.info("Gallery update...");
+		
+		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
+		
+		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
+		String url = "addschoolevents?schoolName="+request.getParameter("schoolName")+"&msg="+uploadedFile.getSuccessMsg();
 		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
 	}
 	

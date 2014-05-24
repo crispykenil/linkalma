@@ -84,7 +84,7 @@ public class ApplicationConstants {
 	
 	public static String SELECT_USER_DETAILS = 
 			" SELECT U.UserID, UC.PASSWORD, RoleID, SC.PrimaryDecode as Role, FirstName, MiddleName, LastName, Address1, Address2, "
-			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, EmailAddress, DOB, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, "
 			+ " AboutMe, Photo, Approved, ActiveYN, CreateDttm, UpdateDttm "
 			+ " FROM user U , USERCREDENTIALS UC, STATICCODES SC "
 			+ " WHERE U.USERID = UC.USERID"
