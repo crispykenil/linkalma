@@ -61,6 +61,19 @@ a {
 	outline:none;
 	color:#0082c8;
 }
+/* over writting Font Awesome CSS font-awesome.css */
+.fa {
+	background-color:#0082C8;
+	color:#fff;
+	font-size:18px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.fa:hover, .fa:active  {
+	background-color:#505765 !important;
+	color:#fff;
+	font-size:18px;
+}
 p {
 	line-height:19px;
 	margin-bottom:10px;

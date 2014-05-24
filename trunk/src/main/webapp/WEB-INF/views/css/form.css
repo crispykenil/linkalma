@@ -55,7 +55,20 @@ padding-bottom:1px;
 	padding:10px 35px;
 	width:200px;
 }
-
+#submitSearchBtn {
+    height: 32px;
+    line-height: 30px;
+    position: absolute;
+    right: 31px;
+    text-align: center;
+    top: 17px;
+    vertical-align: middle;
+    width: 32px;
+}
+/* 
+buttons related css 
+ends 
+*/
 select, input[type=text], input[type=password], input[type=email], input[type=date], textarea  {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;

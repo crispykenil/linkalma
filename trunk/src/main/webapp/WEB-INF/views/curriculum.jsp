@@ -1,17 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Curriculum
-</h1>
-
+<%@ include file="header.jsp" %>
+<h1>Our Curriculums</h1>
 <c:forEach var='schoolDataMap' items='${model.schoolDataMap}'>
 	<h3>${schoolDataMap.key}</h3>
-	<table border="1">
+	<table cellpadding="0" border"0" cellspacing="0" class="dataTable">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -26,18 +18,16 @@
 		<tbody>
 			<c:forEach var='schoolDataDto' items='${schoolDataMap.value}' varStatus="count">
 				<tr>
-					<td>${count.index }</td>
-					<td>&nbsp;${schoolDataDto.title }</td>
-					<td>&nbsp;${schoolDataDto.description }</td>
-					<td>&nbsp;${schoolDataDto.grade }</td>
-					<td>&nbsp;${schoolDataDto.description }</td>
-					<td>&nbsp;${schoolDataDto.documentName }</td>
-					<td>&nbsp;${schoolDataDto.createDttm }</td>
+					<td>${count.index}</td>
+					<td>${schoolDataDto.title}</td>
+					<td>${schoolDataDto.description}</td>
+					<td>${schoolDataDto.grade }</td>
+					<td>${schoolDataDto.description}</td>
+					<td>${schoolDataDto.documentName}</td>
+					<td>${schoolDataDto.createDttm}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </c:forEach>
-
-</body>
-</html>
+<%@ include file="footer.jsp" %>

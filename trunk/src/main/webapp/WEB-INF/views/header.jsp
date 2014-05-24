@@ -27,7 +27,7 @@
 	</div>
 	<div class="status-info-bar fr">
 		<ul>
-			<li><a href="/linkalma/viewprofile">My Profile</a> | <a href="/linkalma/logout">Logout</a></li>
+			<li><a href="/linkalma/viewprofile">My Profile</a>  <a href="/linkalma/logout" class="signInOut fa fa-sign-out" title="Sign Out"></a></li>
 		</ul>
 	</div>
 </div>
@@ -42,7 +42,8 @@
 				<div class="fr">
 					<div class="search-bar">
 					<label>Search Your Freinds</label>
-						<input type="text" value="" placeholder="" class="search-field"/>
+						<input type="text" value="" placeholder="" class="search-field "/>
+						<a href=";" class="fa fa-search" id="submitSearchBtn"></a>
 					</div>
 				</div>
 			</div><!-- header-content-wrapper -->
@@ -61,6 +62,7 @@
 						<li><a href="/linkalma/school/${model.schoolName }/curriculum">Curriculum</a></li>
 						<li><a href="/linkalma/school/${model.schoolName }/aboutus">About Us</a></li>
 						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Staff</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Gallery</a></li>
 						<li class="adminLink"><a href="/linkalma/schooladmin?schoolName=${model.schoolName }">Administrator</a></li>
 					</ul>
 				</div>

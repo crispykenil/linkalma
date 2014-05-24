@@ -115,10 +115,15 @@ h3 {
 	background-color: #EFEFEF;
 
 }
-.school-staffs h2 {
+.school-staffs h3 {
 	margin: 5px 0;
     padding: 0;
     font-size:22px;
+    font-weight:normal;
+
+	font-family:century gothic, Helvetica, Verdana, Arial,  sans-serif; 
+
+	line-height:30px;
 }
 .home-intro-section {
 	width:650px;
