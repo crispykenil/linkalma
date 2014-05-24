@@ -17,7 +17,7 @@ function fileUpload()
 		<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
       		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="162px" height="158px" alt="" modelAttribute="uploadedFile" />
 			<br> 
-			<input type="file" name="file" accept="image/*" class="button" onchange="javascript:fileUpload();">
+			<input type="file" name="files" accept="image/*" class="button" onchange="javascript:fileUpload();">
 			<input type="hidden" name="destination" value="userprofile" />
 	  	</form:form>		
 			

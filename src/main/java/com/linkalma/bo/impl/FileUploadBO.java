@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -40,44 +41,52 @@ public class FileUploadBO implements IFileUploadBO {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 
-		MultipartFile file = uploadedFile.getFile();
+		List<MultipartFile> fileList = uploadedFile.getFiles();
+		int i = 0;
+		System.out.println("Gallery Filelist size: "+fileList.size());
+		
+		for(MultipartFile file: fileList)
+		{
+			
+			String fileName = "pic_"+i;
 
-		String fileName = "_profilePic";
-
-		try {
-			inputStream = file.getInputStream();
-
-			File newFile = new File("../webapps/linkalma/WEB-INF/views/images/"+destination+"/"
-					+ fileName + ".jpg");
-			if (newFile.exists()) {
-				newFile.delete();
-				newFile.createNewFile();
-			} else
-				newFile.createNewFile();
-			outputStream = new FileOutputStream(newFile);
-			int read = 0;
-			byte[] bytes = new byte[1024];
-
-			while ((read = inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0, read);
-				fileName = newFile.getName();
-				
-			}
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		} finally {
 			try {
-				if (outputStream != null)
-					outputStream.close();
+				inputStream = file.getInputStream();
 
+				File newFile = new File("c:/" + destination + "/" + fileName
+						+ ".jpg");
+				if (newFile.exists()) {
+					newFile.delete();
+					newFile.createNewFile();
+				} else
+					newFile.createNewFile();
+				outputStream = new FileOutputStream(newFile);
+				int read = 0;
+				byte[] bytes = new byte[1024];
+
+				while ((read = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
+					fileName = newFile.getName();
+
+				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
+			} finally {
+				try {
+					if (outputStream != null)
+						outputStream.close();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+
+			model.addAttribute("profileImageURI", fileName);
+			model.addAttribute("msg", "Upload Successfull");
 		}
-		model.addAttribute("profileImageURI", fileName);
-		return null;
+		return model;
 	}
 
 	/**

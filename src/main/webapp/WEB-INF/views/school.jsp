@@ -3,35 +3,23 @@
 	<div class="clear-fix">
 		<div class="school-news-and-event">
 			<h2>Ryan News & Events</h2>
-			
+				
 			<ul>
+			<c:forEach var='schoolUpdatesMap' items='${model.schoolUpdatesMap}' varStatus="count" >
 				<li>
-					<div class="counts">1</div>
-					<div class="description">
-						<h3 class="title">Linkalma Welcomes You To Its Beta Version </h3>
-						<p>Dear friends; it is our pleasure to launch a beta version of LinkAlma, an alumni engagement porta... LinkAlma.com is an Alumni Relationship Platform (ARM) founded to create an ecosystem of educational institutes in India and its alumni. This is fully owned by Arghya Consulting Services Pvt. Ltd and is inspired by combination of its founder's own schooling experience, our exposure to the western education system and our current experience with our kid's education institutes and in general state of education in India.</p>
-					</div>
-					<div class="read-more">Read More </div>
-				</li>
-				<li>
-					<div class="counts">2</div>
-					<div class="description">
-						<h3 class="title">Linkalma Welcomes You To Its Beta Version </h3>
-						<p>Dear friends; it is our pleasure to launch a beta version of LinkAlma, an alumni engagement porta... LinkAlma.com is an Alumni Relationship Platform (ARM) founded to create an ecosystem of educational institutes in India and its alumni. This is fully owned by Arghya Consulting Services Pvt. Ltd and is inspired by combination of its founder's own schooling experience, our exposure to the western education system and our current experience with our kid's education institutes and in general state of education in India.</p>
+					<div class="counts">${count.index+1 }</div>
+					<c:forEach var='schoolUpdateDto' items='${schoolUpdatesMap.value}' varStatus="innerCount">
+						<c:if test="${innerCount.index == 0}">
+							<div class="description">
+								<h3 class="title">${schoolUpdateDto.title }  </h3>
+								<p>${schoolUpdateDto.description }</p>
+							</div>
+							<div class="read-more">Read More </div>
+						</c:if>
 						
-					</div>
-					<div class="read-more">Read More </div>
-					
+					</c:forEach>
 				</li>
-				<li>
-					<div class="counts">3</div>
-					<div class="description">
-						<h3 class="title">Linkalma Welcomes You To Its Beta Version </h3>
-						<p >Dear friends; it is our pleasure to launch a beta version of LinkAlma, an alumni engagement porta...  LinkAlma.com is an Alumni Relationship Platform (ARM) founded to create an ecosystem of educational institutes in India and its alumni. This is fully owned by Arghya Consulting Services Pvt. Ltd and is inspired by combination of its founder's own schooling experience, our exposure to the western education system and our current experience with our kid's education institutes and in general state of education in India.</p>
-						
-					</div>
-					<div class="read-more">Read More </div>
-				</li>
+			</c:forEach>
 			</ul>
 				<!-- <a href="#" class="button">Add News & Event</a> -->
 		</div>
