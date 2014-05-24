@@ -18,8 +18,8 @@
 function getFullNewsAndEvents(){
 	$('.school-news-and-event .read-more').on('click', function(e) {
 		// Triggering bPopup when click event is fired
-		var popUpContent = $(this).parent().find(".description").clone();
-		popUpContent.wrap( "<div class='popup-container'></div>" );
+		var popUpContent = $(this).parent().find(".description").clone().addClass("popupContent").css("width","500px");
+	
 	
 		popUpContent.bPopup({
 			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int

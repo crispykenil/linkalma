@@ -44,22 +44,22 @@
 	margin-bottom:25px;
 }
 .counts {
-	position:relative;
-	float:left;
-	margin: 0 20px 55px 0;
-	width: 50px;
-	height: 50px;
-	background: #a6b911;
-	color: #ffffff;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 36px;
-	line-height: 50px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	border-radius: 5px;
-	overflow:hidden
+  	background: none repeat scroll 0 0 #A6B911;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 31px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 20px 55px 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    width: 40px;
 }
 
 .school-news-and-event .description {
@@ -129,4 +129,13 @@ h3 {
 	width:650px;
 	/*margin-left:374px;*/
 	float:right
+}
+#gallery a {
+	border: 10px solid #EEEEEE;
+    display: inline-block;
+    margin: 10px;
+}
+#gallery a:hover {
+	opacity:0.8;
+	border-color:#A6B911;
 }

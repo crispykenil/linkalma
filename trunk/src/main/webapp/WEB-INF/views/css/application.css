@@ -321,4 +321,6 @@ input[type="text"].search-field {
 	display: none;
 	min-width: 350px;
 	padding: 25px;
+	margin:auto;
+	
 }
