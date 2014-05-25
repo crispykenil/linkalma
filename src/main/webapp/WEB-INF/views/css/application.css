@@ -1,4 +1,22 @@
 /* generic classes */
+.counts {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  	background: none repeat scroll 0 0 #A6B911;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 31px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 20px 55px 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    width: 40px;
+}
 .hidden {
 	display:none
 }
@@ -164,7 +182,7 @@ input[type="text"].search-field {
 #main-content-wrapper {
 	padding:15px 0px;
 	margin-top:3px;
-	min-height:200px;
+	min-height:400px;
 	display:block;
 	border-top:1px solid #efefef;
 }

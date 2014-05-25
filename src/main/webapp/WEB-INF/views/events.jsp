@@ -5,7 +5,7 @@
 								<h3>${schoolUpdatesMap.key}</h3>
 						    <c:forEach var='schoolUpdateDto' items='${schoolUpdatesMap.value}' >
 								<p><b>${schoolUpdateDto.title } </b></p>
-								<p><pre>${schoolUpdateDto.description }</pre></p>
+								<p>${schoolUpdateDto.description }</p>
 						    </c:forEach>
 						</c:forEach>
 
