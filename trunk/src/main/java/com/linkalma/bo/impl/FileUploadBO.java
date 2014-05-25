@@ -43,7 +43,7 @@ public class FileUploadBO implements IFileUploadBO {
 
 		List<MultipartFile> fileList = uploadedFile.getFiles();
 		int i = 0;
-		System.out.println("Gallery Filelist size: "+fileList.size());
+//		System.out.println("Gallery Filelist size: "+fileList.size());
 		
 		for(MultipartFile file: fileList)
 		{

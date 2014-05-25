@@ -16,6 +16,10 @@ public class School extends BaseDTO
 	
 	private String address2;
 	
+	private long phone1;
+	
+	private long phone2;
+	
 	private String branch;
 	
 	private String websiteAddress;
@@ -341,6 +345,34 @@ public class School extends BaseDTO
 	 */
 	public void setAdminName(String adminName) {
 		this.adminName = adminName;
+	}
+
+	/**
+	 * @return the phone1
+	 */
+	public long getPhone1() {
+		return phone1;
+	}
+
+	/**
+	 * @param phone1 the phone1 to set
+	 */
+	public void setPhone1(long phone1) {
+		this.phone1 = phone1;
+	}
+
+	/**
+	 * @return the phone2
+	 */
+	public long getPhone2() {
+		return phone2;
+	}
+
+	/**
+	 * @param phone2 the phone2 to set
+	 */
+	public void setPhone2(long phone2) {
+		this.phone2 = phone2;
 	}
 
 	

@@ -1,6 +1,5 @@
 package com.linkalma.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -72,9 +69,9 @@ public class HomeController {
 		return new ModelAndView("index");
 	}
 
-	
 	@RequestMapping(value = "/dashboard")
-	public ModelAndView dashboard(@ModelAttribute User userDto, Model model, HttpServletRequest  request) {
+	public ModelAndView dashboard(@ModelAttribute User userDto, Model model,
+			HttpServletRequest request) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
 
 		IDashboardBO dashboardBO = (IDashboardBO) context
@@ -84,161 +81,190 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			userDto.setUserID(userBean.getUserID());
-		
+
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
 
 		return new ModelAndView("dashboard", "model", model);
 	}
 
-	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam("userName") String userName,@RequestParam("password")String password,
-			@ModelAttribute("loginForm") UserBean userBean, HttpServletRequest request, Model model) {
+	public ModelAndView login(@RequestParam("userName") String userName,
+			@RequestParam("password") String password,
+			@ModelAttribute("loginForm") UserBean userBean,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to login page.");
-		
+
 		// Checking whether Alumni signing in or School Signing.
-		if (userBean.getLoginType().equalsIgnoreCase("A"))
-		{
-			if(authenticateLogin(userName,password,userBean, userBean.getLoginType())){
+		if (userBean.getLoginType().equalsIgnoreCase("A")) {
+			if (authenticateLogin(userName, password, userBean,
+					userBean.getLoginType())) {
 				request.getSession().setAttribute("userBean", userBean);
 				return new ModelAndView("redirect:/dashboard");
-			}
-			else{
+			} else {
 				return new ModelAndView("redirect:/error");
 			}
-		}
-		else if ("S".equalsIgnoreCase(userBean.getLoginType()))
-		{
-			if(authenticateLogin(userName,password,userBean, userBean.getLoginType())){
-				
+		} else if ("S".equalsIgnoreCase(userBean.getLoginType())) {
+			if (authenticateLogin(userName, password, userBean,
+					userBean.getLoginType())) {
+
 				ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-				logger.info("UserName:"+userBean.getUserName());
-				School school = schoolBO.getSchoolBySchoolEmailID(userBean.getUserName(), model);
+				logger.info("UserName:" + userBean.getUserName());
+				School school = schoolBO.getSchoolBySchoolEmailID(
+						userBean.getUserName(), model);
 				request.getSession().setAttribute("school", school);
 
 				model.addAttribute("school", school);
-				model.addAttribute("linkalmaaddress", school.getLinkalmaAddress());
-				logger.info("Linkalma Address : "+school.getLinkalmaAddress());
-				return new ModelAndView("redirect:school/"+school.getLinkalmaAddress(), "model", model);
-			}
-			else{
+				model.addAttribute("linkalmaaddress",
+						school.getLinkalmaAddress());
+				logger.info("Linkalma Address : " + school.getLinkalmaAddress());
+				return new ModelAndView("redirect:school/"
+						+ school.getLinkalmaAddress(), "model", model);
+			} else {
 				return new ModelAndView("redirect:/error");
 			}
-		}
-		else
+		} else
 			return new ModelAndView("redirect:/error");
 	}
-	
-	
+
 	@RequestMapping(value = "/school/{id}")
-	public ModelAndView school(@PathVariable("id") String schoolName, Model model, HttpServletRequest request) {
+	public ModelAndView school(@PathVariable("id") String schoolName,
+			Model model, HttpServletRequest request) {
 		logger.info("Welcome home! Redirecting to School page.");
 
-		logger.info(schoolName+"--"+model.containsAttribute("linkalmaaddress"));
-		
+		logger.info(schoolName + "--"
+				+ model.containsAttribute("linkalmaaddress"));
+
 		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-		
+
 		SchoolUpdateDTO schoolUpdateDto = new SchoolUpdateDTO();
-		School school = (School)request.getSession().getAttribute("school");
+		School school = (School) request.getSession().getAttribute("school");
 		schoolUpdateDto.setSchoolID(school.getSchoolID());
 		schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
-		model.addAttribute("schoolName", schoolName);
 		
+		model.addAttribute("school", school);
+		model.addAttribute("schoolName", schoolName);
+
 		return new ModelAndView("school", "model", model);
 	}
 
-	@RequestMapping(value = "/school/{schoolname}/{page}", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView schoolInnerPages(@PathVariable("schoolname") String schoolName, @PathVariable("page") String innerPage, 
-			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,HttpServletRequest request, Model model) {
+	@RequestMapping(value = "/school/{schoolname}/{page}", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView schoolInnerPages(
+			@PathVariable("schoolname") String schoolName,
+			@PathVariable("page") String innerPage,
+			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,
+			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to School Inner page.");
 
-		logger.info(schoolName);
-		logger.info("innerpage: "+innerPage);
-		ISchoolBO schoolBO = (ISchoolBO)context.getBean("schoolBO");
-		School school = (School)request.getSession().getAttribute("school");
+		logger.info("School Innerpage called: " + innerPage);
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		School school = (School) request.getSession().getAttribute("school");
 		schoolUpdateDto.setSchoolID(school.getSchoolID());
-		
-		if(innerPage.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_EVENTS))
+
+		if (innerPage
+				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_EVENTS))
 			model = schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
-		else if (innerPage.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_CURRICULUM))
+		else if (innerPage
+				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_CURRICULUM))
 			model = schoolBO.getSchoolDataBySchoolID(schoolUpdateDto, model);
-		
+
 		model.addAttribute("schoolName", schoolName);
+		model.addAttribute("school", school);
 		return new ModelAndView(innerPage, "model", model);
 	}
-	
-@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
-	public ModelAndView schoolAdmin(@RequestParam("schoolName") String schoolName, Model model, HttpServletRequest request) {
+
+	@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
+	public ModelAndView schoolAdmin(
+			@RequestParam("schoolName") String schoolName, Model model,
+			HttpServletRequest request) {
 		logger.info("Redirecting to default admin page");
-		School school = (School)request.getSession().getAttribute("school");
+		School school = (School) request.getSession().getAttribute("school");
 		model.addAttribute("school", school);
 		model.addAttribute("schoolName", schoolName);
-		return new ModelAndView("/schooladmin/addadminprofile", "model", model);
+		return new ModelAndView("/schooladmin/addaboutschool", "model", model);
 	}
-	
+
 	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
-	public ModelAndView schoolAdminInnerPages(@PathVariable("page") String page, 
-			@RequestParam("schoolName") String schoolName, Model model, HttpServletRequest request) {
-		logger.info("Redirecting to admin page:"+page);
-		
+	public ModelAndView schoolAdminInnerPages(
+			@PathVariable("page") String page,
+			@RequestParam("schoolName") String schoolName, Model model,
+			HttpServletRequest request) {
+		logger.info("Redirecting to admin page:" + page);
+
 		String msg = request.getParameter("msg");
-		School school = (School)request.getSession().getAttribute("school");
+		School school = (School) request.getSession().getAttribute("school");
 		model.addAttribute("school", school);
 		model.addAttribute("page", page);
 		model.addAttribute("msg", msg);
 		model.addAttribute("schoolName", schoolName);
 
-		return new ModelAndView("/schooladmin/"+page, "model", model);
+		return new ModelAndView("/schooladmin/" + page, "model", model);
 	}
 
 	@RequestMapping(value = "/schooladmin/updateschoolnews", method = RequestMethod.GET)
-	public ModelAndView updateSchoolNews(@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto, Model model) {
-		logger.info("Update School Called for News : "+schoolUpdateDto.getUpdateType());
-		
-		ISchoolBO schoolBO = (ISchoolBO)context.getBean("schoolBO");
-		
-		schoolBO.updateSchoolUpdates(schoolUpdateDto, model);
-		String url = "addschoolevents?schoolName="+schoolUpdateDto.getSchoolName()+"&msg="+schoolUpdateDto.getSuccessMsg();
-		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
-	}
-	
-	@RequestMapping(value = "/schooladmin/updateschoolgallery", method = RequestMethod.GET)
-	public ModelAndView updateSchoolGallery(@ModelAttribute("schoolGalleryForm") UploadedFile uploadedFile, HttpServletRequest request, Model model) {
-		logger.info("Gallery update...");
-		
-		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
-		
-		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
-		String url = "addschoolevents?schoolName="+request.getParameter("schoolName")+"&msg="+uploadedFile.getSuccessMsg();
-		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
-	}
-	
-	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.GET)
-	public ModelAndView updateSchoolData(@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto, 
-			Model model, HttpServletRequest request) {
-		logger.info("Update School Called for Data: "+schoolDataDto.getDataType());
+	public ModelAndView updateSchoolNews(
+			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,
+			Model model) {
+		logger.info("Update School Called for News : "
+				+ schoolUpdateDto.getUpdateType());
 
-		ISchoolBO schoolBO = (ISchoolBO)context.getBean("schoolBO");
-		School school = (School)request.getSession().getAttribute("school");
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+
+		schoolBO.updateSchoolUpdates(schoolUpdateDto, model);
+		String url = "addschoolevents?schoolName="
+				+ schoolUpdateDto.getSchoolName() + "&msg="
+				+ schoolUpdateDto.getSuccessMsg();
+		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
+	}
+
+	@RequestMapping(value = "/schooladmin/updateschoolgallery", method = RequestMethod.POST)
+	public ModelAndView updateSchoolGallery(
+			@ModelAttribute("schoolGalleryForm") UploadedFile uploadedFile,
+			HttpServletRequest request, Model model) {
+		logger.info("Gallery upload...");
+		IFileUploadBO fileUploadBO = (IFileUploadBO) context
+				.getBean("fileUploadBO");
+
+		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
+				model);
+		String url = "addschoolevents?schoolName="
+				+ request.getParameter("schoolName") + "&msg="
+				+ uploadedFile.getSuccessMsg();
+		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
+	}
+
+	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.GET)
+	public ModelAndView updateSchoolData(
+			@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto,
+			Model model, HttpServletRequest request) {
+		logger.info("Update School Called for Data: "
+				+ schoolDataDto.getDataType());
+
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		School school = (School) request.getSession().getAttribute("school");
 		if (null == school)
 			return new ModelAndView("redirect:/logout", "model", model);
-		
-		/*UploadedFile uploadedFile = new UploadedFile();
-		uploadedFile.setDestination("schoolData");
-		uploadedFile.setFile(schoolDataDto.getUploadedFile());
-		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
-		
-		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
-		*/		
-		
+
+		/*
+		 * UploadedFile uploadedFile = new UploadedFile();
+		 * uploadedFile.setDestination("schoolData");
+		 * uploadedFile.setFile(schoolDataDto.getUploadedFile()); IFileUploadBO
+		 * fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
+		 * 
+		 * fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
+		 * model);
+		 */
+
 		schoolDataDto.setSchoolID(school.getSchoolID());
 		schoolBO.updateSchoolData(schoolDataDto, model);
-		String url = "addschoolcurriculum?schoolName="+schoolDataDto.getSchoolName()+"&msg="+schoolDataDto.getSuccessMsg();
-		
-		return new ModelAndView("redirect:/schooladmin/"+url, "model", model);
+		String url = "addschoolcurriculum?schoolName="
+				+ schoolDataDto.getSchoolName() + "&msg="
+				+ schoolDataDto.getSuccessMsg();
+
+		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
 	}
-	
-	@RequestMapping(value = "/addwallpost",  method = RequestMethod.POST )
+
+	@RequestMapping(value = "/addwallpost", method = RequestMethod.POST)
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
 			Model model, HttpServletRequest request) {
 		logger.info("Welcome home! Saving Wall Post.");
@@ -267,10 +293,10 @@ public class HomeController {
 		school.setSchoolName(request.getParameter("schoolName"));
 		school.setBranch(request.getParameter("branch"));
 
-//		schoolJDBCTemplate.createSchool(school);
-//		;
-//		List<School> schoolList = schoolJDBCTemplate.listSchools();
-//		model.addAttribute("schoolList", schoolList);
+		// schoolJDBCTemplate.createSchool(school);
+		// ;
+		// List<School> schoolList = schoolJDBCTemplate.listSchools();
+		// model.addAttribute("schoolList", schoolList);
 
 		logger.info("Forwarding to Search Page!");
 		return "search";
@@ -309,7 +335,7 @@ public class HomeController {
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
- 		user.setUserID(userBean.getUserID());
+		user.setUserID(userBean.getUserID());
 		model = userBO.getUserProfileDetails(user, model);
 
 		return new ModelAndView("profile", "model", model);
@@ -325,9 +351,11 @@ public class HomeController {
 		// IUserBO userBO = (IUserBO)context.getBean("userBO");
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
-		IFileUploadBO fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
-		
-		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(), model);
+		IFileUploadBO fileUploadBO = (IFileUploadBO) context
+				.getBean("fileUploadBO");
+
+		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
+				model);
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
@@ -340,36 +368,37 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
 
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
-		
+
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.updateUserProfileDetails(user, model);
 
 		return new ModelAndView("profile", "model", model);
 	}
 
-	
 	@RequestMapping(value = "/updateuserschool", method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView updateUserSchool(@ModelAttribute("userSchool") User user,
+	public ModelAndView updateUserSchool(
+			@ModelAttribute("userSchool") User user,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
 
-		UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
 
-		List<UserSchoolDTO> userSchoolList= user.getUserSchoolList();
-		logger.info("UserSchoolList Size - Update: "+userSchoolList.size());
+		List<UserSchoolDTO> userSchoolList = user.getUserSchoolList();
+		logger.info("UserSchoolList Size - Update: " + userSchoolList.size());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
-//		model = userBO.updateUserProfileDetails(user, model);
+		// model = userBO.updateUserProfileDetails(user, model);
 
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
-	
-	
+
 	@RequestMapping(value = "/addmyschool", method = RequestMethod.POST)
 	@Transactional
 	public ModelAndView addMySchool(
@@ -461,6 +490,7 @@ public class HomeController {
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}
+
 	/**
 	 * @return the school
 	 */
@@ -491,50 +521,50 @@ public class HomeController {
 		this.schoolJDBCTemplate = schoolJDBCTemplate;
 	}
 
-private boolean authenticateLogin(String userName,String password,UserBean userBean, String loginType){
-		
+	private boolean authenticateLogin(String userName, String password,
+			UserBean userBean, String loginType) {
+
 		boolean isValid = false;
-		
+
 		LoginDAO loginDAO = (LoginDAO) context.getBean("loginDAO");
 		UserBean userBeanResult = null;
-		
-		if (loginType.equalsIgnoreCase("A"))
-		{
-			userBeanResult = loginDAO.validateUserCredentials(userName, password);
-			if(userBeanResult!=null 
+
+		if (loginType.equalsIgnoreCase("A")) {
+			userBeanResult = loginDAO.validateUserCredentials(userName,
+					password);
+			if (userBeanResult != null
 					&& Utils.isValidString(userBeanResult.getEmailId())
-						&& Utils.isValidIntegerValue(userBeanResult.getRole())
-							&& Utils.isValidLongValue(userBeanResult.getUserID())
-								&& Utils.isValidString(userBeanResult.getUserName())){
-				
+					&& Utils.isValidIntegerValue(userBeanResult.getRole())
+					&& Utils.isValidLongValue(userBeanResult.getUserID())
+					&& Utils.isValidString(userBeanResult.getUserName())) {
+
 				userBean.setEmailId(userBeanResult.getEmailId());
 				userBean.setRole(userBeanResult.getRole());
 				userBean.setUserID(userBeanResult.getUserID());
 				userBean.setUserName(userBeanResult.getUserName());
-				
+
 				isValid = true;
-			}else{
-				
+			} else {
+
 				isValid = false;
 			}
-		}
-		else
-		{	
-			userBeanResult = loginDAO.validateSchoolCredentials(userName, password);
+		} else {
+			userBeanResult = loginDAO.validateSchoolCredentials(userName,
+					password);
 
-			if(userBeanResult!=null 
+			if (userBeanResult != null
 					&& Utils.isValidString(userBeanResult.getEmailId())
-						&& Utils.isValidLongValue(userBeanResult.getUserID())
-							&& Utils.isValidString(userBeanResult.getUserName())){
-				
+					&& Utils.isValidLongValue(userBeanResult.getUserID())
+					&& Utils.isValidString(userBeanResult.getUserName())) {
+
 				userBean.setEmailId(userBeanResult.getEmailId());
 				userBean.setRole(userBeanResult.getRole());
 				userBean.setUserID(userBeanResult.getUserID());
 				userBean.setUserName(userBeanResult.getUserName());
-				
+
 				isValid = true;
-			}else{
-				
+			} else {
+
 				isValid = false;
 			}
 		}
