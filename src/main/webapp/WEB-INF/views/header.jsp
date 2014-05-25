@@ -49,7 +49,8 @@
 			</div><!-- header-content-wrapper -->
 		</div><!-- hd -->
       </c:when>
-      <c:otherwise><!-- school header -->
+      <c:otherwise>
+      <!-- school header starts -->
       	<div id="hd" class="school-header" >
 			<div class="header-content-wrapper">
 				<div class="school-logo fl">
@@ -57,18 +58,25 @@
 				</div>
 				<div class="top-navigation fl">
 					<ul>
-						<li><a href="/linkalma/school/${model.schoolName }">Home</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/events">News & Events</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/curriculum">Curriculum</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/aboutus">About Us</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Staff</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Gallery</a></li>
 						<li class="adminLink"><a href="/linkalma/schooladmin?schoolName=${model.schoolName }">Administrator</a></li>
 					</ul>
 				</div>
 		
 			</div><!-- header-content-wrapper -->
 		</div><!-- hd -->
+		<div>
+				<ul class="sf-menu clear-fix">
+						<li><a href="/linkalma/school/${model.schoolName }">Home</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/events">News & Events</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/curriculum">Curriculum</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/aboutus">About Us</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Staff</a></li>
+						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Gallery</a></li>
+						
+					</ul>
+		</div>
+					
+
       </c:otherwise>
 </c:choose>
 <div id="bd">
