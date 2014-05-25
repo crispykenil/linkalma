@@ -3,6 +3,13 @@
 			<div id="show-case-area">
 					<div id="signin-signup-panel" class="fl border-box">
 						<div class="sign-in-wrapper">
+					<c:choose>
+						<c:when test="${model.loggedIn == true}">
+						<h3>View <a href="${model.dashboardUrl }">Dashboard</a></h3>
+						<br>
+						<h5><a href="logout">Sign In </a>As a different user</h5>
+						</c:when>
+						<c:otherwise>
 						<h2>Login</h2>
 						<form:form action="login" modelAttribute="loginForm" >
 							<ul>
@@ -17,9 +24,13 @@
 								</li>
 							</ul>
 						</form:form>
-					</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
 		
 				<div class="sign-up-wrapper">
+				<c:choose>
+						<c:when test="${model.loggedIn != true}">
 					<ul>
 						
 						<li><input type="button" value="Create an Account" id="sign-up-button" class="button large"/></li>
@@ -27,6 +38,8 @@
 						<li>OR</li>
 						<li>Login through ...</li> -->
 					</ul>
+					</c:when>
+					</c:choose>
 					<div id="sign-up" class="sign-up-container">
 		
 						<h2>New User? Sign Up</h2>

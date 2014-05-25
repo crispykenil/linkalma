@@ -66,7 +66,27 @@ public class HomeController {
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
-		return new ModelAndView("index");
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+		School school = (School) request.getSession().getAttribute("school");
+		
+		if (userBean != null)
+		{
+			model.addAttribute("userBean", userBean);
+			model.addAttribute("loggedIn","true");
+			model.addAttribute("dashboardUrl","dashboard");
+			
+		}
+		else if (school != null)
+		{
+			model.addAttribute("school", school);
+			model.addAttribute("loggedIn","true");
+			model.addAttribute("dashboardUrl","schooladmin?schoolName="+school.getLinkalmaAddress());
+		}
+		else
+			model.addAttribute("loggedIn","false");
+		
+		return new ModelAndView("index", "model", model);
 	}
 
 	@RequestMapping(value = "/dashboard")
