@@ -1,23 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	About Us
-</h1>
+<%@ include file="header.jsp"%>
 
-<P>  The time on the server is ${serverTime}. </P>
+		<p><b>School History </b></p>
+		<p>${model.school.schoolHistory}</p>
 
-<form action="search" name="searchForm">
-<input type="text" name ="schoolName" />
-<input type="text" name ="schoolAddress1" />
-<input type="text" name ="schoolAddress2" />
-<input type="text" name ="branch" />
-<input type="text" name ="websiteAddress" />
-<input type="submit" value="Submit" />
-</form>
-</body>
-</html>
+		<p><b>Contact Info: </b></p>
+		Branch :
+		<p>${model.school.branch}</p>
+		Address:
+		<p>${model.school.address1}</p>
+		<p>${model.school.address2}</p>
+		
+		Phone:
+		<p>${model.school.phone1}</p>
+		<p>${model.school.phone2}</p>
+		
+<%@ include file="footer.jsp"%>

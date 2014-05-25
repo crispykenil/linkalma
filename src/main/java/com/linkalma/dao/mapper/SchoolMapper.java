@@ -14,9 +14,12 @@ public class SchoolMapper implements RowMapper<School> {
 		      school.setSchoolName(rs.getString("SchoolName"));
 		      school.setAddress1(rs.getString("Address1"));
 		      school.setAddress2(rs.getString("Address2"));
+		      school.setPhone1(rs.getLong("PHONE1"));
+		      school.setPhone2(rs.getLong("PHONE2"));
 		      school.setBranch(rs.getString("Branch"));
 		      school.setWebsiteAddress(rs.getString("WebsiteURL"));
 		      school.setLinkalmaAddress(rs.getString("LinkAlmaURL"));
+		      school.setSchoolHistory(rs.getString("SCHOOLHISTORY"));
 		      school.setApproved(rs.getString("APPROVED"));
 		      school.setActive(rs.getString("ACTIVEYN"));
 		      school.setCreateDttm(rs.getDate("CreateDttm"));
