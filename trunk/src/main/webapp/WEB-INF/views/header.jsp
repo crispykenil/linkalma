@@ -14,7 +14,19 @@
 		<%@ include file="schoolHeaderResources.jsp"%>
 	</c:if>
 </head>
+
+		
+<c:choose>
+      <c:when test="${empty model.schoolName}">
 <body>
+      </c:when>
+      <c:otherwise>
+
+	
+		<body id="schoolPageBody">			
+
+      </c:otherwise>
+</c:choose>
 
 <div id="top-bar">
 	<div class="top-navigation fl">
@@ -63,8 +75,7 @@
 				</div>
 		
 			</div><!-- header-content-wrapper -->
-		</div><!-- hd -->
-		<div>
+				<div class="clear-fix">
 				<ul class="sf-menu clear-fix">
 						<li><a href="/linkalma/school/${model.schoolName }">Home</a></li>
 						<li><a href="/linkalma/school/${model.schoolName }/events">News & Events</a></li>
@@ -75,6 +86,8 @@
 						
 					</ul>
 		</div>
+		</div><!-- hd -->
+	
 					
 
       </c:otherwise>
