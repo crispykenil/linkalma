@@ -37,6 +37,7 @@ import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.Utils;
+import com.linkalma.utils.cipher.Cipher;
 
 /**
  * Handles requests for the application home page.
@@ -551,7 +552,7 @@ public class HomeController {
 
 		if (loginType.equalsIgnoreCase("A")) {
 			userBeanResult = loginDAO.validateUserCredentials(userName,
-					password);
+					Cipher.DIGEST_PASSWORD(password));
 			if (userBeanResult != null
 					&& Utils.isValidString(userBeanResult.getEmailId())
 					&& Utils.isValidIntegerValue(userBeanResult.getRole())
@@ -570,7 +571,7 @@ public class HomeController {
 			}
 		} else {
 			userBeanResult = loginDAO.validateSchoolCredentials(userName,
-					password);
+					Cipher.DIGEST_PASSWORD(password));
 
 			if (userBeanResult != null
 					&& Utils.isValidString(userBeanResult.getEmailId())
