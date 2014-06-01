@@ -9,10 +9,12 @@ var form = {
 			data : formData
 
 		}).done(function(data) {
+			alert(data);
 			console.log(data);
 		}).error(function(data) {
 			console.log(data);
 		}).complete(function(data) {
+			alert(data);
 			console.log(data);
 		});
 	},

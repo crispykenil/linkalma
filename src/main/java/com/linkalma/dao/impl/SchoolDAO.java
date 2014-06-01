@@ -69,10 +69,9 @@ public class SchoolDAO implements ISchoolDAO {
 	    	  	ps.setString(7, school.getLinkalmaAddress());
 	    	  	ps.setString(8, school.getApproved());
 	    	  	ps.setString(9, school.getActive());
-	    	  	ps.setDate(10, school.getCreateDttm());
-	    	  	ps.setDate(11, school.getUpdateDttm());
-	    	  	ps.setLong(12, school.getCreateUserID());
-	    	  	ps.setLong(13, school.getUpdateUserID());
+	    	  	ps.setDate(10, null);	// CreateDttm - Purposely set to null, so that it picks up default value from CREATE Table script
+	    	  	ps.setLong(11, school.getCreateUserID());
+	    	  	ps.setLong(12, school.getUpdateUserID());
 	    	  	
 	    	  	return ps;
     	  	}
@@ -175,7 +174,8 @@ public class SchoolDAO implements ISchoolDAO {
 	    	  	ps.setString(3, schoolUpdateDto.getDescription());
 	    	  	ps.setInt(4, updateType);
 	    	  	ps.setLong(5, schoolUpdateDto.getCreateUserID());
-	    	  	ps.setLong(6, schoolUpdateDto.getUpdateUserID());
+	    	  	ps.setDate(6, null);
+	    	  	ps.setLong(7, schoolUpdateDto.getUpdateUserID());
 	    	  	
 	    	  	return ps;
     	  	}
@@ -202,6 +202,7 @@ public class SchoolDAO implements ISchoolDAO {
 	    	  	ps.setString(7, schoolDataDto.getDivision());
 	    	  	ps.setLong(8, schoolDataDto.getCreateUserID());
 	    	  	ps.setLong(9, schoolDataDto.getUpdateUserID());
+	    	  	ps.setDate(10, null);
 	    	  	
 	    	  	return ps;
     	  	}
@@ -242,6 +243,12 @@ public class SchoolDAO implements ISchoolDAO {
 			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_ALL_UPDATES, 
 					new Long[]{schoolID}, new SchoolUpdateMapper());
 		return schoolUpdateDtoList;
-	}	
+	}
+
+	@Override
+	public String checkLinkalmaURL(String linkalmaUrl) {
+		getJdbcTemplateObject().queryForInt(ApplicationConstants.CHECK_LINKALMA_URL_QUERY);
+		return null;
+	}
 
 }

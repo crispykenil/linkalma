@@ -60,8 +60,8 @@ public class UserDAO implements IUserDAO {
 	    	  	ps.setString(16, alumni.getAboutMe());
 	    	  	ps.setString(17, alumni.getPhoto());
 	    	  	ps.setString(18, alumni.getApproved());
-	    	  	ps.setDate(19, alumni.getCreateDttm());
-	    	  	ps.setDate(20, alumni.getUpdateDttm());
+	    	  	ps.setInt(19, alumni.getRoleID());
+	    	  	ps.setDate(20, null);	// CreateDTTM - Purposely set to null, so that it picks up default value from CREATE Table script
 	    	  	
 	    	  	return ps;
 	    	  	}
