@@ -102,9 +102,9 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			userDto.setUserID(userBean.getUserID());
-
+			userDto.setEmailAddress(userBean.getEmailId());
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
-
+		model.addAttribute("userBean",userBean);
 		return new ModelAndView("dashboard", "model", model);
 	}
 
