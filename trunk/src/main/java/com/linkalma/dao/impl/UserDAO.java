@@ -21,6 +21,7 @@ import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserWorkplaceDTO;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.cipher.Cipher;
 
 public class UserDAO implements IUserDAO {
 
@@ -73,7 +74,7 @@ public class UserDAO implements IUserDAO {
 	public int createCredentials(User alumni) {
 	      
 	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_USER_CREDENTIALS_QUERY, 
-	    		  alumni.getUserID(), alumni.getPassword());
+	    		  alumni.getUserID(), alumni.getEmailAddress(),Cipher.DIGEST_PASSWORD(alumni.getPassword()));
 	      
 	   }
 
