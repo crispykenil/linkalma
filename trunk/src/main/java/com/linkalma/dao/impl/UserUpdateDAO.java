@@ -42,7 +42,8 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	    	  	ps.setString(3, wallPostDto.getWallPost());
 	    	  	ps.setInt(4, wallPostDto.getPostTo());
 	    	  	ps.setLong(5, wallPostDto.getUserID());
-	    	  	ps.setLong(6, wallPostDto.getUserID());
+	    	  	ps.setDate(6, null);
+	    	  	ps.setLong(7, wallPostDto.getUserID());
 	    	  	
 	    	  	return ps;
     	  	}

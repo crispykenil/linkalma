@@ -80,4 +80,7 @@ public interface ISchoolDAO {
 	   public Map<String, List<SchoolUpdateDTO>> getSchoolUpdatesByTypeForSchool(List<StaticCodesDTO> staticCodeList, long schoolID);
 	   
 	   public List<SchoolUpdateDTO> getSchoolAllUpdates(long schoolID);
+	   
+	   public String checkLinkalmaURL(String linkalmaUrl);
+
 }

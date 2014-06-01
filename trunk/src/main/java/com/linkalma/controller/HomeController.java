@@ -328,7 +328,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
 	@Transactional
-	public Model createProfile(@ModelAttribute User user,
+	public String createProfile(@ModelAttribute User user,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! ");
 
@@ -341,7 +341,7 @@ public class HomeController {
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.createUser(user, model);
 
-		return model;
+		return "User Created";
 	}
 
 	/**

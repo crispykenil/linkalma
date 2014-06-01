@@ -9,6 +9,7 @@ import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.MessageConstants;
 
 public class UserBO implements IUserBO 
@@ -26,6 +27,7 @@ public class UserBO implements IUserBO
 	@Transactional
 	public Model createUser(User userDto, Model model)
 	{
+		userDto.setRoleID(ApplicationConstants.USER_ROLE_ALUMNI_CODE);
 		long userID = getUserDAO().createUser(userDto);
 		userDto.setUserID(userID);
 		getUserDAO().createCredentials(userDto);
