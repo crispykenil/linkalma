@@ -21,7 +21,7 @@
 	display:none
 }
 .navigation ul li  {
-	background-color: #e5e5e5;
+	background-color: #efefef;
 	border-left:10px solid #cacaca;
 	padding-left:5px;
 	margin-bottom:1px;
@@ -141,7 +141,7 @@ input[type="text"].search-field {
 	margin-right: 10px;
 	width:282px;
 	height:100%;
-	border:1px solid #c9c8c8;
+	border:1px solid #efefef;
 	padding:10px;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -252,13 +252,13 @@ input[type="text"].search-field {
 	padding:10px;
 }
 .panel .panel-header {
-	background-color:#0082c8;
+	background-color:#efefef;
 	padding:6px;
-
+	
 
 }
 .panel .panel-header h3 {
-	color:#fff;
+	color:#505765;
 	font-weight:normal;
 	vertical-align:middle
 }
@@ -280,7 +280,7 @@ input[type="text"].search-field {
 	height:50px;
 }
 .posting-options {
-	background-color:#f2f2f2;
+	background-color:#efefef;
 	padding:5px;
 	height:30px;
 }
@@ -341,4 +341,30 @@ input[type="text"].search-field {
 	padding: 25px;
 	margin:auto;
 	
+}
+/* vertical main nav */
+.vertical-main-nav > ul > li > a {
+	display: block;
+	color: #fff;
+	background: #505765;
+	padding: 10px 18px 12px;
+}
+.vertical-main-nav > ul > li  {
+	margin-bottom:1px;
+}
+.vertical-main-nav > ul > li >  ul > li > a {
+	background: #efefef;
+    box-sizing: border-box;
+    color: #31353D;
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 18px;
+    padding: 9px 18px 9px;
+    text-transform: uppercase;
+}
+.vertical-main-nav > ul > li >  ul > li > a:hover {
+	background-color: #0082C8;
+	color:#fff;
+
 }

@@ -32,23 +32,59 @@
 					
 				</div>
 				<div class="left-column border-box">
-					<div class="panel">
+				<div class="vertical-main-nav">
+					<ul>
+						<li><a href="javascirpt:;">My Activities</a>
+							<ul>
+								<li><a href="javascirpt:;">My Alumnus</a></li>
+								<li><a href="javascirpt:;">My Schools</a></li>
+								<li><a href="javascirpt:;">My Groups</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					<ul>
+						<li><a href="javascirpt:;">My Associates</a>
+							<ul>
+								<li><a href="javascirpt:;">Group1 Name</a></li>
+								<li><a href="javascirpt:;">School1 Name</a></li>
+								<li><a href="javascirpt:;">School2 Name</a></li>
+								<li><a href="javascirpt:;">Group1 Name</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					<ul>
+						<li><a href="javascirpt:;">Privacy Settings</a>
+							<ul>
+								<li><a href="javascirpt:;">My Alumnus</a></li>
+								<li><a href="javascirpt:;">My Schools</a></li>
+								<li><a href="javascirpt:;">My Groups</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+				</ul>
+				
+					
+					
+				</div><!-- left-side-wrapper -->
+				<div class="main-content border-box">
+						<div class="panel">
 						<div class="panel-header">
 							<h3>My School's Update</h3>
 						</div>
 						<div class="panel-content">
-						<c:forEach var='schoolMap' items='${model.schoolUpdatesDtoMap}'>
-								<h3>${schoolMap.key}</h3>
-						    <c:forEach var='schoolUpdateDto' items='${schoolMap.value}' >
-								<p><b>${schoolUpdateDto.title } </b></p>
-								<p>${schoolUpdateDto.description }</p>
-						    </c:forEach>
-						</c:forEach>
+							<c:forEach var='schoolMap' items='${model.schoolUpdatesDtoMap}'>
+									<h3>${schoolMap.key}</h3>
+							    <c:forEach var='schoolUpdateDto' items='${schoolMap.value}' >
+									<p><b>${schoolUpdateDto.title } </b></p>
+									<p>${schoolUpdateDto.description }</p>
+							    </c:forEach>
+							</c:forEach>
+							</div>
 						</div>
-					</div>
-					
-				</div><!-- left-side-wrapper -->
-				<div class="main-content border-box">
 						<div class="panel">
 							<div class="panel-header">
 								<h3>My Updates</h3>
