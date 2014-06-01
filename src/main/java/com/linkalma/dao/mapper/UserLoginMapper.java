@@ -15,6 +15,9 @@ public class UserLoginMapper implements RowMapper<UserBean>{
 		userBean.setRole(rs.getInt("RoleID"));
 		userBean.setUserID(rs.getInt("UserID"));
 		userBean.setEmailId(rs.getString("EmailAddress"));
+		userBean.setFirstName(rs.getString("FirstName"));
+		userBean.setLastName(rs.getString("LastName"));
+		userBean.setMiddleName(rs.getString("MiddleName"));
 		return userBean;
 	}
 	
