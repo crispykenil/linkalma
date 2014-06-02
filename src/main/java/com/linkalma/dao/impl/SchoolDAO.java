@@ -27,6 +27,7 @@ import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.cipher.Cipher;
 
 public class SchoolDAO implements ISchoolDAO {
 
@@ -45,8 +46,8 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public int createSchoolCredentials(School school) {
 	      
-	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_SCHOOL_CREDENTIALS_QUERY, 
-	    		  school.getSchoolID(), school.getPassword());
+	      return getJdbcTemplateObject().update( ApplicationConstants.INSERT_SCHOOL_CREDENTIALS_QUERY, 
+	    		  school.getSchoolID(),school.getEmailAddress(), Cipher.DIGEST_PASSWORD(school.getPassword()));
 	      
 	   }
 

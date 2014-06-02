@@ -7,11 +7,12 @@
 						<form action="registerschool" name="registerSchool" method="post" id="registerSchoolForm" >
 							<ul>
 								<li><label>School Name</label> <input type="text" value="" placeholder="" name="schoolName" class="required"/></li>
+								<li><label>Branch</label><input type="text" value="" placeholder="" name="branch" class="required" /></li>
 								<li><label>Address1</label><input type="text" value="" placeholder="" name="address1" class="required" /></li>
 								<li><label>Address2</label><input type="text" value="" placeholder="" name="address2" class="required" /> </li>
 								<li><label>Email</label><input type="text" value=""  placeholder="" name="emailAddress" class="required emailField" /> </li>
-								<li><label>Phone1</label><input type="text" value="" placeholder="" name="phone1" class="required" /></li>
-								<li><label>Phone2</label><input type="text" value="" placeholder="" name="phone2" /> </li>
+								<li><label>School Website URL</label><input type="text" value="" placeholder="" name="websiteAddress" /></li>
+								<li><label>Linkalma URL</label><input type="text" value="" placeholder="" name="linkalmaAddress" class="required" /></li>
 								<li><label>Password</label><input type="password" value="" placeholder="" name="password" class="required"/> </li>
 								<li><label>Confirm Password</label> <input type="password" value="" placeholder="" /></li>
 							</ul>

@@ -8,15 +8,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -27,6 +30,7 @@ import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
+import com.linkalma.dto.BaseDTO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
@@ -202,7 +206,7 @@ public class HomeController {
 		School school = (School) request.getSession().getAttribute("school");
 		model.addAttribute("school", school);
 		model.addAttribute("schoolName", schoolName);
-		return new ModelAndView("/schooladmin/addaboutschool", "model", model);
+		return new ModelAndView("/schooladmin/addschoolevents", "model", model);
 	}
 
 	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
@@ -591,4 +595,13 @@ public class HomeController {
 		}
 		return isValid;
 	}
+	
+/*	@RequestMapping(value="/checkavailability", method=RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BaseDTO createSmartphone(@RequestBody Smartphone smartphone) {
+        return smartphoneService.create(smartphone);
+    }
+*/
+	
 }

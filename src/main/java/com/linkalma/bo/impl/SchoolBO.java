@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.linkalma.bo.ISchoolBO;
@@ -28,6 +29,7 @@ public class SchoolBO implements ISchoolBO
 	private IUserDAO userDAO;
 
 	@Override
+	@Transactional
 	public Model createSchool(School schoolDto, Model model) {
 		
 		long schoolID = schoolDAO.createSchool(schoolDto);

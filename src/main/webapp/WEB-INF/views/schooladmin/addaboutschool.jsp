@@ -39,10 +39,10 @@ function fileUpload()
 				 </li>
 				 <br>
 				  <li><label>School History</label> <textarea value=""
-				 	name="schoolHistory" class="required" maxlength="100" rows="8" cols="20" >${model.school.schoolHistory } </textarea>
+				 	name="schoolHistory" class="required" maxlength="5000" rows="8" cols="20" >${model.school.schoolHistory } </textarea>
 				 </li><br>
-				 <li><label>Website Address</label> <textarea value=""
-				 	name="schoolHistory" class="required" maxlength="100" >${model.school.websiteAddress} </textarea>
+				 <li><label>Website Address</label> <input type="text" value="${model.school.websiteAddress}"
+				 	name="websiteAddress" class="required" maxlength="255" /> 
 				 </li>
 				 <br>
 				 <li><label>Linkalma URL</label> <c:out value="${requestScope['javax.servlet.forward.context_path']}"></c:out>/<input type="text" value="${model.schoolName } "
