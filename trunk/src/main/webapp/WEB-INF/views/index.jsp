@@ -32,8 +32,8 @@
 				<c:choose>
 						<c:when test="${model.loggedIn != true}">
 					<ul>
-						
 						<li><input type="button" value="Create an Account" id="sign-up-button" class="button large"/></li>
+						<li><a href="loadschool">Register New School !</a></li>
 						<!--<li>No Account Yet? </li>
 						<li>OR</li>
 						<li>Login through ...</li> -->
