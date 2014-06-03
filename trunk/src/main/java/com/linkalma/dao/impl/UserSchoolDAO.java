@@ -62,7 +62,6 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	/**

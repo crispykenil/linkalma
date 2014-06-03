@@ -104,7 +104,6 @@ public class UserDAO implements IUserDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-	    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
 	@Override

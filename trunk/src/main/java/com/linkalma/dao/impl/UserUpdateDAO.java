@@ -72,7 +72,6 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-	    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	/**

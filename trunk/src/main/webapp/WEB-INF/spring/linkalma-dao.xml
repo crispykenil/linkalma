@@ -20,31 +20,37 @@
    <bean id="schoolJDBCTemplate" 
       class="com.linkalma.dao.SchoolJDBCTemplate">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
    
     <bean id="userDAO" 
       class="com.linkalma.dao.impl.UserDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
    
    <bean id="schoolDAO" 
       class="com.linkalma.dao.impl.SchoolDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
    
    <bean id="userSchoolDAO" 
       class="com.linkalma.dao.impl.UserSchoolDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
 
 	<bean id="schoolUpdateDAO" 
       class="com.linkalma.dao.impl.SchoolUpdateDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
 	
 	<bean id="userUpdateDAO" 
       class="com.linkalma.dao.impl.UserUpdateDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
    
    <bean id="categoryCodesDAO" 
@@ -56,6 +62,7 @@
    <bean id="loginDAO" 
       class="com.linkalma.dao.impl.LoginDAO">
       <property name="dataSource"  ref="dataSource" />    
+      <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>
 	
 </beans>
