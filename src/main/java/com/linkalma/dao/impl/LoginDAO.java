@@ -19,15 +19,10 @@ public class LoginDAO implements ILoginDAO{
 	@Autowired
    private JdbcTemplate jdbcTemplateObject;
 	
-	public JdbcTemplate getJdbcTemplateObject() {
-		return jdbcTemplateObject;
-	}
-
-
+	
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
 	
@@ -51,5 +46,29 @@ public class LoginDAO implements ILoginDAO{
 
 		return userBean;
 		
+	}
+
+
+	/**
+	 * @return the jdbcTemplateObject
+	 */
+	public JdbcTemplate getJdbcTemplateObject() {
+		return jdbcTemplateObject;
+	}
+
+
+	/**
+	 * @param jdbcTemplateObject the jdbcTemplateObject to set
+	 */
+	public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
+		this.jdbcTemplateObject = jdbcTemplateObject;
+	}
+
+
+	/**
+	 * @return the dataSource
+	 */
+	public DataSource getDataSource() {
+		return dataSource;
 	}
 }

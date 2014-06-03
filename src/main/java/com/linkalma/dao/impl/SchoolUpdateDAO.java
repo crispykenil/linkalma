@@ -51,7 +51,6 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	/**
