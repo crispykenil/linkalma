@@ -10,11 +10,27 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
-		
+		resetPassword();
 		
 	});
 
 })(jQuery);
+
+function resetPassword(){
+	$('#forgotPasswordBtn').on('click', function(e) {
+		// Triggering bPopup when click event is fired
+		getPopup($("#forgotPassword"));
+
+	});
+}
+function getPopup(popUpElement){
+	popUpElement.addClass("popupContent");
+	popUpElement.bPopup({
+		fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
+		followSpeed : 1500, //can be a string ('slow'/'fast') or int
+		modalColor : 'black'
+	});
+}
 function getFullNewsAndEvents(){
 	$('.school-news-and-event .read-more').on('click', function(e) {
 		// Triggering bPopup when click event is fired

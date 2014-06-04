@@ -16,7 +16,7 @@
 								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
-								<a href="javascript:;" class="smallestFont fr">Forgot your password?</a>
+								<a href="javascript:;" class="smallestFont fr" id="forgotPasswordBtn">Forgot your password?</a>
 								</li>
 								<li class="smallFont"> 
 									<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
@@ -119,5 +119,19 @@
 					
 				</div>
 </div>
+<div id="forgotPassword" class="forgot-password hidden">
+	<h2>Forgot Password? Type your email address and get it.</h2>
+	<form class="forgot-password-form">
+		<ul class=" clear-fix">
+					<li><label>Email</label> <input type="text" 	 name="country" class="required email" /></li>
+		</ul>
+		<div class="btn-wrapper">
+			<input type="button" value="Email Password" />
+						
+		</div>
+	</form>
+					
+</div>
+
 <%@ include file="footer.jsp" %>
 
