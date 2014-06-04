@@ -73,13 +73,7 @@ function fileUpload()
 							<div id="mairrageInfo">
 								<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
 								<label>No of Children</label>
-								<select disabled="disabled">
-									<option>One</option>
-									<option>Two</option>
-									<option>Three</option>
-									<option>Four</option>
-									<option>Five</option>
-								</select>
+								<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
 							</div>
 							
 							</li>

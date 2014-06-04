@@ -1,4 +1,8 @@
 /* generic classes */
+
+.tow-col-layout .main-content{
+	float:left;
+}
 .counts {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -289,16 +293,12 @@ input[type="text"].search-field {
 
 
 
-/* for register page */
+/* for register page or profile page */
 .registerSchoolContainer {
 	width:50%;
 	margin:50px auto;
 }
 
-
-.tow-col-layout .main-content{
-	float:left;
-}
 .profilePage .left-column {
 	width:200px;
 }
@@ -331,6 +331,21 @@ input[type="text"].search-field {
 	padding:8px 3px;
 	width:100%
 }
+.profilePage h2 {
+	background-color: #505765;
+	font-size: 20px;
+	padding: 5px;
+	margin: 25px 0px 10px 0px;
+	color:#fff
+}
+
+
+.profilePage #personalDetails form input[type="text"], .profilePage #personalDetails form input[type="password"] {
+   border:1px solid #ddd;
+   color:#000;
+   
+}
+/* end of profile page css */
 .popupContent {
 	background-color: #fff;
 	border-radius: 10px 10px 10px 10px;
@@ -366,5 +381,4 @@ input[type="text"].search-field {
 .vertical-main-nav > ul > li >  ul > li > a:hover {
 	background-color: #0082C8;
 	color:#fff;
-
 }
