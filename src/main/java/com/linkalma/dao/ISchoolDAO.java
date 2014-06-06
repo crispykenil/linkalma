@@ -82,5 +82,7 @@ public interface ISchoolDAO {
 	   public List<SchoolUpdateDTO> getSchoolAllUpdates(long schoolID);
 	   
 	   public String checkLinkalmaURL(String linkalmaUrl);
+	   
+	   public int updateAboutSchoolInfo(SchoolDataDTO schoolDataDto);
 
 }

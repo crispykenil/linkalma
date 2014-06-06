@@ -23,6 +23,7 @@ public class SchoolMapper implements RowMapper<School> {
 		      school.setApproved(rs.getString("APPROVED"));
 		      school.setActive(rs.getString("ACTIVEYN"));
 		      school.setCreateDttm(rs.getDate("CreateDttm"));
+		      school.setEmailAddress(rs.getString("EmailAddress"));
 		      return school;
 		   }
 	   

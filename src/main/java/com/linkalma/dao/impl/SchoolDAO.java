@@ -251,4 +251,24 @@ public class SchoolDAO implements ISchoolDAO {
 		return null;
 	}
 
+	@Override
+	public int updateAboutSchoolInfo(final SchoolDataDTO schoolDataDto) {
+		int noOfRowsUpdated=getJdbcTemplateObject().update(new PreparedStatementCreator() {
+	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_ABOUT_SCHOOL_INFO);
+	    		ps.setString(1,schoolDataDto.getSchoolName());
+	    		ps.setString(2, schoolDataDto.getWebsiteAddress());
+	    		ps.setString(3, schoolDataDto.getLinkalmaUrl());
+	    		ps.setString(4, schoolDataDto.getSchoolHistory());
+	    		ps.setString(5, "LOGO.jpg");
+	    		ps.setString(6, schoolDataDto.getSchoolContact());
+	    		ps.setLong(7, schoolDataDto.getSchoolID());
+	    		
+	       		return ps;
+    	  	}
+    });
+	  return noOfRowsUpdated;
+		
+	}
+
 }

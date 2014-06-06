@@ -170,5 +170,9 @@ public class ApplicationConstants {
 	public static String SCHOOL_INNER_PAGE_GALLERY = "GALLERY";
 	
 	public static String CHECK_LINKALMA_URL_QUERY = "SELECT COUNT(*) FROM school WHERE LINKALMAURL = ?";
+	
+	public final static String  UPDATE_ABOUT_SCHOOL_INFO="Update school "+
+							    "Set SchoolName=? ,WebsiteURL=? ,LinkAlmaURL=? ,SchoolHistory=? ,LogoFileName=?,Address1=? "+
+							    "Where SchoolID=? "	;
 }
 

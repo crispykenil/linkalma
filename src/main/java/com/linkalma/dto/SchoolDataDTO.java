@@ -7,32 +7,82 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class SchoolDataDTO extends BaseDTO {
 
 	private long id;
-	
+
 	private long schoolID;
-	
+
 	private String title;
-	
+
 	private String description;
-	
+
 	private String documentName;
 
 	private String schoolName;
 
 	private int dataType;
-	
+
 	private String grade;
-	
+
 	private String division;
-	
+
 	private CommonsMultipartFile uploadedFile;
-	
+
 	private long createUserID;
-	
+
 	private Date CreateDttm;
-	
+
 	private long updateUserID;
-	
+
 	private Date updateDttm;
+
+	private String schoolContact;
+	
+	private String schoolHistory;
+	
+	private String linkalmaUrl;
+	
+	private String websiteAddress;
+
+	private String schoolEmailAddress;
+	
+	public String getSchoolEmailAddress() {
+		return schoolEmailAddress;
+	}
+
+	public void setSchoolEmailAddress(String schoolEmailAddress) {
+		this.schoolEmailAddress = schoolEmailAddress;
+	}
+
+	public String getSchoolContact() {
+		return schoolContact;
+	}
+
+	public void setSchoolContact(String schoolContact) {
+		this.schoolContact = schoolContact;
+	}
+
+	public String getSchoolHistory() {
+		return schoolHistory;
+	}
+
+	public void setSchoolHistory(String schoolHistory) {
+		this.schoolHistory = schoolHistory;
+	}
+
+	public String getLinkalmaUrl() {
+		return linkalmaUrl;
+	}
+
+	public void setLinkalmaUrl(String linkalmaUrl) {
+		this.linkalmaUrl = linkalmaUrl;
+	}
+
+	public String getWebsiteAddress() {
+		return websiteAddress;
+	}
+
+	public void setWebsiteAddress(String websiteAddress) {
+		this.websiteAddress = websiteAddress;
+	}
 
 	/**
 	 * @return the schoolID
@@ -42,7 +92,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param schoolID the schoolID to set
+	 * @param schoolID
+	 *            the schoolID to set
 	 */
 	public void setSchoolID(long schoolID) {
 		this.schoolID = schoolID;
@@ -56,7 +107,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -70,7 +122,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param createUserID the createUserID to set
+	 * @param createUserID
+	 *            the createUserID to set
 	 */
 	public void setCreateUserID(long createUserID) {
 		this.createUserID = createUserID;
@@ -84,7 +137,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param createDttm the createDttm to set
+	 * @param createDttm
+	 *            the createDttm to set
 	 */
 	public void setCreateDttm(Date createDttm) {
 		CreateDttm = createDttm;
@@ -98,7 +152,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param updateUserID the updateUserID to set
+	 * @param updateUserID
+	 *            the updateUserID to set
 	 */
 	public void setUpdateUserID(long updateUserID) {
 		this.updateUserID = updateUserID;
@@ -112,7 +167,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param updateDttm the updateDttm to set
+	 * @param updateDttm
+	 *            the updateDttm to set
 	 */
 	public void setUpdateDttm(Date updateDttm) {
 		this.updateDttm = updateDttm;
@@ -126,7 +182,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -140,7 +197,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -154,7 +212,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param grade the grade to set
+	 * @param grade
+	 *            the grade to set
 	 */
 	public void setGrade(String grade) {
 		this.grade = grade;
@@ -168,7 +227,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param division the division to set
+	 * @param division
+	 *            the division to set
 	 */
 	public void setDivision(String division) {
 		this.division = division;
@@ -182,7 +242,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param dataType the dataType to set
+	 * @param dataType
+	 *            the dataType to set
 	 */
 	public void setDataType(int dataType) {
 		this.dataType = dataType;
@@ -196,7 +257,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param documentName the documentName to set
+	 * @param documentName
+	 *            the documentName to set
 	 */
 	public void setDocumentName(String documentName) {
 		this.documentName = documentName;
@@ -210,7 +272,8 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param schoolName the schoolName to set
+	 * @param schoolName
+	 *            the schoolName to set
 	 */
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
@@ -224,10 +287,11 @@ public class SchoolDataDTO extends BaseDTO {
 	}
 
 	/**
-	 * @param uploadedFile the uploadedFile to set
+	 * @param uploadedFile
+	 *            the uploadedFile to set
 	 */
 	public void setUploadedFile(CommonsMultipartFile uploadedFile) {
 		this.uploadedFile = uploadedFile;
 	}
-	
+
 }
