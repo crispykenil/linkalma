@@ -6,12 +6,15 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="userBO" class="com.linkalma.bo.impl.UserBO">
 		<property name="userDAO" ref="userDAO" />   
-		<property name="userSchoolBO" ref="userSchoolBO" />   
+		<property name="userSchoolBO" ref="userSchoolBO" />
+		
+		   
    </bean>
    
 	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
 		<property name="schoolDAO" ref="schoolDAO" />   
 		<property name="categoryCodesDAO" ref="categoryCodesDAO" />   
+		<property name="fileHelperImpl" ref="fileHelperImpl"/>
    </bean>
 
 	<bean id="userSchoolBO" class="com.linkalma.bo.impl.UserSchoolBO">
@@ -30,4 +33,6 @@
 		<property name="schoolDAO" ref="schoolDAO" />
 	</bean>
 
+	<bean id="fileHelperImpl" class="com.linkalma.helper.FileHelperImpl"/>
+	
 </beans>

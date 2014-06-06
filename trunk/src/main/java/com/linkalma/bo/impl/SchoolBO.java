@@ -1,11 +1,14 @@
 package com.linkalma.bo.impl;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.dao.ISchoolDAO;
@@ -14,8 +17,10 @@ import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.StaticCodesDTO;
+import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.CategoryCodesDAO;
+import com.linkalma.utils.LinkalmaException;
 
 public class SchoolBO implements ISchoolBO 
 {
@@ -27,9 +32,19 @@ public class SchoolBO implements ISchoolBO
 
 	@Autowired
 	private IUserDAO userDAO;
+	
+	@Autowired
+	private FileHelperImpl fileHelperImpl;
+	
+	public FileHelperImpl getFileHelperImpl() {
+		return fileHelperImpl;
+	}
+
+	public void setFileHelperImpl(FileHelperImpl fileHelperImpl) {
+		this.fileHelperImpl = fileHelperImpl;
+	}
 
 	@Override
-	@Transactional
 	public Model createSchool(School schoolDto, Model model) {
 		
 		long schoolID = schoolDAO.createSchool(schoolDto);
@@ -167,4 +182,41 @@ public class SchoolBO implements ISchoolBO
 		this.userDAO = userDAO;
 	}
 
+	@Override
+	public void updateAboutSchoolInfo(SchoolDataDTO schoolDataDto) throws FileNotFoundException, IOException ,LinkalmaException
+	{
+			this.validateForSchoolAboutInfo(schoolDataDto);
+			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
+			if(!StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+			{
+				fileHelperImpl.writeFile(multipartFile, "F:\\Linkalma\\uploadedFiles\\"+multipartFile.getOriginalFilename());
+			}
+			schoolDAO.updateAboutSchoolInfo(schoolDataDto);
+	}
+	
+	private void validateForSchoolAboutInfo(SchoolDataDTO schoolDataDto) throws LinkalmaException
+	{
+
+		if(StringUtils.isEmpty(StringUtils.trim(schoolDataDto.getSchoolName())))
+		{
+			throw new LinkalmaException("School Name not found");
+		}
+		if(StringUtils.isEmpty(StringUtils.trim(schoolDataDto.getWebsiteAddress())))
+		{
+			throw new LinkalmaException("Website Address not found");
+		}
+		if(StringUtils.isEmpty(StringUtils.trim(schoolDataDto.getLinkalmaUrl())))
+		{
+			throw new LinkalmaException("Linkalma URL not found");
+		}
+		if(StringUtils.isEmpty(StringUtils.trim(schoolDataDto.getSchoolHistory())))
+		{
+			throw new LinkalmaException("School History not found");
+		}
+		if(StringUtils.isEmpty(StringUtils.trim(schoolDataDto.getSchoolContact())))
+		{
+			throw new LinkalmaException("School Contact not found");
+		}
+		
+	}
 }

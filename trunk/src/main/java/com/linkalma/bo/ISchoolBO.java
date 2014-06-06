@@ -1,10 +1,14 @@
 package com.linkalma.bo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.springframework.ui.Model;
 
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.utils.LinkalmaException;
 
 public interface ISchoolBO {
 
@@ -31,5 +35,7 @@ public interface ISchoolBO {
 	public Model getSchoolDataBySchoolID(SchoolUpdateDTO schoolUPdateDto, Model model);
 
 	public Model getSchoolUpdatesBySchoolID(SchoolUpdateDTO schoolUPdateDto, Model model);
+	
+	public void updateAboutSchoolInfo(SchoolDataDTO schoolDataDto) throws FileNotFoundException, IOException,LinkalmaException;
 
 }

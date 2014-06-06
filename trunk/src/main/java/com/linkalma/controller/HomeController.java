@@ -1,25 +1,26 @@
 package com.linkalma.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -30,7 +31,6 @@ import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.impl.SchoolBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
-import com.linkalma.dto.BaseDTO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
@@ -40,6 +40,7 @@ import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.Utils;
 import com.linkalma.utils.cipher.Cipher;
 
@@ -47,6 +48,7 @@ import com.linkalma.utils.cipher.Cipher;
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes(value="school",types= School.class)
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory
@@ -106,9 +108,9 @@ public class HomeController {
 				"userBean");
 		if (userBean != null)
 			userDto.setUserID(userBean.getUserID());
-			userDto.setEmailAddress(userBean.getEmailId());
+
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
-		model.addAttribute("userBean",userBean);
+
 		return new ModelAndView("dashboard", "model", model);
 	}
 
@@ -137,7 +139,7 @@ public class HomeController {
 				School school = schoolBO.getSchoolBySchoolEmailID(
 						userBean.getUserName(), model);
 				request.getSession().setAttribute("school", school);
-
+				request.getSession().setAttribute("schoolEmailAddress", school.getEmailAddress());
 				model.addAttribute("school", school);
 				model.addAttribute("linkalmaaddress",
 						school.getLinkalmaAddress());
@@ -206,7 +208,7 @@ public class HomeController {
 		School school = (School) request.getSession().getAttribute("school");
 		model.addAttribute("school", school);
 		model.addAttribute("schoolName", schoolName);
-		return new ModelAndView("/schooladmin/addschoolevents", "model", model);
+		return new ModelAndView("/schooladmin/addaboutschool", "model", model);
 	}
 
 	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
@@ -595,13 +597,46 @@ public class HomeController {
 		}
 		return isValid;
 	}
-	
-/*	@RequestMapping(value="/checkavailability", method=RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public BaseDTO createSmartphone(@RequestBody Smartphone smartphone) {
-        return smartphoneService.create(smartphone);
-    }
-*/
-	
+	 @RequestMapping(value={"/schooladmin/updateaboutschool"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
+	  public ModelAndView updateAboutSchoolInfo(@ModelAttribute("aboutSchoolForm") SchoolDataDTO schoolDataDto, HttpServletRequest request, Model model,HttpSession session)
+	  {
+	    UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
+
+	    ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
+	    School school = (School)request.getSession().getAttribute("school");
+	    if (null == school)
+	    {
+	      return new ModelAndView("redirect:/logout", "model", model);
+	    }
+	    schoolDataDto.setSchoolID(school.getSchoolID());
+	    try
+	    {
+			schoolBO.updateAboutSchoolInfo(schoolDataDto);
+			String schoolEmailAddress=schoolDataDto.getSchoolEmailAddress();
+			school = schoolBO.getSchoolBySchoolEmailID(schoolEmailAddress,model);
+			request.getSession().setAttribute("school", school);
+			model.addAttribute("school", school);
+			
+		} catch (FileNotFoundException e) 
+		{
+			model.addAttribute("msg", "Failed to update school info");
+			e.printStackTrace();
+		} catch (LinkalmaException e)
+		{
+			model.addAttribute("msg", e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			model.addAttribute("msg", "Failed to update school info");
+			e.printStackTrace();
+		}
+	    catch (Exception e) {
+	    	model.addAttribute("msg", "Failed to update school info");
+	    	e.printStackTrace();
+		}
+
+	   
+		
+	    return new ModelAndView("redirect:/schooladmin/addaboutschool?schoolName="+school.getSchoolName(), "model", model);
+	  }
 }
