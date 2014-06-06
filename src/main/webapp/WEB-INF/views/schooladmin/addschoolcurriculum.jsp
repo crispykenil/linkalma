@@ -15,7 +15,7 @@
 <!-- left-column -->
 <div class="main-content border-box">
 	<h1>Syllabus</h1>
-	<form action="updateschooldata" name="schoolDataForm" enctype="multipart/form-data">
+	<form action="updateschooldata" name="schoolDataForm" enctype="multipart/form-data" method="POST">
 		<ul class="clear-fix">
 
 			<li><label>Title</label> 
@@ -25,9 +25,9 @@
 				<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
 			</li>
 			<li><label>File</label> 
-				<input type="file" name="documentName" class="required" />
+				<input type="file" name="uploadedFile" class="required" id="syllabusUploadedFile"/>
 				<input type="hidden" name="dataType" value="1" />
-				
+				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 			</li>
 			<li><input type="submit" value="Save" />
 			</li>
@@ -35,7 +35,7 @@
 	</form>
 	<hr />
 	<h1>Calendar</h1>
-	<form action="updateschooldata" name="schoolDataForm" >
+	<form action="updateschooldata" name="schoolDataForm" method="POST" enctype="multipart/form-data" >
 		<ul class="clear-fix">
 
 			<li><label>Title</label> 
@@ -45,8 +45,9 @@
 				<textarea value="" rows="6" cols="40" name="description" class="required" maxlength="50" ></textarea>
 			</li>
 			<li><label>File</label> 
-				<input type="file" name="documentName" class="required" />
+				<input type="file" name="uploadedFile" class="required" id="calenderUploadedFile" />
 				<input type="hidden" name="dataType" value="2" />
+				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 				
 			</li>
 			<li><input type="submit" value="Save" />
@@ -55,7 +56,7 @@
 	</form>
 	<hr />
 	<h1>Exams</h1>
-	<form action="updateschooldata" name="schoolDataForm" >
+	<form action="updateschooldata" name="schoolDataForm" method="POST" enctype="multipart/form-data" >
 		<ul class="clear-fix">
 
 			<li><label>Title</label> 
@@ -71,9 +72,9 @@
 				<input type="text" value="" name="division" class="required" maxlength="20" /> 
 			</li>
 			<li><label>File</label> 
-				<input type="file" name="documentName" class="required" />
+				<input type="file" name="uploadedFile" class="required" id="examUploadedFile"/>
 				<input type="hidden" name="dataType" value="3" />
-				
+				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 			</li>
 			<li><input type="submit" value="Save" />
 			</li>

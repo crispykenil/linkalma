@@ -121,10 +121,27 @@ public class SchoolBO implements ISchoolBO
 
 	@Override
 	public Model updateSchoolData(SchoolDataDTO schoolDataDto, Model model) {
-		long id = getSchoolDAO().updateSchoolData(schoolDataDto, schoolDataDto.getDataType());
 		
-		if (id > 0)
-			schoolDataDto.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
+		try
+		{
+			
+			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
+			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+			{
+				schoolDataDto.setDocumentName(multipartFile.getOriginalFilename());
+				fileHelperImpl.writeFile(multipartFile, "F:\\Linkalma\\uploadedFiles\\"+multipartFile.getOriginalFilename());
+			}
+			long id = getSchoolDAO().updateSchoolData(schoolDataDto, schoolDataDto.getDataType());
+			if (id > 0)
+			{
+				schoolDataDto.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
+			}
+		}
+		catch(Exception e)
+		{	schoolDataDto.setSuccessMsg("Failed to Update");
+			e.printStackTrace();
+		}
+		
 		
 		model.addAttribute("schoolDataDto", schoolDataDto);
 		
@@ -187,7 +204,7 @@ public class SchoolBO implements ISchoolBO
 	{
 			this.validateForSchoolAboutInfo(schoolDataDto);
 			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
-			if(!StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 			{
 				fileHelperImpl.writeFile(multipartFile, "F:\\Linkalma\\uploadedFiles\\"+multipartFile.getOriginalFilename());
 			}
