@@ -260,7 +260,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
 	}
 
-	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.GET)
+	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.POST)
 	public ModelAndView updateSchoolData(
 			@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto,
 			Model model, HttpServletRequest request) {
