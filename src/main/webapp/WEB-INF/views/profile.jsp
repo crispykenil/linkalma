@@ -33,9 +33,10 @@ function fileUpload()
 	<!-- left-column -->
 	<div class="main-content border-box">
 			<h1>My Profile</h1>
+			
 			<div id="personalDetails">
+				<h2>Personal Details </h2>
 				<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
-					<h2>Personal Details </h2>
 					<div>
 						<ul class="twoColumn clear-fix">
 							<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
@@ -44,12 +45,10 @@ function fileUpload()
 								 name="userLastName" class="required" maxlength="50" /></li>
 							<li><label>Email</label> <input type="text" value="${model.userProfile.emailAddress }"
 								 name="emailAddress" class="emailField required" /></li>
-							<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
-								 name="password" class="required" /></li>
-							<li><label>Confirm Password</label> <input type="password"
-								value="${model.userProfile.password }"  class="required" /></li>
 							<li>
-									<ul class="twoColumn" style="margin-top:22px;">
+							
+									<ul class="threeColumn" >
+									<li>Gender</li>
 										<li><label class="fl">Male </label>
 										<input type="radio" value="M"  
 											name="gender" <c:if test="${model.userProfile.gender == 'M'}">checked</c:if> /></li>
@@ -58,10 +57,33 @@ function fileUpload()
 										name="gender" <c:if test="${model.userProfile.gender == 'F'}">checked</c:if> /></li>
 									</ul>
 							</li>
+							<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
+								 name="password" class="required" /></li>
+							<li><label>Confirm Password</label> <input type="password"
+								value="${model.userProfile.password }"  class="required" /></li>
+					
 						</ul>
+						<div class="family-details">
+							<ul class="twoColumn_1-3 clear-fix">
+								<li>
+									<div id="maritalStatus">
+										<label>Single</label> <input type="radio" value="" name="maritalStatus" class="single" checked="checked" />
+										<label>Married</label> <input type="radio" value="" name="maritalStatus" class="married">
+									</div>
+								</li>
+								<li>
+									<div id="mairrageInfo">
+										<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
+										<label>No of Children</label>
+										<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
+					<!-- 
 					<div class="family-details">
-						<h4>Family Details</h4>
+						<h3>Family Details</h3>
 						<ul class="twoColumn_1-3 clear-fix">
 						<li>
 						<div id="maritalStatus">
@@ -79,8 +101,9 @@ function fileUpload()
 							</li>
 						</ul>
 					</div>
+					 -->
 				<div>
-					<h4>Contact Info</h4>
+					<h3>Contact Info</h3>
 					<ul class="twoColumn clear-fix">
 		
 						<li><label>Address 1</label> <input type="text" value="${model.userProfile.address1 }"
@@ -110,14 +133,16 @@ function fileUpload()
 				</div>
 				
 					<div class="btn-wrapper">
+						<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
+						
 					</div>
 			</form:form>
 			</div>
 			<div id="schoolDetails">
+				<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
 			<form:form name="userSchoolDetailsForm" class="readOnlyForm schoolDetailsForm" action="updateuserschool" modelAttribute="userSchool" method="post">
-			<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
+		
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 				<table class="dataTable">
 						<thead>
@@ -191,8 +216,9 @@ function fileUpload()
 				</div>
 			</div>
 			<div id="workDetails">
+			<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
 				<form:form class="readOnlyForm workDetailsForm" action="updateprofile" name="userWorkplaceDetailsForm" modelAttribute="workDetails">
-					<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
+					
 					<input type="hidden" name="totalUserSchoolCount" value="${model.workplaceList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
 						<thead>

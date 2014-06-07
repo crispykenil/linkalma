@@ -77,7 +77,7 @@ float:right
 #top-bar ul li{
 	display:list-item;
 	height:36px;
-	margin-left:14px;
+	margin-right:14px;
 	float:left;
 }
 
@@ -85,7 +85,7 @@ float:right
 	background-color:#31353D;
 	height:40px;
 	line-height:40px;
-	padding:0px 2px 0px 25px;
+	padding:0px 25px;
 
 }
 #top-bar ul li a{
@@ -298,7 +298,12 @@ input[type="text"].search-field {
 	width:50%;
 	margin:50px auto;
 }
-
+.profilePage .family-details {
+	border-radius:10px;
+	border:1px solid #ddd;
+	margin:5px 20px;
+	padding:0px 10px;
+}
 .profilePage .left-column {
 	width:200px;
 }
@@ -309,9 +314,14 @@ input[type="text"].search-field {
 	display: inline-block;
     text-align: right;
     width: 135px;
+    line-height:normal;
 }
 .profilePage .family-details label {
 	width:auto
+}
+.profilePage form  ul > li {
+	min-height:54px;
+	line-height:54px
 }
 .profilePage .family-details li {
 	height:50px;
@@ -338,12 +348,30 @@ input[type="text"].search-field {
 	margin: 25px 0px 10px 0px;
 	color:#fff
 }
-
-
 .profilePage #personalDetails form input[type="text"], .profilePage #personalDetails form input[type="password"] {
    border:1px solid #ddd;
    color:#000;
-   
+}
+
+.profilePage .main-content form {
+	border:5px solid #eee;
+	border-top:none;
+
+}
+.profilePage .main-content form > ul {
+	margin:15px;
+}
+.profilePage .main-content h2 {
+	margin-bottom:0px;
+}
+.profilePage .main-content h3 {
+	background-color:#eee;
+	padding:5px;
+	margin-bottom:15px
+}
+.profilePage .main-content .btn-wrapper {
+	background-color:#eee;
+	padding:6px;
 }
 /* end of profile page css */
 .popupContent {

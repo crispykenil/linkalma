@@ -18,13 +18,10 @@
 		
 <c:choose>
       <c:when test="${empty model.schoolName}">
-<body>
+		<body>
       </c:when>
       <c:otherwise>
-
-	
 		<body id="schoolPageBody">			
-
       </c:otherwise>
 </c:choose>
 
@@ -32,16 +29,20 @@
 	<div class="top-navigation fl">
 		<ul>
 			<li><a href="/linkalma">Home</a></li>
-			<li><a href="/linkalma/dashboard">My Dashboard</a></li>
+			
 			<li><a href="/linkalma">About Us</a></li>
 			<li><a href="/linkalma">Contact Us</a></li>
 		</ul>
 	</div>
-	<div class="status-info-bar fr">
+	
+	<c:if test="${model.loggedIn == true}">
+		<div class="status-info-bar fr">
 		<ul>
-			<li><a href="/linkalma/viewprofile">My Profile</a>  <a href="/linkalma/logout" class="signInOut fa fa-sign-out" title="Sign Out"></a></li>
+			<li><a href="/linkalma/dashboard">My Dashboard</a></li><li><a href="/linkalma/viewprofile">My Profile</a>  <a href="/linkalma/logout" class="" title="Sign Out">Log Out</a></li>
 		</ul>
 	</div>
+	</c:if>
+	
 </div>
 <div id="doc">
 <c:choose>

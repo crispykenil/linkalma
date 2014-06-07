@@ -16,7 +16,7 @@
 								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
-								<a href="javascript:;" class="smallestFont fr" id="forgotPasswordBtn">Forgot your password?</a>
+								<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
 								</li>
 								<li class="smallFont"> 
 									<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
