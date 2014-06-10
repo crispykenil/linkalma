@@ -11,6 +11,7 @@ import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.MessageConstants;
+import com.linkalma.utils.Utils;
 
 public class UserBO implements IUserBO 
 {
@@ -82,7 +83,10 @@ public class UserBO implements IUserBO
 		System.out.println("Printing...User\n"+userDto);
 		
 		getUserDAO().updateUser(userDto);
-		getUserDAO().updateCredentials(userDto);
+		
+		if(Utils.isValidString(userDto.getPassword()))
+			getUserDAO().updateCredentials(userDto);
+		
 		model.addAttribute("userProfile", userDto);
 		model.addAttribute("errorCode", "200");
 		model.addAttribute("message", "Profile updated successfully");

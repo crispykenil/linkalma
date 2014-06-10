@@ -17,8 +17,7 @@
       <property name="dataSource"  ref="dataSource" />    
       </bean>
    <!-- Definition for studentJDBCTemplate bean -->
-   <bean id="schoolJDBCTemplate" 
-      class="com.linkalma.dao.SchoolJDBCTemplate">
+   <bean id="schoolJDBCTemplate" class="com.linkalma.dao.SchoolJDBCTemplate">
       <property name="dataSource"  ref="dataSource" />    
       <property name="jdbcTemplateObject"  ref="jdbcTemplate" />    
    </bean>

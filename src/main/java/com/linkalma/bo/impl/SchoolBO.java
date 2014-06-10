@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +46,7 @@ public class SchoolBO implements ISchoolBO
 	}
 
 	@Override
+	@Transactional
 	public Model createSchool(School schoolDto, Model model) {
 		
 		long schoolID = schoolDAO.createSchool(schoolDto);
@@ -129,7 +131,7 @@ public class SchoolBO implements ISchoolBO
 			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 			{
 				schoolDataDto.setDocumentName(multipartFile.getOriginalFilename());
-				fileHelperImpl.writeFile(multipartFile, "F:\\Linkalma\\uploadedFiles\\"+multipartFile.getOriginalFilename());
+				fileHelperImpl.writeFile(multipartFile, "/home/ec2-user/fileuploads/"+multipartFile.getOriginalFilename());
 			}
 			long id = getSchoolDAO().updateSchoolData(schoolDataDto, schoolDataDto.getDataType());
 			if (id > 0)
@@ -206,7 +208,7 @@ public class SchoolBO implements ISchoolBO
 			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
 			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 			{
-				fileHelperImpl.writeFile(multipartFile, "F:\\Linkalma\\uploadedFiles\\"+multipartFile.getOriginalFilename());
+				fileHelperImpl.writeFile(multipartFile, "/home/ec2-user/fileuploads/"+multipartFile.getOriginalFilename());
 			}
 			schoolDAO.updateAboutSchoolInfo(schoolDataDto);
 	}

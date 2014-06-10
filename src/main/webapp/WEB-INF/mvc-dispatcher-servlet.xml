@@ -11,7 +11,6 @@
 	<context:component-scan base-package="com.linkalma" >
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	
 	<mvc:interceptors>
       <bean class="com.linkalma.interceptor.BaseInterceptor" />
     </mvc:interceptors> 
@@ -69,18 +68,18 @@
 	    </property>
 	</bean>
 
-	<bean id="templateMailMessage"
-	    class="org.springframework.mail.SimpleMailMessage">
-	    <property name="from" value="sender@gmail.com" />
-	    <property name="to" value="receiver@gmail.com" />
-	    <property name="subject" value="Hello" />
-	    <property name="text">
-	       <value>
-	        <![CDATA[
-	            Dear %s,
-	            Mail Content : %s
-	        ]]>
-	       </value>
-	        </property>
-	</bean>	
+<bean id="templateMailMessage"
+    class="org.springframework.mail.SimpleMailMessage">
+    <property name="from" value="sender@gmail.com" />
+    <property name="to" value="receiver@gmail.com" />
+    <property name="subject" value="Hello" />
+    <property name="text">
+       <value>
+        <![CDATA[
+            Dear %s,
+            Mail Content : %s
+        ]]>
+       </value>
+        </property>
+</bean>	
 </beans>

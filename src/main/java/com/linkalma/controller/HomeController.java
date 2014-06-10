@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -48,7 +47,6 @@ import com.linkalma.utils.cipher.Cipher;
  * Handles requests for the application home page.
  */
 @Controller
-@SessionAttributes(value="school",types= School.class)
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory
@@ -73,9 +71,17 @@ public class HomeController {
 	public ModelAndView home(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");
 
+		setRequiredModelPropeties(model, request);
+		model.addAttribute("schoolName", "");
+		return new ModelAndView("index", "model", model);
+	}
+
+	private void setRequiredModelPropeties(Model model,
+			HttpServletRequest request) {
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
 		School school = (School) request.getSession().getAttribute("school");
+		
 		
 		if (userBean != null)
 		{
@@ -89,11 +95,11 @@ public class HomeController {
 			model.addAttribute("school", school);
 			model.addAttribute("loggedIn","true");
 			model.addAttribute("dashboardUrl","schooladmin?schoolName="+school.getLinkalmaAddress());
+			model.addAttribute("schoolName", school.getSchoolName());
 		}
 		else
 			model.addAttribute("loggedIn","false");
 		
-		return new ModelAndView("index", "model", model);
 	}
 
 	@RequestMapping(value = "/dashboard")
@@ -110,7 +116,7 @@ public class HomeController {
 			userDto.setUserID(userBean.getUserID());
 
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
-
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("dashboard", "model", model);
 	}
 
@@ -140,9 +146,10 @@ public class HomeController {
 						userBean.getUserName(), model);
 				request.getSession().setAttribute("school", school);
 				request.getSession().setAttribute("schoolEmailAddress", school.getEmailAddress());
-				model.addAttribute("school", school);
-				model.addAttribute("linkalmaaddress",
-						school.getLinkalmaAddress());
+
+				setRequiredModelPropeties(model, request);
+				
+				model.addAttribute("linkalmaaddress",school.getLinkalmaAddress());
 				logger.info("Linkalma Address : " + school.getLinkalmaAddress());
 				return new ModelAndView("redirect:school/"
 						+ school.getLinkalmaAddress(), "model", model);
@@ -158,8 +165,7 @@ public class HomeController {
 			Model model, HttpServletRequest request) {
 		logger.info("Welcome home! Redirecting to School page.");
 
-		logger.info(schoolName + "--"
-				+ model.containsAttribute("linkalmaaddress"));
+		logger.info(schoolName + "--"+ model.containsAttribute("linkalmaaddress"));
 
 		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
 
@@ -168,9 +174,8 @@ public class HomeController {
 		schoolUpdateDto.setSchoolID(school.getSchoolID());
 		schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
 		
-		model.addAttribute("school", school);
-		model.addAttribute("schoolName", schoolName);
-
+		setRequiredModelPropeties(model, request);
+		
 		return new ModelAndView("school", "model", model);
 	}
 
@@ -195,8 +200,8 @@ public class HomeController {
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_CURRICULUM))
 			model = schoolBO.getSchoolDataBySchoolID(schoolUpdateDto, model);
 
-		model.addAttribute("schoolName", schoolName);
-		model.addAttribute("school", school);
+		setRequiredModelPropeties(model, request);
+		
 		return new ModelAndView(innerPage, "model", model);
 	}
 
@@ -204,10 +209,10 @@ public class HomeController {
 	public ModelAndView schoolAdmin(
 			@RequestParam("schoolName") String schoolName, Model model,
 			HttpServletRequest request) {
-		logger.info("Redirecting to default admin page");
-		School school = (School) request.getSession().getAttribute("school");
-		model.addAttribute("school", school);
-		model.addAttribute("schoolName", schoolName);
+		logger.info("Redirecting to default schooladmin page");
+		
+		setRequiredModelPropeties(model, request);
+		
 		return new ModelAndView("/schooladmin/addaboutschool", "model", model);
 	}
 
@@ -219,11 +224,11 @@ public class HomeController {
 		logger.info("Redirecting to admin page:" + page);
 
 		String msg = request.getParameter("msg");
-		School school = (School) request.getSession().getAttribute("school");
-		model.addAttribute("school", school);
+		
+		setRequiredModelPropeties(model, request);
+		
 		model.addAttribute("page", page);
 		model.addAttribute("msg", msg);
-		model.addAttribute("schoolName", schoolName);
 
 		return new ModelAndView("/schooladmin/" + page, "model", model);
 	}
@@ -232,8 +237,7 @@ public class HomeController {
 	public ModelAndView updateSchoolNews(
 			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,
 			Model model) {
-		logger.info("Update School Called for News : "
-				+ schoolUpdateDto.getUpdateType());
+		logger.info("Update School Called for News : "+ schoolUpdateDto.getUpdateType());
 
 		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
 
@@ -287,14 +291,14 @@ public class HomeController {
 		String url = "addschoolcurriculum?schoolName="
 				+ schoolDataDto.getSchoolName() + "&msg="
 				+ schoolDataDto.getSuccessMsg();
-
+		
 		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
 	}
 
 	@RequestMapping(value = "/addwallpost", method = RequestMethod.POST)
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
 			Model model, HttpServletRequest request) {
-		logger.info("Welcome home! Saving Wall Post.");
+		logger.info("Saving Wall Post.");
 
 		IDashboardBO dashboardBO = (IDashboardBO) context
 				.getBean("dashboardBO");
@@ -305,7 +309,7 @@ public class HomeController {
 			wallPostDto.setUserID(userBean.getUserID());
 
 		model = dashboardBO.addWallPost(wallPostDto, model);
-
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("redirect:/dashboard", "model", model);
 	}
 
@@ -346,7 +350,9 @@ public class HomeController {
 		logger.info("UserID : " + user.getUserID());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.createUser(user, model);
-
+		
+		setRequiredModelPropeties(model, request);
+		
 		return "User Created";
 	}
 
@@ -364,7 +370,7 @@ public class HomeController {
 				"userBean");
 		user.setUserID(userBean.getUserID());
 		model = userBO.getUserProfileDetails(user, model);
-
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("profile", "model", model);
 	}
 
@@ -375,9 +381,6 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to File Upload! ");
 
-		// IUserBO userBO = (IUserBO)context.getBean("userBO");
-		UserBean userBean = (UserBean) request.getSession().getAttribute(
-				"userBean");
 		IFileUploadBO fileUploadBO = (IFileUploadBO) context
 				.getBean("fileUploadBO");
 
@@ -395,23 +398,21 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
 
-		UserBean userBean = (UserBean) request.getSession().getAttribute(
-				"userBean");
+		UserBean userBean = (UserBean) request.getSession().getAttribute("userBean");
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
 
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		model = userBO.updateUserProfileDetails(user, model);
-
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("profile", "model", model);
 	}
 
 	@RequestMapping(value = "/updateuserschool", method = RequestMethod.POST)
-	@Transactional
 	public ModelAndView updateUserSchool(
 			@ModelAttribute("userSchool") User user,
 			HttpServletRequest request, Model model) {
-		logger.info("Welcome to My Profile! ");
+		logger.info("Welcome to Update User profile! ");
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -420,9 +421,7 @@ public class HomeController {
 
 		List<UserSchoolDTO> userSchoolList = user.getUserSchoolList();
 		logger.info("UserSchoolList Size - Update: " + userSchoolList.size());
-		IUserBO userBO = (IUserBO) context.getBean("userBO");
-		// model = userBO.updateUserProfileDetails(user, model);
-
+		
 		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
@@ -479,13 +478,14 @@ public class HomeController {
 			userDto.setUserID(userBean.getUserID());
 
 		model = userSchoolBO.getUserSchoolList(userDto, model);
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("addMySchool", "model", model);
 	}
 
 	@RequestMapping(value = "/loadschool")
 	@Transactional
 	public ModelAndView loadAllSchool(HttpServletRequest request, Model model) {
-		logger.info("Welcome registerSchool!");
+		logger.info("Welcome load school!");
 
 		ISchoolBO schoolBO = (SchoolBO) context.getBean("schoolBO");
 
@@ -496,7 +496,6 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/registerschool")
-	@Transactional
 	public ModelAndView registerSchool(@ModelAttribute School schoolDto,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
