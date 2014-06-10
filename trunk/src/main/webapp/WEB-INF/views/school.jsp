@@ -2,7 +2,7 @@
 <%@ include file="header.jsp" %>
 	<div class="clear-fix">
 		<div class="school-news-and-event">
-			<h2>Ryan News & Events</h2>
+			<h2>News & Events</h2>
 				
 			<ul>
 			<c:forEach var='schoolUpdatesMap' items='${model.schoolUpdatesMap}' varStatus="count" >
@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="home-intro-section">
-			<h2>Welcome to Ryan International</h2>
+			<h2>Welcome to ${model.schoolName }</h2>
 			<div><img src="/linkalma/images/show-case.png" width="650" /></div>
 			<br />
 			<p>LinkAlma.com is an Alumni Relationship Platform (ARM) founded to create an ecosystem of educational institutes in India and its alumni. This is fully owned by Arghya Consulting Services Pvt. Ltd and is inspired by combination of its founder's own schooling experience, our exposure to the western education system and our current experience with our kid's education institutes and in general state of education in India.</p>
