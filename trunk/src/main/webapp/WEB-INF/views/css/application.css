@@ -313,8 +313,11 @@ input[type="text"].search-field {
 .profilePage form label{ 
 	display: inline-block;
     text-align: right;
-    width: 135px;
     line-height:normal;
+}
+.profilePage form ul li > label, .profilePage form div > label{ 
+    width: 135px;
+    color:#0082c8;
 }
 .profilePage .family-details label {
 	width:auto
