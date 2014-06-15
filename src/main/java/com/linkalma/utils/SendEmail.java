@@ -2,22 +2,18 @@ package com.linkalma.utils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
- 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class SendEmail {
 
 	@Autowired
-	private MailSender mailSender;
-	 
-	@Autowired
-	private JavaMailSenderImpl javaMailSender;
+	private JavaMailSender javaMailSender;
 	 
 	@Autowired
 	private SimpleMailMessage templateMailMessage;
@@ -30,10 +26,6 @@ public class SendEmail {
 	    this.templateMailMessage = templateMailMessage;
 	}
 	 
-	public void setMailSender(MailSender mailSender) {
-	    this.mailSender = mailSender;
-	}
-
 	public void sendMail(String from, String to, String subject, String msg) {
 
 	    SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -42,13 +34,13 @@ public class SendEmail {
 	    simpleMailMessage.setTo(to);
 	    simpleMailMessage.setSubject(subject);
 	    simpleMailMessage.setText(msg);
-	    mailSender.send(simpleMailMessage);
+	    javaMailSender.send(simpleMailMessage);
 	}
 	 
 	public void sendMailWithTemplate(String dear, String content) {         
 	       SimpleMailMessage message = new SimpleMailMessage(templateMailMessage);
 	       message.setText(String.format( templateMailMessage.getText(), dear, content));
-	       mailSender.send(message);
+	       javaMailSender.send(message);
 	}
 	 
 	public void sendMailWithAttachment(String dear, String content) {
@@ -72,4 +64,32 @@ public class SendEmail {
 	         }
 	       javaMailSender.send(message);
 	         }
+
+	/**
+	 * @return the javaMailSender
+	 */
+	public JavaMailSender getJavaMailSender() {
+		return javaMailSender;
+	}
+
+	/**
+	 * @param javaMailSender the javaMailSender to set
+	 */
+	public void setJavaMailSender(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
+
+	/**
+	 * @return the templateMailMessage
+	 */
+	public SimpleMailMessage getTemplateMailMessage() {
+		return templateMailMessage;
+	}
+
+	/**
+	 * @param templateMailMessage the templateMailMessage to set
+	 */
+	public void setTemplateMailMessage(SimpleMailMessage templateMailMessage) {
+		this.templateMailMessage = templateMailMessage;
+	}
 }

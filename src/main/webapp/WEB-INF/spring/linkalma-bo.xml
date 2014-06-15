@@ -7,10 +7,8 @@
 	<bean id="userBO" class="com.linkalma.bo.impl.UserBO">
 		<property name="userDAO" ref="userDAO" />   
 		<property name="userSchoolBO" ref="userSchoolBO" />
-		
-		   
    </bean>
-   
+
 	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
 		<property name="schoolDAO" ref="schoolDAO" />   
 		<property name="categoryCodesDAO" ref="categoryCodesDAO" />   
@@ -32,6 +30,40 @@
    <bean id="fileUploadBO" class="com.linkalma.bo.impl.FileUploadBO">
 		<property name="userDAO" ref="userDAO" />   
 		<property name="schoolDAO" ref="schoolDAO" />
+	</bean>
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="kenilkdoshi@gmail.com" />
+	    <property name="password" value="revolution@123" />
+	    <property name="javaMailProperties">
+	            <props>
+	                <prop key="mail.smtp.auth">true</prop>
+	                <prop key="mail.smtp.starttls.enable">true</prop>
+	                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	            </props>
+	    </property>
+	</bean>
+
+<bean id="templateMailMessage"
+    class="org.springframework.mail.SimpleMailMessage">
+    <property name="from" value="admin@linkalma.com" />
+    <property name="to" value="receiver@gmail.com" />
+    <property name="subject" value="Hello" />
+    <property name="text">
+       <value>
+        <![CDATA[
+            Dear %s,
+            Mail Content : %s
+        ]]>
+       </value>
+        </property>
+</bean>	
+
+	<bean id="sendEmail" class="com.linkalma.utils.SendEmail">
+		<property name="javaMailSender" ref="mailSender" />   
+		<property name="templateMailMessage" ref="templateMailMessage" />
 	</bean>
 
 	<bean id="fileHelperImpl" class="com.linkalma.helper.FileHelperImpl"/>
