@@ -6,10 +6,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" 
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://localhost:3306/linkalma"/>
-      <property name="username" value="root"/>
-      <property name="password" value="admin"/>
+      <property name="driverClassName" value="#{linkalmaProp['db.driver.class']}"/>
+      <property name="url" value="#{linkalmaProp['db.url']}"/>
+      <property name="username" value="#{linkalmaProp['db.username']}"/>
+      <property name="password" value="#{linkalmaProp['db.password']}"/>
    </bean>
 
 	<bean id="jdbcTemplate" 
