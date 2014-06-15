@@ -29,9 +29,6 @@ public class DashboardBO implements IDashboardBO {
 	@Autowired
 	ISchoolDAO schoolDAO;
 	
-	@Autowired
-	private KeyHolder keyHolder;
-	
 	@Override
 	public Map<String,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {
 		
@@ -94,20 +91,6 @@ public class DashboardBO implements IDashboardBO {
 	}
 
 	/**
-	 * @return the keyHolder
-	 */
-	public KeyHolder getKeyHolder() {
-		return keyHolder;
-	}
-
-	/**
-	 * @param keyHolder the keyHolder to set
-	 */
-	public void setKeyHolder(KeyHolder keyHolder) {
-		this.keyHolder = keyHolder;
-	}
-
-	/**
 	 * @return the userUpdateDAO
 	 */
 	public IUserUpdateDAO getUserUpdateDAO() {
@@ -141,7 +124,7 @@ public class DashboardBO implements IDashboardBO {
 		// TODO Auto-generated method stub
 		getUserUpdateDAO().createWallPost(wallPost);
 		
-		return null;
+		return model;
 	}
 
 }

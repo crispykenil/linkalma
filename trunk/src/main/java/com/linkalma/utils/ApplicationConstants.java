@@ -164,6 +164,8 @@ public class ApplicationConstants {
 
 	public static String UPDATE_SUCCESS_MSG = "Data Saved Successfully";
 	
+	public static String EMAIL_ACCOUNT_CREATION_MSG = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
+	
 	public static String SCHOOL_INNER_PAGE_EVENTS = "EVENTS";
 	public static String SCHOOL_INNER_PAGE_CURRICULUM = "CURRICULUM";
 	public static String SCHOOL_INNER_PAGE_ABOUTUS = "ABOUTUS";

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -40,6 +41,7 @@ import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.WallPostDto;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.LinkalmaException;
+import com.linkalma.utils.SendEmail;
 import com.linkalma.utils.Utils;
 import com.linkalma.utils.cipher.Cipher;
 
@@ -311,6 +313,7 @@ public class HomeController {
 			wallPostDto.setUserID(userBean.getUserID());
 
 		model = dashboardBO.addWallPost(wallPostDto, model);
+		System.out.println(model);
 		setRequiredModelPropeties(model, request);
 		return new ModelAndView("redirect:/dashboard", "model", model);
 	}
@@ -339,7 +342,6 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
-	@Transactional
 	public String createProfile(@ModelAttribute User user,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! ");
@@ -351,7 +353,13 @@ public class HomeController {
 
 		logger.info("UserID : " + user.getUserID());
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		
+		SendEmail mailSender = (SendEmail) context.getBean("sendEmail");
+		
 		model = userBO.createUser(user, model);
+		
+		mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
+				ApplicationConstants.EMAIL_ACCOUNT_CREATION_MSG);
 		
 		setRequiredModelPropeties(model, request);
 		
