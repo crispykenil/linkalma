@@ -134,7 +134,8 @@ public class HomeController {
 				request.getSession().setAttribute("userBean", userBean);
 				return new ModelAndView("redirect:/dashboard");
 			} else {
-				return new ModelAndView("redirect:/error");
+				model.addAttribute("loginErrorMsg", "Invalid user login.");
+				return new ModelAndView("redirect:/");
 			}
 		} else if ("S".equalsIgnoreCase(userBean.getLoginType())) {
 			if (authenticateLogin(userName, password, userBean,
@@ -154,7 +155,8 @@ public class HomeController {
 				return new ModelAndView("redirect:school/"
 						+ school.getLinkalmaAddress(), "model", model);
 			} else {
-				return new ModelAndView("redirect:/error");
+				model.addAttribute("loginErrorMsg", "Invalid school login.");
+				return new ModelAndView("redirect:/");
 			}
 		} else
 			return new ModelAndView("redirect:/error");
