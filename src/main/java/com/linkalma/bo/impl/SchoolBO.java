@@ -142,7 +142,7 @@ public class SchoolBO implements ISchoolBO
 			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 			{
 				schoolDataDto.setDocumentName(multipartFile.getOriginalFilename());
-				fileHelperImpl.writeFile(multipartFile, "/home/ec2-user/fileuploads/"+multipartFile.getOriginalFilename());
+				fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
 			}
 			long id = getSchoolDAO().updateSchoolData(schoolDataDto, schoolDataDto.getDataType());
 			if (id > 0)
