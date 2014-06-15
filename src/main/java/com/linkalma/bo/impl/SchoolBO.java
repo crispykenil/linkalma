@@ -22,6 +22,7 @@ import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.CategoryCodesDAO;
 import com.linkalma.utils.LinkalmaException;
+import com.linkalma.utils.LinkalmaUtil;
 
 public class SchoolBO implements ISchoolBO 
 {
@@ -37,6 +38,16 @@ public class SchoolBO implements ISchoolBO
 	@Autowired
 	private FileHelperImpl fileHelperImpl;
 	
+	@Autowired
+	private LinkalmaUtil linkalmaUtil;
+	public LinkalmaUtil getLinkalmaUtil() {
+		return linkalmaUtil;
+	}
+
+	public void setLinkalmaUtil(LinkalmaUtil linkalmaUtil) {
+		this.linkalmaUtil = linkalmaUtil;
+	}
+
 	public FileHelperImpl getFileHelperImpl() {
 		return fileHelperImpl;
 	}
@@ -206,9 +217,10 @@ public class SchoolBO implements ISchoolBO
 	{
 			this.validateForSchoolAboutInfo(schoolDataDto);
 			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
+			
 			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 			{
-				fileHelperImpl.writeFile(multipartFile, "/home/ec2-user/fileuploads/"+multipartFile.getOriginalFilename());
+				fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
 			}
 			schoolDAO.updateAboutSchoolInfo(schoolDataDto);
 	}

@@ -15,6 +15,7 @@
 		<property name="schoolDAO" ref="schoolDAO" />   
 		<property name="categoryCodesDAO" ref="categoryCodesDAO" />   
 		<property name="fileHelperImpl" ref="fileHelperImpl"/>
+		<property name="linkalmaUtil" ref="linkalmaUtil"/>
    </bean>
 
 	<bean id="userSchoolBO" class="com.linkalma.bo.impl.UserSchoolBO">

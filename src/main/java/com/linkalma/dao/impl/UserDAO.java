@@ -31,8 +31,7 @@ public class UserDAO implements IUserDAO {
 	@Autowired
    private JdbcTemplate jdbcTemplateObject;
 	
-	@Autowired
-	   private KeyHolder keyHolder;
+	
 		
 	public long createUser(final User alumni) {
 		
