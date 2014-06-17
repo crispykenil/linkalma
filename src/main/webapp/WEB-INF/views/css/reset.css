@@ -72,9 +72,9 @@ a {
 	-webkit-box-sizing: border-box;
 }
 .fa:hover, .fa:active  {
-	background-color:#505765 !important;
+	background-color:#505765;
 	color:#fff;
-	font-size:18px;
+
 }
 p {
 	line-height:19px;

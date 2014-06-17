@@ -1,21 +1,52 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	LinkAlma - Login...
-</h1>
+<%@ include file="header.jsp" %>
+<style>
+.sign-in-wrapper input[type=text], .sign-in-wrapper input[type=password]{
+	width:79%;
+}
+#signup-panel {
+	font-size: 566px;
+	position: relative;
+	margin: auto;
+	color:#eee;
+	background:none;
+	display:block;
+	width:360px
+}
+#signup-panel h2 {
+	position:absolute;
+	top:160px;
+	left:148px;
+	
+}
+#signup-panel:hover, #signup-panel.fa:hover {
+	background:none
+}
+.sign-in-wrapper {
+	position:absolute;
+	bottom:140px;
+	left:30px;
+	width:85%
+}
+</style>
 
-<P>  The time on the server is ${serverTime}. </P>
+<div class="border-box fa fa-lock " id="signup-panel">
+<h2>Login</h2>
+	<div class="sign-in-wrapper">
+	
+		<form:form action="login" modelAttribute="loginForm" >
+			<ul>
+				<li><label>Username</label><input type="text" value="" name="userName" /> </li>
+				<li><label>Password</label><input type="password" value="" name="password" /> </li>
+				<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
+				<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
+				</li>
+				<li class="smallFont"> 
+					<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
+					<label class="fr">School Login <input type="radio" value="S" name="loginType" />	</label>
+				</li>
+			</ul>
+		</form:form>
+</div>
+</div>
+<%@ include file="footer.jsp" %>
 
-<form action="/j_security_check" name="loginForm">
-<input type="text" name ="j_username" />
-<input type="password" name ="j_password" />
-
-<input type="submit" value="Submit" />
-</form>
-</body>
-</html>
