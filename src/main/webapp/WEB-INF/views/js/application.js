@@ -11,10 +11,15 @@
 		registerNewSchool();
 		getFullNewsAndEvents();
 		resetPassword();
-		
+		showHideMsges();
 	});
 
 })(jQuery);
+
+function showHideMsges()
+{
+	$('#successMsg').css('display', 'none');
+}
 
 function resetPassword(){
 	$('#forgotPasswordBtn').on('click', function(e) {

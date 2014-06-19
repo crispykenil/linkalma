@@ -135,4 +135,10 @@ public class UserBO implements IUserBO
 		this.userSchoolDto = userSchoolDto;
 	}
 
+	@Override
+	public boolean checkUserExists(String emailAddress, Model model) {
+
+		return getUserDAO().checkUserExists(emailAddress);
+	}
+
 }

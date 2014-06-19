@@ -271,4 +271,13 @@ public class SchoolDAO implements ISchoolDAO {
 		
 	}
 
+	@Override
+	public boolean checkSchoolExists(String emailAddress) {
+		int count = getJdbcTemplateObject().queryForInt( ApplicationConstants.CHECK_SCHOOL_QUERY, new Object[]{emailAddress});
+		if (count > 0)
+			return true;
+		else 
+			return false;
+	}
+
 }

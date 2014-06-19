@@ -176,5 +176,10 @@ public class ApplicationConstants {
 	public final static String  UPDATE_ABOUT_SCHOOL_INFO="Update school "+
 							    "Set SchoolName=? ,WebsiteURL=? ,LinkAlmaURL=? ,SchoolHistory=? ,LogoFileName=?,Address1=? "+
 							    "Where SchoolID=? "	;
+	
+	public static String CHECK_SCHOOL_QUERY = "SELECT COUNT(*) FROM school WHERE EmailAddress= ?";
+	
+	public static String CHECK_USER_QUERY = "SELECT COUNT(*) FROM user WHERE EmailAddress= ?";
+	
 }
 

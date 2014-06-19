@@ -2,6 +2,9 @@ package com.linkalma.utils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
@@ -11,6 +14,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class SendEmail {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(SendEmail.class);
 
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -35,6 +41,7 @@ public class SendEmail {
 	    simpleMailMessage.setSubject(subject);
 	    simpleMailMessage.setText(msg);
 	    javaMailSender.send(simpleMailMessage);
+	    logger.info("Email Sent to: "+to);
 	}
 	 
 	public void sendMailWithTemplate(String dear, String content) {         

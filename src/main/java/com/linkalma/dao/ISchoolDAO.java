@@ -85,4 +85,5 @@ public interface ISchoolDAO {
 	   
 	   public int updateAboutSchoolInfo(SchoolDataDTO schoolDataDto);
 
+	   public boolean checkSchoolExists(String emailAddress);
 }

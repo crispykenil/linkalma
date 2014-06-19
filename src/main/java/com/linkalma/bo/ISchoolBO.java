@@ -38,4 +38,5 @@ public interface ISchoolBO {
 	
 	public void updateAboutSchoolInfo(SchoolDataDTO schoolDataDto) throws FileNotFoundException, IOException,LinkalmaException;
 
+	public boolean checkSchoolExists(String emailAddress, Model model);
 }
