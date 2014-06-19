@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.linkalma.bo.IDashboardBO;
@@ -129,6 +129,25 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to login page.");
 
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		
+		if (userBO.checkUserExists(userName, model))
+		{
+			userBean.setLoginType("A");
+			logger.info("Alumni is logging in");
+		}
+		else if(schoolBO.checkSchoolExists(userName, model))
+		{
+			userBean.setLoginType("S");
+			logger.info("School is logging in");
+		}
+		else
+		{
+			model.addAttribute("loginErrorMsg", "Invalid user login.");
+			return new ModelAndView("redirect:/");
+		}
+		
 		// Checking whether Alumni signing in or School Signing.
 		if (userBean.getLoginType().equalsIgnoreCase("A")) {
 			if (authenticateLogin(userName, password, userBean,
@@ -143,7 +162,6 @@ public class HomeController {
 			if (authenticateLogin(userName, password, userBean,
 					userBean.getLoginType())) {
 
-				ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
 				logger.info("UserName:" + userBean.getUserName());
 				School school = schoolBO.getSchoolBySchoolEmailID(
 						userBean.getUserName(), model);
@@ -342,7 +360,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
-	public String createProfile(@ModelAttribute User user,
+	public @ResponseBody String createProfile(@ModelAttribute User user,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! ");
 

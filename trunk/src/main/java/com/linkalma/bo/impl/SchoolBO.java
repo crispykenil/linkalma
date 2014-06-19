@@ -250,4 +250,10 @@ public class SchoolBO implements ISchoolBO
 		}
 		
 	}
+
+	@Override
+	public boolean checkSchoolExists(String emailAddress, Model model) {
+		return getSchoolDAO().checkSchoolExists(emailAddress);
+		
+	}
 }

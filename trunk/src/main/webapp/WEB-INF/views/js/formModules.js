@@ -9,17 +9,13 @@ var form = {
 			data : formData
 
 		}).done(function(data) {
-			//alert(data);
+			$('#successMsg').css('display', 'block');
+			$('#successMsg').css('text-align', 'center');
+			$('#successMsg').html(data);
 			console.log(data);
 		}).error(function(data) {
 			//console.log(data);
 		}).complete(function(data) {
-			alert('l-'+data);
-			$('#sign-up').hide({
-				fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
-				followSpeed : 1500, //can be a string ('slow'/'fast') or int
-				modalColor : ''
-			});
 			console.log(data);
 		});
 	},

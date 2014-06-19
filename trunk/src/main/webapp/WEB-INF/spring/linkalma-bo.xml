@@ -33,22 +33,22 @@
 	</bean>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	    <property name="host" value="smtp.gmail.com" />
+	    <property name="host" value="smtp.live.com" />
 	    <property name="port" value="587" />
-	    <property name="username" value="kenilkdoshi@gmail.com" />
-	    <property name="password" value="" />
+	    <property name="username" value="link_alma@outlook.com" />
+	    <property name="password" value="@7RoyalTower" />
 	    <property name="javaMailProperties">
 	            <props>
 	                <prop key="mail.smtp.auth">true</prop>
 	                <prop key="mail.smtp.starttls.enable">true</prop>
-	                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	                <prop key="mail.smtp.ssl.trust">smtp.live.com</prop>
 	            </props>
 	    </property>
 	</bean>
 
 <bean id="templateMailMessage"
     class="org.springframework.mail.SimpleMailMessage">
-    <property name="from" value="admin@linkalma.com" />
+    <property name="from" value="link_alma@outlook.com" />
     <property name="to" value="receiver@gmail.com" />
     <property name="subject" value="Hello" />
     <property name="text">

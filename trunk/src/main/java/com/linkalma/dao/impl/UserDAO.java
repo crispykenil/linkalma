@@ -172,4 +172,13 @@ public class UserDAO implements IUserDAO {
 		return alumni;
 		
 	}
+	
+	@Override
+	public boolean checkUserExists(String emailAddress) {
+		int count = getJdbcTemplateObject().queryForInt( ApplicationConstants.CHECK_USER_QUERY, new Object[]{emailAddress});
+		if (count > 0)
+			return true;
+		else 
+			return false;
+	}
 }

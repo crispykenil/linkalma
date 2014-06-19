@@ -19,4 +19,6 @@ public interface IUserDAO {
 	public List<User> getAllUserProfile(User alumni);
 
 	public User getUserWorkplace(User alumni);
+	
+	public boolean checkUserExists(String emailAddress);
 }

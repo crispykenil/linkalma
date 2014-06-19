@@ -18,10 +18,6 @@
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 								<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
 								</li>
-								<li class="smallFont"> 
-									<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
-									<label class="fr">School Login <input type="radio" value="S" name="loginType" />	</label>
-								</li>
 							</ul>
 						</form:form>
 						</c:otherwise>
@@ -43,6 +39,7 @@
 					<div id="sign-up" class="sign-up-container">
 		
 						<h2>New User? Sign Up</h2>
+						<h3 id="successMsg"></h3>
 						<form:form action="createprofile" id="signUpForm" name="userProfile" method="post">
 						<ul class="twoColumnForm clear-fix">
 							<li><label>First Name</label>

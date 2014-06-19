@@ -16,5 +16,7 @@ public interface IUserBO {
 	
 	public Model updateUserProfileDetails(User userDto, Model model);
 	
+	public boolean checkUserExists(String emailAddress, Model model);
+	
 	
 }
