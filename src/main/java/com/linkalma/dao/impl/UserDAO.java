@@ -8,12 +8,15 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import com.linkalma.controller.HomeController;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dao.mapper.UserMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
@@ -24,6 +27,9 @@ import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.cipher.Cipher;
 
 public class UserDAO implements IUserDAO {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserDAO.class);
 
 	@Autowired
 	private DataSource dataSource;
@@ -72,7 +78,7 @@ public class UserDAO implements IUserDAO {
  
 	public int createCredentials(User alumni) {
 	      
-	      return getJdbcTemplateObject().update( ApplicationConstants.INSER_USER_CREDENTIALS_QUERY, 
+	      return getJdbcTemplateObject().update( ApplicationConstants.INSERT_USER_CREDENTIALS_QUERY, 
 	    		  alumni.getUserID(), alumni.getEmailAddress(),Cipher.DIGEST_PASSWORD(alumni.getPassword()));
 	      
 	   }
@@ -181,4 +187,26 @@ public class UserDAO implements IUserDAO {
 		else 
 			return false;
 	}
+
+	@Override
+	public String generateVerificationCode(String emailAddress) {
+		
+		String verificationCode = Cipher.DIGEST_PASSWORD_256(emailAddress);
+		logger.info("VerficationCode: "+verificationCode);
+		return verificationCode;
+	}
+	
+	@Override
+	public int saveVerificationCode(String emailAddress, String code) {
+		 int updateStatus = getJdbcTemplateObject().update( ApplicationConstants.INSERT_VERIFICATION_CODE_QUERY, 
+	    		  emailAddress, code);
+		 
+		 return updateStatus;
+	}
+	
+	public static void main(String[] args) {
+		new UserDAO().generateVerificationCode("keni@gmail.com");
+	}
+
+	
 }

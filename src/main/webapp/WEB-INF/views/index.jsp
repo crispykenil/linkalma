@@ -12,6 +12,9 @@
 						<c:otherwise>
 						<h2>Login</h2>
 						<form:form action="login" modelAttribute="loginForm" >
+						<c:forEach items="${errors}" var="error">
+						   <h3> <c:out value="${error}" /></h3>
+						</c:forEach>
 							<ul>
 								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
@@ -118,15 +121,15 @@
 </div>
 <div id="forgotPassword" class="forgot-password hidden">
 	<h2>Forgot Password? Type your email address and get it.</h2>
-	<form class="forgot-password-form">
+	<form:form class="forgot-password-form" action="emailpassword">
 		<ul class=" clear-fix">
-					<li><label>Email</label> <input type="text" 	 name="country" class="required email" /></li>
+					<li><label>Email</label> <input type="text" 	 name="emailAddress" class="required email" /></li>
 		</ul>
 		<div class="btn-wrapper">
-			<input type="button" value="Email Password" />
+			<input type="submit" value="Email Password" />
 						
 		</div>
-	</form>
+	</form:form>
 					
 </div>
 

@@ -46,8 +46,11 @@ public class ApplicationConstants {
 			+ " (USERID, SUBJECT, DESCRIPTION, UPLOADEDON, CREATEUSERID, CREATEDTTM, UPDATEUSERID) "
 			+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-	public static String INSER_USER_CREDENTIALS_QUERY = "INSERT INTO usercredentials (USERID,EMAILADDRESS,PASSWORD) "
+	public static String INSERT_USER_CREDENTIALS_QUERY = "INSERT INTO usercredentials (USERID,EMAILADDRESS,PASSWORD) "
       		+ "VALUES (?,?, ?)";
+	
+	public static String INSERT_VERIFICATION_CODE_QUERY = "INSERT INTO verificationlinks (EMAILADDRESS,CODE) "
+      		+ "VALUES (?, ?)";
 	
 	public static String INSERT_SCHOOL_CREDENTIALS_QUERY = "INSERT INTO schoolcredentials (SCHOOLID,EMAILADDRESS, PASSWORD) "
       		+ "VALUES (?, ?, ?)";
@@ -165,7 +168,10 @@ public class ApplicationConstants {
 	public static String UPDATE_SUCCESS_MSG = "Data Saved Successfully";
 	
 	public static String EMAIL_ACCOUNT_CREATION_MSG = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
+
+	public static String PASSWORD_RESET_EMAIL_MSG = "Follow the below link to reset your password.";
 	
+
 	public static String SCHOOL_INNER_PAGE_EVENTS = "EVENTS";
 	public static String SCHOOL_INNER_PAGE_CURRICULUM = "CURRICULUM";
 	public static String SCHOOL_INNER_PAGE_ABOUTUS = "ABOUTUS";
@@ -180,6 +186,10 @@ public class ApplicationConstants {
 	public static String CHECK_SCHOOL_QUERY = "SELECT COUNT(*) FROM school WHERE EmailAddress= ?";
 	
 	public static String CHECK_USER_QUERY = "SELECT COUNT(*) FROM user WHERE EmailAddress= ?";
+
+	
+	public static String PASSWORD_RESET_LINK_SUCCESS = "Your password reset instructions have been sent to your Email Address."; 
+	public static String PASSWORD_RESET_LINK_FAILURE = "The Email Address mentioned is not registered with LinkAlma."; 
 	
 	public static String INSERT_STAFF_QUERY ="INSERT INTO staff (SCHOOLID,  FACULTYNAME,FACULTYEMAIL,  SUBJECTAREA,  PHOTONAME) VALUES(?,?,?,?,?)";
 	

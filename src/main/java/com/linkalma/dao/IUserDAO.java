@@ -21,4 +21,8 @@ public interface IUserDAO {
 	public User getUserWorkplace(User alumni);
 	
 	public boolean checkUserExists(String emailAddress);
+	
+	public String generateVerificationCode(String emailAddress);
+	
+	public int saveVerificationCode(String emailAddress, String code);
 }
