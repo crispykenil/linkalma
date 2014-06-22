@@ -56,5 +56,13 @@
 <a href="/linkalma/images/gallery/20.jpg" rel="lightbox"><img src="/linkalma/images/gallery/20.jpg" class="thumbnail" alt="" /></a>
 
 </div>
-
+<form action="/linkalma/schooladmin/createSchoolGallery" name="schoolGalleryForm" method="POST" enctype="multipart/form-data">
+	
+	albumName<input type="text" name="albumName"/>
+	photoName<input type="text" name="photoName"/>
+	description<input type="text" name="description"/>
+	<input type="file" name="uploadedFileList" accept="image/*" class="button" multiple="multiple" />
+	<input type="submit" name=""/>
+		
+	</form>
 <%@ include file="footer.jsp" %>

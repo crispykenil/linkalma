@@ -23,6 +23,7 @@ import com.linkalma.dao.mapper.SchoolUpdateMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
@@ -304,6 +305,26 @@ public class SchoolDAO implements ISchoolDAO {
 		      Long pkStaffId = keyHolder.getKey().longValue();
 		      return pkStaffId;
 		
+	}
+
+	@Override
+	public long createSchoolGallery(final SchoolGallery schoolGallery) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		//INSERT INTO schoolgallery (SCHOOLID,ALBUMNAME,PHOTONAME,DESCRIPTION) VALUES(?,?,?,?)
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_SCHOOL_GALLERY_QUERY, new String[] {"photoID"});
+		    	  	
+	    	  	ps.setLong(1, schoolGallery.getSchoolID());
+	    	  	ps.setString(2, schoolGallery.getAlbumName());
+	    	  	ps.setString(3, schoolGallery.getPhotoName());
+	    	  	ps.setString(4, schoolGallery.getDescription());
+	    	     	  	return ps;
+	    	  	}
+	    }, keyHolder);
+	      
+	      Long pkSchoolGalleryId = keyHolder.getKey().longValue();
+	      return pkSchoolGalleryId;
 	}
 	
 }

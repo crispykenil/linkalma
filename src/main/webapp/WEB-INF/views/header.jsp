@@ -83,7 +83,7 @@
 						<li><a href="/linkalma/school/${model.schoolName }/curriculum">Curriculum</a></li>
 						<li><a href="/linkalma/school/${model.schoolName }/aboutus">About Us</a></li>
 						<li><a href="/linkalma/schooladmin/showStaff">Our Staff</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Gallery</a></li>
+						<li><a href="/linkalma/schooladmin/showGallery">Our Gallery</a></li>
 						
 					</ul>
 		</div>

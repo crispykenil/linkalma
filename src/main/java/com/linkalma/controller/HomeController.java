@@ -33,6 +33,7 @@ import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
 import com.linkalma.dto.UploadedFile;
@@ -710,4 +711,48 @@ public class HomeController {
 		    return new ModelAndView("ourstaff");
 	 
 	 }
+	 @RequestMapping(value="/schooladmin/showGallery",method=RequestMethod.GET)
+	 public ModelAndView showGallery(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
+	 {
+
+		    return new ModelAndView("gallery");
+	 
+	 }
+	 @RequestMapping(value="/schooladmin/createSchoolGallery",method=RequestMethod.POST)
+	 public ModelAndView createSchoolGallery(@ModelAttribute("schoolGalleryForm") SchoolGallery schoolGallery,HttpServletRequest request,Model model)
+	 {
+		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
+		 	School school = (School)request.getSession().getAttribute("school");
+		    if (null == school)
+		    {
+		      return new ModelAndView("redirect:/logout", "model", model);
+		    }
+		    
+		    schoolGallery.setSchoolID(school.getSchoolID());
+		    schoolGallery.setSchoolName(school.getSchoolName());
+		    try 
+		    {
+				schoolBO.createSchoolGallery(schoolGallery);
+			} catch (FileNotFoundException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LinkalmaException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		   
+		 
+		    
+		    
+		return  new ModelAndView("redirect:/schooladmin/showGallery", "model", model);
+	
+	 }
+	
+	 
 }

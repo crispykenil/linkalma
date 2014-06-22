@@ -5,10 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
 
 public class FileHelperImpl  implements FileHelper
@@ -39,6 +41,17 @@ public class FileHelperImpl  implements FileHelper
 		fileOutputStream.write(IOUtils.toByteArray(is));
 		fileOutputStream.flush();
 		fileOutputStream.close();
+	}
+
+	@Override
+	public void writeFile(List<MultipartFile> multipartFiles,String dir)
+			throws FileNotFoundException, IOException, LinkalmaException {
+		
+		for (MultipartFile multipartFile : multipartFiles)
+		{
+			this.writeFile(multipartFile, dir+"//"+multipartFile.getOriginalFilename());
+		}
+		
 	}
 
 }
