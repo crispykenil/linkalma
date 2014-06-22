@@ -181,5 +181,6 @@ public class ApplicationConstants {
 	
 	public static String CHECK_USER_QUERY = "SELECT COUNT(*) FROM user WHERE EmailAddress= ?";
 	
+	public static String INSERT_STAFF_QUERY ="INSERT INTO staff (SCHOOLID,  FACULTYNAME,FACULTYEMAIL,  SUBJECTAREA,  PHOTONAME) VALUES(?,?,?,?,?)";
 }
 

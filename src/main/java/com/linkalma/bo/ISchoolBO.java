@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.Staff;
 import com.linkalma.utils.LinkalmaException;
 
 public interface ISchoolBO {
@@ -39,4 +40,6 @@ public interface ISchoolBO {
 	public void updateAboutSchoolInfo(SchoolDataDTO schoolDataDto) throws FileNotFoundException, IOException,LinkalmaException;
 
 	public boolean checkSchoolExists(String emailAddress, Model model);
+	
+	public long createStaff(Staff staff)  throws FileNotFoundException, IOException ,LinkalmaException;
 }

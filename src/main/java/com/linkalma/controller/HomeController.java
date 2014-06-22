@@ -34,6 +34,7 @@ import com.linkalma.dao.impl.LoginDAO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.Staff;
 import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserBean;
@@ -666,4 +667,47 @@ public class HomeController {
 		
 	    return new ModelAndView("redirect:/schooladmin/addaboutschool?schoolName="+school.getSchoolName(), "model", model);
 	  }
+	 
+	 @RequestMapping(value="/schooladmin/createStaff",method=RequestMethod.POST)
+	 public ModelAndView createStaff(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
+	 {
+		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
+		 	School school = (School)request.getSession().getAttribute("school");
+		    if (null == school)
+		    {
+		      return new ModelAndView("redirect:/logout", "model", model);
+		    }
+		    
+		    staff.setSchoolID(school.getSchoolID());
+		    try 
+		    {
+				schoolBO.createStaff(staff);
+			} catch (FileNotFoundException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LinkalmaException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		   
+		 
+		    
+		    
+		return  new ModelAndView("redirect:/schooladmin/showStaff", "model", model);
+	
+	 }
+	 
+	 @RequestMapping(value="/schooladmin/showStaff",method=RequestMethod.GET)
+	 public ModelAndView showStaff(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
+	 {
+
+		    return new ModelAndView("ourstaff");
+	 
+	 }
 }
