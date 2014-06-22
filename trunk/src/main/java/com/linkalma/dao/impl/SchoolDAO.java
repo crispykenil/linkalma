@@ -24,7 +24,9 @@ import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
+import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.cipher.Cipher;
@@ -280,4 +282,28 @@ public class SchoolDAO implements ISchoolDAO {
 			return false;
 	}
 
+	@Override
+	public long createStaff(final Staff staff) {
+		
+			//INSERT_STAFF_QUERY ="INSERT INTO staff (SCHOOLID,  FACULTYNAME,FACULTYEMAIL,  SUBJECTAREA,  PHOTONAME)";
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+			
+			getJdbcTemplateObject().update(new PreparedStatementCreator() {
+		    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+		    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_STAFF_QUERY, new String[] {"staffID"});
+			    	  	
+		    	  	ps.setLong(1, staff.getSchoolID());
+		    	  	ps.setString(2, staff.getFacultyName());
+		    	  	ps.setString(3, staff.getFacultyEmail());
+		    	  	ps.setString(4, staff.getSubjectArea());
+		    	  	ps.setString(5, staff.getPhotoName());
+		    	     	  	return ps;
+		    	  	}
+		    }, keyHolder);
+		      
+		      Long pkStaffId = keyHolder.getKey().longValue();
+		      return pkStaffId;
+		
+	}
+	
 }

@@ -17,6 +17,7 @@ import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.utils.ApplicationConstants;
@@ -255,5 +256,19 @@ public class SchoolBO implements ISchoolBO
 	public boolean checkSchoolExists(String emailAddress, Model model) {
 		return getSchoolDAO().checkSchoolExists(emailAddress);
 		
+	}
+
+	@Override
+	public long createStaff(Staff staff)  throws FileNotFoundException, IOException ,LinkalmaException{
+		
+		MultipartFile multipartFile=staff.getUploadedFile();
+		
+		if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+		{
+			staff.setPhotoName(multipartFile.getOriginalFilename());
+			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
+		}
+		Long pkStaffID=schoolDAO.createStaff(staff);
+		return pkStaffID;
 	}
 }

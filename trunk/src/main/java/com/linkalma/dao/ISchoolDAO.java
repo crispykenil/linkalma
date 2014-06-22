@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolUpdateDTO;
+import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.UserSchoolDTO;
 
@@ -86,4 +87,8 @@ public interface ISchoolDAO {
 	   public int updateAboutSchoolInfo(SchoolDataDTO schoolDataDto);
 
 	   public boolean checkSchoolExists(String emailAddress);
+	   
+	   public long createStaff(Staff staff);
+	   
+	   
 }
