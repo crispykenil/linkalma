@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
@@ -90,5 +91,5 @@ public interface ISchoolDAO {
 	   
 	   public long createStaff(Staff staff);
 	   
-	   
+	   public long createSchoolGallery(SchoolGallery schoolGallery);
 }

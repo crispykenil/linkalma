@@ -1,5 +1,6 @@
 package com.linkalma.bo.impl;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -16,12 +17,14 @@ import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.CategoryCodesDAO;
+import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.LinkalmaUtil;
 
@@ -271,4 +274,23 @@ public class SchoolBO implements ISchoolBO
 		Long pkStaffID=schoolDAO.createStaff(staff);
 		return pkStaffID;
 	}
+
+	@Override
+	public void createSchoolGallery(SchoolGallery schoolGallery)throws FileNotFoundException, IOException, LinkalmaException {
+		
+		List<MultipartFile> multipartFiles=schoolGallery.getUploadedFileList();
+		String schoolParentDir;
+		for(MultipartFile multipartFile:  multipartFiles)
+		{
+			schoolGallery.setPhotoName(multipartFile.getOriginalFilename());
+			schoolParentDir=schoolGallery.getSchoolName()+"_"+schoolGallery.getSchoolID();
+			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.getAlbumFilePath(schoolParentDir
+																				 ,schoolGallery.getAlbumName()
+																				 ,multipartFile.getOriginalFilename()));
+			schoolDAO.createSchoolGallery(schoolGallery);
+		}
+		
+		return ;
+	}
+	
 }
