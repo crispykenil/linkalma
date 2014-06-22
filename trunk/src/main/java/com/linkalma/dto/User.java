@@ -76,6 +76,8 @@ public class User extends BaseDTO
 	
 	private String category; // This includes type - Personal, School, Workplace, Other
 	
+	private String verificationCode;
+	
 	private List<UserSchoolDTO> userSchoolList;
 	
 	private List<UserWorkplaceDTO> userWorkplaceList;
@@ -623,5 +625,19 @@ public class User extends BaseDTO
 	 */
 	public void setUserWorkplaceList(List<UserWorkplaceDTO> userWorkplaceList) {
 		this.userWorkplaceList = userWorkplaceList;
+	}
+
+	/**
+	 * @return the verificationCode
+	 */
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	/**
+	 * @param verificationCode the verificationCode to set
+	 */
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
 }

@@ -146,8 +146,8 @@ public class HomeController {
 		}
 		else
 		{
-			model.addAttribute("loginErrorMsg", "Invalid user login.");
-			return new ModelAndView("redirect:/");
+			model.addAttribute("errors", "Incorrect EmailID or Password.");
+			return new ModelAndView("index");
 		}
 		
 		// Checking whether Alumni signing in or School Signing.
@@ -364,26 +364,47 @@ public class HomeController {
 	@RequestMapping(value = "/createprofile", method = RequestMethod.POST)
 	public @ResponseBody String createProfile(@ModelAttribute User user,
 			HttpServletRequest request, Model model) {
-		logger.info("Welcome home! ");
+		logger.info("Welcome Create Profile! ");
 
-		UserBean userBean = (UserBean) request.getSession().getAttribute(
-				"userBean");
-		if (userBean != null)
-			user.setUserID(userBean.getUserID());
-
-		logger.info("UserID : " + user.getUserID());
+		
+		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		
-		SendEmail mailSender = (SendEmail) context.getBean("sendEmail");
-		
-		model = userBO.createUser(user, model);
-		
-		mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
-				ApplicationConstants.EMAIL_ACCOUNT_CREATION_MSG);
-		
-		setRequiredModelPropeties(model, request);
-		
-		return "User Created";
+		if (!userBO.checkUserExists(user.getEmailAddress(), model))
+		{
+			if(!schoolBO.checkSchoolExists(user.getEmailAddress(), model))
+			{
+			logger.info("User Does not exists, GO Ahead Create it");
+			
+			UserBean userBean = (UserBean) request.getSession().getAttribute(
+					"userBean");
+			if (userBean != null)
+				user.setUserID(userBean.getUserID());
+
+			logger.info("UserID : " + user.getUserID());
+			
+			SendEmail mailSender = (SendEmail) context.getBean("sendEmail");
+			
+			model = userBO.createUser(user, model);
+			
+			mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
+					ApplicationConstants.EMAIL_ACCOUNT_CREATION_MSG);
+			
+			setRequiredModelPropeties(model, request);
+			
+			return "Voila ! Alumni Profile Created";
+			}
+			else
+			{
+				logger.info("School Exists with this email id : "+user.getEmailAddress());
+				return "EmailID is already registered with LinkAlma, please use a different one !";
+			}
+		}
+		else
+		{
+			logger.info("Alumni Exists with this email id : "+user.getEmailAddress());
+			return "Alumni EmailID is already registered with LinkAlma";
+		}
 	}
 
 	/**

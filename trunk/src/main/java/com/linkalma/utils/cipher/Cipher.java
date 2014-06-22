@@ -13,4 +13,8 @@ public class Cipher
 		return DigestUtils.sha512Hex(SALT_PREFIX+pass+SALT_SUFFIX);
 	}
 	
+	public static String DIGEST_PASSWORD_256(String pass)
+	{
+		return DigestUtils.sha256Hex(SALT_PREFIX+pass+SALT_SUFFIX);
+	}
 }

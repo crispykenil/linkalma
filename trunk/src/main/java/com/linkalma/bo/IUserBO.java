@@ -18,5 +18,5 @@ public interface IUserBO {
 	
 	public boolean checkUserExists(String emailAddress, Model model);
 	
-	
+	public String generateVerficationCode(String emailAddress);
 }

@@ -12,6 +12,7 @@ import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.MessageConstants;
 import com.linkalma.utils.Utils;
+import com.mysql.jdbc.StringUtils;
 
 public class UserBO implements IUserBO 
 {
@@ -141,4 +142,21 @@ public class UserBO implements IUserBO
 		return getUserDAO().checkUserExists(emailAddress);
 	}
 
+	@Override
+	@Transactional
+	public String generateVerficationCode(String emailAddress) {
+		
+		String code = getUserDAO().generateVerificationCode(emailAddress);
+		
+		if(!StringUtils.isNullOrEmpty(code))
+		{
+			int updateStatus = getUserDAO().saveVerificationCode(emailAddress, code);
+//			if(updateStatus > 0)
+				
+			
+		}
+		return code;
+	}
+
+	
 }
