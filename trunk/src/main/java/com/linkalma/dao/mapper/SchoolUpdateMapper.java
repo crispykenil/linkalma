@@ -15,7 +15,7 @@ public class SchoolUpdateMapper implements RowMapper<SchoolUpdateDTO> {
 	      schoolUpdateDTO.setSchoolID(rs.getLong("SCHOOLID"));
 	      schoolUpdateDTO.setTitle(rs.getString("TITLE"));
 	      schoolUpdateDTO.setDescription(rs.getString("DESCRIPTION"));
-	      schoolUpdateDTO.setType(rs.getString("TYPE"));
+//	      schoolUpdateDTO.setType(rs.getString("TYPE"));
 	      schoolUpdateDTO.setUpdateType(rs.getInt("UPDATETYPE"));
 	      schoolUpdateDTO.setSchoolName(rs.getString("SCHOOLNAME"));
 	      schoolUpdateDTO.setCreateDttm(rs.getDate("CREATEDTTM"));
