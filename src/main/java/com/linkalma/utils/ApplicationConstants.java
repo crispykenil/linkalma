@@ -176,6 +176,7 @@ public class ApplicationConstants {
 	public static String SCHOOL_INNER_PAGE_CURRICULUM = "CURRICULUM";
 	public static String SCHOOL_INNER_PAGE_ABOUTUS = "ABOUTUS";
 	public static String SCHOOL_INNER_PAGE_GALLERY = "GALLERY";
+	public static String SCHOOL_INNER_PAGE_STAFF = "STAFF";
 	
 	public static String CHECK_LINKALMA_URL_QUERY = "SELECT COUNT(*) FROM school WHERE LINKALMAURL = ?";
 	
