@@ -16,7 +16,7 @@
 						   <h3> <c:out value="${error}" /></h3>
 						</c:forEach>
 							<ul>
-								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
+								<li><label>Email Id</label><input type="text" value="" name="userName" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 								<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
@@ -31,7 +31,7 @@
 				<c:choose>
 						<c:when test="${model.loggedIn != true}">
 					<ul>
-						<li><input type="button" value="Create an Account" id="sign-up-button" class="button large"/></li>
+						<li><input type="button" value="Not a Member! Sign Up" id="sign-up-button" class="button large"/></li>
 						<li><a href="loadschool">Register New School !</a></li>
 						<!--<li>No Account Yet? </li>
 						<li>OR</li>
