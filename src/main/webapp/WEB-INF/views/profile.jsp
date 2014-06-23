@@ -145,13 +145,13 @@ function fileUpload()
 			<form:form name="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm" action="updateuserschool" modelAttribute="userSchool" method="post">
 		
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
-				<table class="dataTable">
+								<table class="dataTable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
 								<th> School Name </th>
-								<th> From Year </th>
-								<th> To Year </th>
-								<th> Batch</th>
+								<th class="table-year-col"> From Year </th>
+								<th class="table-year-col"> To Year </th>
+								<th class="table-year-col"> Batch</th>
 								<th> Branch</th>
 								<th>Action</th>
 								
@@ -185,8 +185,10 @@ function fileUpload()
 					</tbody>
 				</table>
 				<div class="btn-wrapper">
+				<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-						<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
+						
+						
 				</div>
 			</form:form>
 				<div id="addMySchool" class="addMydSchoolContainer popupContent" style="width:450px">
@@ -208,7 +210,7 @@ function fileUpload()
 						<label>Branch</label>
 						<input type="text" value=""  name="branch" />
 						<div class="btn-wrapper">
-							<input type="submit" class="button large" value="Add Work Details" />
+							<input type="submit" class="button large" value="Add School Details" />
 						</div>
 						
 						
@@ -252,8 +254,9 @@ function fileUpload()
 						</tbody>
 					</table>
 					<div class="btn-wrapper">
+							
+							<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 							<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-							<input type="reset" value="Cancel" class="button cancelUpdateAction" disabled="disabled"/>
 					</div>
 				</form:form>
 				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">

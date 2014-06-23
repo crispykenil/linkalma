@@ -33,7 +33,9 @@ function getPopup(popUpElement){
 	popUpElement.bPopup({
 		fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
 		followSpeed : 1500, //can be a string ('slow'/'fast') or int
-		modalColor : 'black'
+		modalColor : 'black',
+		closeClass:'close-bPopup',
+
 	});
 }
 function getFullNewsAndEvents(){
@@ -55,14 +57,8 @@ function getSignUpForm (){
 	// From jQuery v.1.7.0 use .on() instead of .bind()
 	$('#sign-up-button').bind('click', function(e) {
 		// Triggering bPopup when click event is fired
-		$('#sign-up').bPopup({
-			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
-			followSpeed : 1500, //can be a string ('slow'/'fast') or int
-			modalColor : 'black'
-		});
-
+		getPopup($("#sign-up"));
 	});
-	
 }
 function submitSignUpForm() {
 	$("#signUpForm").submit(function(e) {
