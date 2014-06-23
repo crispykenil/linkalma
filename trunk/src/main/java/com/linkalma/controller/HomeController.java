@@ -224,6 +224,13 @@ public class HomeController {
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_CURRICULUM))
 			model = schoolBO.getSchoolDataBySchoolID(schoolUpdateDto, model);
 
+		else if (innerPage
+					.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_GALLERY))
+				model = model;
+		else if (innerPage
+				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_STAFF))
+			model = model;
+
 		setRequiredModelPropeties(model, request);
 		
 		return new ModelAndView(innerPage, "model", model);
@@ -718,27 +725,10 @@ public class HomeController {
 				e.printStackTrace();
 			}
 		   
-		 
-		    
-		    
-		return  new ModelAndView("redirect:/schooladmin/showStaff", "model", model);
+		return  new ModelAndView("redirect:/schooladmin/ourstaff", "model", model);
 	
 	 }
 	 
-	 @RequestMapping(value="/schooladmin/showStaff",method=RequestMethod.GET)
-	 public ModelAndView showStaff(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
-	 {
-
-		    return new ModelAndView("ourstaff");
-	 
-	 }
-	 @RequestMapping(value="/schooladmin/showGallery",method=RequestMethod.GET)
-	 public ModelAndView showGallery(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
-	 {
-
-		    return new ModelAndView("gallery");
-	 
-	 }
 	 @RequestMapping(value="/schooladmin/createSchoolGallery",method=RequestMethod.POST)
 	 public ModelAndView createSchoolGallery(@ModelAttribute("schoolGalleryForm") SchoolGallery schoolGallery,HttpServletRequest request,Model model)
 	 {
@@ -771,7 +761,7 @@ public class HomeController {
 		 
 		    
 		    
-		return  new ModelAndView("redirect:/schooladmin/showGallery", "model", model);
+		return  new ModelAndView("redirect:/schooladmin/gallery", "model", model);
 	
 	 }
 	
