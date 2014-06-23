@@ -9,15 +9,16 @@ var form = {
 			data : formData
 
 		}).done(function(data) {
-			$('#successMsg').css('display', 'block');
-			$('#successMsg').css('text-align', 'center');
-			$('#successMsg').html(data);
-			console.log(data);
+			showMessage(data);
 		}).error(function(data) {
-			//console.log(data);
+			showMessage(data);
 		}).complete(function(data) {
 			console.log(data);
 		});
+		
+		var showMessage = function showMessage(data){
+			$('.message', form).html(data).show();
+		};
 	},
 	makeFormReadonly : function(form) {
 		$(this.formFields, form).each(function() {

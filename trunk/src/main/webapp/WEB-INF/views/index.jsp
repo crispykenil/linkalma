@@ -12,11 +12,8 @@
 						<c:otherwise>
 						<h2>Login</h2>
 						<form:form action="login" modelAttribute="loginForm" >
-						<c:forEach items="${errors}" var="error">
-						   <h3> <c:out value="${error}" /></h3>
-						</c:forEach>
 							<ul>
-								<li><label>Email Id</label><input type="text" value="" name="userName" /> </li>
+								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 								<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
@@ -31,7 +28,7 @@
 				<c:choose>
 						<c:when test="${model.loggedIn != true}">
 					<ul>
-						<li><input type="button" value="Not a Member! Sign Up" id="sign-up-button" class="button large"/></li>
+						<li><input type="button" value="Create an Account" id="sign-up-button" class="button large"/></li>
 						<li><a href="loadschool">Register New School !</a></li>
 						<!--<li>No Account Yet? </li>
 						<li>OR</li>
@@ -42,8 +39,9 @@
 					<div id="sign-up" class="sign-up-container">
 		
 						<h2>New User? Sign Up</h2>
-						<h3 id="successMsg"></h3>
+						
 						<form:form action="createprofile" id="signUpForm" name="userProfile" method="post">
+						<div class="message successMsg"></div>
 						<ul class="twoColumnForm clear-fix">
 							<li><label>First Name</label>
 							<input type="text" value="" placeholder="" name="userFirstName" class="required" /></li>

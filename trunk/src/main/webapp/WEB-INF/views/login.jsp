@@ -40,10 +40,7 @@
 				<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 				<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
 				</li>
-				<li class="smallFont"> 
-					<label>Alumni Login	<input type="radio" value="A" name="loginType" checked />	</label>
-					<label class="fr">School Login <input type="radio" value="S" name="loginType" />	</label>
-				</li>
+
 			</ul>
 		</form:form>
 </div>

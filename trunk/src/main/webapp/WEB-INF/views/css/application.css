@@ -52,18 +52,20 @@ float:right
 	margin:15px 0px;
 
 }
-.dataTable thead {
-	background-color:#444444;
+.dataTable tr:nth-child(odd)  { background-color:#fff }
+.dataTable tr:nth-child(even)   { background-color:#f5f5f5 }
+.dataTable .table-year-col {
+	width:15%;
 }
 .dataTable thead th {
-	background-color:#3e3e3e;
-	color:#fff;
-	padding:7px 10px;
+	background-color: #cfcfcf;
+	color: #0082c8;
+	padding: 7px 10px;
+	border-bottom: 1px solid #cacaca;
 }
 .dataTable td  {
-	border-bottom: 1px solid #cacaca;
-	padding:7px 10px;
-	background-color:#f5f5f5;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #fff;
 }
 .vError {
 	border:1px solid red !important;
@@ -88,12 +90,18 @@ float:right
 	padding:0px 25px;
 
 }
+#top-bar .top-bar-container {
+	width:1024px
+}
+.top-navigation {
+	margin-left:6px;
+}
 #top-bar ul li a{
 	height:36px;
 	line-height:36px;
 	text-decoration:none;
 	padding-left:15px;
-	color:#777777;
+	color:#fff;
 }
 #top-bar ul li a:hover{
 	color:#0082C8;
@@ -154,7 +162,7 @@ input[type="text"].search-field {
 	-moz-box-shadow: inset -11px 24px 202px -27px rgba(0,0,0,0.07);
 	box-shadow: inset -11px 24px 202px -27px rgba(0,0,0,0.07);
 }
-.sign-in-wrapper input[type=text], #signin-signup-panel input[type=password]{
+.sign-in-wrapper input[type=text], .sign-in-wrapper input[type=password]{
 	width:66%;
 	margin-bottom:0px;
 }
@@ -357,7 +365,7 @@ input[type="text"].search-field {
 }
 
 .profilePage .main-content form {
-	border:5px solid #eee;
+	border:5px solid #cfcfcf;
 	border-top:none;
 
 }
@@ -373,8 +381,12 @@ input[type="text"].search-field {
 	margin-bottom:15px
 }
 .profilePage .main-content .btn-wrapper {
-	background-color:#eee;
+	background-color:#cfcfcf;
 	padding:6px;
+}
+#profilePage .dataTable {
+	margin:0px;
+	
 }
 /* end of profile page css */
 .popupContent {
