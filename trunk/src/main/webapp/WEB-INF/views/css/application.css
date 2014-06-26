@@ -91,20 +91,27 @@ float:right
 
 }
 #top-bar .top-bar-container {
-	width:1024px
+	width:1024px;
+	margin:auto;
 }
-.top-navigation {
-	margin-left:6px;
+#top-bar .top-bar-container {
+	width:1024px
 }
 #top-bar ul li a{
 	height:36px;
 	line-height:36px;
 	text-decoration:none;
-	padding-left:15px;
+	padding-right:15px;
 	color:#fff;
+}
+#top-bar ul li a:last-child{
+	padding-right:0px;
 }
 #top-bar ul li a:hover{
 	color:#0082C8;
+}
+#top-bar .status-info-bar ul li:last-child {
+	margin-right:0px
 }
 #doc {
 	width:1024px;
@@ -119,7 +126,7 @@ float:right
 #hd .logo{
 	float:left;
 	width:580px;
-	background:url(../images/linkalma-logo.png) left center; 
+	background:url(../images/linkalma-logo.png) -20px center; 
 	background-repeat: no-repeat;
 	height:100%;
 }
@@ -143,7 +150,7 @@ float:right
 	margin-top:2px;
 }
 input[type="text"].search-field {
-	width:90%
+	width:100%
 }
 /* for index page */
 #show-case-area {
@@ -316,7 +323,7 @@ input[type="text"].search-field {
 	width:200px;
 }
 .profilePage .main-content {
-	width:765px;
+	width:100%;
 }
 .profilePage form label{ 
 	display: inline-block;
@@ -326,6 +333,9 @@ input[type="text"].search-field {
 .profilePage form ul li > label, .profilePage form div > label{ 
     width: 135px;
     color:#0082c8;
+}
+.profilePage #personalDetailsForm .personal-info ul.threeColumn  li > label {
+	width:70px
 }
 .profilePage .family-details label {
 	width:auto
@@ -347,6 +357,11 @@ input[type="text"].search-field {
 	padding: 5px;
 	margin: 25px 0px 10px 0px;
 }
+.profilePage .profile-pic{
+	position:absolute;
+	left:0px;
+	top:0px
+}
 .profilePage .profile-pic input[type="file"]{
 	font-size:11px;
 	padding:8px 3px;
@@ -364,10 +379,13 @@ input[type="text"].search-field {
    color:#000;
 }
 
-.profilePage .main-content form {
+.profilePage .main-content form, .personal-details-container {
 	border:5px solid #cfcfcf;
 	border-top:none;
-
+	position:relative
+}
+.profilePage .main-content  .personal-details-container form {
+	border:none;
 }
 .profilePage .main-content form > ul {
 	margin:15px;
@@ -387,6 +405,9 @@ input[type="text"].search-field {
 #profilePage .dataTable {
 	margin:0px;
 	
+}
+#profilePage .contact-info {
+	margin-top:30px
 }
 /* end of profile page css */
 .popupContent {

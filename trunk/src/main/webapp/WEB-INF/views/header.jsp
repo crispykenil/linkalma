@@ -26,23 +26,23 @@
 </c:choose>
 
 <div id="top-bar">
-	<div class="top-navigation fl">
-		<ul>
-			<li><a href="/linkalma">Home</a></li>
-			
-			<li><a href="/linkalma">About Us</a></li>
-			<li><a href="/linkalma">Contact Us</a></li>
-		</ul>
-	</div>
-	
+	<div class="top-bar-container clear-fix">
+			<div class="top-navigation fl">
+			<ul>
+				<li><a href="/linkalma">Home</a></li>
+				
+				<li><a href="/linkalma">About Us</a></li>
+				<li><a href="/linkalma">Contact Us</a></li>
+			</ul>
+		</div>
 	<c:if test="${model.loggedIn == true}">
-		<div class="status-info-bar fr">
+	<div class="status-info-bar fr">
 		<ul>
 			<li><a href="/linkalma/dashboard">My Dashboard</a></li><li><a href="/linkalma/viewprofile">My Profile</a>  <a href="/linkalma/logout" class="" title="Sign Out">Log Out</a></li>
 		</ul>
 	</div>
 	</c:if>
-	
+	</div>
 </div>
 <div id="doc">
 <c:choose>
