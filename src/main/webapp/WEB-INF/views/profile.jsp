@@ -12,133 +12,108 @@ function fileUpload()
 </script>
 
 <div class="profilePage" id="profilePage">
-	<div class="left-column border-box">
-		<div class="profile-pic">
-		<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
-      		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="162px" height="158px" alt="" modelAttribute="uploadedFile" />
-			<br> 
-			<input type="file" name="files" accept="image/*" class="button" onchange="javascript:fileUpload();">
-			<input type="hidden" name="destination" value="userprofile" />
-	  	</form:form>		
-			
-		</div>
-		<div class="navigation">
-			<ul>
-				<li><a href="javascript:;">Personal Details</a></li>
-				<li><a href="javascript:;">School Details</a></li>
-				<li><a href="javascript:;">Workplace details</a></li>
-			</ul>
-		</div>
-	</div>
+
 	<!-- left-column -->
 	<div class="main-content border-box">
 			<h1>My Profile</h1>
 			
 			<div id="personalDetails">
 				<h2>Personal Details </h2>
-				<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
-					<div>
-						<ul class="twoColumn clear-fix">
-							<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
-								 name="userFirstName" class="required" maxlength="50" /></li>
-							<li><label>Last Name</label> <input type="text" value="${model.userProfile.userLastName }"
-								 name="userLastName" class="required" maxlength="50" /></li>
-							<li><label>Email</label> <input type="text" value="${model.userProfile.emailAddress }"
-								 name="emailAddress" class="emailField required" /></li>
-							<li>
-							<label>Gender</label>
-							<fieldset style="display:inline-block; margin-left:10px">
-								<label class="fl">Male&nbsp;</label>
-								<input class="fl" type="radio" value="M" name="gender" 
-									<c:if test="${model.userProfile.gender == 'M'}">checked</c:if> />
-								<label class="fl">&nbsp;&nbsp;Female &nbsp;</label>
-								<input class="fl" type="radio" value="F"  
-										name="gender" <c:if test="${model.userProfile.gender == 'F'}">checked</c:if> />
-							</fieldset>
-								
-							</li>
-							<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
-								 name="password" class="required" /></li>
-							<li><label>Confirm Password</label> <input type="password"
-								value="${model.userProfile.password }"  class="required" /></li>
+				<div class="personal-details-container clear-fix">
+					<div class="profile-pic">
+						<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
+				      		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="150px" height="130px" alt="" modelAttribute="uploadedFile" />
+							<br> 
+							<input type="file" name="files" accept="image/*" class="button" onchange="javascript:fileUpload();">
+							<input type="hidden" name="destination" value="userprofile" />
+					  	</form:form>		
 					
-						</ul>
-						<div class="family-details">
-							
-							<ul class="twoColumn_1-3 clear-fix">
-								<li>
-									<div id="maritalStatus">
-										<label>Single</label> <input type="radio" value="" name="maritalStatus" class="single" checked="checked" />
-										<label>Married</label> <input type="radio" value="" name="maritalStatus" class="married">
-									</div>
-								</li>
-								<li>
-									<div id="mairrageInfo">
-										<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
-										<label>No of Children</label>
-										<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
-									</div>
-								</li>
-							</ul>
-						</div>
 					</div>
-					<!-- 
-					<div class="family-details">
-						<h3>Family Details</h3>
-						<ul class="twoColumn_1-3 clear-fix">
-						<li>
-						<div id="maritalStatus">
-							<label>Single</label> <input type="radio" value="" name="maritalStatus" class="single" checked="checked" />
-							<label>Married</label> <input type="radio" value="" name="maritalStatus" class="married">
-						</div>
-						</li>
-						<li>
-							<div id="mairrageInfo">
-								<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
-								<label>No of Children</label>
-								<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
+					<div >
+						<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
+							<div class="personal-info" style="width: 77%; margin-left: 235px">
+								<ul class="threeColumn clear-fix">
+									<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
+										 name="userFirstName" class="required" maxlength="50" /></li>
+									<li><label>Last Name</label> <input type="text" value="${model.userProfile.userLastName }"
+										 name="userLastName" class="required" maxlength="50" /></li>
+									<li><label>Email</label> <input type="text" value="${model.userProfile.emailAddress }"
+										 name="emailAddress" class="emailField required" /></li>
+									<li>
+									<label>Gender</label>
+									<fieldset style="display:inline-block; margin-left:10px">
+										<label class="fl">Male&nbsp;</label>
+										<input class="fl" type="radio" value="M" name="gender" 
+											<c:if test="${model.userProfile.gender == 'M'}">checked</c:if> />
+										<label class="fl">&nbsp;&nbsp;Female &nbsp;</label>
+										<input class="fl" type="radio" value="F"  
+												name="gender" <c:if test="${model.userProfile.gender == 'F'}">checked</c:if> />
+									</fieldset>
+										
+									</li>
+									<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
+										 name="password" class="required" /></li>
+									<li><label>Confirm Password</label> <input type="password"
+										value="${model.userProfile.password }"  class="required" /></li>
+							
+								</ul>
+								<div class="family-details">
+									
+									<ul class="twoColumn_1-3 clear-fix">
+										<li>
+											<div id="maritalStatus">
+												<label>Single</label> <input type="radio" value="" name="maritalStatus" class="single" checked="checked" />
+												<label>Married</label> <input type="radio" value="" name="maritalStatus" class="married">
+											</div>
+										</li>
+										<li>
+											<div id="mairrageInfo">
+												<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
+												<label>No of Children</label>
+												<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
-							
-							</li>
-						</ul>
-					</div>
-					 -->
-				<div>
-					<h3>Contact Info</h3>
-					<ul class="twoColumn clear-fix">
-		
-						<li><label>Address 1</label> <input type="text" value="${model.userProfile.address1 }"
-							 name="address1" class="required" /></li>
-						<li><label>Address 2</label> <input type="text" value="${model.userProfile.address2 }"
-							 name="address2" class="" /></li>
-						<li><label>City</label> <input type="text" value="${model.userProfile.city }"
-							 name="city" class="required" /></li>
-						<li><label>State</label> <input type="text" value="${model.userProfile.state }"
-							 name="state" class="" /></li>
-						<li><label>Country of Residence</label> <input type="text" value="${model.userProfile.country }"
-							 name="country" class="required" /></li>
-						<li><label>Zip Code</label> <input type="text" value=""
-							 name="zipCode" class="" /></li>
-						<li><label>Cell</label> <input type="text" value=""
-							 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
-							 name="phone1" class="numeric" size="10"/></li>
-						<li><label>Work</label> <input type="text" value=""
-							 name="code2" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
-							 name="phone2"class="numeric" size="10" /></li>
-						<li><label>Residence</label> <input type="text" value=""
-							 name="code3" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
-							 name="phone3" class="numeric" maxlength="10" size="10" /></li>
-		
-					</ul>
-	
-				</div>
+							<div class="contact-info">
+								<h3>Contact Info</h3>
+								<ul class="threeColumn clear-fix">
+					
+									<li><label>Address 1</label> <input type="text" value="${model.userProfile.address1 }"
+										 name="address1" class="required" /></li>
+									<li><label>Address 2</label> <input type="text" value="${model.userProfile.address2 }"
+										 name="address2" class="" /></li>
+									<li><label>City</label> <input type="text" value="${model.userProfile.city }"
+										 name="city" class="required" /></li>
+									<li><label>State</label> <input type="text" value="${model.userProfile.state }"
+										 name="state" class="" /></li>
+									<li><label>Country of Residence</label> <input type="text" value="${model.userProfile.country }"
+										 name="country" class="required" /></li>
+									<li><label>Zip Code</label> <input type="text" value=""
+										 name="zipCode" class="" /></li>
+									<li><label>Cell</label> <input type="text" value=""
+										 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
+										 name="phone1" class="numeric" size="10"/></li>
+									<li><label>Work</label> <input type="text" value=""
+										 name="code2" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
+										 name="phone2"class="numeric" size="10" /></li>
+									<li><label>Residence</label> <input type="text" value=""
+										 name="code3" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
+										 name="phone3" class="numeric" maxlength="10" size="10" /></li>
+					
+								</ul>
 				
-					<div class="btn-wrapper">
-						<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
-						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+							</div>
 						
+							<div class="btn-wrapper">
+								<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
+								<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+								
+							</div>
+						</form:form>
 					</div>
-			</form:form>
+				</div>
 			</div>
 			<div id="schoolDetails">
 				<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
