@@ -37,7 +37,7 @@ function fileUpload()
 										 name="userFirstName" class="required" maxlength="50" /></li>
 									<li><label>Last Name</label> <input type="text" value="${model.userProfile.userLastName }"
 										 name="userLastName" class="required" maxlength="50" /></li>
-									<li><label>Email</label> <input type="text" value="${model.userProfile.emailAddress }"
+									<li><label>Email</label> <input type="text" readonly="readonly" value="${model.userProfile.emailAddress }"
 										 name="emailAddress" class="emailField required" /></li>
 									<li>
 									<label>Gender</label>
@@ -68,7 +68,7 @@ function fileUpload()
 										</li>
 										<li>
 											<div id="mairrageInfo">
-												<label>Married To</label> <input type="text" value="Mamta Sharma"  class="required" />
+												<label>Spouse Name</label> <input type="text" value=""  class="required" />
 												<label>No of Children</label>
 												<input type="text" value=""	 name="noOfChild" class="numeric" maxlength="1" />
 											</div>
@@ -91,7 +91,7 @@ function fileUpload()
 									<li><label>Country of Residence</label> <input type="text" value="${model.userProfile.country }"
 										 name="country" class="required" /></li>
 									<li><label>Zip Code</label> <input type="text" value=""
-										 name="zipCode" class="" /></li>
+										 name="zipCode" class="required" /></li>
 									<li><label>Cell</label> <input type="text" value=""
 										 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
 										 name="phone1" class="numeric" size="10"/></li>
@@ -107,9 +107,8 @@ function fileUpload()
 							</div>
 						
 							<div class="btn-wrapper">
-								<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 								<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-								
+								<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 							</div>
 						</form:form>
 					</div>
@@ -160,10 +159,8 @@ function fileUpload()
 					</tbody>
 				</table>
 				<div class="btn-wrapper">
-				<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
-						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-						
-						
+					<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+					<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 				</div>
 			</form:form>
 				<div id="addMySchool" class="addMydSchoolContainer popupContent" style="width:450px">
@@ -229,9 +226,8 @@ function fileUpload()
 						</tbody>
 					</table>
 					<div class="btn-wrapper">
-							
-							<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 							<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+							<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 					</div>
 				</form:form>
 				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">
