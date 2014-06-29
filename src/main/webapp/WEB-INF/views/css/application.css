@@ -198,30 +198,7 @@ input[type="text"].search-field {
     padding: 15px;
 }
 /* end for index page */
-#main-content-wrapper {
-	padding:15px 0px;
-	margin-top:3px;
-	min-height:400px;
-	display:block;
-	border-top:1px solid #efefef;
-}
-.main-content {
-	min-height:100px;
-	width:725px;
-	/*margin-left:374px;*/
-	float:right
-}
-.main-content .middle-wrapper {
-	float:left;
-	width:732px;
-}
-.left-column {
-	float:left;
-	margin-right: 10px;
-	width:275px;
-	padding:0px 10px 0px 0px; 
-	margin-right:24px;
-}
+
 .title-image {
 	float:right;
 }
