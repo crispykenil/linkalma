@@ -134,8 +134,9 @@ public class UserDAO implements IUserDAO {
 	    		ps.setString(15, alumni.getEmailAddress());
 	    		ps.setDate(16, alumni.getDob());
 	    		ps.setString(17, alumni.getAboutMe());
+	    		ps.setLong(18, alumni.getZipCode());
 
-	    		ps.setLong(18, alumni.getUserID());
+	    		ps.setLong(19, alumni.getUserID());
 	    	  	return ps;
     	  	}
     });

@@ -10,9 +10,10 @@
 		submitSignUpForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
+		addNewWorkPlace();
 		resetPassword();
 		showHideMsges();
-	});
+});
 
 })(jQuery);
 
@@ -80,9 +81,23 @@ function registerNewSchool() {
 	});
 }
 
+function addNewWorkPlace() {
+	$("#addWorkPlace").submit(function(e) {
+		e.preventDefault();
+		if (form.validateForm($(this))) {
+			
+			form.submitFormThroughAjax($(this));
+			
+		}
+
+	});
+}
 
 
-
+function addWorkDetails()
+{
+	// Need to add java script for splitting Month & Date.
+}
 
 
 
