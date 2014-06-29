@@ -38,6 +38,8 @@ public class User extends BaseDTO
 	
 	private short countryCode;
 	
+	private long zipCode;
+
 	private long phone1;
 	
 	private long phone2;
@@ -459,6 +461,7 @@ public class User extends BaseDTO
 		sb.append("\nEmail: "+this.emailAddress);
 		sb.append("\nAddr1: "+this.address1);
 		sb.append("\nAddr2: "+this.address2);
+		sb.append("\nZipCd: "+this.zipCode);
 		sb.append("\nPhon1: "+this.phone1);
 		sb.append("\nPhon2: "+this.phone2);
 		sb.append("\nPhon3: "+this.phone3);
@@ -639,5 +642,19 @@ public class User extends BaseDTO
 	 */
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
+	}
+
+	/**
+	 * @return the zipCode
+	 */
+	public long getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * @param zipCode the zipCode to set
+	 */
+	public void setZipCode(long zipCode) {
+		this.zipCode = zipCode;
 	}
 }

@@ -90,7 +90,7 @@ function fileUpload()
 										 name="state" class="" /></li>
 									<li><label>Country of Residence</label> <input type="text" value="${model.userProfile.country }"
 										 name="country" class="required" /></li>
-									<li><label>Zip Code</label> <input type="text" value=""
+									<li><label>Zip Code</label> <input type="text" value="${model.userProfile.zipCode }"
 										 name="zipCode" class="required" /></li>
 									<li><label>Cell</label> <input type="text" value=""
 										 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
@@ -174,7 +174,7 @@ function fileUpload()
 							</c:forEach>
 						</select> 
 						<label>From Year</label>
-						<input type="text" value=""  name="fromYear" />
+						<input type="text" value=""  name="fromYear" maxlength="4" />
 						<label>To Year</label>
 						<input type="text" value=""  name="toYear" />
 						<label>Passout</label>
@@ -184,10 +184,7 @@ function fileUpload()
 						<div class="btn-wrapper">
 							<input type="submit" class="button large" value="Add School Details" />
 						</div>
-						
-						
 					</form:form>
-				
 				</div>
 			</div>
 			<div id="workDetails">
@@ -199,8 +196,8 @@ function fileUpload()
 						<thead>
 							<tr>
 								<th> Organisation Name </th>
-								<th> From Month - Year</th>
-								<th> To Month - Year</th>
+								<th> From Date (MM / YYYY)</th>
+								<th> To Date (MM / YYYY)</th>
 								<th> Designation </th>
 								<th> Description </th>
 								<th> Action</th>
@@ -215,8 +212,8 @@ function fileUpload()
 									<td><input type="text" size="2" name="workplace[${count.index}].fromMonth" value="${workplace.fromMonth}"> - 
 										<input type="text" size="4" name="workplace[${count.index}].fromYear" value="${workplace.fromYear}">
 									</td>
-									<td><input type="text" size="2" name="workplace[${count.index}].toMonth" value="${workplace.toMonth}"> -
-										<input type="text" size="4" name="workplace[${count.index}].toYear" value="${workplace.toYear}" >
+									<td><input type="text" size="2" maxlength="2"  name="workplace[${count.index}].toMonth" value="${workplace.toMonth}"> -
+										<input type="text" size="4" maxlength="4" name="workplace[${count.index}].toYear" value="${workplace.toYear}" >
 									</td>
 									<td><input type="text" name="workplace[${count.index}].designation" value="${workplace.designation}"></td>
 									<td><input type="text" name="workplace[${count.index}].description" value="${workplace.description}"></td>
@@ -228,27 +225,27 @@ function fileUpload()
 					<div class="btn-wrapper">
 							<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
 							<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
-					</div>
+					</div> 
 				</form:form>
 				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">
 					<h2>Add Work Details</h2>
-					<form:form action="addmyschool" name="addMySchool" method="post">
-						<label>School Name</label>
-						<select name="schoolID">
-							<c:forEach var="schoolList" items="${model.schoolList}">
-								<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
-							</c:forEach>
-						</select> 
-						<label>From Year</label>
-						<input type="text" value=""  name="fromYear" />
-						<label>To Year</label>
-						<input type="text" value=""  name="toYear" />
-						<label>Passout</label>
+					<form:form action="addWorkPlace" name="addWorkPlace" method="post">
+						<label>Organisation Name</label>
+					 	<input type="text" value=""  name="organisationName" />	
+						<label>From Date</label>
+						<input type="text" value=""  name="fromMonthYear" placeholder="MM / YYYY" maxlength="7" class="numeric" />
+							<input type="hidden" value=""  name="fromYear" />
+							<input type="hidden" value=""  name="fromMonth" />
+						<label>To Date</label>
+						<input type="text" value=""  name="toMonthYear"  placeholder="MM / YYYY" maxlength="7" class="numeric" />
+							<input type="hidden" value=""  name="toYear" />
+							<input type="hidden" value=""  name="toMonth" />
+						<label>Designation</label>
 						<input type="text" value=""  name="passOutBatch" />
-						<label>Branch</label>
+						<label>Description</label>
 						<input type="text" value=""  name="branch" />
 						<div class="btn-wrapper">
-							<input type="submit" class="button large" value="Add Work Details" />
+							<input type="submit" class="button large" value="Save Work Details" />
 						</div>
 						
 					</form:form>

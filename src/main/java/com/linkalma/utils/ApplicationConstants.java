@@ -93,12 +93,12 @@ public class ApplicationConstants {
 			" UPDATE user SET FirstName = ?,    MiddleName = ?,    LastName = ?, "
 			+ " Address1 = ?, Address2 = ?, CountryCode = ?, Phone1 = ?, Phone2 = ?, Phone3 = ?, Phone4 = ?, "
 			+ " Gender = ?, City = ?, State = ?, Country = ?, "
-			+ " EmailAddress = ?, DOB = ?, AboutMe = ? "
+			+ " EmailAddress = ?, DOB = ?, AboutMe = ?, ZipCode = ?"
 			+ " WHERE UserID = ?";
 	
 	public static String SELECT_USER_DETAILS = 
 			" SELECT U.UserID, UC.PASSWORD, RoleID, SC.PrimaryDecode as Role, FirstName, MiddleName, LastName, Address1, Address2, "
-			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, "
 			+ " AboutMe, Photo, Approved, ActiveYN, CreateDttm, UpdateDttm "
 			+ " FROM user U , usercredentials UC, staticcodes  SC "
 			+ " WHERE U.USERID = UC.USERID"

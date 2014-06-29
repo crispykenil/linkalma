@@ -15,6 +15,7 @@ public class UserMapper implements RowMapper<User> {
 		      alumni.setPassword(rs.getString("Password"));
 		      alumni.setRoleID(rs.getInt("RoleID"));
 		      alumni.setRole(rs.getString("Role"));
+		      alumni.setZipCode(rs.getInt("ZipCode"));
 		      alumni.setUserFirstName(rs.getString("FirstName"));
 		      alumni.setUserLastName(rs.getString("LastName"));
 		      alumni.setUserMiddleName(rs.getString("MiddleName"));

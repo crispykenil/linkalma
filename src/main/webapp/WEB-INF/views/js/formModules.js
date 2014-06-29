@@ -153,8 +153,10 @@ var form = {
 				alert("found some updation so please valid form and submit it");
 				if (form.validateForm(myForm)) {
 					settings.callback();
-					//window.location.reload(true);
+					alert('ok');
+					window.location.reload(true);
 				} else
+					
 					return false;
 			} else {
 				alert("please change something before update");
@@ -174,3 +176,10 @@ var form = {
 	};
 	
 }(jQuery));
+
+function E(id) { return document.getElementById(id); }
+function changeit(drp,txf)
+{
+    dd = E(drp);
+    E(txf).value = dd.options[ dd.selectedIndex ].text;
+}
