@@ -54,7 +54,15 @@
 <a href="/linkalma/images/gallery/18.jpg" rel="lightbox"><img src="/linkalma/images/gallery/18.jpg" class="thumbnail" alt="" /></a>
 <a href="/linkalma/images/gallery/19.jpg" rel="lightbox"><img src="/linkalma/images/gallery/19.jpg" class="thumbnail" alt="" /></a>
 <a href="/linkalma/images/gallery/20.jpg" rel="lightbox"><img src="/linkalma/images/gallery/20.jpg" class="thumbnail" alt="" /></a>
-
+<c:forEach items="${schoolAlbumList}" var="album">
+		<h1> ${album.albumName }</h1></br>
+       <c:forEach items="${album.photoList}" var="photo">
+       <a href="${IMAGE_HOST}//${SCHOOL}//${album.albumName}//${photo.photoName}" rel="lightbox">
+       <img src="${IMAGE_HOST}//${SCHOOL}//${album.albumName}//${photo.photoName}" class="thumbnail" alt="${photo.photoName}" />
+       </a>
+       		
+		</c:forEach>
+</c:forEach>
 </div>
 <form action="/linkalma/schooladmin/createSchoolGallery" name="schoolGalleryForm" method="POST" enctype="multipart/form-data">
 	
@@ -65,4 +73,7 @@
 	<input type="submit" name=""/>
 		
 	</form>
+	
+	
+	
 <%@ include file="footer.jsp" %>
