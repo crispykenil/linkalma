@@ -18,10 +18,12 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.mapper.SchoolDataMapper;
+import com.linkalma.dao.mapper.SchoolGalleryMapper;
 import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dao.mapper.SchoolUpdateMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.School;
+import com.linkalma.dto.SchoolAlbum;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
@@ -325,6 +327,15 @@ public class SchoolDAO implements ISchoolDAO {
 	      
 	      Long pkSchoolGalleryId = keyHolder.getKey().longValue();
 	      return pkSchoolGalleryId;
+	}
+
+	@Override
+	public List<SchoolAlbum> getSchoolAlbumsBySchoolId(long schoolId) {
+		 
+		List<SchoolAlbum> schoolAlbumList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_ALBUM, 
+		new Long[]{schoolId}, new SchoolGalleryMapper());
+		
+		return schoolAlbumList;
 	}
 	
 }

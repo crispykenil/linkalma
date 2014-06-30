@@ -45,4 +45,6 @@ public interface ISchoolBO {
 	public long createStaff(Staff staff)  throws FileNotFoundException, IOException ,LinkalmaException;
 	
 	public void createSchoolGallery(SchoolGallery schoolGallery)  throws FileNotFoundException, IOException ,LinkalmaException;
+	
+	public void getSchoolAlbums(School school,Model model);
 }

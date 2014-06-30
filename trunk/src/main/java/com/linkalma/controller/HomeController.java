@@ -219,17 +219,26 @@ public class HomeController {
 
 		if (innerPage
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_EVENTS))
+		{
 			model = schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
+		}
 		else if (innerPage
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_CURRICULUM))
+		{
 			model = schoolBO.getSchoolDataBySchoolID(schoolUpdateDto, model);
+		}
 
 		else if (innerPage
 					.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_GALLERY))
-				model = model;
+		{
+			schoolBO.getSchoolAlbums(school, model);
+		}
 		else if (innerPage
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_STAFF))
+		{
+			
 			model = model;
+		}
 
 		setRequiredModelPropeties(model, request);
 		
