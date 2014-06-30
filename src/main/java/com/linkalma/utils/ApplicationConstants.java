@@ -196,5 +196,9 @@ public class ApplicationConstants {
 	public static String INSERT_STAFF_QUERY ="INSERT INTO staff (SCHOOLID,  FACULTYNAME,FACULTYEMAIL,  SUBJECTAREA,  PHOTONAME) VALUES(?,?,?,?,?)";
 	
 	public static String INSERT_SCHOOL_GALLERY_QUERY ="INSERT INTO schoolgallery (SCHOOLID,ALBUMNAME,PHOTONAME,DESCRIPTION) VALUES(?,?,?,?)";
+	
+	public static String GET_SCHOOL_ALBUM="Select AlbumName ,group_concat(PhotoID   ,':~' , PhotoName)  as 'PhotoId_PhotoName'"+
+										  " From schoolgallery Where SchoolID=? Group by AlbumName  ;";
+	
 }
 

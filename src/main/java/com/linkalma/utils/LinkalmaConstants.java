@@ -5,7 +5,8 @@ public class LinkalmaConstants {
 	public enum Properties
 	{	
 		
-		FILE_UPLOAD_PATH("file.upload.path");
+		FILE_UPLOAD_PATH("file.upload.path"),
+		IMAGE_HOST("image.host")		;
 		
 		private Properties(String prop) {
 		this.prop=prop;	

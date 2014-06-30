@@ -16,6 +16,7 @@ import com.linkalma.bo.ISchoolBO;
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.School;
+import com.linkalma.dto.SchoolAlbum;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
@@ -291,6 +292,15 @@ public class SchoolBO implements ISchoolBO
 		}
 		
 		return ;
+	}
+
+	@Override
+	public void getSchoolAlbums(School school, Model model) {
+		
+		List<SchoolAlbum> schoolAlbumList = schoolDAO.getSchoolAlbumsBySchoolId(school.getSchoolID());
+		model.addAttribute("schoolAlbumList", schoolAlbumList);
+		model.addAttribute("IMAGE_HOST", linkalmaUtil.getProperty(LinkalmaConstants.Properties.IMAGE_HOST));
+		model.addAttribute("SCHOOL", school.getSchoolName()+"_"+school.getSchoolID());
 	}
 	
 }

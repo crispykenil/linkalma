@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.ui.Model;
 
 import com.linkalma.dto.School;
+import com.linkalma.dto.SchoolAlbum;
 import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
@@ -92,4 +93,6 @@ public interface ISchoolDAO {
 	   public long createStaff(Staff staff);
 	   
 	   public long createSchoolGallery(SchoolGallery schoolGallery);
+	   
+	   public List<SchoolAlbum> getSchoolAlbumsBySchoolId(long schoolId);
 }
