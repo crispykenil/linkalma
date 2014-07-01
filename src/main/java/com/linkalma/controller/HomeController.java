@@ -770,7 +770,7 @@ public class HomeController {
 		 
 		    
 		    
-		return  new ModelAndView("redirect:/schooladmin/gallery", "model", model);
+		return  new ModelAndView("redirect:/school/"+school.getSchoolName()+"/gallery", "model", model);
 	
 	 }
 	
