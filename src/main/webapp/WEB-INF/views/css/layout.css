@@ -41,11 +41,11 @@
 /* one column layout */
 .three-column-layout .left-column {
 	display: block;
-	width: 25%
+	width: 20%
 }
 .three-column-layout .right-column {
 	display: block;
-	width: 25%
+	width: 30%
 	
 }
 .three-column-layout .main-content {
