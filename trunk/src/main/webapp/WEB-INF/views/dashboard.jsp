@@ -4,6 +4,7 @@
 
 <%@ include file="header.jsp" %>
 <div class="three-column-layout">
+
 		<div id="user-info-panel" class="clear-fix">
 			<div class="profile-pic fl">
 				<img src="images/profile-pic.png" width="162px" height="158px" />
@@ -65,18 +66,48 @@
 			</div>
 		</div><!-- left-side-column -->
 		<div class="main-content border-box">
-			<div class="panel">
-				<div class="panel-header">
-					<h3>My Updates</h3>
-				</div>
-				<div class="panel-content">
-					<c:forEach var='userUpdateDto' items='${model.userUpdateDto}' >
-					<p><b>${userUpdateDto.subject }</b></p>
-					<p>${userUpdateDto.description } <br> ${userUpdateDto.createDttm }</p>
-			    </c:forEach>
-				</div>
-			</div>
+		<div class="post-update-section">
+			<c:forEach var='userUpdateDto' items='${model.userUpdateDto}'>
+					<div class="panel">
+						<div class="panel-content">
+							<div class="my-updates">
+								<h3>${userUpdateDto.userFirstName} ${userUpdateDto.userLastName}</h3> 
+								<div class="smallestFont post-timestamp">${userUpdateDto.createDttm }</div>
+								<p>${userUpdateDto.description }  	</p>
+							</div>
+							
+							
+							
+							<div class="icon-tool-bar">
+								<ul class="inline-element-container clear-fix">
+									<li><a href="javascript:;">Like</a></li>
+									<li><a href="javascript:;">Comments</a></li>
+									<li><a href="javascript:;">Share</a></li>
+								</ul>
+							</div>
+							<div class="user-comments-section">
+								<ul>
+									<li class="smallFont">
+									<h3>Gautam Sharma -</h3>
+									dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfsa f dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfs</li>
+									<li class="smallFont">
+									<h3>Kenil Doshi -</h3>
+									dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfsa f dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfs</li>
+									<li class="smallFont">
+									<h3>Ram Narayan Shiv Dasani-</h3>
+									dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfsa f dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfs</li>
+									<li class="smallFont">
+									<h3>Suhas Shinde -</h3>
+									dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfsa f dfdsaf sadf sdafsa fsad fsdaf sadf asfsa dfsadf asdf asdf sadf asdf asdfsafdsa fasdfs</li>
+								</ul>
+							</div>
+						</div>
+						
+					</div>
 			
+			 </c:forEach>
+		</div>
+
 			
 			
 		</div>
