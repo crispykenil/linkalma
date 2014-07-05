@@ -127,7 +127,7 @@ function fileUpload()
 								<th class="table-year-col"> To Year </th>
 								<th class="table-year-col"> Batch</th>
 								<th> Branch</th>
-								<th>Action</th>
+								<th class="align-center">Action</th>
 								
 							</tr>
 						</thead>
@@ -136,7 +136,7 @@ function fileUpload()
 						<c:forEach var="userSchoolList" items="${model.userProfile.userSchoolList}" varStatus="count">
 							<tr>
 								<td>
-								<input type="text" value="${userSchoolList.schoolName} - ${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].schoolName"  />
+							
 								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
 								<select name="userSchoolList[${count.index}].schoolID">
 									<c:forEach var="schoolList" items="${model.schoolList}">
@@ -152,7 +152,7 @@ function fileUpload()
 								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  /></td>
 								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch"  /></td>
 							
-								<td> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}">Delete</a></td>
+								<td class="align-center"> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}" class="fa fa-times delete-icon"></a></td>
 							</tr>
 						</c:forEach>
 
@@ -200,7 +200,7 @@ function fileUpload()
 								<th> To Date (MM / YYYY)</th>
 								<th> Designation </th>
 								<th> Description </th>
-								<th> Action</th>
+								<th class="align-center"> Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -217,7 +217,7 @@ function fileUpload()
 									</td>
 									<td><input type="text" name="workplace[${count.index}].designation" value="${workplace.designation}"></td>
 									<td><input type="text" name="workplace[${count.index}].description" value="${workplace.description}"></td>
-									<td> <a href="deletemyschool?ID=1">Delete</a></td>
+									<td class="align-center"> <a href="deletemyschool?ID=1" class="fa fa-times delete-icon" ></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
