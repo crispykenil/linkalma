@@ -133,3 +133,17 @@ table{font-size:inherit;font:100%;}
 .inline-element-container > *{
 	float:left	
 }
+
+
+.delete-icon {
+	background-color:transparent;
+	color:red;
+}
+.delete-icon:hover {
+	background-color:transparent;
+	color:red;
+	opacity:0.7
+}
+.align-center {
+	text-align:center
+}

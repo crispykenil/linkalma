@@ -406,7 +406,7 @@ input[type="text"].search-field {
 }
 #profilePage .dataTable {
 	margin:0px;
-	
+	width:100%
 }
 #profilePage .contact-info {
 	margin-top:30px

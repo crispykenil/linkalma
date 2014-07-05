@@ -23,18 +23,18 @@ var form = {
 	makeFormReadonly : function(form) {
 		$(this.formFields, form).each(function() {
 			$(this).attr("disabled", true);
-			if ($(this).is("select")){
-				$(this).hide();
-			}
+//			if ($(this).is("select")){
+//				$(this).hide();
+//			}
 		});
 		form.addClass("readOnlyForm");
 	},
 	makeFormEditable : function(form) {
 		$(this.formFields, form).each(function() {
 			$(this).attr("disabled", false);
-			if ($(this).is("select")){
-				$(this).show();
-			}
+//			if ($(this).is("select")){
+//				$(this).show();
+//			} 
 		});
 		form.removeClass("readOnlyForm");
 	},
@@ -43,14 +43,14 @@ var form = {
 		$(".errorMsg", form).remove();
 		var isFormValidate = true;
 
-		$(".required", form).each(function() {
+		$(".required:visible", form).each(function() {
 			if ($.trim($(this).val()).length == 0) {
 				$(this).addClass("vError");
 			} else {
 				$(this).removeClass("vError");
 			}
 		});
-		$(".numeric", form).each(function() {
+		$(".numeric:visible", form).each(function() {
 			if (isNaN($(this).val())) {
 				$(this).addClass("vError");
 			} else {
@@ -76,7 +76,7 @@ var form = {
 
 		}
 		// email validation
-		var emailFields = $(".emailField", form);
+		var emailFields = $(".emailField:visible", form);
 		if (emailFields.length > 0) {
 			// if any value then only validate email pattern
 			var errContainer = $("<div class='errorMsg'></div>");
