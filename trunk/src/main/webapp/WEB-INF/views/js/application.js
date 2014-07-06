@@ -1,3 +1,18 @@
+//created Utility obj and added all common and utility methods inti use(Utility.methodName)
+var Utility = {
+		init: function() {
+			this.collapseExpandPanel();
+		},
+		collapseExpandPanel: function(){
+			$(".collapse-expand-btn").on("click",function(){
+				var collapseExpandElement = $(this).siblings(".collapse-expand-content");
+				if(collapseExpandElement.length < 1) {
+					collapseExpandElement = $(this).parent().siblings(".collapse-expand-content");
+				} 
+				collapseExpandElement.slideToggle();
+			});
+		}
+};
 // Semicolon (;) to ensure closing of earlier scripting
 // Encapsulation
 // $ is assigned to jQuery
@@ -13,9 +28,11 @@
 		addNewWorkPlace();
 		resetPassword();
 		showHideMsges();
+		Utility.init();
 });
 
 })(jQuery);
+
 
 function showHideMsges()
 {

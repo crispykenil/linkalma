@@ -15,16 +15,17 @@ function fileUpload()
 
 	<!-- left-column -->
 	<div class="main-content border-box">
-			<h1>My Profile</h1>
+			<h1>${model.userProfile.userFirstName } ${model.userProfile.userLastName }  - <span class="smallestFont">${model.userProfile.emailAddress }</span></h1>
 			
 			<div id="personalDetails">
-				<h2>Personal Details </h2>
-				<div class="personal-details-container clear-fix">
+				<h2>Personal Details 	<a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a></h2>
+			
+				<div class="personal-details-container clear-fix collapse-expand-content">
 					<div class="profile-pic">
 						<form:form action="uploadfile" name="fileupload" enctype="multipart/form-data" method="post" >
 				      		<img src="images/${model.profileImageURI }" onerror="this.src='images/profile-pic.png';" width="150px" height="130px" alt="" modelAttribute="uploadedFile" />
 							<br> 
-							<input type="file" name="files" accept="image/*" class="button" onchange="javascript:fileUpload();">
+							<input type="hidden" type="file" name="files" accept="image/*" class="button" onchange="javascript:fileUpload();" id="change-profilepic-btn">
 							<input type="hidden" name="destination" value="userprofile" />
 					  	</form:form>		
 					
@@ -37,8 +38,8 @@ function fileUpload()
 										 name="userFirstName" class="required" maxlength="50" /></li>
 									<li><label>Last Name</label> <input type="text" value="${model.userProfile.userLastName }"
 										 name="userLastName" class="required" maxlength="50" /></li>
-									<li><label>Email</label> <input type="text" readonly="readonly" value="${model.userProfile.emailAddress }"
-										 name="emailAddress" class="emailField required" /></li>
+								<!-- 	<li><label>Email</label> <input type="text" readonly="readonly" value="${model.userProfile.emailAddress }"
+										 name="emailAddress" class="emailField required" /></li> -->
 									<li>
 									<label>Gender</label>
 									<fieldset style="display:inline-block; margin-left:10px">
@@ -51,11 +52,12 @@ function fileUpload()
 									</fieldset>
 										
 									</li>
+									<!-- 
 									<li><label>Password</label> <input type="password" value="${model.userProfile.password }"
 										 name="password" class="required" /></li>
 									<li><label>Confirm Password</label> <input type="password"
 										value="${model.userProfile.password }"  class="required" /></li>
-							
+							-->
 								</ul>
 								<div class="family-details">
 									
@@ -115,8 +117,8 @@ function fileUpload()
 				</div>
 			</div>
 			<div id="schoolDetails">
-				<h2>School Details <a href="javascript:;" class="button smallbtn fr addMySchool">Add School</a></h2>
-			<form:form name="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm" action="updateuserschool" modelAttribute="userSchool" method="post">
+				<h2>School Details  <a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a> </h2>
+			<form:form name="userSchoolDetailsForm" id="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm collapse-expand-content" action="updateuserschool" modelAttribute="userSchool" method="post">
 		
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 								<table class="dataTable" cellpadding="0" cellspacing="0">
@@ -138,14 +140,16 @@ function fileUpload()
 								<td>
 							
 								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
-								<select name="userSchoolList[${count.index}].schoolID">
-									<c:forEach var="schoolList" items="${model.schoolList}">
-										<option value="${schoolList.schoolID}"
-										<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
-										${schoolList.schoolName } - ${schoolList.branch }
-										</option>
-									</c:forEach>
-								</select> 
+								<div class="select-drop-down">
+									<select name="userSchoolList[${count.index}].schoolID">
+										<c:forEach var="schoolList" items="${model.schoolList}">
+											<option value="${schoolList.schoolID}"
+											<c:if test="${schoolList.schoolID == userSchoolList.schoolID}">selected="selected"</c:if> > 
+											${schoolList.schoolName } - ${schoolList.branch }
+											</option>
+										</c:forEach>
+									</select> 
+								</div>
 								</td>
 								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  /></td>
 								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  /></td>
@@ -159,7 +163,9 @@ function fileUpload()
 					</tbody>
 				</table>
 				<div class="btn-wrapper">
+				<input type="button" class="button addMySchool" value="Add School" />
 					<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+					
 					<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
 				</div>
 			</form:form>
@@ -188,8 +194,8 @@ function fileUpload()
 				</div>
 			</div>
 			<div id="workDetails">
-			<h2>Work Details <a href="javascript:;" class="button smalbtn fr addMyWorkDetaitsBtn">Add Work Details</a></h2>
-				<form:form class="readOnlyForm clear-fix workDetailsForm" action="updateprofile" name="userWorkplaceDetailsForm" modelAttribute="workDetails">
+			<h2>Work Details <a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a></h2>
+				<form:form class="readOnlyForm clear-fix workDetailsForm collapse-expand-content" action="updateprofile" name="userWorkplaceDetailsForm" modelAttribute="workDetails">
 					
 					<input type="hidden" name="totalUserSchoolCount" value="${model.workplaceList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
@@ -223,8 +229,9 @@ function fileUpload()
 						</tbody>
 					</table>
 					<div class="btn-wrapper">
-							<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
-							<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled"/>
+						<input type="button" value="Add Work Details"class="button addMyWorkDetaitsBtn" />
+						<input type="button" value="Edit" class="editUpdateFormBtn editForm" />
+						<input type="reset" value="Cancel" class="button lesser cancelUpdateAction" disabled="disabled" />
 					</div> 
 				</form:form>
 				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">

@@ -360,9 +360,9 @@ input[type="text"].search-field {
 	margin: 25px 0px 10px 0px;
 }
 .profilePage .profile-pic{
-	position:absolute;
-	left:0px;
-	top:0px
+ 	left: 16px;
+    position: absolute;
+    top: 5px;
 }
 .profilePage .profile-pic input[type="file"]{
 	font-size:11px;
