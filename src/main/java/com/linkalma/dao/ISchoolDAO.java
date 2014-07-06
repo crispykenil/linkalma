@@ -14,6 +14,7 @@ import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
+import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.UserSchoolDTO;
 
@@ -95,4 +96,6 @@ public interface ISchoolDAO {
 	   public long createSchoolGallery(SchoolGallery schoolGallery);
 	   
 	   public List<SchoolAlbum> getSchoolAlbumsBySchoolId(long schoolId);
+	   
+	   public List<StaffInfo>  getStaffInfoBySchoolId(long schoolId);
 }

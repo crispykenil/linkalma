@@ -21,6 +21,7 @@ import com.linkalma.dao.mapper.SchoolDataMapper;
 import com.linkalma.dao.mapper.SchoolGalleryMapper;
 import com.linkalma.dao.mapper.SchoolMapper;
 import com.linkalma.dao.mapper.SchoolUpdateMapper;
+import com.linkalma.dao.mapper.StaffInfoMapper;
 import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolAlbum;
@@ -28,6 +29,7 @@ import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
+import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
@@ -336,6 +338,15 @@ public class SchoolDAO implements ISchoolDAO {
 		new Long[]{schoolId}, new SchoolGalleryMapper());
 		
 		return schoolAlbumList;
+	}
+
+	@Override
+	public List<StaffInfo> getStaffInfoBySchoolId(long schoolId) {
+
+		List<StaffInfo> StaffInfoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_STAFF, 
+				new Long[]{schoolId}, new StaffInfoMapper());
+				
+				return StaffInfoList;
 	}
 	
 }

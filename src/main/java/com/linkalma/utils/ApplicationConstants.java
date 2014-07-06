@@ -177,7 +177,7 @@ public class ApplicationConstants {
 	public static String SCHOOL_INNER_PAGE_CURRICULUM = "CURRICULUM";
 	public static String SCHOOL_INNER_PAGE_ABOUTUS = "ABOUTUS";
 	public static String SCHOOL_INNER_PAGE_GALLERY = "GALLERY";
-	public static String SCHOOL_INNER_PAGE_STAFF = "STAFF";
+	public static String SCHOOL_INNER_PAGE_STAFF = "ourstaff";
 	
 	public static String CHECK_LINKALMA_URL_QUERY = "SELECT COUNT(*) FROM school WHERE LINKALMAURL = ?";
 	
@@ -199,6 +199,10 @@ public class ApplicationConstants {
 	
 	public static String GET_SCHOOL_ALBUM="Select AlbumName ,group_concat(PhotoID   ,':~' , PhotoName)  as 'PhotoId_PhotoName'"+
 										  " From schoolgallery Where SchoolID=? Group by AlbumName  ;";
+	
+	
+	public static String GET_SCHOOL_STAFF=" Select StaffID,FacultyName ,FacultyEmail,SubjectArea ,PhotoName  From staff Where SchoolID=? Order By FacultyName Asc";
+	
 	
 }
 

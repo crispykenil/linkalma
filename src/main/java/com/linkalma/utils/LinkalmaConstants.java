@@ -19,5 +19,22 @@ public class LinkalmaConstants {
 		}
 		
 	}
+	public enum Dirs
+	{
+		ALBUM_DIR("Albums"),
+		STAFF_DIR("Staff");
+		
+		private Dirs(String dir) {
+			this.dir = dir;
+		}
+
+		String dir;
+		
+		@Override
+		public String toString() {
+			return this.dir;
+		}
+		
+	}
 	
 }

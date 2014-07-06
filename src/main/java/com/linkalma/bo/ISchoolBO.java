@@ -42,9 +42,13 @@ public interface ISchoolBO {
 
 	public boolean checkSchoolExists(String emailAddress, Model model);
 	
-	public long createStaff(Staff staff)  throws FileNotFoundException, IOException ,LinkalmaException;
+	public long createStaff(Staff staff,School school)  throws FileNotFoundException, IOException ,LinkalmaException;
 	
 	public void createSchoolGallery(SchoolGallery schoolGallery)  throws FileNotFoundException, IOException ,LinkalmaException;
 	
 	public void getSchoolAlbums(School school,Model model);
+	
+	public void getSchoolStaff(School school,Model model);
+	
+	
 }

@@ -236,8 +236,7 @@ public class HomeController {
 		else if (innerPage
 				.equalsIgnoreCase(ApplicationConstants.SCHOOL_INNER_PAGE_STAFF))
 		{
-			
-			model = model;
+			schoolBO.getSchoolStaff(school, model);
 		}
 
 		setRequiredModelPropeties(model, request);
@@ -719,7 +718,7 @@ public class HomeController {
 		    staff.setSchoolID(school.getSchoolID());
 		    try 
 		    {
-				schoolBO.createStaff(staff);
+				schoolBO.createStaff(staff,school);
 			} catch (FileNotFoundException e) 
 			{
 				// TODO Auto-generated catch block
@@ -734,7 +733,7 @@ public class HomeController {
 				e.printStackTrace();
 			}
 		   
-		return  new ModelAndView("redirect:/schooladmin/ourstaff", "model", model);
+		return  new ModelAndView("redirect:/school/"+school.getSchoolName()+"/ourstaff", "model", model);
 	
 	 }
 	 
