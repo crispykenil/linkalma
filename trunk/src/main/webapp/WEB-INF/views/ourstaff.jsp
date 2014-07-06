@@ -3,47 +3,23 @@
 
 	<div class="school-staffs clear-fix">
 	<h2>Our Staff</h2>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
+			
+		<c:forEach items="${staffInfoList}" var="staff">
+		
+       	<div>
+			<h3>${staff.facultyName}</h3>
+			<div class="pic-container"><img src="${IMAGE_HOST_PATH}//${staff.photoName}" width="100%" height="185" /></div>
+			<p class="description">
+				 ${staff.subjectArea}</br>
+			     ${staff.facultyEmail} <a href="javascript:;">read more</a>
+			</p>
 		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>
-		<div>
-			<h3>Sam Kronshtain</h3>
-			<div class="pic-container"><img src="/linkalma/images/staff/img-3.jpg" width="100%" height="185" /></div>
-			<p class="description"> Vivamus vel eros eget magna volutpat sagittis. Nulla faucibus nibh a magna tincidunt accumsan hendrerit nunc facilisis. Curabitur et libero sit amet ante hendrerit molestie.  <a href="javascript:;">read more</a></p>
-		</div>					
+		
+		
+	</c:forEach>					
 	</div>
+	
+	
 	
 	<form action="/linkalma/schooladmin/createStaff" name="staffForm" method="POST" enctype="multipart/form-data">
 	

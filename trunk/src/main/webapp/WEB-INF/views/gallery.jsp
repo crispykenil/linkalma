@@ -57,8 +57,8 @@
 <c:forEach items="${schoolAlbumList}" var="album">
 		<h1> ${album.albumName }</h1></br>
        <c:forEach items="${album.photoList}" var="photo">
-       <a href="${IMAGE_HOST}//${SCHOOL}//${album.albumName}//${photo.photoName}" rel="lightbox">
-       <img src="${IMAGE_HOST}//${SCHOOL}//${album.albumName}//${photo.photoName}" class="thumbnail" alt="${photo.photoName}" />
+       <a href="${IMAGE_HOST_PATH}//${album.albumName}//${photo.photoName}" rel="lightbox">
+       <img src="${IMAGE_HOST_PATH}//${album.albumName}//${photo.photoName}" class="thumbnail" alt="${photo.photoName}" />
        </a>
        		
 		</c:forEach>

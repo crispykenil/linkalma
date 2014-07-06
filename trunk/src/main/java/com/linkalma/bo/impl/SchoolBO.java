@@ -21,6 +21,7 @@ import com.linkalma.dto.SchoolDataDTO;
 import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.Staff;
+import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.utils.ApplicationConstants;
@@ -263,14 +264,14 @@ public class SchoolBO implements ISchoolBO
 	}
 
 	@Override
-	public long createStaff(Staff staff)  throws FileNotFoundException, IOException ,LinkalmaException{
+	public long createStaff(Staff staff,School school)  throws FileNotFoundException, IOException ,LinkalmaException{
 		
 		MultipartFile multipartFile=staff.getUploadedFile();
-		
+		String schoolParentDir=school.getSchoolName()+"_"+school.getSchoolID();
 		if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 		{
 			staff.setPhotoName(multipartFile.getOriginalFilename());
-			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
+			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.getStaffImageFileUploadPath(schoolParentDir,multipartFile.getOriginalFilename()));
 		}
 		Long pkStaffID=schoolDAO.createStaff(staff);
 		return pkStaffID;
@@ -285,7 +286,7 @@ public class SchoolBO implements ISchoolBO
 		{
 			schoolGallery.setPhotoName(multipartFile.getOriginalFilename());
 			schoolParentDir=schoolGallery.getSchoolName()+"_"+schoolGallery.getSchoolID();
-			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.getAlbumFilePath(schoolParentDir
+			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.getAlbumFileUploadPath(schoolParentDir
 																				 ,schoolGallery.getAlbumName()
 																				 ,multipartFile.getOriginalFilename()));
 			schoolDAO.createSchoolGallery(schoolGallery);
@@ -299,8 +300,20 @@ public class SchoolBO implements ISchoolBO
 		
 		List<SchoolAlbum> schoolAlbumList = schoolDAO.getSchoolAlbumsBySchoolId(school.getSchoolID());
 		model.addAttribute("schoolAlbumList", schoolAlbumList);
-		model.addAttribute("IMAGE_HOST", linkalmaUtil.getProperty(LinkalmaConstants.Properties.IMAGE_HOST));
-		model.addAttribute("SCHOOL", school.getSchoolName()+"_"+school.getSchoolID());
+		
+		String schoolParentDir=school.getSchoolName()+"_"+school.getSchoolID();
+		model.addAttribute("IMAGE_HOST_PATH", linkalmaUtil.getAlbumServePath(schoolParentDir));
+	}
+
+	@Override
+	public void getSchoolStaff(School school, Model model) {
+
+		List<StaffInfo>	staffInfoList=schoolDAO.getStaffInfoBySchoolId(school.getSchoolID());
+		model.addAttribute("staffInfoList", staffInfoList);
+		
+		String schoolParentDir=school.getSchoolName()+"_"+school.getSchoolID();
+		model.addAttribute("IMAGE_HOST_PATH", linkalmaUtil.getStaffImageServePath(schoolParentDir));
+		
 	}
 	
 }
