@@ -50,14 +50,16 @@ var submitPersonalDetails = function(){
 	});
 };
 
+
 var submitSchoolDetails = function(){
 	var form2 = $('#userSchoolDetailsForm');
-	form2.submitFormThroughAjax(form2);
+	form.submitFormThroughAjax(form2);
+	
 };
 
 var submitWorkplaceDetails = function(){
 	var form1 = $('#userWorkplaceDetailsForm');
-	form1.submitFormThroughAjax(form1);
+	form.submitFormThroughAjax(form1);
 };
 
 function getAddMyWorkDetailsForm(){

@@ -150,11 +150,11 @@ var form = {
 		function executeUpdateAction(){
 			afterUpdateFormData = myForm.serialize();
 			if (beforeUpdateFormData != afterUpdateFormData) {
-				alert("found some updation so please valid form and submit it");
+				//alert("found some updation so please valid form and submit it");
 				if (form.validateForm(myForm)) {
 					settings.callback();
-					alert('ok');
-					window.location.reload(true);
+					//alert('ok');
+					
 				} else
 					
 					return false;
