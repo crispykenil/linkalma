@@ -53,7 +53,7 @@ public class UtilityController {
 			userDto.setVerificationCode(code);
 			logger.info(code);
 			mailSender.sendMail("admin@linkalma.com", userDto.getEmailAddress(), "Linkalma: Account Created", 
-					ApplicationConstants.EMAIL_ACCOUNT_CREATION_MSG);
+					ApplicationConstants.ACCOUNT_CREATION_EMAIL);
 
 		}
 		else if(schoolBO.checkSchoolExists(userDto.getEmailAddress(), model))

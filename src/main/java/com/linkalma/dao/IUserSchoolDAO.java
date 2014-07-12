@@ -9,4 +9,6 @@ public interface IUserSchoolDAO {
 	
 	public int deleteUserSchool(UserSchoolDTO userschoolDto);
 	
+	public long updateUserSchool(UserSchoolDTO userschoolDto);
+	
 }

@@ -1,7 +1,7 @@
 package com.linkalma.dao.impl;
 
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,10 +16,8 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.linkalma.controller.HomeController;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dao.mapper.UserMapper;
-import com.linkalma.dao.mapper.UserSchoolMapper;
 import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserWorkplaceDTO;
@@ -131,12 +129,15 @@ public class UserDAO implements IUserDAO {
 	    		ps.setString(12, alumni.getCity());
 	    		ps.setString(13, alumni.getState());
 	    		ps.setString(14, alumni.getCountry());
-	    		ps.setString(15, alumni.getEmailAddress());
-	    		ps.setDate(16, alumni.getDob());
-	    		ps.setString(17, alumni.getAboutMe());
-	    		ps.setLong(18, alumni.getZipCode());
+	    		ps.setInt(15, alumni.getPhoneCode1());
+	    		ps.setInt(16, alumni.getPhoneCode2());
+	    		ps.setInt(17, alumni.getPhoneCode3());
+	    		ps.setInt(18, alumni.getPhoneCode4());
+	    		ps.setDate(19, alumni.getDob());
+	    		ps.setString(20, alumni.getAboutMe());
+	    		ps.setLong(21, alumni.getZipCode());
 
-	    		ps.setLong(19, alumni.getUserID());
+	    		ps.setLong(22, alumni.getUserID());
 	    	  	return ps;
     	  	}
     });
@@ -209,5 +210,5 @@ public class UserDAO implements IUserDAO {
 		new UserDAO().generateVerificationCode("keni@gmail.com");
 	}
 
-	
+
 }

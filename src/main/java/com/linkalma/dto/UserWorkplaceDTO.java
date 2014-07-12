@@ -17,6 +17,10 @@ public class UserWorkplaceDTO extends BaseDTO
 	
 	private int toYear;
 	
+	private String fromMonthYear;
+	
+	private String toMonthYear;
+	
 	private String designation;
 	
 	private String description;
@@ -151,6 +155,34 @@ public class UserWorkplaceDTO extends BaseDTO
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		return sb.toString();
+	}
+
+	/**
+	 * @return the fromMonthYear
+	 */
+	public String getFromMonthYear() {
+		return fromMonthYear;
+	}
+
+	/**
+	 * @param fromMonthYear the fromMonthYear to set
+	 */
+	public void setFromMonthYear(String fromMonthYear) {
+		this.fromMonthYear = fromMonthYear;
+	}
+
+	/**
+	 * @return the toMonthYear
+	 */
+	public String getToMonthYear() {
+		return toMonthYear;
+	}
+
+	/**
+	 * @param toMonthYear the toMonthYear to set
+	 */
+	public void setToMonthYear(String toMonthYear) {
+		this.toMonthYear = toMonthYear;
 	}
 
 }

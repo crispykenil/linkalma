@@ -3,7 +3,6 @@ package com.linkalma.dao.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.linkalma.dto.User;
@@ -28,6 +27,10 @@ public class UserMapper implements RowMapper<User> {
 		      alumni.setPhone2(rs.getLong("Phone2"));
 		      alumni.setPhone3(rs.getLong("Phone3"));
 		      alumni.setPhone4(rs.getLong("Phone4"));
+		      alumni.setPhoneCode1(rs.getShort("PhoneCode1"));
+		      alumni.setPhoneCode2(rs.getShort("PhoneCode2"));
+		      alumni.setPhoneCode3(rs.getShort("PhoneCode3"));
+		      alumni.setPhoneCode4(rs.getShort("PhoneCode4"));
 		      alumni.setGender(rs.getString("Gender"));
 		      alumni.setCity(rs.getString("City"));
 		      alumni.setState(rs.getString("State"));

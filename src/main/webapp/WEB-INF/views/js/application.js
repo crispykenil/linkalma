@@ -99,11 +99,18 @@ function registerNewSchool() {
 }
 
 function addNewWorkPlace() {
-	$("#addWorkPlace").submit(function(e) {
+	$("#saveWorkPlaceBtn").on("click",function(e) {
 		e.preventDefault();
-		if (form.validateForm($(this))) {
+		if (form.validateForm($("#addWorkPlace"))) {
+			/*alert($("#addWorkPlace input[name=fromMonthYear]").val());
+			splitDate($("#addWorkPlace input[name=fromMonthYear]").val());
+			splitDate($("#addWorkPlace input[name=toMonthYear]").val());*/
+			alert(document.getElementById("fromMonthYear").value);
 			
-			form.submitFormThroughAjax($(this));
+			splitDate(document.getElementById("fromMonthYear").value,"from");
+			splitDate(document.getElementById("toMonthYear").value, "to");
+			
+			$("#addWorkPlaceForm").submit();
 			
 		}
 

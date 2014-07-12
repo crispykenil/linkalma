@@ -64,7 +64,12 @@ public class ApplicationConstants {
 			+ "(USERID, SCHOOLID, FROMYEAR, TOYEAR, PASSOUTBATCH, CREATEUSERID, CREATEDTTM) "
       		+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+	public static String INSERT_USER_WORKPALCE_QUERY = "INSERT INTO userworkplace (UserID, OrganisationName, FromMonth, FromYear, ToMonth, ToYear, Designation, Description) "
+			+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	
 	public static String DELETE_USER_SCHOOL = "DELETE FROM userschool WHERE USERSCHOOLID = ?";
+	
+	public static String DELETE_USER_WORKPLACE = "DELETE FROM userworkplace WHERE UserWorkplaceID = ?";
 	
 	public static String GET_SCHOOL_NEWS_FOR_USERSCHOOL = "SELECT US.USERID, US.SCHOOLID, SN.ID as NEWSID, SN.NEWSDESCRIPTION, "
 			+ " SN.NEWSTYPE, S.SCHOOLNAME, S.BRANCH, S.EMAILADDRESS, S.LINKALMAURL "
@@ -92,13 +97,13 @@ public class ApplicationConstants {
 	public static String UPDATE_USER_PROFILE_PERSONAL_DETAILS = 
 			" UPDATE user SET FirstName = ?,    MiddleName = ?,    LastName = ?, "
 			+ " Address1 = ?, Address2 = ?, CountryCode = ?, Phone1 = ?, Phone2 = ?, Phone3 = ?, Phone4 = ?, "
-			+ " Gender = ?, City = ?, State = ?, Country = ?, "
-			+ " EmailAddress = ?, DOB = ?, AboutMe = ?, ZipCode = ?"
+			+ " Gender = ?, City = ?, State = ?, Country = ?, PhoneCode1 = ?, PhoneCode2 = ?, PhoneCode3 = ?, PhoneCode4 = ?, "
+			+ " DOB = ?, AboutMe = ?, ZipCode = ?"
 			+ " WHERE UserID = ?";
 	
 	public static String SELECT_USER_DETAILS = 
 			" SELECT U.UserID, UC.PASSWORD, RoleID, SC.PrimaryDecode as Role, FirstName, MiddleName, LastName, Address1, Address2, "
-			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
 			+ " AboutMe, Photo, Approved, ActiveYN, CreateDttm, UpdateDttm "
 			+ " FROM user U , usercredentials UC, staticcodes  SC "
 			+ " WHERE U.USERID = UC.USERID"
@@ -115,6 +120,12 @@ public class ApplicationConstants {
 			+ " PASSOUTBATCH=?, UPDATEUSERID=? "
 			+ " WHERE USERSCHOOLID=?";
 	
+	public static String UPDATE_USER_WORKPLACE = 
+			" UPDATE userworkplace "
+			+ " SET ORGANISATIONNAME = ?, FROMMONTH = ?, FROMYEAR=?, TOMONTH = ?, TOYEAR=?, "
+			+ " DESIGNATION = ?, DESCRIPTION = ? "
+			+ " WHERE UserWorkplaceID=?";
+
 	public static String GET_SCHOOL_BY_EMAILID =
 			" SELECT SCHOOLID, SCHOOLNAME, ADDRESS1, ADDRESS2, PHONE1, PHONE2, BRANCH, EMAILADDRESS, "
 			+ " WEBSITEURL, LINKALMAURL, SCHOOLHISTORY, ACTIVEYN, APPROVED, CREATEDTTM "
@@ -168,8 +179,12 @@ public class ApplicationConstants {
 
 	public static String UPDATE_SUCCESS_MSG = "Data Saved Successfully";
 	
-	public static String EMAIL_ACCOUNT_CREATION_MSG = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
+	public static String ACCOUNT_CREATION_EMAIL = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
 
+	public static String PROFILE_CREATION_MSG = "Voila ! Alumni Profile Created, Check your email for Verification !";
+
+	public static String EMAIL_ALREADY_REGISTERED_MSG = "EmailID is already registered with LinkAlma, please use a different one !";
+	
 	public static String PASSWORD_RESET_EMAIL_MSG = "Follow the below link to reset your password.";
 	
 
