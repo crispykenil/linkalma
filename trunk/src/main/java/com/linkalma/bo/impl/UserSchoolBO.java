@@ -84,4 +84,14 @@ public class UserSchoolBO implements IUserSchoolBO {
 		this.userSchoolDAO = userSchoolDAO;
 	}
 
+	@Override
+	public Model updateUserSchool(List<UserSchoolDTO> userSchoolDtoList,
+			Model model) {
+		for(UserSchoolDTO userSchoolDto : userSchoolDtoList)
+		{
+			getUserSchoolDAO().updateUserSchool(userSchoolDto);
+		}
+		return null;
+	}
+
 }

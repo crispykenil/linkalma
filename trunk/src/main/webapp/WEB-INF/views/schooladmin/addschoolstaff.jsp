@@ -14,16 +14,21 @@
 	</div><!-- left-column -->
 
 <div class="main-content border-box">
-	<form:form method="post" action="updateschoolgallery"
-            modelAttribute="schoolGalleryForm" enctype="multipart/form-data">
-			<ul class=" clear-fix">
-				<li><label>Add Photos</label> 
-					<input type="file" name="files" accept="image/*" class="button" multiple="multiple" />
-				</li><br>
-					<input type="hidden" name="destination" value="schoolgallery" />
-			</ul>
+	<form:form action="/linkalma/schooladmin/createstaff" name="staffForm" method="POST" enctype="multipart/form-data">
 	
-		<input type="submit" value="Save Photos" />
+		<label>Faculty Name</label>
+		<input type="text" name="facultyName"/>
+		
+		<label>Faculty Email ID</label>
+		<input type="text" name="facultyEmail"/>
+		
+		<label>Subject Area</label>
+		<input type="text" name="subjectArea"/>
+		
+		<label>Upload Image</label>
+		<input type="file" name="uploadedFile" accept="image/*" class="button" />
+		<input type="submit" name=""/>
+		
 	</form:form>	
 </div>
 <%@ include file="../footer.jsp"%>

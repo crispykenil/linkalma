@@ -38,6 +38,14 @@ public class User extends BaseDTO
 	
 	private short countryCode;
 	
+	private short phoneCode1;
+	
+	private short phoneCode2;
+	
+	private short phoneCode3;
+	
+	private short phoneCode4;
+	
 	private long zipCode;
 
 	private long phone1;
@@ -656,5 +664,61 @@ public class User extends BaseDTO
 	 */
 	public void setZipCode(long zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	/**
+	 * @return the phoneCode1
+	 */
+	public short getPhoneCode1() {
+		return phoneCode1;
+	}
+
+	/**
+	 * @param phoneCode1 the phoneCode1 to set
+	 */
+	public void setPhoneCode1(short phoneCode1) {
+		this.phoneCode1 = phoneCode1;
+	}
+
+	/**
+	 * @return the phoneCode2
+	 */
+	public short getPhoneCode2() {
+		return phoneCode2;
+	}
+
+	/**
+	 * @param phoneCode2 the phoneCode2 to set
+	 */
+	public void setPhoneCode2(short phoneCode2) {
+		this.phoneCode2 = phoneCode2;
+	}
+
+	/**
+	 * @return the phoneCode3
+	 */
+	public short getPhoneCode3() {
+		return phoneCode3;
+	}
+
+	/**
+	 * @param phoneCode3 the phoneCode3 to set
+	 */
+	public void setPhoneCode3(short phoneCode3) {
+		this.phoneCode3 = phoneCode3;
+	}
+
+	/**
+	 * @return the phoneCode4
+	 */
+	public short getPhoneCode4() {
+		return phoneCode4;
+	}
+
+	/**
+	 * @param phoneCode4 the phoneCode4 to set
+	 */
+	public void setPhoneCode4(short phoneCode4) {
+		this.phoneCode4 = phoneCode4;
 	}
 }

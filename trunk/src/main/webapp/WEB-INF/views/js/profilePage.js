@@ -59,9 +59,28 @@ var submitSchoolDetails = function(){
 
 var submitWorkplaceDetails = function(){
 	var form1 = $('#userWorkplaceDetailsForm');
+	
 	form.submitFormThroughAjax(form1);
 };
 
+function splitDate(monthYear, type)
+{
+	var dateArr = monthYear.split('/');
+	alert(dateArr[0]+':'+dateArr[1]);
+	if(dateArr != null && dateArr.length > 0)
+	{
+		if(type == 'from')
+		{
+			document.getElementById("fromMonth").value = (dateArr[0]);
+			document.getElementById("fromYear").value = (dateArr[1]);
+		}
+		else {
+			document.getElementById("toMonth").value = (dateArr[0]);
+			document.getElementById("toYear").value = (dateArr[1]);
+		}
+	}
+	
+}
 function getAddMyWorkDetailsForm(){
 	$('.addMyWorkDetaitsBtn').bind('click', function() {
 		$('#addMyWorkDetails').bPopup({

@@ -19,10 +19,7 @@
 	</c:forEach>					
 	</div>
 	
-	
-	
-	<form action="/linkalma/schooladmin/createStaff" name="staffForm" method="POST" enctype="multipart/form-data">
-	
+	<form action="/linkalma/schooladmin/createstaff" name="staffForm" method="POST" enctype="multipart/form-data">
 	facultyName<input type="text" name="facultyName"/>
 	facultyEmail<input type="text" name="facultyEmail"/>
 	subjectArea<input type="text" name="subjectArea"/>

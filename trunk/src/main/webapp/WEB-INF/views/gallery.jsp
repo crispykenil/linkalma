@@ -34,26 +34,6 @@
 <div id="gallery">
 	
 <h1>Our Gallery </h1>
-<a href="/linkalma/images/gallery/1.jpg" rel="lightbox"><img src="/linkalma/images/gallery/1.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/2.jpg" rel="lightbox"><img src="/linkalma/images/gallery/2.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/3.jpg" rel="lightbox"><img src="/linkalma/images/gallery/3.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/4.jpg" rel="lightbox"><img src="/linkalma/images/gallery/4.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/5.jpg" rel="lightbox"><img src="/linkalma/images/gallery/5.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/6.jpg" rel="lightbox"><img src="/linkalma/images/gallery/6.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/7.jpg" rel="lightbox"><img src="/linkalma/images/gallery/7.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/8.jpg" rel="lightbox"><img src="/linkalma/images/gallery/8.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/9.jpg" rel="lightbox"><img src="/linkalma/images/gallery/9.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/10.jpg" rel="lightbox"><img src="/linkalma/images/gallery/10.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/11.jpg" rel="lightbox"><img src="/linkalma/images/gallery/11.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/12.jpg" rel="lightbox"><img src="/linkalma/images/gallery/12.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/13.jpg" rel="lightbox"><img src="/linkalma/images/gallery/13.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/14.jpg" rel="lightbox"><img src="/linkalma/images/gallery/14.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/15.jpg" rel="lightbox"><img src="/linkalma/images/gallery/15.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/16.jpg" rel="lightbox"><img src="/linkalma/images/gallery/16.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/17.jpg" rel="lightbox"><img src="/linkalma/images/gallery/17.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/18.jpg" rel="lightbox"><img src="/linkalma/images/gallery/18.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/19.jpg" rel="lightbox"><img src="/linkalma/images/gallery/19.jpg" class="thumbnail" alt="" /></a>
-<a href="/linkalma/images/gallery/20.jpg" rel="lightbox"><img src="/linkalma/images/gallery/20.jpg" class="thumbnail" alt="" /></a>
 <c:forEach items="${schoolAlbumList}" var="album">
 		<h1> ${album.albumName }</h1></br>
        <c:forEach items="${album.photoList}" var="photo">

@@ -9,6 +9,7 @@
 			<li><a href="/linkalma/schooladmin/addschoolevents?schoolName=${model.schoolName }">School Events</a></li>
 			<li><a href="/linkalma/schooladmin/addaboutschool?schoolName=${model.schoolName }">About School</a></li>
 			<li><a href="/linkalma/schooladmin/addschoolgallery?schoolName=${model.schoolName }">School Gallery</a></li>
+			<li><a href="/linkalma/schooladmin/addschoolstaff?schoolName=${model.schoolName }">School Staff</a></li>
 		</ul>
 	</div>
 </div>

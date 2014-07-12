@@ -28,7 +28,9 @@ import com.linkalma.bo.IFileUploadBO;
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
+import com.linkalma.bo.IUserWorkplaceBO;
 import com.linkalma.bo.impl.SchoolBO;
+import com.linkalma.bo.impl.UserBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
 import com.linkalma.dto.School;
@@ -40,6 +42,7 @@ import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.dto.UserWorkplaceDTO;
 import com.linkalma.dto.WallPostDto;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.LinkalmaException;
@@ -403,22 +406,22 @@ public class HomeController {
 			model = userBO.createUser(user, model);
 			
 			mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
-					ApplicationConstants.EMAIL_ACCOUNT_CREATION_MSG);
+					ApplicationConstants.ACCOUNT_CREATION_EMAIL);
 			
 			setRequiredModelPropeties(model, request);
 			
-			return "Voila ! Alumni Profile Created";
+			return ApplicationConstants.PROFILE_CREATION_MSG;
 			}
 			else
 			{
 				logger.info("School Exists with this email id : "+user.getEmailAddress());
-				return "EmailID is already registered with LinkAlma, please use a different one !";
+				return ApplicationConstants.EMAIL_ALREADY_REGISTERED_MSG;
 			}
 		}
 		else
 		{
 			logger.info("Alumni Exists with this email id : "+user.getEmailAddress());
-			return "Alumni EmailID is already registered with LinkAlma";
+			return ApplicationConstants.EMAIL_ALREADY_REGISTERED_MSG;
 		}
 	}
 
@@ -434,10 +437,16 @@ public class HomeController {
 		IUserBO userBO = (IUserBO) context.getBean("userBO");
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
-		user.setUserID(userBean.getUserID());
-		model = userBO.getUserProfileDetails(user, model);
-		setRequiredModelPropeties(model, request);
-		return new ModelAndView("profile", "model", model);
+		if(userBean != null)
+		{
+			user.setUserID(userBean.getUserID());
+			model = userBO.getUserProfileDetails(user, model);
+			setRequiredModelPropeties(model, request);
+			return new ModelAndView("profile", "model", model);
+		}
+		else
+			return new ModelAndView("redirect:/logout", "model", model);
+		
 	}
 
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
@@ -483,14 +492,46 @@ public class HomeController {
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
 		if (userBean != null)
+		{
 			user.setUserID(userBean.getUserID());
 
-		List<UserSchoolDTO> userSchoolList = user.getUserSchoolList();
-		logger.info("UserSchoolList Size - Update: " + userSchoolList.size());
-		
-		return new ModelAndView("redirect:/viewprofile", "model", model);
+			List<UserSchoolDTO> userSchoolList = user.getUserSchoolList();
+			logger.info("UserSchoolList Size - Update: " + userSchoolList.size());
+			
+			IUserSchoolBO userSchoolBO = (IUserSchoolBO) context.getBean("userSchoolBO");
+			userSchoolBO.updateUserSchool(userSchoolList, model);
+			
+			return new ModelAndView("redirect:/viewprofile", "model", model);
+		}
+		else
+			return new ModelAndView("redirect:/logout", "model", model);
 	}
 
+	@RequestMapping(value = "/updateworkplace", method = RequestMethod.POST)
+	public ModelAndView updateWorkplace(
+			@ModelAttribute("userWorkplace") User user,
+			HttpServletRequest request, Model model) {
+		logger.info("Welcome to Update User profile! ");
+
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+		if (userBean != null)
+		{
+			user.setUserID(userBean.getUserID());
+
+			List<UserWorkplaceDTO> userWorkplaceList = user.getUserWorkplaceList();
+			
+			logger.info("UserWorkplaceList Size - Update: " + userWorkplaceList.size());
+			IUserWorkplaceBO userWorkplaceBO = (IUserWorkplaceBO) context.getBean("userWorkplaceBO");
+			
+			userWorkplaceBO.updateUserWorkplace(userWorkplaceList, model);
+			
+			return new ModelAndView("redirect:/viewprofile", "model", model);
+		}
+		else
+			return new ModelAndView("redirect:/logout", "model", model);
+	}
+	
 	@RequestMapping(value = "/addmyschool", method = RequestMethod.POST)
 	@Transactional
 	public ModelAndView addMySchool(
@@ -526,9 +567,44 @@ public class HomeController {
 				.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
 
 		userSchoolBO.deleteUserSchool(userSchoolDto, model);
-		return new ModelAndView("redirect:/loadUserSchool", "model", model);
+		return new ModelAndView("redirect:/loaduserschool", "model", model);
 	}
 
+	@RequestMapping(value = "/deletemyworkplace", method = RequestMethod.GET)
+	@Transactional
+	public ModelAndView deleteMyWorkplace(@ModelAttribute UserWorkplaceDTO userWorkplaceDto,
+			HttpServletRequest request, Model model) {
+		logger.info("Welcome deleteMyWorkplace!");
+
+		UserBO userBO = (UserBO) context.getBean("userBO");
+		userWorkplaceDto.setUserWorkplaceID(Long.parseLong(request.getParameter("ID")));
+		userBO.getUserWorkplaceBO().deleteUserWorkplace(userWorkplaceDto, model);
+		return new ModelAndView("redirect:/viewprofile", "model", model);
+	}
+
+	@RequestMapping(value = "/addworkplace", method = RequestMethod.POST)
+	@Transactional
+	public ModelAndView addWorkPlace(@ModelAttribute UserWorkplaceDTO userWorkplaceDto,
+			HttpServletRequest request, Model model) {
+		logger.info("Welcome addWorkPlace!");
+
+		UserBO userBO = (UserBO) context
+				.getBean("userBO");
+		
+		UserBean userBean = (UserBean) request.getSession().getAttribute(
+				"userBean");
+		if (userBean != null)
+		{
+			userWorkplaceDto.setUserID(userBean.getUserID());
+
+		userBO.getUserWorkplaceBO().createUserWorkplace(userWorkplaceDto);
+		
+		return new ModelAndView("redirect:/viewprofile", "model", model);
+		}
+		else
+			return new ModelAndView("redirect:/logout", "model", model);
+	}
+	
 	@RequestMapping(value = "/loaduserschool")
 	@Transactional
 	public ModelAndView loadUserSchool(@ModelAttribute User userDto,
@@ -705,7 +781,7 @@ public class HomeController {
 	    return new ModelAndView("redirect:/schooladmin/addaboutschool?schoolName="+school.getSchoolName(), "model", model);
 	  }
 	 
-	 @RequestMapping(value="/schooladmin/createStaff",method=RequestMethod.POST)
+	 @RequestMapping(value="/schooladmin/createstaff",method=RequestMethod.POST)
 	 public ModelAndView createStaff(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
 	 {
 		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
@@ -733,7 +809,7 @@ public class HomeController {
 				e.printStackTrace();
 			}
 		   
-		return  new ModelAndView("redirect:/school/"+school.getSchoolName()+"/ourstaff", "model", model);
+		return  new ModelAndView("redirect:/school/schooladmin/ourstaff", "model", model);
 	
 	 }
 	 

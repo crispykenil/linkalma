@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
+import com.linkalma.bo.IUserWorkplaceBO;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
@@ -18,11 +19,11 @@ public class UserBO implements IUserBO
 {
 	@Autowired
 	private IUserDAO userDAO;
-
+	
 	@Autowired
 	private IUserSchoolBO userSchoolBO;
+	private IUserWorkplaceBO userWorkplaceBO;
 
-	
 	private UserSchoolDTO userSchoolDto;
 	
 	@Override
@@ -79,9 +80,6 @@ public class UserBO implements IUserBO
 	@Override
 	public Model updateUserProfileDetails(User userDto, Model model) 
 	{
-		
-		System.out.println(userDto.getUserFirstName());
-		System.out.println("Printing...User\n"+userDto);
 		
 		getUserDAO().updateUser(userDto);
 		
@@ -158,5 +156,18 @@ public class UserBO implements IUserBO
 		return code;
 	}
 
+	/**
+	 * @return the userWorkplaceBO
+	 */
+	public IUserWorkplaceBO getUserWorkplaceBO() {
+		return userWorkplaceBO;
+	}
+
+	/**
+	 * @param userWorkplaceBO the userWorkplaceBO to set
+	 */
+	public void setUserWorkplaceBO(IUserWorkplaceBO userWorkplaceBO) {
+		this.userWorkplaceBO = userWorkplaceBO;
+	}
 	
 }

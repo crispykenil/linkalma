@@ -7,6 +7,7 @@
 	<bean id="userBO" class="com.linkalma.bo.impl.UserBO">
 		<property name="userDAO" ref="userDAO" />   
 		<property name="userSchoolBO" ref="userSchoolBO" />
+		<property name="userWorkplaceBO" ref="userWorkplaceBO" />
    </bean>
 
 	<bean id="schoolBO" class="com.linkalma.bo.impl.SchoolBO">
@@ -19,6 +20,10 @@
 	<bean id="userSchoolBO" class="com.linkalma.bo.impl.UserSchoolBO">
 		<property name="schoolDAO" ref="schoolDAO" />   
 		<property name="userSchoolDAO" ref="userSchoolDAO" />   
+   </bean>
+   
+   <bean id="userWorkplaceBO" class="com.linkalma.bo.impl.UserWorkplaceBO">
+		<property name="userWorkplaceDAO" ref="userWorkplaceDAO" />   
    </bean>
    
    <bean id="dashboardBO" class="com.linkalma.bo.impl.DashboardBO">

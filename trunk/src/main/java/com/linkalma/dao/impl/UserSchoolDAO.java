@@ -87,4 +87,22 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 	      
 		return 0;
 	}
+
+	@Override
+	public long updateUserSchool(final UserSchoolDTO userschoolDto) {
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_SCHOOL_DETAILS);
+	    		ps.setLong(1, userschoolDto.getSchoolID());
+	    		ps.setString(2, userschoolDto.getFromYear());
+	    		ps.setString(3, userschoolDto.getToYear());
+	    		ps.setString(4, userschoolDto.getPassOutBatch());
+	    		ps.setLong(5, userschoolDto.getUserID());
+	    		ps.setLong(6, userschoolDto.getUserSchoolID());
+
+	    	  	return ps;
+    	  	}
+    });
+		return 0;
+	}
 }

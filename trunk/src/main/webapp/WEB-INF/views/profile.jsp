@@ -94,15 +94,16 @@ function fileUpload()
 										 name="country" class="required" /></li>
 									<li><label>Zip Code</label> <input type="text" value="${model.userProfile.zipCode }"
 										 name="zipCode" class="required" /></li>
-									<li><label>Cell</label> <input type="text" value=""
-										 name="code1" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone1 }"
-										 name="phone1" class="numeric" size="10"/></li>
-									<li><label>Work</label> <input type="text" value=""
-										 name="code2" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone2 }"
+									<li><label>Cell</label> 
+										<input type="text" value="${model.userProfile.phoneCode1 }" name="phoneCode1" class="numeric" maxlength="3" size="1" /> 
+										<input type="text" value="${model.userProfile.phone1 }" name="phone1" class="numeric" size="10"/></li>
+									<li><label>Work</label> 
+										<input type="text" value="${model.userProfile.phoneCode2 }" name="phoneCode2" class="numeric" maxlength="3" size="1" /> 
+										<input type="text" value="${model.userProfile.phone2 }"
 										 name="phone2"class="numeric" size="10" /></li>
-									<li><label>Residence</label> <input type="text" value=""
-										 name="code3" class="numeric" maxlength="3" size="1" /> <input type="text" value="${model.userProfile.phone3 }"
-										 name="phone3" class="numeric" maxlength="10" size="10" /></li>
+									<li><label>Residence</label> 
+										<input type="text" value="${model.userProfile.phoneCode3 }" name="phoneCode3" class="numeric" maxlength="3" size="1" /> 
+										<input type="text" value="${model.userProfile.phone3 }" name="phone3" class="numeric" maxlength="10" size="10" /></li>
 					
 								</ul>
 				
@@ -139,6 +140,7 @@ function fileUpload()
 							<tr>
 								<td>
 							
+								<input type="hidden" value="${userSchoolList.userSchoolID}" name="userSchoolList[${count.index}].userSchoolID" />
 								<input type="hidden" value="${userSchoolList.schoolID}" name="schoolID_${count.index}" />
 								<div class="select-drop-down">
 									<select name="userSchoolList[${count.index}].schoolID">
@@ -195,9 +197,10 @@ function fileUpload()
 			</div>
 			<div id="workDetails">
 			<h2>Work Details <a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a></h2>
-				<form:form class="readOnlyForm clear-fix workDetailsForm collapse-expand-content" action="updateprofile" name="userWorkplaceDetailsForm" modelAttribute="workDetails">
+				<form:form class="readOnlyForm clear-fix workDetailsForm collapse-expand-content" action="updateworkplace" 
+				name="userWorkplaceDetailsForm" modelAttribute="workDetails" method="post">
 					
-					<input type="hidden" name="totalUserSchoolCount" value="${model.workplaceList.size()}" />
+					<input type="hidden" name="totalUserWorkplaceCount" value="${model.workplaceList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
@@ -210,20 +213,24 @@ function fileUpload()
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="workplace" items="${model.workplaceList}">
+							<c:forEach var="workplaceList" items="${model.workplaceList}" varStatus="count"	>
 								<tr>
-									<td><input type=hidden name="userWorkplaceID_${count.index}" value="${workplace.userWorkplaceID }">
-										<input type="text" name="workplace[${count.index}].organisationName" value="${workplace.organisationName }">
+									<td><input type=hidden name="workplace[${count.index}].userWorkplaceID" value="${workplaceList.userWorkplaceID }">
+										<input type="text" name="workplace[${count.index}].organisationName" value="${workplaceList.organisationName }">
 									</td>
-									<td><input type="text" size="2" name="workplace[${count.index}].fromMonth" value="${workplace.fromMonth}"> - 
-										<input type="text" size="4" name="workplace[${count.index}].fromYear" value="${workplace.fromYear}">
+									<td>
+										<input type="text" maxlength="7" name="workplaceList[${count.index}].fromMonthYear" value="${workplaceList.fromMonth}/${workplaceList.fromYear}">
+										<input type="hidden" size="2" name="workplaceList[${count.index}].fromMonth" value="${workplaceList.fromMonth}">
+										<input type="hidden" size="4" name="workplaceList[${count.index}].fromYear" value="${workplaceList.fromYear}">
 									</td>
-									<td><input type="text" size="2" maxlength="2"  name="workplace[${count.index}].toMonth" value="${workplace.toMonth}"> -
-										<input type="text" size="4" maxlength="4" name="workplace[${count.index}].toYear" value="${workplace.toYear}" >
+									<td>
+										<input type="text" maxlength="7" maxlength="2"  name="workplaceList[${count.index}].toMonthYear" value="${workplaceList.toMonth}/${workplaceList.toYear}">
+										<input type="hidden" size="2" maxlength="2"  name="workplaceList[${count.index}].toMonth" value="${workplace.toMonth}">
+										<input type="hidden" size="4" maxlength="4" name="workplaceList[${count.index}].toYear" value="${workplace.toYear}" >
 									</td>
-									<td><input type="text" name="workplace[${count.index}].designation" value="${workplace.designation}"></td>
-									<td><input type="text" name="workplace[${count.index}].description" value="${workplace.description}"></td>
-									<td class="align-center"> <a href="deletemyschool?ID=1" class="fa fa-times delete-icon" ></a></td>
+									<td><input type="text" name="workplaceList[${count.index}].designation" value="${workplaceList.designation}"></td>
+									<td><input type="text" name="workplaceList[${count.index}].description" value="${workplaceList.description}"></td>
+									<td class="align-center"> <a href="deletemyworkplace?ID=${workplaceList.userWorkplaceID}" class="fa fa-times delete-icon" ></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -236,25 +243,27 @@ function fileUpload()
 				</form:form>
 				<div id="addMyWorkDetails" class="addMyWorkDetails popupContent" style="width:450px">
 					<h2>Add Work Details</h2>
-					<form:form action="addWorkPlace" name="addWorkPlace" method="post">
+					<form:form action="addworkplace" name="addWorkPlace" method="post" id="addWorkPlaceForm" >
 						<label>Organisation Name</label>
-					 	<input type="text" value=""  name="organisationName" />	
+					 	<input type="text" value=""  name="organisationName" class="required" />	
 						<label>From Date</label>
-						<input type="text" value=""  name="fromMonthYear" placeholder="MM / YYYY" maxlength="7" class="numeric" />
-							<input type="hidden" value=""  name="fromYear" />
-							<input type="hidden" value=""  name="fromMonth" />
+						<input type="text" value=""  name="fromMonthYear" id="fromMonthYear" placeholder="MM / YYYY" maxlength="7" class="required numeric" />
+							<input type="hidden" value=""  name="fromYear" id="fromYear" />
+							<input type="hidden" value=""  name="fromMonth" id="fromMonth" />
 						<label>To Date</label>
-						<input type="text" value=""  name="toMonthYear"  placeholder="MM / YYYY" maxlength="7" class="numeric" />
-							<input type="hidden" value=""  name="toYear" />
-							<input type="hidden" value=""  name="toMonth" />
+						<input type="text" value=""  name="toMonthYear" id="toMonthYear"  placeholder="MM / YYYY" maxlength="7" class="required numeric" />
+							<input type="hidden" value=""  name="toYear" id="toYear" />
+							<input type="hidden" value=""  name="toMonth" id="toMonth" />
 						<label>Designation</label>
-						<input type="text" value=""  name="passOutBatch" />
-						<label>Description</label>
-						<input type="text" value=""  name="branch" />
-						<div class="btn-wrapper">
-							<input type="submit" class="button large" value="Save Work Details" />
-						</div>
+						<input type="text" value=""  name="designation" class="required" />
+						<label>Experience Summary</label>
+						<textarea type="text" name="description" rows="5" cols="30">
+							
+						</textarea>
 						
+						<div class="btn-wrapper">
+							<input type="submit" class="button large" value="Save Work Details" id="saveWorkPlaceBtn" />
+						</div>
 					</form:form>
 				</div>
 			</div>
