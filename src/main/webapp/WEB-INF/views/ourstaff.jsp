@@ -18,14 +18,5 @@
 		
 	</c:forEach>					
 	</div>
-	
-	<form action="/linkalma/schooladmin/createstaff" name="staffForm" method="POST" enctype="multipart/form-data">
-	facultyName<input type="text" name="facultyName"/>
-	facultyEmail<input type="text" name="facultyEmail"/>
-	subjectArea<input type="text" name="subjectArea"/>
-	<input type="file" name="uploadedFile" accept="image/*" class="button" />
-	<input type="submit" name=""/>
-		
-	</form>
 		
 <%@ include file="footer.jsp"%>

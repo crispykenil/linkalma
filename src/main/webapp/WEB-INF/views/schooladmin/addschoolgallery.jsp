@@ -14,16 +14,28 @@
 	</div><!-- left-column -->
 
 <div class="main-content border-box">
-	<form:form method="post" action="updateschoolgallery"
-            modelAttribute="schoolGalleryForm" enctype="multipart/form-data">
-			<ul class=" clear-fix">
-				<li><label>Add Photos</label> 
-					<input type="file" name="files" accept="image/*" class="button" multiple="multiple" />
+	<form  method="POST" action="createschoolgallery" name="schoolGalleryForm" enctype="multipart/form-data">
+		<c:if test="${not empty model.msg}">
+			<div class="infoPanel">${model.msg}</div>
+		</c:if>
+		<h1>Add Gallery</h1>
+				<ul class=" clear-fix">
+			<li>
+				<label>Album Name</label>
+				<input type="text" name="albumName"/>
+			</li><br>
+			<li>
+				<label>Description</label>
+				<input type="text" name="description"/>
+			</li><br>
+			<li>
+				<label>Add Photos</label> 
+				<input type="file" name="uploadedFileList" accept="image/*" class="button" multiple="multiple" />
 				</li><br>
-					<input type="hidden" name="destination" value="schoolgallery" />
+				<input type="hidden" name="destination" value="schoolgallery" />
 			</ul>
-	
-		<input type="submit" value="Save Photos" />
-	</form:form>	
+		<input type="submit" value="Save Gallery" />
+	</form>
+		
 </div>
 <%@ include file="../footer.jsp"%>
