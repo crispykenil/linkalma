@@ -271,7 +271,8 @@ public class HomeController {
 		
 		model.addAttribute("page", page);
 		model.addAttribute("msg", msg);
-
+		
+		
 		return new ModelAndView("/schooladmin/" + page, "model", model);
 	}
 
@@ -795,27 +796,36 @@ public class HomeController {
 		    try 
 		    {
 				schoolBO.createStaff(staff,school);
+				model.addAttribute("msg", "Staff Added Successfully");
+				
+				
 			} catch (FileNotFoundException e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
+				
 			} catch (LinkalmaException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
+				
 			} catch (IOException e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
+				
 			}
 		   
-		return  new ModelAndView("redirect:/school/schooladmin/ourstaff", "model", model);
-	
+		return  new ModelAndView("redirect:/schooladmin/addschoolstaff?schoolName="+school.getSchoolName(), "model", model);
 	 }
 	 
-	 @RequestMapping(value="/schooladmin/createSchoolGallery",method=RequestMethod.POST)
+	 @RequestMapping(value="/schooladmin/createschoolgallery",method=RequestMethod.POST)
 	 public ModelAndView createSchoolGallery(@ModelAttribute("schoolGalleryForm") SchoolGallery schoolGallery,HttpServletRequest request,Model model)
 	 {
+		 System.out.println("create school gallery.");
 		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
 		 	School school = (School)request.getSession().getAttribute("school");
 		    if (null == school)
@@ -828,6 +838,8 @@ public class HomeController {
 		    try 
 		    {
 				schoolBO.createSchoolGallery(schoolGallery);
+				model.addAttribute("msg", "Gallery Created Successfully");
+				
 			} catch (FileNotFoundException e) 
 			{
 				// TODO Auto-generated catch block
@@ -842,10 +854,7 @@ public class HomeController {
 				e.printStackTrace();
 			}
 		   
-		 
-		    
-		    
-		return  new ModelAndView("redirect:/school/"+school.getSchoolName()+"/gallery", "model", model);
+		return  new ModelAndView("redirect:/schooladmin/addschoolgallery?schoolName="+school.getSchoolName(), "model", model);
 	
 	 }
 	
