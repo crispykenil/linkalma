@@ -61,6 +61,9 @@
 	line-height:73px;
 	vertical-align:middle
 }
+.navigation {
+	width:200px;
+}
 .school-header .top-navigation  {
 	position:absolute;
 	right:0px;
@@ -263,4 +266,13 @@ h3 {
 .panel .panel-body {
 	color:#fff;
 	
+}
+
+
+
+.dataTable thead th {
+	padding: 7px 10px;
+}
+.dataTable td  {
+	padding: 7px 10px;
 }
