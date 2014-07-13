@@ -67,12 +67,12 @@ function splitDate(monthYear, type)
 {
 	var dateArr = monthYear.split('/');
 	alert(dateArr[0]+':'+dateArr[1]);
-	if(dateArr != null && dateArr.length > 0)
+	if(dateArr != null && dateArr.length == 2)
 	{
 		if(type == 'from')
 		{
-			document.getElementById("fromMonth").value = (dateArr[0]);
-			document.getElementById("fromYear").value = (dateArr[1]);
+			$("#fromMonth").val(dateArr[0]); 
+			$("#fromYear").val(dateArr[1]);
 		}
 		else {
 			document.getElementById("toMonth").value = (dateArr[0]);
