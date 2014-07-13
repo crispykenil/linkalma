@@ -159,3 +159,11 @@ table{font-size:inherit;font:100%;}
     width: 18px;
     z-index: 1000;
 }
+.btn-wrapper {
+	position:relative;
+	text-align:center;
+}
+.btn-wrapper .fa-spin {
+    left: -30px;
+    position: relative;
+}
