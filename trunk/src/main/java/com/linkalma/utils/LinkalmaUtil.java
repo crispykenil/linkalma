@@ -19,6 +19,15 @@ public class LinkalmaUtil
 	{
 		return properties.getProperty(prop.toString());
 	}
+	
+	public String getCurriculumFileUploadPath(String schoolParentDir,String strFile, String type) throws IOException
+	{
+		String path=this.getCurriculumUploadPath(schoolParentDir, type);
+		
+		this.createAlbum(path);
+		return path+"//"+strFile;
+	}
+	
 	public  String getAlbumFileUploadPath(String schoolParentDir,String albumName,String strFile) throws IOException
 	{	
 		
@@ -41,6 +50,22 @@ public class LinkalmaUtil
 		
 		return path;
 	}
+	
+	public  String getCurriculumServePath(String schoolParentDir, String type)
+	{	
+		String path = "";
+		if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_CALENDAR))
+			path=getProperty(LinkalmaConstants.Properties.IMAGE_HOST)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.CALENDAR_DIR;
+		
+		else if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_EXAMS))
+			path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.EXAMS_DIR;
+
+		else if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_SYLLABUS))
+			path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.SYLLABUS_DIR;
+
+		return path;
+	}
+	
 	private void createAlbum(String albumPath) throws IOException 
 	{
 		File file=new File(albumPath);
@@ -85,5 +110,20 @@ public class LinkalmaUtil
 	{
 		File file=new File(staffImgDir);
 		this.createDir(file);
+	}
+	
+	public  String getCurriculumUploadPath(String schoolParentDir, String type)	// TYPE = Syllabus, Exams, Calendar
+	{	
+		String path = "";
+		if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_CALENDAR))
+			path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.CALENDAR_DIR;
+		
+		else if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_EXAMS))
+			path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.EXAMS_DIR;
+
+		else if(type.equalsIgnoreCase(ApplicationConstants.CURRICULUM_SYLLABUS))
+			path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+schoolParentDir+"//"+LinkalmaConstants.Dirs.SYLLABUS_DIR;
+
+		return path;
 	}
 }

@@ -2,13 +2,17 @@ package com.linkalma.dao.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.linkalma.dto.SchoolDataDTO;
+import com.linkalma.utils.LinkalmaUtil;
 
 public class SchoolDataMapper implements RowMapper<SchoolDataDTO> {
 	
+	
 	public SchoolDataDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		LinkalmaUtil linkalmaUtil = new LinkalmaUtil();
 		
 		SchoolDataDTO schoolDataDTO = new SchoolDataDTO();
 	      schoolDataDTO.setId(rs.getLong("ID"));
@@ -22,8 +26,9 @@ public class SchoolDataMapper implements RowMapper<SchoolDataDTO> {
 	      schoolDataDTO.setDivision(rs.getString("DIVISION"));
 	      schoolDataDTO.setDocumentName(rs.getString("DOCUMENTNAME"));
 	      schoolDataDTO.setCreateDttm(rs.getDate("CREATEDTTM"));
+	      
+//	      String schoolParentDir=schoolDataDTO.getSchoolName()+"_"+schoolDataDTO.getSchoolID();
+//	      schoolDataDTO.setServerDocumentUrl(linkalmaUtil.getCurriculumServePath(schoolParentDir,String.valueOf(schoolDataDTO.getDataType() )));
 	      return schoolDataDTO;
 	   }
- 
-
 }

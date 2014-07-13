@@ -22,7 +22,10 @@ public class LinkalmaConstants {
 	public enum Dirs
 	{
 		ALBUM_DIR("Albums"),
-		STAFF_DIR("Staff");
+		STAFF_DIR("Staff"),
+		SYLLABUS_DIR("Syllabus"),
+		EXAMS_DIR("Exams"),
+		CALENDAR_DIR("Calendar");
 		
 		private Dirs(String dir) {
 			this.dir = dir;
