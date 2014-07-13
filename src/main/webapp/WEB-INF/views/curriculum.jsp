@@ -13,6 +13,7 @@
 				<th>Division</th>
 				<th>File</th>
 				<th>Uploaded Date</th>
+				<th>Download</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +26,7 @@
 					<td>${schoolDataDto.description}</td>
 					<td>${schoolDataDto.documentName}</td>
 					<td>${schoolDataDto.createDttm}</td>
+					<td align="center"><a href="" class="fa fa-download">${schoolDataDto.serverDocumentUrl}</a> </td>
 				</tr>
 			</c:forEach>
 		</tbody>

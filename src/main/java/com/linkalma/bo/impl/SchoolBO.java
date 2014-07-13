@@ -139,31 +139,38 @@ public class SchoolBO implements ISchoolBO
 	}
 
 	@Override
+	@Transactional
 	public Model updateSchoolData(SchoolDataDTO schoolDataDto, Model model) {
-		
-		try
-		{
-			
-			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
-			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+
+		try {
+
+			MultipartFile multipartFile = schoolDataDto.getUploadedFile();
+
+			if (multipartFile != null
+					&& !StringUtils.isEmpty(multipartFile.getOriginalFilename())) 
 			{
 				schoolDataDto.setDocumentName(multipartFile.getOriginalFilename());
-				fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
+				
+				long id = getSchoolDAO().updateSchoolData(schoolDataDto,schoolDataDto.getDataType());
+				// If DB Insert successful then go ahead for FileUpload...
+				if (id > 0) 
+				{
+					String schoolParentDir = schoolDataDto.getSchoolName()+ "_" + schoolDataDto.getSchoolID();
+
+					fileHelperImpl.writeFile(multipartFile,
+									linkalmaUtil.getCurriculumFileUploadPath(schoolParentDir, multipartFile.getOriginalFilename(),
+											String.valueOf(schoolDataDto.getDataType())));
+				}
+				schoolDataDto
+						.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
 			}
-			long id = getSchoolDAO().updateSchoolData(schoolDataDto, schoolDataDto.getDataType());
-			if (id > 0)
-			{
-				schoolDataDto.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
-			}
-		}
-		catch(Exception e)
-		{	schoolDataDto.setSuccessMsg("Failed to Update");
+		} catch (Exception e) {
+			schoolDataDto.setSuccessMsg("Failed to Update");
 			e.printStackTrace();
 		}
-		
-		
+
 		model.addAttribute("schoolDataDto", schoolDataDto);
-		
+
 		return model;
 	}
 
@@ -173,6 +180,9 @@ public class SchoolBO implements ISchoolBO
 		List<StaticCodesDTO> staticCodesDtoList = getCategoryCodesDAO().getStaticCodesForCategoryID(ApplicationConstants.SCHOOL_DATA_CTGRY_CODE);
 		
 		Map<String, List<SchoolDataDTO>> schoolDataMap = getSchoolDAO().getSchoolDataByTypeForSchool(staticCodesDtoList, schoolUpdateDto.getSchoolID());
+		
+		String schoolParentDir=schoolUpdateDto.getSchoolName()+"_"+schoolUpdateDto.getSchoolID();
+		
 		
 		model.addAttribute("schoolDataMap", schoolDataMap);
 		return model;

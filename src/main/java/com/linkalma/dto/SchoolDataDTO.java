@@ -16,6 +16,8 @@ public class SchoolDataDTO extends BaseDTO {
 
 	private String documentName;
 
+	private String serverDocumentUrl;
+
 	private String schoolName;
 
 	private int dataType;
@@ -292,6 +294,20 @@ public class SchoolDataDTO extends BaseDTO {
 	 */
 	public void setUploadedFile(CommonsMultipartFile uploadedFile) {
 		this.uploadedFile = uploadedFile;
+	}
+
+	/**
+	 * @return the serverDocumentUrl
+	 */
+	public String getServerDocumentUrl() {
+		return serverDocumentUrl;
+	}
+
+	/**
+	 * @param serverDocumentUrl the serverDocumentUrl to set
+	 */
+	public void setServerDocumentUrl(String serverDocumentUrl) {
+		this.serverDocumentUrl = serverDocumentUrl;
 	}
 
 }

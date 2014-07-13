@@ -17,6 +17,9 @@
 <div class="main-content border-box">
 	<h1>Syllabus</h1>
 	<form action="updateschooldata" name="schoolDataForm" enctype="multipart/form-data" method="POST">
+		<c:if test="${not empty model.msg}">
+			<div class="infoPanel">${model.msg}</div>
+		</c:if>
 		<ul class="clear-fix">
 
 			<li><label>Title</label> 
