@@ -160,8 +160,8 @@ public class HomeController {
 				request.getSession().setAttribute("userBean", userBean);
 				return new ModelAndView("redirect:/dashboard");
 			} else {
-				model.addAttribute("loginErrorMsg", "Invalid user login.");
-				return new ModelAndView("redirect:/");
+				model.addAttribute("errors", "Invalid Alumni login credentials.");
+				return new ModelAndView("index");
 			}
 		} else if ("S".equalsIgnoreCase(userBean.getLoginType())) {
 			if (authenticateLogin(userName, password, userBean,
@@ -180,8 +180,8 @@ public class HomeController {
 				return new ModelAndView("redirect:school/"
 						+ school.getLinkalmaAddress(), "model", model);
 			} else {
-				model.addAttribute("loginErrorMsg", "Invalid school login.");
-				return new ModelAndView("redirect:/");
+				model.addAttribute("errors", "Invalid School login credentials.");
+				return new ModelAndView("index");
 			}
 		} else
 			return new ModelAndView("redirect:/error");
