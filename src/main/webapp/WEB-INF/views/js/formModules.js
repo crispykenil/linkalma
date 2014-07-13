@@ -4,6 +4,10 @@ var form = {
 		var formData = form.serialize();
 		var url = form.attr("action");
 		$.ajax({
+			beforeSend:function disableButton(){
+				$('.btn-wrapper .button', form).attr("disabled",true);
+				$('.btn-wrapper', form).append('<span class="fa fa-spinner fa-spin"></span>');
+			},
 			type : "POST",
 			url : url,
 			data : formData
@@ -15,8 +19,10 @@ var form = {
 			showMessage(data);
 		}).complete(function(data) {
 			console.log(data);
+			$('.btn-wrapper .button', form).attr("disabled",false);
+			$('.btn-wrapper .fa-spin', form).remove();
 		});
-		
+
 		var showMessage = function showMessage(data){
 			$('.message', form).html(data).show();
 		};

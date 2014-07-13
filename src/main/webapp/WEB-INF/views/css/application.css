@@ -175,8 +175,15 @@ input[type="text"].search-field {
 	width:100%
 }
 /* for index page */
+.home-page .main-content {
+	width:640px;
+}
+.home-page .left-column {
+	width:360px
+}
 #show-case-area {
 	height:278px;
+	margin-bottom:25px;
 }
 #signin-signup-panel {
 	margin-right: 10px;

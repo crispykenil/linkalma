@@ -16,8 +16,8 @@
 <div class="main-content border-box">
 	<form:form action="/linkalma/schooladmin/createstaff" name="staffForm" method="POST" enctype="multipart/form-data">
 	
-		<c:if test="${not empty model.successMsg}">
-			<div class="infoPanel">${model.successMsg }</div>
+		<c:if test="${not empty model.msg}">
+			<div class="infoPanel">${model.msg }</div>
 		</c:if>
 		<h1>Add Staff</h1>
 

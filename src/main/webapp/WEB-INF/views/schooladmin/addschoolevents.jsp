@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../header.jsp"%>
 
-<h2><c:if test="${model.msg!= null } ">${model.msg}</c:if> </h2>
+<c:if test="${model.msg!= null } "><h2>${model.msg}</h2></c:if> 
 <div class="left-column border-box">
 	<div class="navigation">
 		<ul>
