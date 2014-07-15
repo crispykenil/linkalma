@@ -83,6 +83,13 @@ public class HomeController {
 		return new ModelAndView("index", "model", model);
 	}
 
+	@RequestMapping(value = "/dologin", method = RequestMethod.GET)
+	public ModelAndView doLogin(HttpServletRequest request, Model model) {
+		setRequiredModelPropeties(model, request);
+		model.addAttribute("schoolName", "");
+		return new ModelAndView("login", "model", model);
+	}
+	
 	private void setRequiredModelPropeties(Model model,
 			HttpServletRequest request) {
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
@@ -105,7 +112,10 @@ public class HomeController {
 			model.addAttribute("schoolName", school.getSchoolName());
 		}
 		else
+		{
 			model.addAttribute("loggedIn","false");
+			model.addAttribute("errors", request.getParameter("errors"));
+		}
 		
 	}
 
@@ -150,7 +160,7 @@ public class HomeController {
 		else
 		{
 			model.addAttribute("errors", "Incorrect EmailID or Password.");
-			return new ModelAndView("index");
+			return new ModelAndView("redirect:/dologin", "model", model);
 		}
 		
 		// Checking whether Alumni signing in or School Signing.
@@ -161,7 +171,7 @@ public class HomeController {
 				return new ModelAndView("redirect:/dashboard");
 			} else {
 				model.addAttribute("errors", "Invalid Alumni login credentials.");
-				return new ModelAndView("index");
+				return new ModelAndView("redirect:/dologin", "model", model);
 			}
 		} else if ("S".equalsIgnoreCase(userBean.getLoginType())) {
 			if (authenticateLogin(userName, password, userBean,
@@ -181,7 +191,7 @@ public class HomeController {
 						+ school.getLinkalmaAddress(), "model", model);
 			} else {
 				model.addAttribute("errors", "Invalid School login credentials.");
-				return new ModelAndView("index");
+				return new ModelAndView("redirect:/dologin", "model", model);
 			}
 		} else
 			return new ModelAndView("redirect:/error");

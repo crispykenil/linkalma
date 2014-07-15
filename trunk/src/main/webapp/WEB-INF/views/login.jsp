@@ -32,10 +32,14 @@
 <div class="border-box fa fa-lock " id="signup-panel">
 <h2>Login</h2>
 	<div class="sign-in-wrapper">
-	
+	<c:forEach items="${errors}" var="error">
+		<div class="errorMsg">
+			<c:out value="${error}" />
+		</div>
+	</c:forEach>
 		<form:form action="login" modelAttribute="loginForm" >
 			<ul>
-				<li><label>Username</label><input type="text" value="" name="userName" /> </li>
+				<li><label>Email</label><input type="text" value="" name="userName" autofocus="autofocus" /> </li>
 				<li><label>Password</label><input type="password" value="" name="password" /> </li>
 				<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 				<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
