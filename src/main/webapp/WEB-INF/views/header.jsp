@@ -54,7 +54,7 @@
 				</div>
 				<div class="fr">
 					<div class="search-bar">
-					<label>Search Your Freinds</label>
+					<label>Search Your Friends</label>
 						<input type="text" value="" placeholder="" class="search-field "/>
 						<a href=";" class="fa fa-search" id="submitSearchBtn"></a>
 					</div>

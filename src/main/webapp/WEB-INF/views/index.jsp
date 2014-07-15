@@ -11,15 +11,10 @@
 						</c:when>
 						<c:otherwise>
 						<h2>Login</h2>
-						<c:forEach items="${errors}" var="error">
-							<div class="errorMsg">
-								<c:out value="${error}" />
-							</div>
-						</c:forEach>
 						<form:form action="login" modelAttribute="loginForm" >
 						
 							<ul>
-								<li><label>Username</label><input type="text" value="" name="userName" /> </li>
+								<li><label>Email</label><input type="text" value="" name="userName" autofocus="autofocus" /> </li>
 								<li><label>Password</label><input type="password" value="" name="password" /> </li>
 								<li> <input type="submit" value="Sign In" id="sign-in-button" class="button"/>
 								<a href="javascript:;" class="smallFont fr" title="Click here to reset your password" id="forgotPasswordBtn">Forgot password?</a>
@@ -93,7 +88,7 @@
 			
 		</div><!-- signin-signup-panel -->
 		<div id="slider-panel" class="fl">
-			<img src="images/show-case.png" />
+			<a href="dologin"> <img src="images/show-case.png" /> </a>
 		</div>
 	</div><!-- show-case-area -->
 				<div class="left-column border-box">
