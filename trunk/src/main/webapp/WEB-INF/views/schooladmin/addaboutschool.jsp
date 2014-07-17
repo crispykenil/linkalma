@@ -27,6 +27,7 @@ function fileUpload()
 
 <div class="main-content border-box">
 	<form action="/linkalma/schooladmin/updateaboutschool" name="aboutSchoolForm" method="POST" enctype="multipart/form-data">
+	<h1>About School</h1>
 	
 			<ul class=" clear-fix">
 				<li><label>School Logo</label> 

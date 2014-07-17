@@ -199,7 +199,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/school/{id}")
 	public ModelAndView school(@PathVariable("id") String schoolName,
-			Model model, HttpServletRequest request) {
+			Model model, HttpServletRequest request ) {
 		logger.info("Welcome home! Redirecting to School page.");
 
 		logger.info(schoolName + "--"+ model.containsAttribute("linkalmaaddress"));
@@ -210,6 +210,7 @@ public class HomeController {
 		School school = (School) request.getSession().getAttribute("school");
 		schoolUpdateDto.setSchoolID(school.getSchoolID());
 		schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
+		schoolBO.getSchoolStaff(school, model);
 		
 		setRequiredModelPropeties(model, request);
 		

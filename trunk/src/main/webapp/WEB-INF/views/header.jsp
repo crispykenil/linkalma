@@ -38,7 +38,11 @@
 	<c:if test="${model.loggedIn == true}">
 	<div class="status-info-bar fr">
 		<ul>
-			<li><a href="/linkalma/dashboard">My Dashboard</a></li><li><a href="/linkalma/viewprofile">My Profile</a>  <a href="/linkalma/logout" class="" title="Sign Out">Log Out</a></li>
+			<li><a href="/linkalma/${model.dashboardUrl }">My Dashboard</a></li>
+			<c:if test="${not empty model.userBean}">
+				<li><a href="/linkalma/viewprofile">My Profile</a></li>
+			</c:if>  
+			<li><a href="/linkalma/logout" class="" title="Sign Out">Log Out</a></li>
 		</ul>
 	</div>
 	</c:if>
