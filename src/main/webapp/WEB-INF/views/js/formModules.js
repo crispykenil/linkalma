@@ -1,12 +1,19 @@
 var form = {
 	formFields : "input[type='text'],input[type='password'],select",
-	submitFormThroughAjax: function (form) {
-		var formData = form.serialize();
-		var url = form.attr("action");
+	submitFormThroughAjax: function (options) {
+		// This is the easiest way to have default options.
+		 var settings = $.extend({
+			// These are the defaults.
+			 form :null,
+			 callback:false
+		 }, options);
+		var formEl = settings.form;
+		var formData = formEl.serialize();
+		var url = formEl.attr("action");
 		$.ajax({
 			beforeSend:function disableButton(){
-				$('.btn-wrapper .button', form).attr("disabled",true);
-				$('.btn-wrapper', form).append('<span class="fa fa-spinner fa-spin"></span>');
+				$('.btn-wrapper .button', formEl).attr("disabled",true);
+				$('.btn-wrapper', formEl).append('<span class="fa fa-spinner fa-spin"></span>');
 			},
 			type : "POST",
 			url : url,
@@ -15,16 +22,17 @@ var form = {
 		}).done(function(data) {
 			showMessage(data);
 			
+			
 		}).error(function(data) {
 			showMessage(data);
 		}).complete(function(data) {
 			console.log(data);
-			$('.btn-wrapper .button', form).attr("disabled",false);
-			$('.btn-wrapper .fa-spin', form).remove();
+			$('.btn-wrapper .button', formEl).attr("disabled",false);
+			$('.btn-wrapper .fa-spin', formEl).remove();
 		});
 
 		var showMessage = function showMessage(data){
-			$('.message', form).html(data).show();
+			$('.message', formEl).html(data).show();
 		};
 	},
 	makeFormReadonly : function(form) {
@@ -129,7 +137,8 @@ var form = {
 		// This is the easiest way to have default options.
 		 var settings = $.extend({
 		// These are the defaults.
-		 callback :"modal callback"
+		 callback :false,
+		 submitThroughAjax:true,
 		 }, options);
 		
 		//make form readonly on onload
@@ -159,11 +168,33 @@ var form = {
 			if (beforeUpdateFormData != afterUpdateFormData) {
 				//alert("found some updation so please valid form and submit it");
 				if (form.validateForm(myForm)) {
-					settings.callback();
-					//alert('ok');
-					
+					if (settings.submitThroughAjax){
+						var formData = myForm.serialize();
+						var url = myForm.attr("action");
+						$.ajax({
+							beforeSend:function disableButton(){
+								//$('.btn-wrapper .button', formEl).attr("disabled",true);
+								//$('.btn-wrapper', formEl).append('<span class="fa fa-spinner fa-spin"></span>');
+							},
+							type : "POST",
+							url : url,
+							data : formData
+
+						}).done(function(data) {
+							
+						}).error(function(data) {
+							
+						}).complete(function(data) {
+							resetForm();
+							
+						});
+						
+					} else {
+						myForm.submit();
+					}
+
+	
 				} else
-					
 					return false;
 			} else {
 				alert("please change something before update");

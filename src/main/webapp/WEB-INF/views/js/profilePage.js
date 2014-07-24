@@ -8,9 +8,9 @@
 		getAddMySchoolForm();
 		getAddMyWorkDetailsForm();
 		hideShowMairrageInfo();
-		$(".personalDetailsForm").bindEditUpdateFunctionality({callback:submitPersonalDetails});
-		$(".schoolDetailsForm").bindEditUpdateFunctionality({callback:submitSchoolDetails});
-		$(".workDetailsForm").bindEditUpdateFunctionality({callback:submitWorkplaceDetails});
+		$(".personalDetailsForm").bindEditUpdateFunctionality({submitThroughAjax:false});
+		$(".schoolDetailsForm").bindEditUpdateFunctionality();
+		$(".workDetailsForm").bindEditUpdateFunctionality();
 
 	});
 
@@ -54,7 +54,6 @@ var submitPersonalDetails = function(){
 var submitSchoolDetails = function(){
 	var form2 = $('#userSchoolDetailsForm');
 	form.submitFormThroughAjax(form2);
-	
 };
 
 var submitWorkplaceDetails = function(){

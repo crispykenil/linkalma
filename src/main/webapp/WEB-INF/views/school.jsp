@@ -34,6 +34,7 @@
 	</div>
 	<div class="school-staffs clear-fix">
 	<h2>Our Staff</h2>
+		<div class="staff-profile">
 		<c:if test="${empty staffInfoList}">
 		
 		<p class="description">No Staff Entries, <a href="/linkalma/${model.dashboardUrl}">Add now !</a></p>
@@ -41,7 +42,7 @@
 		</c:if>
 		<c:forEach items="${staffInfoList}" var="staff" begin="0" end="3">
 		
-       	<div>
+       
 			<h3>${staff.facultyName}</h3>
 			<div class="pic-container"><img src="${IMAGE_HOST_PATH}//${staff.photoName}" width="100%" height="185" /></div>
 			<p class="description">

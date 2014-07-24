@@ -153,9 +153,9 @@ function fileUpload()
 									</select> 
 								</div>
 								</td>
-								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  /></td>
-								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  /></td>
-								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  /></td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  maxlength="4" /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  maxlength="4" /></td>
+								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  maxlength="4" /></td>
 								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch"  /></td>
 							
 								<td class="align-center"> <a href="deletemyschool?ID=${userSchoolList.userSchoolID}" class="fa fa-times delete-icon"></a></td>
@@ -220,8 +220,8 @@ function fileUpload()
 									</td>
 									<td>
 										<input type="text" maxlength="7" name="workplaceList[${count.index}].fromMonthYear" value="${workplaceList.fromMonth}/${workplaceList.fromYear}">
-										<input type="hidden" size="2" name="workplaceList[${count.index}].fromMonth" value="${workplaceList.fromMonth}">
-										<input type="hidden" size="4" name="workplaceList[${count.index}].fromYear" value="${workplaceList.fromYear}">
+										<input type="hidden" size="2" name="workplaceList[${count.index}].fromMonth" value="${workplaceList.fromMonth}" >
+										<input type="hidden" size="4" name="workplaceList[${count.index}].fromYear" value="${workplaceList.fromYear}" maxlength="4" />
 									</td>
 									<td>
 										<input type="text" maxlength="7" maxlength="2"  name="workplaceList[${count.index}].toMonthYear" value="${workplaceList.toMonth}/${workplaceList.toYear}">

@@ -131,7 +131,7 @@ h3 {
 	padding:0px 10px 0px 0px; 
 	margin-right:24px;
 }
-.school-staffs > div {
+.school-staffs .staff-profile {
 	float:left;
 	width:240px;
 	margin-right:16px;
@@ -270,9 +270,3 @@ h3 {
 
 
 
-.dataTable thead th {
-	padding: 7px 10px;
-}
-.dataTable td  {
-	padding: 7px 10px;
-}

@@ -65,16 +65,12 @@ a {
 }
 /* over writting Font Awesome CSS font-awesome.css */
 .fa {
-	color:#fff;
+	 color: #0082c8;
 	font-size:18px;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
-.fa:hover, .fa:active  {
-	background-color:#505765;
-	color:#fff;
 
-}
 p {
 	line-height:19px;
 	margin-bottom:10px;
@@ -166,4 +162,17 @@ table{font-size:inherit;font:100%;}
 .btn-wrapper .fa-spin {
     left: -30px;
     position: relative;
+}
+
+.close-bPopup.fa-times {
+   color: #0082c8;
+    font-size: 30px;
+    position: absolute;
+    right: 4px;
+    top: 1px;
+    cursor:pointer
+}
+
+.close-bPopup.fa-times:hover {
+   background-color: transparent;
 }
