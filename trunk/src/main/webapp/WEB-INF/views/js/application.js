@@ -48,6 +48,8 @@ function resetPassword(){
 }
 function getPopup(popUpElement){
 	popUpElement.addClass("popupContent");
+	popUpElement.append('<a class="close-bPopup fa fa-times"><a/>');
+	
 	popUpElement.bPopup({
 		fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
 		followSpeed : 1500, //can be a string ('slow'/'fast') or int
@@ -61,12 +63,8 @@ function getFullNewsAndEvents(){
 		// Triggering bPopup when click event is fired
 		var popUpContent = $(this).parent().find(".description").clone().addClass("popupContent").css("width","500px");
 	
-	
-		popUpContent.bPopup({
-			fadeSpeed : 'slow', //can be a string ('slow'/'fast') or int
-			followSpeed : 1500, //can be a string ('slow'/'fast') or int
-			modalColor : 'black'
-		});
+		getPopup(popUpContent);
+
 
 	});
 }
@@ -82,7 +80,7 @@ function submitSignUpForm() {
 	$("#signUpForm").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			form.submitFormThroughAjax($(this));
+			form.submitFormThroughAjax({form:$(this)});
 		}
 
 	});

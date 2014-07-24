@@ -125,6 +125,9 @@ padding-bottom:1px;
     width: 32px;
     background-color:#0082C8;
 }
+#submitSearchBtn.fa-search {
+    color:#fff;
+}
 /* 
 buttons related css 
 ends 
