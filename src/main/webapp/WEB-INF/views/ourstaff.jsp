@@ -6,7 +6,7 @@
 			
 		<c:forEach items="${staffInfoList}" var="staff">
 		
-       	<div>
+       	<div class="staff-profile">
 			<h3>${staff.facultyName}</h3>
 			<div class="pic-container"><img src="${IMAGE_HOST_PATH}//${staff.photoName}" width="100%" height="185" /></div>
 			<p class="description">
