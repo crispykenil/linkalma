@@ -33,7 +33,7 @@ import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 import com.linkalma.utils.cipher.Cipher;
 
 public class SchoolDAO implements ISchoolDAO {
@@ -52,7 +52,7 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public int createSchoolCredentials(School school) {
 	      
-	      return getJdbcTemplateObject().update( ApplicationConstants.INSERT_SCHOOL_CREDENTIALS_QUERY, 
+	      return getJdbcTemplateObject().update( QueryConstants.INSERT_SCHOOL_CREDENTIALS_QUERY, 
 	    		  school.getSchoolID(),school.getEmailAddress(), Cipher.DIGEST_PASSWORD(school.getPassword()));
 	      
 	   }
@@ -64,7 +64,7 @@ public class SchoolDAO implements ISchoolDAO {
 		      
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
     	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_SCHOOL_QUERY, 
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_SCHOOL_QUERY, 
 	    	  			new String[] {"id"});
 	    	  	
 	    	  	ps.setString(1, school.getSchoolName());
@@ -97,7 +97,7 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public List<School> listSchools() {
 		
-		List<School> schoolList = getJdbcTemplateObject().query( ApplicationConstants.GET_ALL_SCHOOLS_QUERY,
+		List<School> schoolList = getJdbcTemplateObject().query( QueryConstants.GET_ALL_SCHOOLS_QUERY,
 				new SchoolMapper());
 		
 		return schoolList;
@@ -132,9 +132,9 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public List<UserSchoolDTO> listLinkedSchools(long userID) {
 		
-		List<UserSchoolDTO> schoolList = getJdbcTemplateObject().query( ApplicationConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY, new Long[]{userID},
+		List<UserSchoolDTO> schoolList = getJdbcTemplateObject().query( QueryConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY, new Long[]{userID},
 				new UserSchoolMapper());
-		System.out.println(ApplicationConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY);
+		System.out.println(QueryConstants.GET_ALL_SCHOOLS_BY_USERID_QUERY);
 		return schoolList;
 	}
 
@@ -146,14 +146,14 @@ public class SchoolDAO implements ISchoolDAO {
 
 	@Override
 	public School getSchoolBySchoolEmailID(String emailID) {
-		School school = getJdbcTemplateObject().queryForObject( ApplicationConstants.GET_SCHOOL_BY_EMAILID, new Object[]{emailID},
+		School school = getJdbcTemplateObject().queryForObject( QueryConstants.GET_SCHOOL_BY_EMAILID, new Object[]{emailID},
 					new SchoolMapper());
 		return school;
 	}
 
 	@Override
 	public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID, int updateType) {
-		List<SchoolUpdateDTO> schoolUpdatesDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES, new Object[]{schoolID, updateType},
+		List<SchoolUpdateDTO> schoolUpdatesDtoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_UPDATES, new Object[]{schoolID, updateType},
 				new SchoolUpdateMapper());
 		
 		return schoolUpdatesDtoList;
@@ -161,7 +161,7 @@ public class SchoolDAO implements ISchoolDAO {
 
 	@Override
 	public List<SchoolDataDTO> getSchoolData(long schoolID, int dataType) {
-		List<SchoolDataDTO> schoolDataDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_CURRICULUM_DATA, new Object[]{schoolID, dataType},
+		List<SchoolDataDTO> schoolDataDtoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_CURRICULUM_DATA, new Object[]{schoolID, dataType},
 				new SchoolDataMapper());
 		
 		return schoolDataDtoList;
@@ -173,7 +173,7 @@ public class SchoolDAO implements ISchoolDAO {
 	      
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
     	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_SCHOOL_UPDATES, 
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_SCHOOL_UPDATES, 
 	    	  			new String[] {"id"});
 	    	  	
 	    	  	ps.setLong(1, schoolUpdateDto.getSchoolID());
@@ -198,7 +198,7 @@ public class SchoolDAO implements ISchoolDAO {
 	      
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
     	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_SCHOOL_DATA, 
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_SCHOOL_DATA, 
 	    	  			new String[] {"id"});
 	    	  	ps.setLong(1, schoolDataDto.getSchoolID());
 	    	  	ps.setInt(2, dataType);
@@ -224,7 +224,7 @@ public class SchoolDAO implements ISchoolDAO {
 		Map<String, List<SchoolDataDTO>> schoolDataMap = new HashMap<String, List<SchoolDataDTO>>();
 		for(StaticCodesDTO staticCodesDTO: staticCodeList)
 		{
-			List<SchoolDataDTO> schoolDataDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_CURRICULUM_DATA, 
+			List<SchoolDataDTO> schoolDataDtoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_CURRICULUM_DATA, 
 					new Long[]{schoolID, staticCodesDTO.getCode()}, new SchoolDataMapper());
 			schoolDataMap.put(staticCodesDTO.getPrimaryDecode(), schoolDataDtoList);
 			System.out.println("SchoolDataList Size "+schoolDataDtoList.size()+" for Categroy Code:"+staticCodesDTO.getPrimaryDecode());
@@ -237,7 +237,7 @@ public class SchoolDAO implements ISchoolDAO {
 		Map<String, List<SchoolUpdateDTO>> schoolUpdateMap = new HashMap<String, List<SchoolUpdateDTO>>();
 		for(StaticCodesDTO staticCodesDTO: staticCodeList)
 		{
-			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES, 
+			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_UPDATES, 
 					new Long[]{schoolID, staticCodesDTO.getCode()}, new SchoolUpdateMapper());
 			schoolUpdateMap.put(staticCodesDTO.getPrimaryDecode(), schoolUpdateDtoList);
 			System.out.println("SchoolList Size "+schoolUpdateDtoList.size()+" for Categroy Code:"+staticCodesDTO.getPrimaryDecode());
@@ -247,14 +247,14 @@ public class SchoolDAO implements ISchoolDAO {
 
 	@Override
 	public List<SchoolUpdateDTO> getSchoolAllUpdates(long schoolID) {
-			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_ALL_UPDATES, 
+			List<SchoolUpdateDTO> schoolUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_ALL_UPDATES, 
 					new Long[]{schoolID}, new SchoolUpdateMapper());
 		return schoolUpdateDtoList;
 	}
 
 	@Override
 	public String checkLinkalmaURL(String linkalmaUrl) {
-		getJdbcTemplateObject().queryForInt(ApplicationConstants.CHECK_LINKALMA_URL_QUERY);
+		getJdbcTemplateObject().queryForInt(QueryConstants.CHECK_LINKALMA_URL_QUERY);
 		return null;
 	}
 
@@ -262,7 +262,7 @@ public class SchoolDAO implements ISchoolDAO {
 	public int updateAboutSchoolInfo(final SchoolDataDTO schoolDataDto) {
 		int noOfRowsUpdated=getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_ABOUT_SCHOOL_INFO);
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_ABOUT_SCHOOL_INFO);
 	    		ps.setString(1,schoolDataDto.getSchoolName());
 	    		ps.setString(2, schoolDataDto.getWebsiteAddress());
 	    		ps.setString(3, schoolDataDto.getLinkalmaUrl());
@@ -280,7 +280,7 @@ public class SchoolDAO implements ISchoolDAO {
 
 	@Override
 	public boolean checkSchoolExists(String emailAddress) {
-		int count = getJdbcTemplateObject().queryForInt( ApplicationConstants.CHECK_SCHOOL_QUERY, new Object[]{emailAddress});
+		int count = getJdbcTemplateObject().queryForInt( QueryConstants.CHECK_SCHOOL_QUERY, new Object[]{emailAddress});
 		if (count > 0)
 			return true;
 		else 
@@ -295,7 +295,7 @@ public class SchoolDAO implements ISchoolDAO {
 			
 			getJdbcTemplateObject().update(new PreparedStatementCreator() {
 		    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-		    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_STAFF_QUERY, new String[] {"staffID"});
+		    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_STAFF_QUERY, new String[] {"staffID"});
 			    	  	
 		    	  	ps.setLong(1, staff.getSchoolID());
 		    	  	ps.setString(2, staff.getFacultyName());
@@ -317,7 +317,7 @@ public class SchoolDAO implements ISchoolDAO {
 		//INSERT INTO schoolgallery (SCHOOLID,ALBUMNAME,PHOTONAME,DESCRIPTION) VALUES(?,?,?,?)
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_SCHOOL_GALLERY_QUERY, new String[] {"photoID"});
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_SCHOOL_GALLERY_QUERY, new String[] {"photoID"});
 		    	  	
 	    	  	ps.setLong(1, schoolGallery.getSchoolID());
 	    	  	ps.setString(2, schoolGallery.getAlbumName());
@@ -334,7 +334,7 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public List<SchoolAlbum> getSchoolAlbumsBySchoolId(long schoolId) {
 		 
-		List<SchoolAlbum> schoolAlbumList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_ALBUM, 
+		List<SchoolAlbum> schoolAlbumList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_ALBUM, 
 		new Long[]{schoolId}, new SchoolGalleryMapper());
 		
 		return schoolAlbumList;
@@ -343,7 +343,7 @@ public class SchoolDAO implements ISchoolDAO {
 	@Override
 	public List<StaffInfo> getStaffInfoBySchoolId(long schoolId) {
 
-		List<StaffInfo> StaffInfoList = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_STAFF, 
+		List<StaffInfo> StaffInfoList = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_STAFF, 
 				new Long[]{schoolId}, new StaffInfoMapper());
 				
 				return StaffInfoList;

@@ -43,8 +43,6 @@ public class AbstractDAO extends SimpleJdbcDaoSupport  {
 //	 */
 //	protected SqlManager sqlManager;
 //
-//	private ConsultationLogger consultationLogger;
-//
 //	/**
 //	 * @return the sqlManager
 //	 */

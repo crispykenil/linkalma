@@ -110,6 +110,8 @@ public class HomeController {
 			model.addAttribute("loggedIn","true");
 			model.addAttribute("dashboardUrl","schooladmin?schoolName="+school.getLinkalmaAddress());
 			model.addAttribute("schoolName", school.getSchoolName());
+			model.addAttribute("linkalmaAddress", school.getLinkalmaAddress().trim());
+			
 		}
 		else
 		{
@@ -521,7 +523,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/updateworkplace", method = RequestMethod.POST)
 	public ModelAndView updateWorkplace(
-			@ModelAttribute("userWorkplace") User user,
+			@ModelAttribute("workDetails") User user,
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to Update User profile! ");
 
@@ -530,8 +532,9 @@ public class HomeController {
 		if (userBean != null)
 		{
 			user.setUserID(userBean.getUserID());
-
-			List<UserWorkplaceDTO> userWorkplaceList = user.getUserWorkplaceList();
+			System.out.println(user.getWorkplaceList().size());
+			
+			List<UserWorkplaceDTO> userWorkplaceList = user.getWorkplaceList();
 			
 			logger.info("UserWorkplaceList Size - Update: " + userWorkplaceList.size());
 			IUserWorkplaceBO userWorkplaceBO = (IUserWorkplaceBO) context.getBean("userWorkplaceBO");
@@ -579,7 +582,7 @@ public class HomeController {
 				.setUserSchoolID(Long.parseLong(request.getParameter("ID")));
 
 		userSchoolBO.deleteUserSchool(userSchoolDto, model);
-		return new ModelAndView("redirect:/loaduserschool", "model", model);
+		return new ModelAndView("redirect:/viewprofile", "model", model);
 	}
 
 	@RequestMapping(value = "/deletemyworkplace", method = RequestMethod.GET)

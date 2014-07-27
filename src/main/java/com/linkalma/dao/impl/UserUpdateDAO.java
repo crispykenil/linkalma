@@ -17,7 +17,7 @@ import com.linkalma.dao.IUserUpdateDAO;
 import com.linkalma.dao.mapper.UserUpdateMapper;
 import com.linkalma.dto.UserUpdateDTO;
 import com.linkalma.dto.WallPostDto;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class UserUpdateDAO implements IUserUpdateDAO {
 
@@ -34,7 +34,7 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	      
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
     	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_WALLPOST_QUERY, 
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_WALLPOST_QUERY, 
 	    	  			new String[] {"id"});
 	    	  	
 	    	  	ps.setLong(1, wallPostDto.getUserID());
@@ -55,7 +55,7 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 
 	@Override
 	public List<UserUpdateDTO> getUserWallPost(long userID) {
-		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( ApplicationConstants.GET_USER_WALL_POSTS, new Long[]{userID},
+		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new Long[]{userID},
 				new UserUpdateMapper());
 		return userUpdateDtoList;
 	}

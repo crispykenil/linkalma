@@ -60,6 +60,7 @@ var submitWorkplaceDetails = function(){
 	var form1 = $('#userWorkplaceDetailsForm');
 	
 	form.submitFormThroughAjax(form1);
+	console.log();
 };
 
 function splitDate(monthYear, type)

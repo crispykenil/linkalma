@@ -10,10 +10,10 @@ public class UserWorkplaceMapper implements RowMapper<UserWorkplaceDTO> {
 		   	UserWorkplaceDTO userWorkpalce = new UserWorkplaceDTO();
 		      userWorkpalce.setUserID(rs.getLong("UserID"));
 		      userWorkpalce.setUserWorkplaceID(rs.getLong("UserWorkplaceID"));
-		      userWorkpalce.setFromMonth(rs.getInt("FromMonth"));
-		      userWorkpalce.setFromYear(rs.getInt("FromYear"));
-		      userWorkpalce.setToMonth(rs.getInt("ToMonth"));
-		      userWorkpalce.setToYear(rs.getInt("ToYear"));
+		      userWorkpalce.setFromMonth(rs.getString("FromMonth"));
+		      userWorkpalce.setFromYear(rs.getString("FromYear"));
+		      userWorkpalce.setToMonth(rs.getString("ToMonth"));
+		      userWorkpalce.setToYear(rs.getString("ToYear"));
 		      userWorkpalce.setOrganisationName(rs.getString("OrganisationName"));
 		      userWorkpalce.setDesignation(rs.getString("Designation"));
 		      userWorkpalce.setDescription(rs.getString("Description"));

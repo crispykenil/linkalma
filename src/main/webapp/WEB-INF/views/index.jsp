@@ -66,9 +66,9 @@
 							<li>
 								<ul>
 									<li><label class="fl">Male</label>
-								<input type="radio" value="" placeholder="" name="gender" checked /></li>
+								<input type="radio" value="M" placeholder="" name="gender" checked /></li>
 								<li><label class="fl">Female</label>
-								<input type="radio" value="" placeholder="" name="gender" /></li>
+								<input type="radio" value="F" placeholder="" name="gender" /></li>
 								</ul>
 								
 								

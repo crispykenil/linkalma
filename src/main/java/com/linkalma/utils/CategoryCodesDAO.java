@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.linkalma.dao.mapper.StaticCodesMapper;
 import com.linkalma.dto.StaticCodesDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class CategoryCodesDAO {
 
@@ -20,7 +20,7 @@ public class CategoryCodesDAO {
 	private JdbcTemplate jdbcTemplateObject;
 	
 	public List<StaticCodesDTO> getStaticCodesForCategoryID(long categoryID) {
-		List<StaticCodesDTO> staticCodesDTOList = getJdbcTemplateObject().query( ApplicationConstants.GET_STATIC_CODES_FOR_CATEGORY_ID, new Long[]{categoryID},
+		List<StaticCodesDTO> staticCodesDTOList = getJdbcTemplateObject().query( QueryConstants.GET_STATIC_CODES_FOR_CATEGORY_ID, new Long[]{categoryID},
 				new StaticCodesMapper());
 		return staticCodesDTOList;
 	}

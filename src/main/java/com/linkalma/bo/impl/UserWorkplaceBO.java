@@ -61,14 +61,14 @@ public class UserWorkplaceBO implements IUserWorkplaceBO {
 			String fromMonthYear = userWorplaceDto.getFromMonthYear();
 			String arrFrom[] = fromMonthYear.split("/");
 			
-			userWorplaceDto.setFromMonth(Integer.parseInt(arrFrom[0]));
-			userWorplaceDto.setFromYear(Integer.parseInt(arrFrom[1]));
+			userWorplaceDto.setFromMonth(arrFrom[0]);
+			userWorplaceDto.setFromYear(arrFrom[1]);
 			
 			String toMonthYear = userWorplaceDto.getFromMonthYear();
 			String arrTo[] = toMonthYear.split("/");
 			
-			userWorplaceDto.setToMonth(Integer.parseInt(arrTo[0]));
-			userWorplaceDto.setToYear(Integer.parseInt(arrTo[1]));
+			userWorplaceDto.setToMonth(arrTo[0]);
+			userWorplaceDto.setToYear(arrTo[1]);
 			
 			getUserWorkplaceDAO().updateUserWorkplace(userWorplaceDto);
 		}

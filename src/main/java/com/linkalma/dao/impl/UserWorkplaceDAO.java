@@ -14,7 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.linkalma.dao.IUserWorkplaceDAO;
 import com.linkalma.dto.UserWorkplaceDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class UserWorkplaceDAO implements IUserWorkplaceDAO {
 
@@ -29,15 +29,15 @@ public class UserWorkplaceDAO implements IUserWorkplaceDAO {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
     	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_USER_WORKPALCE_QUERY, 
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_USER_WORKPALCE_QUERY, 
 	    	  			new String[] {"id"});
 	    	  	
 	    	  	ps.setLong(1, userWorkplaceDto.getUserID());
 	    	  	ps.setString(2, userWorkplaceDto.getOrganisationName());
-	    	  	ps.setInt(3, userWorkplaceDto.getFromMonth());
-	    	  	ps.setInt(4, userWorkplaceDto.getFromYear());
-	    	  	ps.setInt(5, userWorkplaceDto.getToMonth());
-	    	  	ps.setInt(6, userWorkplaceDto.getToYear());
+	    	  	ps.setString(3, userWorkplaceDto.getFromMonth());
+	    	  	ps.setString(4, userWorkplaceDto.getFromYear());
+	    	  	ps.setString(5, userWorkplaceDto.getToMonth());
+	    	  	ps.setString(6, userWorkplaceDto.getToYear());
 	    	  	ps.setString(7, userWorkplaceDto.getDesignation());
 	    	  	ps.setString(8, userWorkplaceDto.getDescription());
 	    	  	
@@ -53,7 +53,7 @@ public class UserWorkplaceDAO implements IUserWorkplaceDAO {
 	@Override
 	public int deleteUserWorkplace(UserWorkplaceDTO userWorkplaceDto) {
 		
-		jdbcTemplateObject.update(ApplicationConstants.DELETE_USER_WORKPLACE, userWorkplaceDto.getUserWorkplaceID());
+		jdbcTemplateObject.update(QueryConstants.DELETE_USER_WORKPLACE, userWorkplaceDto.getUserWorkplaceID());
 	      System.out.println("Deleted Workplace Record with ID = " + userWorkplaceDto.getUserWorkplaceID() );
 	      
 		return 0;
@@ -92,12 +92,12 @@ public class UserWorkplaceDAO implements IUserWorkplaceDAO {
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 			
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_WORKPLACE);
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_USER_WORKPLACE);
 	    		ps.setString(1, userWorkplaceDto.getOrganisationName());
-	    		ps.setInt(2, userWorkplaceDto.getFromMonth());
-	    		ps.setInt(3, userWorkplaceDto.getFromYear());
-	    		ps.setInt(4, userWorkplaceDto.getToMonth());
-	    		ps.setInt(5, userWorkplaceDto.getToYear());
+	    		ps.setString(2, userWorkplaceDto.getFromMonth());
+	    		ps.setString(3, userWorkplaceDto.getFromYear());
+	    		ps.setString(4, userWorkplaceDto.getToMonth());
+	    		ps.setString(5, userWorkplaceDto.getToYear());
 	    		ps.setString(6, userWorkplaceDto.getDesignation());
 	    		ps.setString(7, userWorkplaceDto.getDescription());
 	    		ps.setLong(8, userWorkplaceDto.getUserWorkplaceID());

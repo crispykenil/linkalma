@@ -21,7 +21,7 @@ import com.linkalma.dao.mapper.UserMapper;
 import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserWorkplaceDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 import com.linkalma.utils.cipher.Cipher;
 
 public class UserDAO implements IUserDAO {
@@ -43,7 +43,7 @@ public class UserDAO implements IUserDAO {
 		
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_USER_QUERY, new String[] {"id"});
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_USER_QUERY, new String[] {"id"});
 		    	  	
 	    	  	ps.setString(1, alumni.getUserFirstName());
 	    	  	ps.setString(2, alumni.getUserMiddleName());
@@ -76,7 +76,7 @@ public class UserDAO implements IUserDAO {
  
 	public int createCredentials(User alumni) {
 	      
-	      return getJdbcTemplateObject().update( ApplicationConstants.INSERT_USER_CREDENTIALS_QUERY, 
+	      return getJdbcTemplateObject().update( QueryConstants.INSERT_USER_CREDENTIALS_QUERY, 
 	    		  alumni.getUserID(), alumni.getEmailAddress(),Cipher.DIGEST_PASSWORD(alumni.getPassword()));
 	      
 	   }
@@ -114,7 +114,7 @@ public class UserDAO implements IUserDAO {
 	{
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_PROFILE_PERSONAL_DETAILS);
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_USER_PROFILE_PERSONAL_DETAILS);
 	    		ps.setString(1, alumni.getUserFirstName());
 	    		ps.setString(2, alumni.getUserMiddleName());
 	    		ps.setString(3, alumni.getUserLastName());
@@ -147,7 +147,7 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public User getUserProfile(final User alumni) {
 		
-		User user = getJdbcTemplateObject().queryForObject(ApplicationConstants.SELECT_USER_DETAILS, new Object[]{alumni.getUserID()}, new UserMapper());
+		User user = getJdbcTemplateObject().queryForObject(QueryConstants.SELECT_USER_DETAILS, new Object[]{alumni.getUserID()}, new UserMapper());
 		return user;
 	}
 
@@ -162,7 +162,7 @@ public class UserDAO implements IUserDAO {
 
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_CREDENTIALS);
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_USER_CREDENTIALS);
 	    		ps.setString(1, alumni.getPassword());
 	    		ps.setLong(2, alumni.getUserID());
 	    		return ps;
@@ -174,7 +174,7 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public User getUserWorkplace(User alumni) {
 		
-		List<UserWorkplaceDTO> userWorkplaceList = getJdbcTemplateObject().query(ApplicationConstants.GET_USER_WORKPLACE_DETAILS, 
+		List<UserWorkplaceDTO> userWorkplaceList = getJdbcTemplateObject().query(QueryConstants.GET_USER_WORKPLACE_DETAILS, 
 				new Object[]{alumni.getUserID()}, new UserWorkplaceMapper());
 		alumni.setUserWorkplaceList(userWorkplaceList);
 		return alumni;
@@ -183,7 +183,7 @@ public class UserDAO implements IUserDAO {
 	
 	@Override
 	public boolean checkUserExists(String emailAddress) {
-		int count = getJdbcTemplateObject().queryForInt( ApplicationConstants.CHECK_USER_QUERY, new Object[]{emailAddress});
+		int count = getJdbcTemplateObject().queryForInt( QueryConstants.CHECK_USER_QUERY, new Object[]{emailAddress});
 		if (count > 0)
 			return true;
 		else 
@@ -200,7 +200,7 @@ public class UserDAO implements IUserDAO {
 	
 	@Override
 	public int saveVerificationCode(String emailAddress, String code) {
-		 int updateStatus = getJdbcTemplateObject().update( ApplicationConstants.INSERT_VERIFICATION_CODE_QUERY, 
+		 int updateStatus = getJdbcTemplateObject().update( QueryConstants.INSERT_VERIFICATION_CODE_QUERY, 
 	    		  emailAddress, code);
 		 
 		 return updateStatus;

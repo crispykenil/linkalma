@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
+import com.linkalma.utils.LinkalmaUtil;
 
 public class FileHelperImpl  implements FileHelper
 {
@@ -19,7 +20,7 @@ public class FileHelperImpl  implements FileHelper
 	@Override
 	public void writeFile(MultipartFile multipartFile, String strPath)
 			throws FileNotFoundException, IOException, LinkalmaException {
-		 
+		 System.out.println("StrPath: FileHelper: "+strPath);
 		if(multipartFile==null || strPath==null)
 		{
 			throw new LinkalmaException("File input missing");
@@ -36,6 +37,8 @@ public class FileHelperImpl  implements FileHelper
 			throw new LinkalmaException("File input missing");
 		}
 		 
+		System.out.println("FInally strPath: "+strPath);
+		
 		File file=new File(strPath);
 		FileOutputStream  fileOutputStream=new FileOutputStream(file);
 		fileOutputStream.write(IOUtils.toByteArray(is));

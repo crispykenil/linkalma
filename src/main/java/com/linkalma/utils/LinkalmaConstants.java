@@ -6,7 +6,8 @@ public class LinkalmaConstants {
 	{	
 		
 		FILE_UPLOAD_PATH("file.upload.path"),
-		IMAGE_HOST("image.host")		;
+		IMAGE_HOST("image.host")		,
+		UNIX_HOST("UNIX.HOST")		;
 		
 		private Properties(String prop) {
 		this.prop=prop;	
