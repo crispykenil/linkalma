@@ -92,6 +92,8 @@ public class User extends BaseDTO
 	
 	private List<UserWorkplaceDTO> userWorkplaceList;
 
+	private List<UserWorkplaceDTO> workplaceList;
+
 	/**
 	 * @return the approved
 	 */
@@ -720,5 +722,19 @@ public class User extends BaseDTO
 	 */
 	public void setPhoneCode4(short phoneCode4) {
 		this.phoneCode4 = phoneCode4;
+	}
+
+	/**
+	 * @return the workplaceList
+	 */
+	public List<UserWorkplaceDTO> getWorkplaceList() {
+		return workplaceList;
+	}
+
+	/**
+	 * @param workplaceList the workplaceList to set
+	 */
+	public void setWorkplaceList(List<UserWorkplaceDTO> workplaceList) {
+		this.workplaceList = workplaceList;
 	}
 }

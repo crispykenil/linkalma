@@ -15,7 +15,7 @@ import com.linkalma.dao.mapper.SchoolUpdateMapper;
 import com.linkalma.dao.mapper.UserUpdateMapper;
 import com.linkalma.dto.SchoolUpdateDTO;
 import com.linkalma.dto.UserUpdateDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 
@@ -33,7 +33,7 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 
 	@Override
 	public List<SchoolUpdateDTO> getSchoolUpdates(long schoolID) {
-		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL, new Long[]{schoolID},
+		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL, new Long[]{schoolID},
 				new SchoolUpdateMapper());
 		return schoolUpdateDTO;
 		
@@ -71,7 +71,7 @@ public class SchoolUpdateDAO implements ISchoolUpdateDAO {
 	public List<SchoolUpdateDTO> getSchoolUpdatesFromList(List<Long> schoolIDList) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("schoolIDList", schoolIDList);
-		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( ApplicationConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL,
+		List<SchoolUpdateDTO> schoolUpdateDTO = getJdbcTemplateObject().query( QueryConstants.GET_SCHOOL_UPDATES_FOR_USERSCHOOL,
 				new SchoolUpdateMapper());
 		return schoolUpdateDTO;
 	}

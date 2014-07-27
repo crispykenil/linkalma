@@ -14,7 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.linkalma.dao.IUserSchoolDAO;
 import com.linkalma.dto.UserSchoolDTO;
-import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class UserSchoolDAO implements IUserSchoolDAO {
 
@@ -30,7 +30,7 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 		 KeyHolder keyHolder = new GeneratedKeyHolder();
 			getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-		    	  	PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.INSERT_USER_SCHOOL_QUERY, 
+		    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.INSERT_USER_SCHOOL_QUERY, 
 		    	  			new String[] {"id"});
 		    	  	
 		    	  	ps.setLong(1, userschoolDto.getUserID());
@@ -82,7 +82,7 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 	public int deleteUserSchool(UserSchoolDTO userschoolDto) {
 		
 		
-	      jdbcTemplateObject.update(ApplicationConstants.DELETE_USER_SCHOOL, userschoolDto.getUserSchoolID());
+	      jdbcTemplateObject.update(QueryConstants.DELETE_USER_SCHOOL, userschoolDto.getUserSchoolID());
 	      System.out.println("Deleted Record with ID = " + userschoolDto.getUserSchoolID() );
 	      
 		return 0;
@@ -92,7 +92,7 @@ public class UserSchoolDAO implements IUserSchoolDAO {
 	public long updateUserSchool(final UserSchoolDTO userschoolDto) {
 		getJdbcTemplateObject().update(new PreparedStatementCreator() {
 	    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	    		PreparedStatement ps =  connection.prepareStatement(ApplicationConstants.UPDATE_USER_SCHOOL_DETAILS);
+	    		PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_USER_SCHOOL_DETAILS);
 	    		ps.setLong(1, userschoolDto.getSchoolID());
 	    		ps.setString(2, userschoolDto.getFromYear());
 	    		ps.setString(3, userschoolDto.getToYear());

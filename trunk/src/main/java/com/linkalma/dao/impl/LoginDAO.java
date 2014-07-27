@@ -9,11 +9,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
+
 import com.linkalma.dao.ILoginDAO;
 import com.linkalma.dao.mapper.SchoolLoginMapper;
 import com.linkalma.dao.mapper.UserLoginMapper;
 import com.linkalma.dto.UserBean;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.QueryConstants;
 
 public class LoginDAO implements ILoginDAO {
 
@@ -36,7 +38,7 @@ public class LoginDAO implements ILoginDAO {
 
 		try {
 			UserBean userBean = (UserBean) getJdbcTemplateObject()
-					.queryForObject(ApplicationConstants.VALIDATE_USER_QUERY,
+					.queryForObject(QueryConstants.VALIDATE_USER_QUERY,
 							new Object[] { userName, password },
 							new UserLoginMapper());
 
@@ -54,7 +56,7 @@ public class LoginDAO implements ILoginDAO {
 	public UserBean validateSchoolCredentials(String userName, String password) {
 		try {
 			UserBean userBean = (UserBean) getJdbcTemplateObject()
-					.queryForObject(ApplicationConstants.VALIDATE_SCHOOL_QUERY,
+					.queryForObject(QueryConstants.VALIDATE_SCHOOL_QUERY,
 							new Object[] { userName, password },
 							new SchoolLoginMapper());
 

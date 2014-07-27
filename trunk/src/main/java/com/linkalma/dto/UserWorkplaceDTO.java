@@ -9,13 +9,13 @@ public class UserWorkplaceDTO extends BaseDTO
 	
 	private String organisationName;
 	
-	private int fromYear;
+	private String fromYear;
 	
-	private int fromMonth;
+	private String fromMonth;
 	
-	private int toMonth;
+	private String toMonth;
 	
-	private int toYear;
+	private String toYear;
 	
 	private String fromMonthYear;
 	
@@ -67,62 +67,7 @@ public class UserWorkplaceDTO extends BaseDTO
 		this.organisationName = organisationName;
 	}
 
-	/**
-	 * @return the fromYear
-	 */
-	public int getFromYear() {
-		return fromYear;
-	}
-
-	/**
-	 * @param fromYear the fromYear to set
-	 */
-	public void setFromYear(int fromYear) {
-		this.fromYear = fromYear;
-	}
-
-	/**
-	 * @return the fromMonth
-	 */
-	public int getFromMonth() {
-		return fromMonth;
-	}
-
-	/**
-	 * @param fromMonth the fromMonth to set
-	 */
-	public void setFromMonth(int fromMonth) {
-		this.fromMonth = fromMonth;
-	}
-
-	/**
-	 * @return the toMonth
-	 */
-	public int getToMonth() {
-		return toMonth;
-	}
-
-	/**
-	 * @param toMonth the toMonth to set
-	 */
-	public void setToMonth(int toMonth) {
-		this.toMonth = toMonth;
-	}
-
-	/**
-	 * @return the toYear
-	 */
-	public int getToYear() {
-		return toYear;
-	}
-
-	/**
-	 * @param toYear the toYear to set
-	 */
-	public void setToYear(int toYear) {
-		this.toYear = toYear;
-	}
-
+	
 	/**
 	 * @return the designation
 	 */
@@ -183,6 +128,62 @@ public class UserWorkplaceDTO extends BaseDTO
 	 */
 	public void setToMonthYear(String toMonthYear) {
 		this.toMonthYear = toMonthYear;
+	}
+
+	/**
+	 * @return the fromYear
+	 */
+	public String getFromYear() {
+		return fromYear;
+	}
+
+	/**
+	 * @param fromYear the fromYear to set
+	 */
+	public void setFromYear(String fromYear) {
+		this.fromYear = fromYear;
+	}
+
+	/**
+	 * @return the fromMonth
+	 */
+	public String getFromMonth() {
+		return fromMonth;
+	}
+
+	/**
+	 * @param fromMonth the fromMonth to set
+	 */
+	public void setFromMonth(String fromMonth) {
+		this.fromMonth = fromMonth;
+	}
+
+	/**
+	 * @return the toMonth
+	 */
+	public String getToMonth() {
+		return toMonth;
+	}
+
+	/**
+	 * @param toMonth the toMonth to set
+	 */
+	public void setToMonth(String toMonth) {
+		this.toMonth = toMonth;
+	}
+
+	/**
+	 * @return the toYear
+	 */
+	public String getToYear() {
+		return toYear;
+	}
+
+	/**
+	 * @param toYear the toYear to set
+	 */
+	public void setToYear(String toYear) {
+		this.toYear = toYear;
 	}
 
 }

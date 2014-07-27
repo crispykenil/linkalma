@@ -82,12 +82,12 @@
 			</div><!-- header-content-wrapper -->
 				<div class="clear-fix">
 				<ul class="sf-menu clear-fix">
-						<li><a href="/linkalma/school/${model.schoolName }">Home</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/events">News & Events</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/curriculum">Curriculum</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/aboutus">About Us</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/ourstaff">Our Staff</a></li>
-						<li><a href="/linkalma/school/${model.schoolName }/gallery">Our Gallery</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress }">Home</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress}/events">News & Events</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress }/curriculum">Curriculum</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress }/aboutus">About Us</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress }/ourstaff">Our Staff</a></li>
+						<li><a href="/linkalma/school/${model.linkalmaAddress }/gallery">Our Gallery</a></li>
 						
 					</ul>
 		</div>

@@ -281,7 +281,8 @@ public class SchoolBO implements ISchoolBO
 		if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
 		{
 			staff.setPhotoName(multipartFile.getOriginalFilename());
-			fileHelperImpl.writeFile(multipartFile, linkalmaUtil.getStaffImageFileUploadPath(schoolParentDir,multipartFile.getOriginalFilename()));
+			fileHelperImpl.writeFile(multipartFile, 
+					linkalmaUtil.getStaffImageFileUploadPath(schoolParentDir,multipartFile.getOriginalFilename()));
 		}
 		Long pkStaffID=schoolDAO.createStaff(staff);
 		return pkStaffID;

@@ -31,7 +31,8 @@ function fileUpload()
 					
 					</div>
 					<div >
-						<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
+						<form:form action="updateprofile" name="personalDetailsForm" modelAttribute="userProfile" 
+						class="personalDetailsForm readOnlyForm" id="personalDetailsForm">
 							<div class="personal-info" style="width: 77%; margin-left: 235px">
 								<ul class="threeColumn clear-fix">
 									<li><label>First Name</label> <input type="text" value="${model.userProfile.userFirstName }"
@@ -119,7 +120,8 @@ function fileUpload()
 			</div>
 			<div id="schoolDetails">
 				<h2>School Details  <a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a> </h2>
-			<form:form name="userSchoolDetailsForm" id="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm collapse-expand-content" action="updateuserschool" modelAttribute="userSchool" method="post">
+			<form:form name="userSchoolDetailsForm" id="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm collapse-expand-content" 
+			action="updateuserschool" modelAttribute="userSchool" method="post">
 		
 			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
 								<table class="dataTable" cellpadding="0" cellspacing="0">
@@ -153,8 +155,8 @@ function fileUpload()
 									</select> 
 								</div>
 								</td>
-								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  maxlength="4" /></td>
-								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  maxlength="4" /></td>
+								<td><input type="text" value="${userSchoolList.fromYear}" placeholder="" name="userSchoolList[${count.index}].fromYear"  maxlength="4" /></td>
+								<td><input type="text" value="${userSchoolList.toYear}" placeholder="" name="userSchoolList[${count.index}].toYear"  maxlength="4" /></td>
 								<td><input type="text" value="${userSchoolList.passOutBatch}" placeholder="" name="userSchoolList[${count.index}].passOutBatch"  maxlength="4" /></td>
 								<td><input type="text" value="${userSchoolList.branch}" placeholder="" name="userSchoolList[${count.index}].branch"  /></td>
 							
@@ -198,7 +200,7 @@ function fileUpload()
 			<div id="workDetails">
 			<h2>Work Details <a href="javascript:;" class="fr fa fa-chevron-down collapse-expand-btn"></a></h2>
 				<form:form class="readOnlyForm clear-fix workDetailsForm collapse-expand-content" action="updateworkplace" 
-				name="userWorkplaceDetailsForm" modelAttribute="workDetails" method="post">
+				name="userWorkplaceDetailsForm" id="userWorkplaceDetailsForm" modelAttribute="workDetails" method="post">
 					
 					<input type="hidden" name="totalUserWorkplaceCount" value="${model.workplaceList.size()}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
