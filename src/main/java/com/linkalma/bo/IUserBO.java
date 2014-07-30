@@ -20,5 +20,6 @@ public interface IUserBO {
 	
 	public String generateVerficationCode(String emailAddress);
 	
+	public boolean checkVerificationCodeExists(String emailAddress, String code);
 	
 }

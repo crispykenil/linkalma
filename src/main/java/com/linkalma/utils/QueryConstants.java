@@ -34,6 +34,8 @@ public class QueryConstants {
 	public static String INSERT_VERIFICATION_CODE_QUERY = "INSERT INTO verificationlinks (EMAILADDRESS,CODE) "
       		+ "VALUES (?, ?)";
 	
+	public static String SP_FETCH_INSERT_VERIFICATION_CODE= "CALL sp_pwd_reset_link_insert(?, ?, ?, ?, ?)";
+	
 	public static String INSERT_SCHOOL_CREDENTIALS_QUERY = "INSERT INTO schoolcredentials (SCHOOLID,EMAILADDRESS, PASSWORD) "
       		+ "VALUES (?, ?, ?)";
 

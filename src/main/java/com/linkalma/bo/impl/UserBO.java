@@ -1,17 +1,24 @@
 package com.linkalma.bo.impl;
 
+import java.util.Locale;
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.IUserWorkplaceBO;
+import com.linkalma.controller.HomeController;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.helper.ResourceBundleUtil;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.MessageConstants;
+import com.linkalma.utils.SendEmail;
 import com.linkalma.utils.Utils;
 import com.mysql.jdbc.StringUtils;
 
@@ -26,6 +33,9 @@ public class UserBO implements IUserBO
 
 	private UserSchoolDTO userSchoolDto;
 	
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserBO.class);
+
 	@Override
 	@Transactional
 	public Model createUser(User userDto, Model model)
@@ -141,18 +151,43 @@ public class UserBO implements IUserBO
 	}
 
 	@Override
+	public boolean checkVerificationCodeExists(String emailAddress, String code) {
+		logger.info("In Check Verification Code");
+		Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, "VERIFY");
+		if(resultMap.get("isExpired") != null && resultMap.get("isExpired").toString().equalsIgnoreCase("N"))
+			return true;
+		else
+			return false;
+	}
+	@Override
 	@Transactional
-	public String generateVerficationCode(String emailAddress) {
+	public String generateVerficationCode(String emailAddress) throws LinkalmaException {
 		
-		String code = getUserDAO().generateVerificationCode(emailAddress);
+		String code = getUserDAO().generateVerificationCode(emailAddress+System.currentTimeMillis());
 		
 		if(!StringUtils.isNullOrEmpty(code))
 		{
-			int updateStatus = getUserDAO().saveVerificationCode(emailAddress, code);
-//			if(updateStatus > 0)
+			Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, "GENERATE");
+			String url = ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.LINKALMA_URL, null, Locale.US);
+			SendEmail mailSender = (SendEmail) ResourceBundleUtil.getInstance().getBean("sendEmail");
+			StringBuilder sb = new StringBuilder();
+			
+			if(resultMap.get("isExpired") != null )
+			{
+				sb.append(ApplicationConstants.PASSWORD_RESET_EMAIL_MSG);
+				sb.append("\n"+url+"?code="+code+"&emailAddress="+emailAddress);
 				
+				mailSender.sendMail("admin@linkalma.com", emailAddress, "Linkalma: Password Reset", 
+						sb.toString());
+			}
+			else
+			{
+				throw new LinkalmaException("");
+			}
 			
 		}
+		else
+			throw new LinkalmaException("");
 		return code;
 	}
 

@@ -27,6 +27,7 @@ var Utility = {
 		getFullNewsAndEvents();
 		addNewWorkPlace();
 		resetPassword();
+		emailResetLink();
 		showHideMsges();
 		Utility.init();
 });
@@ -43,6 +44,16 @@ function resetPassword(){
 	$('#forgotPasswordBtn').on('click', function(e) {
 		// Triggering bPopup when click event is fired
 		getPopup($("#forgotPassword"));
+
+	});
+}
+// Added by Kenil
+function emailResetLink(){
+	$("#emailPassword").submit(function(e) {
+		e.preventDefault();
+		if (form.validateForm($(this))) {
+			form.submitFormThroughAjax({form:$(this)});
+		}
 
 	});
 }

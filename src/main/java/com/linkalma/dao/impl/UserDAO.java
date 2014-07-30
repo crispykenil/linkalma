@@ -1,21 +1,25 @@
 package com.linkalma.dao.impl;
 
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dao.mapper.UserMapper;
 import com.linkalma.dao.mapper.UserWorkplaceMapper;
@@ -199,16 +203,54 @@ public class UserDAO implements IUserDAO {
 	}
 	
 	@Override
-	public int saveVerificationCode(String emailAddress, String code) {
-		 int updateStatus = getJdbcTemplateObject().update( QueryConstants.INSERT_VERIFICATION_CODE_QUERY, 
+	public Map<String, Object> saveVerificationCode(final String emailAddress, final String code, final String operation) {
+		
+		/* int updateStatus = getJdbcTemplateObject().update( QueryConstants.INSERT_VERIFICATION_CODE_QUERY, 
 	    		  emailAddress, code);
+		*/ 
+		logger.info("In saveVerificationCode");
+			
+		 SqlParameter p_emailAddress = new SqlParameter(Types.VARCHAR);
+		 SqlParameter p_code = new SqlParameter(Types.VARCHAR);
+		 SqlParameter p_operation = new SqlParameter(Types.VARCHAR);
+		 SqlOutParameter outParameter = new SqlOutParameter("newCode", Types.VARCHAR);
+		 SqlOutParameter outParameter1 = new SqlOutParameter("isExpired", Types.VARCHAR);
 		 
-		 return updateStatus;
+		 List<SqlParameter> paramList = new ArrayList<SqlParameter>();
+		 paramList.add(p_emailAddress );
+		 paramList.add(p_code );
+		 paramList.add(p_operation );
+		 paramList.add(outParameter);
+		 paramList.add(outParameter1);
+		 System.out.println("Param size"+paramList.size());
+		 Map<String, Object> resultMap = getJdbcTemplateObject().call(new CallableStatementCreator() {
+			
+			@Override
+			public CallableStatement createCallableStatement(Connection con)
+					throws SQLException {
+				logger.info("Verify password SP called");
+				CallableStatement callableStatement = con.prepareCall(QueryConstants.SP_FETCH_INSERT_VERIFICATION_CODE);
+				callableStatement.setString(1, emailAddress);
+				callableStatement.setString(2, code);
+				callableStatement.setString(3, operation);
+				callableStatement.registerOutParameter(4, Types.VARCHAR);
+				callableStatement.registerOutParameter(5, Types.VARCHAR);
+				return callableStatement;
+			}
+		}, paramList);
+		 System.out.println("Verify Password result: "+resultMap.get("newCode"));
+		 System.out.println("Expired: "+resultMap.get("isExpired"));
+		 return resultMap;
 	}
 	
 	public static void main(String[] args) {
-		new UserDAO().generateVerificationCode("keni@gmail.com");
+		System.out.println(new UserDAO().generateVerificationCode("keni@gmail.com"+System.currentTimeMillis()));
 	}
 
-
+	@Override
+	public boolean checkVerificationCodeExists(String emailAddress)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

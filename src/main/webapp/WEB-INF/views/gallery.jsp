@@ -48,7 +48,7 @@ $(document).ready(function() {
 		<h2> ${album.albumName }</h2></br>
        <c:forEach items="${album.photoList}" var="photo">
 	       <a href="${IMAGE_HOST_PATH}//${album.albumName}//${photo.photoName}" rel="lightbox" >
-	       		<img src="${IMAGE_HOST_PATH}//${album.albumName}//${photo.photoName}" class="thumbnail" alt="${photo.photoName}"  />
+	       		<img src="${IMAGE_HOST_PATH}//${album.albumName}//${photo.photoName}" class="thumbnail" alt="Image Not Available"  />
 	       </a>
 
 		</c:forEach>
