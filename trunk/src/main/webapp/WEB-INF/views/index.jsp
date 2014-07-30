@@ -121,7 +121,9 @@
 </div>
 <div id="forgotPassword" class="forgot-password hidden">
 	<h2>Forgot Password? Type your email address and get it.</h2>
-	<form:form class="forgot-password-form" action="emailpassword">
+	<form:form class="forgot-password-form" action="emailpassword" 
+	name="emailPassword" id="emailPassword" method="POST">
+		<div class="infoPanel message"></div>
 		<ul class=" clear-fix">
 					<li><label>Email</label> <input type="text" 	 name="emailAddress" class="required email" /></li>
 		</ul>

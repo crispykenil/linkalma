@@ -1,16 +1,11 @@
 package com.linkalma.controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
-
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -22,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.linkalma.bo.IDashboardBO;
 import com.linkalma.bo.IFileUploadBO;
 import com.linkalma.bo.ISchoolBO;
@@ -34,18 +28,15 @@ import com.linkalma.bo.impl.UserBO;
 import com.linkalma.dao.SchoolJDBCTemplate;
 import com.linkalma.dao.impl.LoginDAO;
 import com.linkalma.dto.School;
-import com.linkalma.dto.SchoolDataDTO;
-import com.linkalma.dto.SchoolGallery;
 import com.linkalma.dto.SchoolUpdateDTO;
-import com.linkalma.dto.Staff;
 import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserBean;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.dto.UserWorkplaceDTO;
 import com.linkalma.dto.WallPostDto;
+import com.linkalma.helper.ResourceBundleUtil;
 import com.linkalma.utils.ApplicationConstants;
-import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.SendEmail;
 import com.linkalma.utils.Utils;
 import com.linkalma.utils.cipher.Cipher;
@@ -58,9 +49,6 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
-
-	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-			"linkalma-beans.xml");
 
 	@Autowired
 	School school;
@@ -80,6 +68,11 @@ public class HomeController {
 
 		setRequiredModelPropeties(model, request);
 		model.addAttribute("schoolName", "");
+		
+		String name = ResourceBundleUtil.getInstance().getProperty("customer.name", 
+    			new Object[] { 28, "http://www.mkyong.com" }, Locale.US);
+    	System.out.println("Customer name (English) : " + name);
+    	
 		return new ModelAndView("index", "model", model);
 	}
 
@@ -126,8 +119,7 @@ public class HomeController {
 			HttpServletRequest request) {
 		logger.info("Welcome home! Redirecting to Dashboard page.");
 
-		IDashboardBO dashboardBO = (IDashboardBO) context
-				.getBean("dashboardBO");
+		IDashboardBO dashboardBO = (IDashboardBO) ResourceBundleUtil.getInstance().getBean("dashboardBO");
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -146,8 +138,8 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to login page.");
 
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
+		IUserBO userBO = (IUserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		
 		if (userBO.checkUserExists(userName, model))
 		{
@@ -206,7 +198,7 @@ public class HomeController {
 
 		logger.info(schoolName + "--"+ model.containsAttribute("linkalmaaddress"));
 
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 
 		SchoolUpdateDTO schoolUpdateDto = new SchoolUpdateDTO();
 		School school = (School) request.getSession().getAttribute("school");
@@ -229,7 +221,7 @@ public class HomeController {
 		logger.info("Welcome home! Redirecting to School Inner page.");
 
 		logger.info("School Innerpage called: " + innerPage);
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 		School school = (School) request.getSession().getAttribute("school");
 		schoolUpdateDto.setSchoolID(school.getSchoolID());
 
@@ -260,104 +252,12 @@ public class HomeController {
 		return new ModelAndView(innerPage, "model", model);
 	}
 
-	@RequestMapping(value = "/schooladmin", method = RequestMethod.GET)
-	public ModelAndView schoolAdmin(
-			@RequestParam("schoolName") String schoolName, Model model,
-			HttpServletRequest request) {
-		logger.info("Redirecting to default schooladmin page");
-		
-		setRequiredModelPropeties(model, request);
-		
-		return new ModelAndView("/schooladmin/addaboutschool", "model", model);
-	}
-
-	@RequestMapping(value = "/schooladmin/{page}", method = RequestMethod.GET)
-	public ModelAndView schoolAdminInnerPages(
-			@PathVariable("page") String page,
-			@RequestParam("schoolName") String schoolName, Model model,
-			HttpServletRequest request) {
-		logger.info("Redirecting to admin page:" + page);
-
-		String msg = request.getParameter("msg");
-		
-		setRequiredModelPropeties(model, request);
-		
-		model.addAttribute("page", page);
-		model.addAttribute("msg", msg);
-		
-		
-		return new ModelAndView("/schooladmin/" + page, "model", model);
-	}
-
-	@RequestMapping(value = "/schooladmin/updateschoolnews", method = RequestMethod.GET)
-	public ModelAndView updateSchoolNews(
-			@ModelAttribute("schoolUpdateForm") SchoolUpdateDTO schoolUpdateDto,
-			Model model) {
-		logger.info("Update School Called for News : "+ schoolUpdateDto.getUpdateType());
-
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-
-		schoolBO.updateSchoolUpdates(schoolUpdateDto, model);
-		String url = "addschoolevents?schoolName="
-				+ schoolUpdateDto.getSchoolName() + "&msg="
-				+ schoolUpdateDto.getSuccessMsg();
-		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
-	}
-
-	@RequestMapping(value = "/schooladmin/updateschoolgallery", method = RequestMethod.POST)
-	public ModelAndView updateSchoolGallery(
-			@ModelAttribute("schoolGalleryForm") UploadedFile uploadedFile,
-			HttpServletRequest request, Model model) {
-		logger.info("Gallery upload...");
-		IFileUploadBO fileUploadBO = (IFileUploadBO) context
-				.getBean("fileUploadBO");
-
-		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
-				model);
-		String url = "addschoolevents?schoolName="
-				+ request.getParameter("schoolName") + "&msg="
-				+ uploadedFile.getSuccessMsg();
-		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
-	}
-
-	@RequestMapping(value = "/schooladmin/updateschooldata", method = RequestMethod.POST)
-	public ModelAndView updateSchoolData(
-			@ModelAttribute("schoolDataForm") SchoolDataDTO schoolDataDto,
-			Model model, HttpServletRequest request) {
-		logger.info("Update School Called for Data: "
-				+ schoolDataDto.getDataType());
-
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-		School school = (School) request.getSession().getAttribute("school");
-		if (null == school)
-			return new ModelAndView("redirect:/logout", "model", model);
-
-		/*
-		 * UploadedFile uploadedFile = new UploadedFile();
-		 * uploadedFile.setDestination("schoolData");
-		 * uploadedFile.setFile(schoolDataDto.getUploadedFile()); IFileUploadBO
-		 * fileUploadBO = (IFileUploadBO) context.getBean("fileUploadBO");
-		 * 
-		 * fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
-		 * model);
-		 */
-
-		schoolDataDto.setSchoolID(school.getSchoolID());
-		schoolBO.updateSchoolData(schoolDataDto, model);
-		String url = "addschoolcurriculum?schoolName="
-				+ schoolDataDto.getSchoolName() + "&msg="
-				+ schoolDataDto.getSuccessMsg();
-		
-		return new ModelAndView("redirect:/schooladmin/" + url, "model", model);
-	}
-
 	@RequestMapping(value = "/addwallpost", method = RequestMethod.POST)
 	public ModelAndView addWallPost(@ModelAttribute WallPostDto wallPostDto,
 			Model model, HttpServletRequest request) {
 		logger.info("Saving Wall Post.");
 
-		IDashboardBO dashboardBO = (IDashboardBO) context
-				.getBean("dashboardBO");
+		IDashboardBO dashboardBO = (IDashboardBO) ResourceBundleUtil.getInstance().getBean("dashboardBO");
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -399,32 +299,32 @@ public class HomeController {
 		logger.info("Welcome Create Profile! ");
 
 		
-		ISchoolBO schoolBO = (ISchoolBO) context.getBean("schoolBO");
-		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
+		IUserBO userBO = (IUserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		
 		if (!userBO.checkUserExists(user.getEmailAddress(), model))
 		{
 			if(!schoolBO.checkSchoolExists(user.getEmailAddress(), model))
 			{
-			logger.info("User Does not exists, GO Ahead Create it");
-			
-			UserBean userBean = (UserBean) request.getSession().getAttribute(
-					"userBean");
-			if (userBean != null)
-				user.setUserID(userBean.getUserID());
-
-			logger.info("UserID : " + user.getUserID());
-			
-			SendEmail mailSender = (SendEmail) context.getBean("sendEmail");
-			
-			model = userBO.createUser(user, model);
-			
-			mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
-					ApplicationConstants.ACCOUNT_CREATION_EMAIL);
-			
-			setRequiredModelPropeties(model, request);
-			
-			return ApplicationConstants.PROFILE_CREATION_MSG;
+				logger.info("User Does not exists, GO Ahead Create it");
+				
+				UserBean userBean = (UserBean) request.getSession().getAttribute(
+						"userBean");
+				if (userBean != null)
+					user.setUserID(userBean.getUserID());
+	
+				logger.info("UserID : " + user.getUserID());
+				
+				SendEmail mailSender = (SendEmail) ResourceBundleUtil.getInstance().getBean("sendEmail");
+				
+				model = userBO.createUser(user, model);
+				
+				mailSender.sendMail("admin@linkalma.com", user.getEmailAddress(), "Linkalma: Account Created", 
+						ApplicationConstants.ACCOUNT_CREATION_EMAIL);
+				
+				setRequiredModelPropeties(model, request);
+				
+				return ApplicationConstants.PROFILE_CREATION_MSG;
 			}
 			else
 			{
@@ -448,7 +348,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to My Profile! ");
 
-		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		IUserBO userBO = (IUserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
 		if(userBean != null)
@@ -470,8 +370,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome to File Upload! ");
 
-		IFileUploadBO fileUploadBO = (IFileUploadBO) context
-				.getBean("fileUploadBO");
+		IFileUploadBO fileUploadBO = (IFileUploadBO) ResourceBundleUtil.getInstance().getBean("fileUploadBO");
 
 		fileUploadBO.uploadFile(uploadedFile, uploadedFile.getDestination(),
 				model);
@@ -491,7 +390,7 @@ public class HomeController {
 		if (userBean != null)
 			user.setUserID(userBean.getUserID());
 
-		IUserBO userBO = (IUserBO) context.getBean("userBO");
+		IUserBO userBO = (IUserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		model = userBO.updateUserProfileDetails(user, model);
 		setRequiredModelPropeties(model, request);
 		return new ModelAndView("profile", "model", model);
@@ -512,7 +411,7 @@ public class HomeController {
 			List<UserSchoolDTO> userSchoolList = user.getUserSchoolList();
 			logger.info("UserSchoolList Size - Update: " + userSchoolList.size());
 			
-			IUserSchoolBO userSchoolBO = (IUserSchoolBO) context.getBean("userSchoolBO");
+			IUserSchoolBO userSchoolBO = (IUserSchoolBO) ResourceBundleUtil.getInstance().getBean("userSchoolBO");
 			userSchoolBO.updateUserSchool(userSchoolList, model);
 			
 			return new ModelAndView("redirect:/viewprofile", "model", model);
@@ -537,7 +436,7 @@ public class HomeController {
 			List<UserWorkplaceDTO> userWorkplaceList = user.getWorkplaceList();
 			
 			logger.info("UserWorkplaceList Size - Update: " + userWorkplaceList.size());
-			IUserWorkplaceBO userWorkplaceBO = (IUserWorkplaceBO) context.getBean("userWorkplaceBO");
+			IUserWorkplaceBO userWorkplaceBO = (IUserWorkplaceBO) ResourceBundleUtil.getInstance().getBean("userWorkplaceBO");
 			
 			userWorkplaceBO.updateUserWorkplace(userWorkplaceList, model);
 			
@@ -554,8 +453,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("=====Welcome addMySchool!=====");
 
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
-				.getBean("userSchoolBO");
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) ResourceBundleUtil.getInstance().getBean("userSchoolBO");
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -573,8 +471,7 @@ public class HomeController {
 	public ModelAndView deleteMySchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome deleteMySchool!");
 
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
-				.getBean("userSchoolBO");
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) ResourceBundleUtil.getInstance().getBean("userSchoolBO");
 
 		UserSchoolDTO userSchoolDto = new UserSchoolDTO();
 
@@ -591,7 +488,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome deleteMyWorkplace!");
 
-		UserBO userBO = (UserBO) context.getBean("userBO");
+		UserBO userBO = (UserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		userWorkplaceDto.setUserWorkplaceID(Long.parseLong(request.getParameter("ID")));
 		userBO.getUserWorkplaceBO().deleteUserWorkplace(userWorkplaceDto, model);
 		return new ModelAndView("redirect:/viewprofile", "model", model);
@@ -603,8 +500,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome addWorkPlace!");
 
-		UserBO userBO = (UserBO) context
-				.getBean("userBO");
+		UserBO userBO = (UserBO) ResourceBundleUtil.getInstance().getBean("userBO");
 		
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -626,8 +522,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Loading User School!");
 
-		IUserSchoolBO userSchoolBO = (IUserSchoolBO) context
-				.getBean("userSchoolBO");
+		IUserSchoolBO userSchoolBO = (IUserSchoolBO) ResourceBundleUtil.getInstance().getBean("userSchoolBO");
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
@@ -644,7 +539,7 @@ public class HomeController {
 	public ModelAndView loadAllSchool(HttpServletRequest request, Model model) {
 		logger.info("Welcome load school!");
 
-		ISchoolBO schoolBO = (SchoolBO) context.getBean("schoolBO");
+		ISchoolBO schoolBO = (SchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 
 		School schoolDto = new School();
 
@@ -657,7 +552,7 @@ public class HomeController {
 			HttpServletRequest request, Model model) {
 		logger.info("Welcome registerSchool!");
 
-		ISchoolBO schoolBO = (SchoolBO) context.getBean("schoolBO");
+		ISchoolBO schoolBO = (SchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 
 		schoolDto.setApproved("Y");
 		schoolDto.setActive("Y");
@@ -709,7 +604,7 @@ public class HomeController {
 
 		boolean isValid = false;
 
-		LoginDAO loginDAO = (LoginDAO) context.getBean("loginDAO");
+		LoginDAO loginDAO = (LoginDAO) ResourceBundleUtil.getInstance().getBean("loginDAO");
 		UserBean userBeanResult = null;
 
 		if (loginType.equalsIgnoreCase("A")) {
@@ -753,124 +648,4 @@ public class HomeController {
 		}
 		return isValid;
 	}
-	 @RequestMapping(value={"/schooladmin/updateaboutschool"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
-	  public ModelAndView updateAboutSchoolInfo(@ModelAttribute("aboutSchoolForm") SchoolDataDTO schoolDataDto, HttpServletRequest request, Model model,HttpSession session)
-	  {
-	    UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
-
-	    ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
-	    School school = (School)request.getSession().getAttribute("school");
-	    if (null == school)
-	    {
-	      return new ModelAndView("redirect:/logout", "model", model);
-	    }
-	    schoolDataDto.setSchoolID(school.getSchoolID());
-	    try
-	    {
-			schoolBO.updateAboutSchoolInfo(schoolDataDto);
-			String schoolEmailAddress=schoolDataDto.getSchoolEmailAddress();
-			school = schoolBO.getSchoolBySchoolEmailID(schoolEmailAddress,model);
-			request.getSession().setAttribute("school", school);
-			model.addAttribute("school", school);
-			
-		} catch (FileNotFoundException e) 
-		{
-			model.addAttribute("msg", "Failed to update school info");
-			e.printStackTrace();
-		} catch (LinkalmaException e)
-		{
-			model.addAttribute("msg", e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			model.addAttribute("msg", "Failed to update school info");
-			e.printStackTrace();
-		}
-	    catch (Exception e) {
-	    	model.addAttribute("msg", "Failed to update school info");
-	    	e.printStackTrace();
-		}
-
-	   
-		
-	    return new ModelAndView("redirect:/schooladmin/addaboutschool?schoolName="+school.getSchoolName(), "model", model);
-	  }
-	 
-	 @RequestMapping(value="/schooladmin/createstaff",method=RequestMethod.POST)
-	 public ModelAndView createStaff(@ModelAttribute("staffForm") Staff staff,HttpServletRequest request,Model model)
-	 {
-		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
-		 	School school = (School)request.getSession().getAttribute("school");
-		    if (null == school)
-		    {
-		      return new ModelAndView("redirect:/logout", "model", model);
-		    }
-		    
-		    staff.setSchoolID(school.getSchoolID());
-		    try 
-		    {
-				schoolBO.createStaff(staff,school);
-				model.addAttribute("msg", "Staff Added Successfully");
-				
-				
-			} catch (FileNotFoundException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
-				
-			} catch (LinkalmaException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
-				
-			} catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				model.addAttribute("msg", "Some error occurred while Adding Staff! Please contact Admin.");
-				
-			}
-		   
-		return  new ModelAndView("redirect:/schooladmin/addschoolstaff?schoolName="+school.getSchoolName(), "model", model);
-	 }
-	 
-	 @RequestMapping(value="/schooladmin/createschoolgallery",method=RequestMethod.POST)
-	 public ModelAndView createSchoolGallery(@ModelAttribute("schoolGalleryForm") SchoolGallery schoolGallery,HttpServletRequest request,Model model)
-	 {
-		 System.out.println("create school gallery.");
-		 	ISchoolBO schoolBO = (ISchoolBO)this.context.getBean("schoolBO");
-		 	School school = (School)request.getSession().getAttribute("school");
-		    if (null == school)
-		    {
-		      return new ModelAndView("redirect:/logout", "model", model);
-		    }
-		    
-		    schoolGallery.setSchoolID(school.getSchoolID());
-		    schoolGallery.setSchoolName(school.getSchoolName());
-		    try 
-		    {
-				schoolBO.createSchoolGallery(schoolGallery);
-				model.addAttribute("msg", "Gallery Created Successfully");
-				
-			} catch (FileNotFoundException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (LinkalmaException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		   
-		return  new ModelAndView("redirect:/schooladmin/addschoolgallery?schoolName="+school.getSchoolName(), "model", model);
-	
-	 }
-	
-	 
 }

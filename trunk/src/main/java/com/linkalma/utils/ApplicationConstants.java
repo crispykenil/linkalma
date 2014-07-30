@@ -27,7 +27,7 @@ public class ApplicationConstants {
 
 	public static String EMAIL_ALREADY_REGISTERED_MSG = "EmailID is already registered with LinkAlma, please use a different one !";
 	
-	public static String PASSWORD_RESET_EMAIL_MSG = "Follow the below link to reset your password.";
+	public static String PASSWORD_RESET_EMAIL_MSG = "Follow the below link to reset your password. \n ";
 	
 	public static String SCHOOL_INNER_PAGE_EVENTS = "EVENTS";
 	public static String SCHOOL_INNER_PAGE_CURRICULUM = "CURRICULUM";
@@ -39,14 +39,21 @@ public class ApplicationConstants {
 	public static String CURRICULUM_EXAMS = "3";
 	public static String CURRICULUM_CALENDAR = "2";
 	
-	public static String PASSWORD_RESET_LINK_SUCCESS = "Your password reset instructions have been sent to your Email Address."; 
-	public static String PASSWORD_RESET_LINK_FAILURE = "The Email Address mentioned is not registered with LinkAlma."; 
-	
 	public static String BLANK_SPACE = " ";
 	public static String BLANK_SPACE_REGEX = "\\s+";
 	public static String BACK_SLASH = "\\\\";
 
 	public static String TRUE = "TRUE";
 	public static String FALSE = "FALSE";
+	
+	public static String LINKALMA_URL = "linkalma.url";
+	public static String LINKALMA_CONTEXT_PATH = "linkalma.contextpath"; 
+	
+	public static String PASSWORD_RESET_LINK_SUCCESS = "PASSWORD_RESET_LINK_SUCCESS";
+	public static String EMAIL_NOT_REGISTERED = "EMAIL_NOT_REGISTERED";
+	public static String PASSWORD_RESET_LINK_EXPIRED = "PASSWORD_RESET_LINK_EXPIRED";
+	public static String PASSWORD_RESET_LINK_MSG = "PASSWORD_RESET_LINK_MSG";
+	public static String EXCEPTION = "exception";
+	
 }
 

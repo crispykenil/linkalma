@@ -41,7 +41,7 @@
 	    <property name="host" value="smtp.live.com" />
 	    <property name="port" value="587" />
 	    <property name="username" value="link_alma@outlook.com" />
-	    <property name="password" value="@7RoyalTower" />
+	    <property name="password" value="@linkalma2014" />
 	    <property name="javaMailProperties">
 	            <props>
 	                <prop key="mail.smtp.auth">true</prop>

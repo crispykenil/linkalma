@@ -1,6 +1,7 @@
 package com.linkalma.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.linkalma.dto.User;
 
@@ -24,5 +25,7 @@ public interface IUserDAO {
 	
 	public String generateVerificationCode(String emailAddress);
 	
-	public int saveVerificationCode(String emailAddress, String code);
+	public Map<String, Object> saveVerificationCode(String emailAddress, String code, String operation);
+
+	public boolean checkVerificationCodeExists(String emailAddress);
 }

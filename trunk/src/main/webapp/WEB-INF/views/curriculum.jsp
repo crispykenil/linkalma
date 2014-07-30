@@ -19,7 +19,7 @@
 		<tbody>
 			<c:forEach var='schoolDataDto' items='${schoolDataMap.value}' varStatus="count">
 				<tr>
-					<td>${count.index}</td>
+					<td>${count.index+1}</td>
 					<td>${schoolDataDto.title}</td>
 					<td>${schoolDataDto.description}</td>
 					<td>${schoolDataDto.grade }</td>
