@@ -40,11 +40,16 @@
 		</c:forEach>
 	</c:if>
 	<c:if test="${empty errors}">
-		<form:form action="resetpassword?operation=reset" modelAttribute="resetForm" >
-			<ul>
-				<li><label>Password</label>			<input type="password" value="" placeholder="" name="password" autofocus="autofocus" class="required" /></li>
-				<li><label>Confirm Password</label>	<input type="password" value="" placeholder=""  class="required" /></li>
-				<li> <input type="submit" value="Reset Password" id="sign-in-button" class="button"/></li>
+		<c:if test="${not empty model.msg}">
+			<div class="infoPanel">${model.msg}</div>
+		</c:if>
+	
+		<form:form action="resetpassword" modelAttribute="resetForm" method="POST" >
+				<input type="hidden" value="<%=request.getParameter("emailAddress") %>" name="emailAddress" id="emailAddress" />
+				<input type="hidden" value="reset" name="type" id="type" />
+				<label>New Password</label><input type="password" value="" placeholder="" name="password" autofocus="autofocus" class="required" />
+				<label>Confirm Password</label>	<input type="password" value="" placeholder=""  class="required" />
+				<input type="submit" value="Reset Password" id="sign-in-button" class="button"/>
 
 			</ul>
 		</form:form>

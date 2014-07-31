@@ -19,8 +19,6 @@ public class ApplicationConstants {
 		public static int SCHOOL_UPDATES_NEWSLETTER_CODE = 2;
 		public static int SCHOOL_UPDATES_EVENTS_CODE = 3;
 
-	public static String UPDATE_SUCCESS_MSG = "Data Saved Successfully";
-	
 	public static String ACCOUNT_CREATION_EMAIL = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
 
 	public static String PROFILE_CREATION_MSG = "Voila ! Alumni Profile Created, Check your email for Verification !";
@@ -39,6 +37,10 @@ public class ApplicationConstants {
 	public static String CURRICULUM_EXAMS = "3";
 	public static String CURRICULUM_CALENDAR = "2";
 	
+	public static String SCHOOL_DATATYPE_1 = "school.dataType1";
+	public static String SCHOOL_DATATYPE_2 = "school.dataType2";
+	public static String SCHOOL_DATATYPE_3 = "school.dataType3";
+
 	public static String BLANK_SPACE = " ";
 	public static String BLANK_SPACE_REGEX = "\\s+";
 	public static String BACK_SLASH = "\\\\";
@@ -55,5 +57,6 @@ public class ApplicationConstants {
 	public static String PASSWORD_RESET_LINK_MSG = "PASSWORD_RESET_LINK_MSG";
 	public static String EXCEPTION = "exception";
 	
+	public static String UPDATE_SUCCESS_MSG = "update.successMsg";
 }
 

@@ -20,6 +20,8 @@ public interface ISchoolBO {
 	
 	public Model updateSchoolNews();
 	
+	public Model updateSchoolCredentials(School schoolDto, Model model);
+	
 	public School getSchoolBySchoolEmailID(String emailID, Model model);
 	
    // newsType can have 1. Projects, 2.Events, 3. Newsletter 

@@ -2,11 +2,11 @@ package com.linkalma.utils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.MailException;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,14 +34,22 @@ public class SendEmail {
 	 
 	public void sendMail(String from, String to, String subject, String msg) {
 
-	    SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+	    try
+		{
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
-	    simpleMailMessage.setFrom(from);
-	    simpleMailMessage.setTo(to);
-	    simpleMailMessage.setSubject(subject);
-	    simpleMailMessage.setText(msg);
-	    javaMailSender.send(simpleMailMessage);
-	    logger.info("Email Sent to: "+to);
+			simpleMailMessage.setFrom(from);
+			simpleMailMessage.setTo(to);
+			simpleMailMessage.setSubject(subject);
+			simpleMailMessage.setText(msg);
+			javaMailSender.send(simpleMailMessage);
+			logger.info("Email Sent to: "+to);
+		}
+		catch (MailException e)
+		{
+			logger.error("Cannot Send email now : Email Msg : "+msg);
+			e.printStackTrace();
+		}
 	}
 	 
 	public void sendMailWithTemplate(String dear, String content) {         

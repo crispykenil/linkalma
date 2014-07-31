@@ -1,13 +1,10 @@
 package com.linkalma.dao;
 
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
-import org.springframework.ui.Model;
-
 import com.linkalma.dto.School;
 import com.linkalma.dto.SchoolAlbum;
 import com.linkalma.dto.SchoolDataDTO;
@@ -17,6 +14,7 @@ import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.utils.LinkalmaException;
 
 public interface ISchoolDAO {
 
@@ -37,6 +35,18 @@ public interface ISchoolDAO {
 	    * a record in the Credentials table for school.
 	    */
 	   public int createSchoolCredentials(School school);
+
+	   /** 
+	    * This is the method to be used to create
+	    * a record in the Credentials table for school.
+	    */
+	   public int updateSchoolCredentials(School school);
+
+	   /** 
+	    * This is the method to be used to create
+	    * a record in the Credentials table for school.
+	    */
+	   public int updateSchoolCredentialsByEmailID(School schoolDto) throws SQLException, LinkalmaException;
 
 	   /** 
 	    * This is the method to be used to list down

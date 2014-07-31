@@ -22,4 +22,5 @@ public interface IUserBO {
 	
 	public boolean checkVerificationCodeExists(String emailAddress, String code);
 	
+	public boolean updatePassword(User userDTO, Model model);
 }

@@ -15,6 +15,8 @@ public interface IUserDAO {
 
 	public int updateCredentials(User alumni);
 
+	public int updateUserCredentialsByEmailID(User alumni);
+
 	public User getUserProfile(User alumni);
 
 	public List<User> getAllUserProfile(User alumni);
