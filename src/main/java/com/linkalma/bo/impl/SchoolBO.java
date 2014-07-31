@@ -1,17 +1,16 @@
 package com.linkalma.bo.impl;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.linkalma.bo.ISchoolBO;
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.IUserDAO;
@@ -24,9 +23,9 @@ import com.linkalma.dto.Staff;
 import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.helper.FileHelperImpl;
+import com.linkalma.helper.ResourceBundleUtil;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.CategoryCodesDAO;
-import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.LinkalmaUtil;
 
@@ -132,7 +131,7 @@ public class SchoolBO implements ISchoolBO
 		long id = getSchoolDAO().updateSchoolUpdates(schoolUpdateDto, schoolUpdateDto.getUpdateType());
 		
 		if (id > 0)
-			schoolUpdateDto.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
+			schoolUpdateDto.setSuccessMsg(ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.UPDATE_SUCCESS_MSG, new Object[]{"Data"}, Locale.US));
 		
 		model.addAttribute("schoolUpdateDto", schoolUpdateDto);
 		return model;
@@ -162,7 +161,8 @@ public class SchoolBO implements ISchoolBO
 											String.valueOf(schoolDataDto.getDataType())));
 				}
 				schoolDataDto
-						.setSuccessMsg(ApplicationConstants.UPDATE_SUCCESS_MSG);
+						.setSuccessMsg(ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.UPDATE_SUCCESS_MSG, 
+								new Object[]{schoolDataDto.getType()}, Locale.US));
 			}
 		} catch (Exception e) {
 			schoolDataDto.setSuccessMsg("Failed to Update");
@@ -325,6 +325,28 @@ public class SchoolBO implements ISchoolBO
 		String schoolParentDir=school.getSchoolName()+"_"+school.getSchoolID();
 		model.addAttribute("IMAGE_HOST_PATH", linkalmaUtil.getStaffImageServePath(schoolParentDir));
 		
+	}
+
+	@Override
+	public Model updateSchoolCredentials(School schoolDto, Model model)
+	{
+		try
+		{
+			getSchoolDAO().updateSchoolCredentialsByEmailID(schoolDto);
+			model.addAttribute("msg", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.UPDATE_SUCCESS_MSG, new Object[]{"Password"}, Locale.US));
+		}
+		catch (LinkalmaException e)
+		{
+			model.addAttribute("msg", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.EXCEPTION, new Object[]{"Password Reset"}, Locale.US));
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			model.addAttribute("msg", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.EXCEPTION, new Object[]{"Password Reset"}, Locale.US));
+			e.printStackTrace();
+		}
+		
+		return model;
 	}
 	
 }

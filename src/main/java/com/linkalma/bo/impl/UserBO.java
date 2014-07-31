@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import com.linkalma.bo.IUserBO;
 import com.linkalma.bo.IUserSchoolBO;
 import com.linkalma.bo.IUserWorkplaceBO;
-import com.linkalma.controller.HomeController;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
@@ -172,10 +171,14 @@ public class UserBO implements IUserBO
 			SendEmail mailSender = (SendEmail) ResourceBundleUtil.getInstance().getBean("sendEmail");
 			StringBuilder sb = new StringBuilder();
 			
-			if(resultMap.get("isExpired") != null )
+			String isExpired = (String)resultMap.get("isExpired");
+			
+			if(isExpired != null )
 			{
 				sb.append(ApplicationConstants.PASSWORD_RESET_EMAIL_MSG);
-				sb.append("\n"+url+"?code="+code+"&emailAddress="+emailAddress);
+				sb.append("\n"+url+"?code="+(String)resultMap.get("newCode")+"&emailAddress="+emailAddress);
+				
+				logger.info("Fetching VerifyCode: "+(String)resultMap.get("newCode"));
 				
 				mailSender.sendMail("admin@linkalma.com", emailAddress, "Linkalma: Password Reset", 
 						sb.toString());
@@ -203,6 +206,24 @@ public class UserBO implements IUserBO
 	 */
 	public void setUserWorkplaceBO(IUserWorkplaceBO userWorkplaceBO) {
 		this.userWorkplaceBO = userWorkplaceBO;
+	}
+
+	@Override
+	public boolean updatePassword(User userDTO, Model model)
+	{
+		// TODO Auto-generated method stub
+		try
+		{
+			getUserDAO().updateUserCredentialsByEmailID(userDTO);
+			model.addAttribute("msg", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.UPDATE_SUCCESS_MSG, new Object[]{"Password"}, Locale.US));
+			
+		}
+		catch (Exception e)
+		{
+			model.addAttribute("msg", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.EXCEPTION, new Object[]{"Password Reset"}, Locale.US));
+			e.printStackTrace();
+		}
+		return true;
 	}
 	
 }

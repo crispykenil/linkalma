@@ -7,15 +7,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.mapper.SchoolDataMapper;
 import com.linkalma.dao.mapper.SchoolGalleryMapper;
@@ -33,6 +30,7 @@ import com.linkalma.dto.StaffInfo;
 import com.linkalma.dto.StaticCodesDTO;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
+import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.QueryConstants;
 import com.linkalma.utils.cipher.Cipher;
 
@@ -347,6 +345,28 @@ public class SchoolDAO implements ISchoolDAO {
 				new Long[]{schoolId}, new StaffInfoMapper());
 				
 				return StaffInfoList;
+	}
+
+	@Override
+	public int updateSchoolCredentials(School school)
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateSchoolCredentialsByEmailID(final School schoolDto) throws SQLException, LinkalmaException
+	{
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+    	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_SCHOOL_CREDENTIALS_BY_EMAILID);
+	    	  	System.out.println(Cipher.DIGEST_PASSWORD(schoolDto.getPassword()));
+	    	  	ps.setString(1, Cipher.DIGEST_PASSWORD(schoolDto.getPassword()));
+	    	  	ps.setString(2, schoolDto.getEmailAddress());
+	     	  	return ps;
+	  	}
+		});
+		return 0;
 	}
 	
 }

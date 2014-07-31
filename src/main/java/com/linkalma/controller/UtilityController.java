@@ -78,18 +78,41 @@ public class UtilityController {
 		return userDto.getSuccessMsg();
 	}
 	
-	@RequestMapping(value = "/resetpassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/resetpassword", method = {RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView resetPassword(HttpServletRequest request, Model model, @ModelAttribute User userDto) {
 		logger.info("Welcome to Reset Pasword: "+userDto.getEmailAddress());
 		
 		IUserBO userBO = (IUserBO)ResourceBundleUtil.getInstance().getBean("userBO");
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 		
+		if("reset".equalsIgnoreCase(userDto.getType()))
+		{
+			if (userBO.checkUserExists(userDto.getEmailAddress(), model))
+			{
+				userBO.updatePassword(userDto, model);
+			}
+			else if(schoolBO.checkSchoolExists(userDto.getEmailAddress(), model))
+			{
+				School schoolDto = new School();
+				schoolDto.setEmailAddress(userDto.getEmailAddress());
+				schoolDto.setPassword(userDto.getPassword());
+				schoolBO.updateSchoolCredentials(schoolDto, model);
+				
+			}
+			else
+			{
+				model.addAttribute("errors", "Incorrect EmailID or Password.");
+				return new ModelAndView("redirect:/dologin", "model", model);
+			}
+			
+		}
+		else
 		if (!userBO.checkVerificationCodeExists(request.getParameter("emailAddress"), request.getParameter("code")))
 			model.addAttribute("errors", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_EXPIRED, null, Locale.US));
 //		else
 //			model.addAttribute("errors", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_MSG, null, Locale.US));
 		
-		return new ModelAndView("resetpassword", "model", model);
+		return new ModelAndView("passwordreset", "model", model);
 	}
 	private void setRequiredModelPropeties(Model model,
 			HttpServletRequest request) {

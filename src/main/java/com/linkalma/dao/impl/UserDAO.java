@@ -253,4 +253,19 @@ public class UserDAO implements IUserDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int updateUserCredentialsByEmailID(final User alumni)
+	{
+		getJdbcTemplateObject().update(new PreparedStatementCreator() {
+    	  	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	    	  	PreparedStatement ps =  connection.prepareStatement(QueryConstants.UPDATE_USER_CREDENTIALS_BY_EMAILID);
+	    	  	System.out.println(Cipher.DIGEST_PASSWORD(alumni.getPassword()));
+	    	  	ps.setString(1, Cipher.DIGEST_PASSWORD(alumni.getPassword()));
+	    	  	ps.setString(2, alumni.getEmailAddress());
+	     	  	return ps;
+	  	}
+		});
+		return 0;
+	}
 }

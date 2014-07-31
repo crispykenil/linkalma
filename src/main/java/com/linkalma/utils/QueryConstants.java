@@ -98,6 +98,14 @@ public class QueryConstants {
 			" UPDATE usercredentials SET PASSWORD = ?"
 			+ " WHERE USERID = ?";
 	
+	public static String UPDATE_USER_CREDENTIALS_BY_EMAILID = 
+			" UPDATE usercredentials SET PASSWORD = ?"
+			+ " WHERE emailAddress = ?";
+
+	public static String UPDATE_SCHOOL_CREDENTIALS_BY_EMAILID = 
+			" UPDATE schoolcredentials SET PASSWORD = ?"
+			+ " WHERE emailAddress = ?";
+	
 	public static String UPDATE_USER_SCHOOL_DETAILS = 
 			" UPDATE userschool "
 			+ " SET SCHOOLID=?, FROMYEAR=?, TOYEAR=?, "
