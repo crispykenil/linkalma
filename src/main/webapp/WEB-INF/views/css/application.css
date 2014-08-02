@@ -428,6 +428,9 @@ input[type="text"].search-field {
 #profilePage .contact-info {
 	margin-top:30px
 }
+#profilePage .collapse-expand-btn {
+	margin-top:5px
+}
 /* end of profile page css */
 .popupContent {
 	background-color: #fff;
