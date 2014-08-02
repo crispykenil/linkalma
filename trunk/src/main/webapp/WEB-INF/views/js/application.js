@@ -56,10 +56,14 @@ function emailResetLink(){
 	$("#emailPassword").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			form.submitFormThroughAjax({form:$(this)});
+			form.submitFormThroughAjax({form:$(this), callback:myFunction});
 		}
 
 	});
+}
+function myFunction()
+{
+//	Test function...
 }
 function getPopup(popUpElement){
 	popUpElement.addClass("popupContent");
