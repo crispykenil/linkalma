@@ -1,5 +1,5 @@
 var form = {
-	formFields : "input[type='text'],input[type='password'],select",
+	formFields : "input[type='text'],input[type='password'],select,input[type='radio']",
 	submitFormThroughAjax: function (options) {
 		// This is the easiest way to have default options.
 		 var settings = $.extend({

@@ -10,6 +10,10 @@ var Utility = {
 					collapseExpandElement = $(this).parent().siblings(".collapse-expand-content");
 				} 
 				collapseExpandElement.slideToggle();
+				if ($(this).hasClass("fa-chevron-down")){
+					$(this).removeClass("fa-chevron-down").addClass("fa-chevron-right")
+				} else 
+					$(this).removeClass("fa-chevron-right").addClass("fa-chevron-down")
 			});
 		}
 };
