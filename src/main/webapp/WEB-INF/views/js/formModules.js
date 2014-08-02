@@ -27,6 +27,8 @@ var form = {
 			showMessage(data);
 		}).complete(function(data) {
 			console.log(data);
+			if(settings.callback)
+				settings.callback();
 			$('.btn-wrapper .button', formEl).attr("disabled",false);
 			$('.btn-wrapper .fa-spin', formEl).remove();
 		});
