@@ -3,11 +3,8 @@ package com.linkalma.bo.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.ui.Model;
-
 import com.linkalma.bo.IDashboardBO;
 import com.linkalma.dao.ISchoolDAO;
 import com.linkalma.dao.ISchoolUpdateDAO;
@@ -30,7 +27,7 @@ public class DashboardBO implements IDashboardBO {
 	ISchoolDAO schoolDAO;
 	
 	@Override
-	public Map<String,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {
+	public Map<String,List<SchoolUpdateDTO>> getSchoolUpdates(User userDto) {	
 		
 		List<UserSchoolDTO> userSchoolDtoList = getSchoolDAO().listLinkedSchools(userDto.getUserID());
 		System.out.println("userSchoolDtoList Size: "+userSchoolDtoList.size());
@@ -121,7 +118,6 @@ public class DashboardBO implements IDashboardBO {
 
 	@Override
 	public Model addWallPost(WallPostDto wallPost, Model model) {
-		// TODO Auto-generated method stub
 		getUserUpdateDAO().createWallPost(wallPost);
 		
 		return model;

@@ -120,6 +120,7 @@ public class UtilityController {
 				"userBean");
 		School school = (School) request.getSession().getAttribute("school");
 		
+		model.addAttribute("contextPath", request.getContextPath());
 		
 		if (userBean != null)
 		{

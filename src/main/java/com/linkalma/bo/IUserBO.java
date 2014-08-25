@@ -1,7 +1,7 @@
 package com.linkalma.bo;
 
+import java.util.List;
 import org.springframework.ui.Model;
-
 import com.linkalma.dto.User;
 
 public interface IUserBO {
@@ -23,4 +23,6 @@ public interface IUserBO {
 	public boolean checkVerificationCodeExists(String emailAddress, String code);
 	
 	public boolean updatePassword(User userDTO, Model model);
+	
+	public Model getfriendSuggestions(User userDto, Model model);
 }

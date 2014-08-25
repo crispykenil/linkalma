@@ -15,7 +15,7 @@
 </div>
 <!-- left-column -->
 <div class="main-content border-box">
-	<form action="/linkalma/schooladmin/updateschoolnews" name="schoolUpdateForm">
+	<form action="${model.contextPath}/schooladmin/updateschoolnews" name="schoolUpdateForm">
 	<h1>Add Newsletter</h1>
 	<ul class=" clear-fix">
 			<li><label>Title</label> 

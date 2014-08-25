@@ -58,7 +58,8 @@ public class SchoolAdminController {
 				"userBean");
 		School school = (School) request.getSession().getAttribute("school");
 		
-		
+		model.addAttribute("contextPath", request.getContextPath());
+
 		if (userBean != null)
 		{
 			model.addAttribute("userBean", userBean);

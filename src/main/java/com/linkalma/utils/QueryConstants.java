@@ -187,6 +187,13 @@ public class QueryConstants {
 										  " From schoolgallery Where SchoolID=? Group by AlbumName  ;";
 	
 	public static String GET_SCHOOL_STAFF=" Select StaffID,FacultyName ,FacultyEmail,SubjectArea ,PhotoName  From staff Where SchoolID=? Order By FacultyName Asc";
-	
+
+	public static String GET_FRIEND_SUGGESTION="SELECT DISTINCT U.UserID, FirstName, MiddleName, LastName, Address1, Address2, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
+			+ " AboutMe, Photo, Approved, ActiveYN "
+										+ " FROM user u, userschool us "
+										+ " WHERE u.UserID = us.UserID AND us.SchoolID "
+										+ " IN (SELECT schoolid FROM userschool WHERE userid = ?)";
+
 }
 
