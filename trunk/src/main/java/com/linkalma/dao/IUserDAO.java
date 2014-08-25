@@ -30,4 +30,7 @@ public interface IUserDAO {
 	public Map<String, Object> saveVerificationCode(String emailAddress, String code, String operation);
 
 	public boolean checkVerificationCodeExists(String emailAddress);
+	
+	public List<User> getfriendSuggestions(User alumni);
+	
 }

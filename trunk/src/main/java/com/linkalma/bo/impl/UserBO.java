@@ -1,5 +1,6 @@
 package com.linkalma.bo.impl;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -226,4 +227,12 @@ public class UserBO implements IUserBO
 		return true;
 	}
 	
+	@Override
+	public Model getfriendSuggestions(User userDto, Model model)
+	{
+		List<User> userList = getUserDAO().getfriendSuggestions(userDto);
+		model.addAttribute("suggestedAlumniList", userList);
+		return model;
+	}
+
 }

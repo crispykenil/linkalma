@@ -89,6 +89,7 @@ public class HomeController {
 				"userBean");
 		School school = (School) request.getSession().getAttribute("school");
 		
+		model.addAttribute("contextPath", request.getContextPath());
 		
 		if (userBean != null)
 		{
@@ -561,6 +562,27 @@ public class HomeController {
 		return new ModelAndView("redirect:/loadschool", "model", model);
 	}
 
+	
+	@RequestMapping(value = "/alumnus")
+	public ModelAndView alumnus(@PathVariable("id") String schoolName,
+			Model model, HttpServletRequest request ) {
+		logger.info("Welcome home! Redirecting to School page.");
+
+		logger.info(schoolName + "--"+ model.containsAttribute("linkalmaaddress"));
+
+		ISchoolBO schoolBO = (ISchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
+
+		SchoolUpdateDTO schoolUpdateDto = new SchoolUpdateDTO();
+		School school = (School) request.getSession().getAttribute("school");
+		schoolUpdateDto.setSchoolID(school.getSchoolID());
+		schoolBO.getSchoolUpdatesBySchoolID(schoolUpdateDto, model);
+		schoolBO.getSchoolStaff(school, model);
+		
+		setRequiredModelPropeties(model, request);
+		
+		return new ModelAndView("school", "model", model);
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, Model model) {
 		logger.info("Welcome home! Redirecting to Index page.");

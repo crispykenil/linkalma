@@ -22,6 +22,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import com.linkalma.dao.IUserDAO;
 import com.linkalma.dao.mapper.UserMapper;
+import com.linkalma.dao.mapper.UserSuggestionMapper;
 import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserWorkplaceDTO;
@@ -267,5 +268,14 @@ public class UserDAO implements IUserDAO {
 	  	}
 		});
 		return 0;
+	}
+
+	@Override
+	public List<User> getfriendSuggestions(User alumni)
+	{
+		List<User> userList = getJdbcTemplateObject().query(QueryConstants.GET_FRIEND_SUGGESTION, 
+				new Object[]{alumni.getUserID()}, new UserSuggestionMapper());
+		System.out.println(userList.size());
+		return userList;
 	}
 }

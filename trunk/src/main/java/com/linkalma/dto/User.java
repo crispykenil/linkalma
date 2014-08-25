@@ -94,6 +94,8 @@ public class User extends BaseDTO
 
 	private List<UserWorkplaceDTO> workplaceList;
 
+	private String[] emailAddressList;
+	
 	/**
 	 * @return the approved
 	 */
@@ -736,5 +738,21 @@ public class User extends BaseDTO
 	 */
 	public void setWorkplaceList(List<UserWorkplaceDTO> workplaceList) {
 		this.workplaceList = workplaceList;
+	}
+
+	/**
+	 * @return the emailAddressList
+	 */
+	public String[] getEmailAddressList()
+	{
+		return emailAddressList;
+	}
+
+	/**
+	 * @param emailAddressList the emailAddressList to set
+	 */
+	public void setEmailAddressList(String[] emailAddressList)
+	{
+		this.emailAddressList = emailAddressList;
 	}
 }

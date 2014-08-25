@@ -22,4 +22,5 @@ public interface IDashboardBO {
 	public Model getAllDashboardDetails(User userDto, Model model);
 	
 	public Model addWallPost(WallPostDto wallPost, Model model);
+
 }
