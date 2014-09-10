@@ -96,6 +96,8 @@ public class User extends BaseDTO
 
 	private String[] emailAddressList;
 	
+	List<ConnectRequestDto> connectRequestList;
+	
 	/**
 	 * @return the approved
 	 */
@@ -755,4 +757,22 @@ public class User extends BaseDTO
 	{
 		this.emailAddressList = emailAddressList;
 	}
+
+	/**
+	 * @return the connectRequestList
+	 */
+	public List<ConnectRequestDto> getConnectRequestList()
+	{
+		return connectRequestList;
+	}
+
+	/**
+	 * @param connectRequestList the connectRequestList to set
+	 */
+	public void setConnectRequestList(List<ConnectRequestDto> connectRequestList)
+	{
+		this.connectRequestList = connectRequestList;
+	}
+
+	
 }

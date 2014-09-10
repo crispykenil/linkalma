@@ -19,9 +19,22 @@ public class ApplicationConstants {
 		public static int SCHOOL_UPDATES_NEWSLETTER_CODE = 2;
 		public static int SCHOOL_UPDATES_EVENTS_CODE = 3;
 
+	public static int FRIEND_REQUEST_STATUS_PENDING = 0;
+	public static int FRIEND_REQUEST_STATUS_ACCEPTED = 1;
+	public static int FRIEND_REQUEST_STATUS_REJECTED = 2;
+	public static int FRIEND_REQUEST_STATUS_BLOCKED = 3;
+	
+	public static String FRIEND_SUGGESTIONS = "SUGGESTION";
+	public static String FRIEND_REQUEST_PENDING = "PENDING";
+	public static String FRIEND_REQUEST_ACCEPTED = "ACCEPTED";
+	public static String FRIEND_REQUEST_REJECTED = "REJECTED";
+	public static String FRIEND_REQUEST_BLOCKED = "BLOCKED";
+	
 	public static String ACCOUNT_CREATION_EMAIL = "Congratulations, Account Created Successfully. Please visit http://www.linklma.com to explore the Linkalma world!";
 
 	public static String PROFILE_CREATION_MSG = "Voila ! Alumni Profile Created, Check your email for Verification !";
+
+	public static String SEND_FRIEND_REQ_MSG = "Congratulations, You have received a new Friend Request ! Please Login to Linkalma and View Notifications";
 
 	public static String EMAIL_ALREADY_REGISTERED_MSG = "EmailID is already registered with LinkAlma, please use a different one !";
 	

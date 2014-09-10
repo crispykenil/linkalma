@@ -27,6 +27,7 @@ var Utility = {
 
 		getSignUpForm();
 		submitSignUpForm();
+		submitEmailInviteForm();
 		registerNewSchool();
 		getFullNewsAndEvents();
 		addNewWorkPlace();
@@ -61,9 +62,19 @@ function emailResetLink(){
 
 	});
 }
-function myFunction()
+function sendFriendRequest(emailAddress, index, status)
 {
-//	Test function...
+	  $.ajax({url:"invitefriends?emailAddressesDelimited="+emailAddress+"&status="+status,success:function(result){
+		  
+		  if(result == 0)
+			  $('#friendRequestLink'+index).html('Friend Request Sent.');
+		  else if(result == 1)
+			  $('#friendRequestLink'+index).html('Accepted.');
+		  else if(result == 2)
+			  $('#friendRequestLink'+index).html('Rejected.');
+		  else if(result == 3)
+			  $('#friendRequestLink'+index).html('Blocked.');
+		  }});
 }
 function getPopup(popUpElement){
 	popUpElement.addClass("popupContent");
@@ -105,6 +116,15 @@ function submitSignUpForm() {
 	});
 }
 
+function submitEmailInviteForm() {
+	$("#alumnusForm").submit(function(e) {
+		e.preventDefault();
+		if (form.validateForm($(this))) {
+			form.submitFormThroughAjax({form:$(this)});
+		}
+
+	});
+}
 function registerNewSchool() {
 	$("#registerSchoolBtn").on("click",function(e) {
 		e.preventDefault();

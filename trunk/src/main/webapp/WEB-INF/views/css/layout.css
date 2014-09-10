@@ -38,7 +38,7 @@
 	float:none
 }
 
-/* one column layout */
+/* three column layout */
 .three-column-layout .left-column {
 	display: block;
 	width: 20%
@@ -50,5 +50,20 @@
 }
 .three-column-layout .main-content {
 	width: 50%;
+	float:left
+}
+
+/* two column layout */
+.two-column-layout .left-column {
+	display: block;
+	width: 30%
+}
+.two-column-layout .right-column {
+	display: none;
+	width:0%
+	
+}
+.two-column-layout .main-content {
+	width: 70%;
 	float:left
 }

@@ -2,7 +2,7 @@ package com.linkalma.dao;
 
 import java.util.List;
 import java.util.Map;
-
+import org.springframework.ui.Model;
 import com.linkalma.dto.User;
 
 public interface IUserDAO {
@@ -31,6 +31,10 @@ public interface IUserDAO {
 
 	public boolean checkVerificationCodeExists(String emailAddress);
 	
-	public List<User> getfriendSuggestions(User alumni);
+	public List<User> getfriendSuggestions(User alumni, String notificationType);
+
+	public Map<String, Object> handleFriendRequest(String fromEmailAddress, String toEmailAddress, int newStatus);
 	
+	public Map<String, List<User>> getNotfications(User alumni);
+
 }
