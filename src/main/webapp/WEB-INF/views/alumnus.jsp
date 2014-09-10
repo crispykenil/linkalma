@@ -10,7 +10,7 @@ function fileUpload()
     document.forms["fileupload"].submit();
 }
 </script>
-<div class="three-column-layout">
+<div class="two-column-layout">
 	
 	<div class="left-column">
 			<div class="vertical-main-nav">
@@ -66,6 +66,7 @@ function fileUpload()
 							<tr>
 								<th> Name </th>
 								<th> Email Address </th>
+								<th> Status </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -73,7 +74,7 @@ function fileUpload()
 							<tr>
 								<td>${user.userFirstName} ${user.userLastName}</td>
 								<td>${user.emailAddress}</td>
-								<td id="friendRequestLink${count.index}"><a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 0);">Send Friend Request ?</a></td>
+								<td id="friendRequestLink${count.index}"><a class="button" href="javascript:;" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 0, this);">Send Friend Request ?</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>

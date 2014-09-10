@@ -64,9 +64,9 @@ function fileUpload()
 					<td>${user.userFirstName} ${user.userLastName}</td>
 					<td>${user.emailAddress}</td>
 					<td id="friendRequestLink${count.index}">
-						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 1);">Accept Friend Request ?</a> |
-						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 2);">Reject Friend Request ?</a> |
-						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 3);">Block Friend Request ?</a>
+						<a href="javascript:;" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 1);"  class="fa fa-check" title="Accept Friend Request ?"></a> |
+						<a href="javascript:;" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 2);" class="fa fa-times delete-icon" title="Reject Friend Request ?"></a> |
+						<a href="javascript:;" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 3);" class="fa fa-ban " title="Block Friend Request ?"></a>
 					</td>
 				</tr>
 				</c:forEach>
