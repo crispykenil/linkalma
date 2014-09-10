@@ -11,9 +11,9 @@ var Utility = {
 				} 
 				collapseExpandElement.slideToggle();
 				if ($(this).hasClass("fa-chevron-down")){
-					$(this).removeClass("fa-chevron-down").addClass("fa-chevron-right")
+					$(this).removeClass("fa-chevron-down").addClass("fa-chevron-right");
 				} else 
-					$(this).removeClass("fa-chevron-right").addClass("fa-chevron-down")
+					$(this).removeClass("fa-chevron-right").addClass("fa-chevron-down");
 			});
 		}
 };
@@ -62,9 +62,15 @@ function emailResetLink(){
 
 	});
 }
-function sendFriendRequest(emailAddress, index, status)
-{
-	  $.ajax({url:"invitefriends?emailAddressesDelimited="+emailAddress+"&status="+status,success:function(result){
+function sendFriendRequest(emailAddress, index, status, targetBtn){
+	
+	  $.ajax({
+		  beforeSend:function(){
+			 // $(targetBtn).addClass("disabled");
+				$(targetBtn).append('<span class="fa fa-spinner fa-spin" style="color:#ff0000"></span>');
+		  },
+		  url:"invitefriends?emailAddressesDelimited="+emailAddress+"&status="+status,
+		  success:function(result){
 		  
 		  if(result == 0)
 			  $('#friendRequestLink'+index).html('Friend Request Sent.');
@@ -74,7 +80,11 @@ function sendFriendRequest(emailAddress, index, status)
 			  $('#friendRequestLink'+index).html('Rejected.');
 		  else if(result == 3)
 			  $('#friendRequestLink'+index).html('Blocked.');
+		  	
+			
 		  }});
+	  
+	  
 }
 function getPopup(popUpElement){
 	popUpElement.addClass("popupContent");

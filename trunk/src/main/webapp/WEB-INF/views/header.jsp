@@ -37,7 +37,7 @@
 		</div>
 	<c:if test="${model.loggedIn == true}">
 	<div class="status-info-bar fr">
-		<ul>
+		<ul><li>Welcome ! ${model.userProfile.emailAddress }</li>
 			<li><a href="/linkalma/${model.dashboardUrl }">My Dashboard</a></li>
 			<c:if test="${not empty model.userBean}">
 				<li><a href="/linkalma/viewprofile">My Profile</a></li>
