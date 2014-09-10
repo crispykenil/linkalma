@@ -10,8 +10,8 @@ function fileUpload()
     document.forms["fileupload"].submit();
 }
 </script>
-<div class="three-column-layout">
-	
+<div class="two-column-layout">
+
 	<div class="left-column">
 			<div class="vertical-main-nav">
 				<ul>
@@ -48,36 +48,30 @@ function fileUpload()
 		</div><!-- left-side-column -->
 
 <div class="main-content border-box">
-<div class="infoPanel message"></div>
-	<form action="invitefriends" name="alumnusForm" id="alumnusForm" method="POST">
-	<h1>My Alumnus</h1>
-	
-			<ul class=" clear-fix">
-				 <li><label>Invite Friend(s)</label> <textarea value="" rows="8" cols="30" placeholder="Enter comma separated EmailID's"
-				 	name="emailAddressesDelimited" class="required" maxlength="1024" ></textarea>
-				 </li>
-			</ul>
-	
-		<input type="submit" value="Invite" />
-	</form>
+	<h1>My Notifications</h1>
 	
 	<table border="0" cellpadding="0" cellspacing="0" class="dataTable">
-						<thead>
-							<tr>
-								<th> Name </th>
-								<th> Email Address </th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="user" items="${model.suggestedAlumniList}" varStatus="count">
-							<tr>
-								<td>${user.userFirstName} ${user.userLastName}</td>
-								<td>${user.emailAddress}</td>
-								<td id="friendRequestLink${count.index}"><a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 0);">Send Friend Request ?</a></td>
-							</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Email Address </th>
+					<th> Status </th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="user" items="${model.pendingFriendRequest}" varStatus="count">
+				<tr>
+					<td>${user.userFirstName} ${user.userLastName}</td>
+					<td>${user.emailAddress}</td>
+					<td id="friendRequestLink${count.index}">
+						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 1);">Accept Friend Request ?</a> |
+						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 2);">Reject Friend Request ?</a> |
+						<a href="#" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 3);">Block Friend Request ?</a>
+					</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+	</table>
 </div>
 </div>
 <%@ include file="footer.jsp"%>

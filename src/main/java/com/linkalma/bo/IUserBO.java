@@ -1,6 +1,5 @@
 package com.linkalma.bo;
 
-import java.util.List;
 import org.springframework.ui.Model;
 import com.linkalma.dto.User;
 
@@ -25,4 +24,8 @@ public interface IUserBO {
 	public boolean updatePassword(User userDTO, Model model);
 	
 	public Model getfriendSuggestions(User userDto, Model model);
+	
+	public String handleFriendRequest(User userDto, Model model);
+	
+	public Model getNotifications(User userDto, Model model);
 }

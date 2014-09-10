@@ -36,6 +36,8 @@ public class QueryConstants {
 	
 	public static String SP_FETCH_INSERT_VERIFICATION_CODE= "CALL sp_pwd_reset_link_insert(?, ?, ?, ?, ?)";
 	
+	public static String SP_HANDLE_FRIEND_REQUEST= "CALL sp_handle_friend_request(?, ?, ?, ?)";
+	
 	public static String INSERT_SCHOOL_CREDENTIALS_QUERY = "INSERT INTO schoolcredentials (SCHOOLID,EMAILADDRESS, PASSWORD) "
       		+ "VALUES (?, ?, ?)";
 
@@ -190,10 +192,16 @@ public class QueryConstants {
 
 	public static String GET_FRIEND_SUGGESTION="SELECT DISTINCT U.UserID, FirstName, MiddleName, LastName, Address1, Address2, "
 			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
-			+ " AboutMe, Photo, Approved, ActiveYN "
+			+ " AboutMe, Photo, Approved, ActiveYN, '' as FromUserID, '' as ToUserID "
 										+ " FROM user u, userschool us "
-										+ " WHERE u.UserID = us.UserID AND us.SchoolID "
+										+ " WHERE u.UserID = us.UserID AND u.UserID not in (?) AND us.SchoolID "
 										+ " IN (SELECT schoolid FROM userschool WHERE userid = ?)";
 
+	public static String GET_PENDING_FRIEND_REQUEST = "select U.UserID, fr.FromUserID, fr.ToUserID as EmailAddress, FirstName, MiddleName, LastName, Address1, Address2, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
+			+ " AboutMe, Photo, Approved, ActiveYN " 
+			+ " from friendrequest fr, user u "
+			+ " where fr.ToUserID = u.EmailAddress "
+			+ " and ToUserID = ? and Status = "+ApplicationConstants.FRIEND_REQUEST_STATUS_PENDING;
 }
 

@@ -230,8 +230,36 @@ public class UserBO implements IUserBO
 	@Override
 	public Model getfriendSuggestions(User userDto, Model model)
 	{
-		List<User> userList = getUserDAO().getfriendSuggestions(userDto);
+		List<User> userList = getUserDAO().getfriendSuggestions(userDto, ApplicationConstants.FRIEND_SUGGESTIONS);
 		model.addAttribute("suggestedAlumniList", userList);
+		return model;
+	}
+
+	@Override
+	public String handleFriendRequest(User userDto, Model model)
+	{
+		String status = "";
+		if (userDto.getConnectRequestList() != null && userDto.getConnectRequestList().size() > 0)
+		{
+			Map<String, Object> resultMap = null;
+			for (int i = 0; i < userDto.getConnectRequestList().size(); i++)
+			{
+				String fromEmailAddress = userDto.getConnectRequestList().get(i).getFromEmailAddress();
+				String toEmailAddress = userDto.getConnectRequestList().get(i).getToEmailAddress(); 
+				
+				resultMap = getUserDAO().handleFriendRequest(fromEmailAddress, toEmailAddress, userDto.getConnectRequestList().get(i).getStatus());
+			}
+			 status =(String) resultMap.get("outStatus");
+			 System.out.println("Statsu : "+status);
+		}
+		return status;
+	}
+
+	@Override
+	public Model getNotifications(User userDto, Model model)
+	{
+		List<User> userList = getUserDAO().getfriendSuggestions(userDto, ApplicationConstants.FRIEND_REQUEST_PENDING);
+		model.addAttribute("pendingFriendRequest", userList);
 		return model;
 	}
 

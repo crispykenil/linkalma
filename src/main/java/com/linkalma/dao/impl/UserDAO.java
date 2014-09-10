@@ -26,6 +26,7 @@ import com.linkalma.dao.mapper.UserSuggestionMapper;
 import com.linkalma.dao.mapper.UserWorkplaceMapper;
 import com.linkalma.dto.User;
 import com.linkalma.dto.UserWorkplaceDTO;
+import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.QueryConstants;
 import com.linkalma.utils.cipher.Cipher;
 
@@ -271,11 +272,60 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public List<User> getfriendSuggestions(User alumni)
+	public List<User> getfriendSuggestions(User alumni, String notificationType)
 	{
-		List<User> userList = getJdbcTemplateObject().query(QueryConstants.GET_FRIEND_SUGGESTION, 
-				new Object[]{alumni.getUserID()}, new UserSuggestionMapper());
-		System.out.println(userList.size());
+		List<User> userList = null;
+		if(ApplicationConstants.FRIEND_REQUEST_PENDING.equalsIgnoreCase(notificationType))
+		{
+			userList = getJdbcTemplateObject().query(QueryConstants.GET_PENDING_FRIEND_REQUEST, 
+					new Object[]{alumni.getEmailAddress()}, new UserSuggestionMapper());
+		
+		}
+		else if(ApplicationConstants.FRIEND_SUGGESTIONS.equalsIgnoreCase(notificationType))
+		{
+			userList = getJdbcTemplateObject().query(QueryConstants.GET_FRIEND_SUGGESTION, 
+					new Object[]{alumni.getUserID(), alumni.getUserID()}, new UserSuggestionMapper());
+		}
+		System.out.println("Suggestions List Size: "+userList.size()+"; EMail:"+alumni.getEmailAddress());
 		return userList;
+	}
+
+	@Override
+	public Map<String, Object> handleFriendRequest(final String fromEmailAddress, final String toEmailAddress, final int newStatus)
+	{
+		 SqlParameter in_fromEmailAddress = new SqlParameter(Types.VARCHAR);
+		 SqlParameter in_toEmailAddress = new SqlParameter(Types.VARCHAR);
+		 SqlParameter in_newStatus = new SqlParameter(Types.VARCHAR);
+		 SqlOutParameter outParameter = new SqlOutParameter("outStatus", Types.VARCHAR);
+		 
+		 List<SqlParameter> paramList = new ArrayList<SqlParameter>();
+		 paramList.add(in_fromEmailAddress );
+		 paramList.add(in_toEmailAddress );
+		 paramList.add(in_newStatus );
+		 paramList.add(outParameter);
+		 System.out.println("Param size"+paramList.size());
+		 Map<String, Object> resultMap = getJdbcTemplateObject().call(new CallableStatementCreator() {
+			
+			@Override
+			public CallableStatement createCallableStatement(Connection con)
+					throws SQLException {
+				logger.info("Friend Request SP called");
+				CallableStatement callableStatement = con.prepareCall(QueryConstants.SP_HANDLE_FRIEND_REQUEST);
+				callableStatement.setString(1, fromEmailAddress);
+				callableStatement.setString(2, toEmailAddress);
+				callableStatement.setInt(3, newStatus);
+				callableStatement.registerOutParameter(4, Types.VARCHAR);
+				return callableStatement;
+			}
+		}, paramList);
+		 System.out.println("Friend Request SP result: "+resultMap.get("outStatus"));
+		 return resultMap;
+	}
+
+	@Override
+	public Map<String, List<User>> getNotfications(User alumni)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
