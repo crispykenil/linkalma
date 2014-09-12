@@ -15,7 +15,7 @@ public class ConnectRequestDto extends BaseDTO {
 	
 	private String toEmailAddress;
 	
-	private int status;	/* Valid Status: 0-Pending, 1-Accepted, 2-Rejected, 3-Blocked */
+	private String status;	/* Valid Status: 0-Pending, 1-Accepted, 2-Rejected, 3-Blocked */
 	
 	private String emailAddressesDelimited;
 	
@@ -86,7 +86,7 @@ public class ConnectRequestDto extends BaseDTO {
 	/**
 	 * @return the status
 	 */
-	public int getStatus()
+	public String getStatus()
 	{
 		return status;
 	}
@@ -94,7 +94,7 @@ public class ConnectRequestDto extends BaseDTO {
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(int status)
+	public void setStatus(String status)
 	{
 		this.status = status;
 	}

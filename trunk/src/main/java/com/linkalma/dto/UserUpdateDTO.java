@@ -1,6 +1,7 @@
 package com.linkalma.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class UserUpdateDTO extends BaseDTO {
 
@@ -25,6 +26,8 @@ public class UserUpdateDTO extends BaseDTO {
 	private long updateUserID;
 	
 	private Date updateDttm;
+	
+	private List<CommentsDTO> commentsList;
 
 	/**
 	 * @return the postID
@@ -179,5 +182,21 @@ public class UserUpdateDTO extends BaseDTO {
 	 */
 	public void setUserLastName(String userLastName) {
 		this.userLastName = userLastName;
+	}
+
+	/**
+	 * @return the commentsList
+	 */
+	public List<CommentsDTO> getCommentsList()
+	{
+		return commentsList;
+	}
+
+	/**
+	 * @param commentsList the commentsList to set
+	 */
+	public void setCommentsList(List<CommentsDTO> commentsList)
+	{
+		this.commentsList = commentsList;
 	}
 }

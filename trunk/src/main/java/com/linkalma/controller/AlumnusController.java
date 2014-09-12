@@ -56,7 +56,7 @@ public class AlumnusController {
 			model.addAttribute("userBean", userBean);
 			model.addAttribute("loggedIn","true");
 			model.addAttribute("dashboardUrl","dashboard");
-			
+			model.addAttribute("loggedInUserName",userBean.getEmailId());
 		}
 		else if (school != null)
 		{
@@ -65,14 +65,12 @@ public class AlumnusController {
 			model.addAttribute("dashboardUrl","schooladmin?schoolName="+school.getLinkalmaAddress());
 			model.addAttribute("schoolName", school.getSchoolName());
 			model.addAttribute("linkalmaAddress", school.getLinkalmaAddress().trim());
-			
 		}
 		else
 		{
 			model.addAttribute("loggedIn","false");
 			model.addAttribute("errors", request.getParameter("errors"));
 		}
-		
 	}
 
 	@RequestMapping(value = "/notifications", method={RequestMethod.GET, RequestMethod.POST})
@@ -109,7 +107,10 @@ public class AlumnusController {
 				"userBean");
 		if (userBean != null)
 			userDto.setUserID(userBean.getUserID());
+		
 		String emails = connectRequestDto.getEmailAddressesDelimited();
+		String fromEmailAddress = connectRequestDto.getFromEmailAddress();
+		
 		System.out.println("My Email List : "+emails);
 		if (!StringUtils.isNullOrEmpty(emails))
 		{
@@ -121,7 +122,7 @@ public class AlumnusController {
 				if (userBO.checkUserExists(emailList[i], model))
 				{
 					ConnectRequestDto connectRequest = new ConnectRequestDto();
-					connectRequest.setFromEmailAddress(userBean.getUserName());
+					connectRequest.setFromEmailAddress(fromEmailAddress);
 					connectRequest.setToEmailAddress(emailList[i]);
 					if (emailList.length == 1)
 						connectRequest.setStatus(connectRequestDto.getStatus());
@@ -160,8 +161,11 @@ public class AlumnusController {
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
 		if (userBean != null)
+		{
 			userDto.setUserID(userBean.getUserID());
+			userDto.setEmailAddress(userBean.getEmailId());
 
+		}
 		System.out.println("UserID : "+userBean.getUserID());
 		model = userBO.getfriendSuggestions(userDto, model);
 		setRequiredModelPropeties(model, request);

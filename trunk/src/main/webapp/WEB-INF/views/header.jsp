@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <HTML>
@@ -37,7 +38,7 @@
 		</div>
 	<c:if test="${model.loggedIn == true}">
 	<div class="status-info-bar fr">
-		<ul><li>Welcome ! ${model.userProfile.emailAddress }</li>
+		<ul><li>Welcome ! ${model.userBean.firstName} ${model.userBean.lastName}</li>
 			<li><a href="/linkalma/${model.dashboardUrl }">My Dashboard</a></li>
 			<c:if test="${not empty model.userBean}">
 				<li><a href="/linkalma/viewprofile">My Profile</a></li>

@@ -4,17 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
 import com.linkalma.dao.IUserUpdateDAO;
+import com.linkalma.dao.mapper.CommentsMapper;
 import com.linkalma.dao.mapper.UserUpdateMapper;
+import com.linkalma.dto.CommentsDTO;
 import com.linkalma.dto.UserUpdateDTO;
 import com.linkalma.dto.WallPostDto;
 import com.linkalma.utils.QueryConstants;
@@ -54,10 +53,25 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 	}
 
 	@Override
-	public List<UserUpdateDTO> getUserWallPost(long userID) {
-		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new Long[]{userID},
+	public List<UserUpdateDTO> getUserWallPost(String emailAddress) {
+		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new String[]{emailAddress, emailAddress},
 				new UserUpdateMapper());
+		
+		/*for(UserUpdateDTO userUpdateDto: userUpdateDtoList)
+		{
+			List<CommentsDTO> commentsDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new String[]{emailAddress, emailAddress},
+					new CommentsMapper());
+			userUpdateDto.getPostID()
+		}*/
+		
 		return userUpdateDtoList;
+	}
+	
+	@Override
+	public List<CommentsDTO> getPostComments(long postID) {
+		List<CommentsDTO> commentsDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new Long[]{postID},
+				new CommentsMapper());
+		return commentsDtoList;
 	}
 
 	/**

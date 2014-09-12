@@ -62,14 +62,14 @@ function emailResetLink(){
 
 	});
 }
-function sendFriendRequest(emailAddress, index, status, targetBtn){
+function sendFriendRequest(fromEmailAddress, toEmailAddress, index, status, targetBtn){
 	
 	  $.ajax({
 		  beforeSend:function(){
 			 // $(targetBtn).addClass("disabled");
 				$(targetBtn).append('<span class="fa fa-spinner fa-spin" style="color:#ff0000"></span>');
 		  },
-		  url:"invitefriends?emailAddressesDelimited="+emailAddress+"&status="+status,
+		  url:"invitefriends?emailAddressesDelimited="+toEmailAddress+"&fromEmailAddress="+fromEmailAddress+"&status="+status,
 		  success:function(result){
 		  
 		  if(result == 0)

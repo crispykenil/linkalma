@@ -73,13 +73,22 @@ public class QueryConstants {
 			 + " AND S.ACTIVEYN = 'Y' "
 			 + " AND US.SCHOOLID = ?";
 	
-	public static String GET_USER_WALL_POSTS = "SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, "
+/*	public static String GET_USER_WALL_POSTS = "SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, "
 			+ " UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME "
 			+ " FROM userupdates UU, user U "
 			+ " WHERE UU.USERID = U.USERID"
 			+ " AND U.USERID = ?"
 			+ " ORDER BY UU.CREATEDTTM DESC" ;
-	
+*/	
+	public static String GET_USER_WALL_POSTS = "SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME, U.EmailAddress "
+			+ " FROM userupdates UU, user U "
+			+ " WHERE UU.USERID = U.USERID AND U.USERID in"
+			+ "		(select u3.UserID "
+			+ "		from user u3, friendrequest fr "
+			+ "		where fr.Status = 1 and (u3.EmailAddress = fr.ToUserID OR u3.EmailAddress = fr.FromUserID ) "
+			+ "		and fr.FromUserID = ? or fr.ToUserID = ?) "
+			+ " ORDER BY UU.CREATEDTTM DESC";
+
 	public static String UPDATE_USER_PROFILE_PERSONAL_DETAILS = 
 			" UPDATE user SET FirstName = ?,    MiddleName = ?,    LastName = ?, "
 			+ " Address1 = ?, Address2 = ?, CountryCode = ?, Phone1 = ?, Phone2 = ?, Phone3 = ?, Phone4 = ?, "
@@ -190,18 +199,25 @@ public class QueryConstants {
 	
 	public static String GET_SCHOOL_STAFF=" Select StaffID,FacultyName ,FacultyEmail,SubjectArea ,PhotoName  From staff Where SchoolID=? Order By FacultyName Asc";
 
-	public static String GET_FRIEND_SUGGESTION="SELECT DISTINCT U.UserID, FirstName, MiddleName, LastName, Address1, Address2, "
+	public static String GET_ALUMNUS_SUGGESTION="SELECT DISTINCT U.UserID, FirstName, MiddleName, LastName, Address1, Address2, "
 			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
 			+ " AboutMe, Photo, Approved, ActiveYN, '' as FromUserID, '' as ToUserID "
-										+ " FROM user u, userschool us "
-										+ " WHERE u.UserID = us.UserID AND u.UserID not in (?) AND us.SchoolID "
+										+ " FROM user U, userschool us "
+										+ " WHERE U.UserID = us.UserID AND U.UserID not in (?) AND us.SchoolID "
 										+ " IN (SELECT schoolid FROM userschool WHERE userid = ?)";
 
-	public static String GET_PENDING_FRIEND_REQUEST = "select U.UserID, fr.FromUserID, fr.ToUserID as EmailAddress, FirstName, MiddleName, LastName, Address1, Address2, "
+	public static String GET_PENDING_ALUMNUS_REQUEST = "select U.UserID, fr.FromUserID  as EmailAddress, fr.ToUserID, FirstName, MiddleName, LastName, Address1, Address2, "
 			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
 			+ " AboutMe, Photo, Approved, ActiveYN " 
-			+ " from friendrequest fr, user u "
-			+ " where fr.ToUserID = u.EmailAddress "
+			+ " from friendrequest fr, user U "
+			+ " where fr.ToUserID = U.EmailAddress "
 			+ " and ToUserID = ? and Status = "+ApplicationConstants.FRIEND_REQUEST_STATUS_PENDING;
+	
+	public static String GET_MY_CONNECTED_ALUMNUS = "SELECT U.UserID, FirstName, MiddleName, LastName, Address1, Address2, "
+			+ " CountryCode, Phone1, Phone2, Phone3, Phone4, Gender, City, State, Country, U.EmailAddress, DOB, ZipCode, PhoneCode1, PhoneCode2, PhoneCode3, PhoneCode4, "
+			+ " AboutMe, Photo, Approved, ActiveYN "
+			+ " FROM user U, friendrequest fr "
+			+ " WHERE fr.Status = 1 AND (U.EmailAddress = fr.ToUserID OR U.EmailAddress = fr.FromUserID ) "
+			+ " AND (fr.FromUserID = ? OR fr.ToUserID = ?) AND U.EmailAddress != ?";
 }
 

@@ -19,10 +19,10 @@ public class ApplicationConstants {
 		public static int SCHOOL_UPDATES_NEWSLETTER_CODE = 2;
 		public static int SCHOOL_UPDATES_EVENTS_CODE = 3;
 
-	public static int FRIEND_REQUEST_STATUS_PENDING = 0;
-	public static int FRIEND_REQUEST_STATUS_ACCEPTED = 1;
-	public static int FRIEND_REQUEST_STATUS_REJECTED = 2;
-	public static int FRIEND_REQUEST_STATUS_BLOCKED = 3;
+	public static String FRIEND_REQUEST_STATUS_PENDING = "0";
+	public static String FRIEND_REQUEST_STATUS_ACCEPTED = "1";
+	public static String FRIEND_REQUEST_STATUS_REJECTED = "2";
+	public static String FRIEND_REQUEST_STATUS_BLOCKED = "3";
 	
 	public static String FRIEND_SUGGESTIONS = "SUGGESTION";
 	public static String FRIEND_REQUEST_PENDING = "PENDING";

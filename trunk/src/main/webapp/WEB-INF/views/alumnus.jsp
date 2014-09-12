@@ -51,34 +51,51 @@ function fileUpload()
 <div class="infoPanel message"></div>
 	<form action="invitefriends" name="alumnusForm" id="alumnusForm" method="POST">
 	<h1>My Alumnus</h1>
+		<table border="0" cellpadding="0" cellspacing="0" class="dataTable">
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Email Address </th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="user" items="${model.myAlumnusList}">
+				<tr>
+					<td>${user.userFirstName} ${user.userLastName}</td>
+					<td>${user.emailAddress}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	
-			<ul class=" clear-fix">
-				 <li><label>Invite Friend(s)</label> <textarea value="" rows="8" cols="30" placeholder="Enter comma separated EmailID's"
-				 	name="emailAddressesDelimited" class="required" maxlength="1024" ></textarea>
-				 </li>
-			</ul>
+		<ul class=" clear-fix">
+			 <li><label>Invite Friend(s)</label> <textarea value="" rows="8" cols="30" placeholder="Enter comma separated EmailID's"
+			 	name="emailAddressesDelimited" class="required" maxlength="1024" ></textarea>
+			 </li>
+		</ul>
 	
 		<input type="submit" value="Invite" />
 	</form>
 	
+	<h1>Alumnus Suggestions</h1>
 	<table border="0" cellpadding="0" cellspacing="0" class="dataTable">
-						<thead>
-							<tr>
-								<th> Name </th>
-								<th> Email Address </th>
-								<th> Status </th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="user" items="${model.suggestedAlumniList}" varStatus="count">
-							<tr>
-								<td>${user.userFirstName} ${user.userLastName}</td>
-								<td>${user.emailAddress}</td>
-								<td id="friendRequestLink${count.index}"><a class="button" href="javascript:;" onclick="sendFriendRequest('${user.emailAddress}', ${count.index}, 0, this);">Send Friend Request ?</a></td>
-							</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+		<thead>
+			<tr>
+				<th> Name </th>
+				<th> Email Address </th>
+				<th> Status </th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="user" items="${model.suggestedAlumniList}" varStatus="count">
+			<tr>
+				<td>${user.userFirstName} ${user.userLastName}</td>
+				<td>${user.emailAddress}</td>
+				<td id="friendRequestLink${count.index}"><a class="button" href="javascript:;" onclick="sendFriendRequest('${model.loggedInUserName }', '${user.emailAddress}', ${count.index}, 0, this);">Send Friend Request ?</a></td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 </div>
 <%@ include file="footer.jsp"%>
