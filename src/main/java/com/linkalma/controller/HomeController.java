@@ -125,8 +125,10 @@ public class HomeController {
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
 		if (userBean != null)
+		{
 			userDto.setUserID(userBean.getUserID());
-
+			userDto.setEmailAddress(userBean.getEmailId());
+		}
 		model = dashboardBO.getAllDashboardDetails(userDto, model);
 		setRequiredModelPropeties(model, request);
 		return new ModelAndView("dashboard", "model", model);
@@ -642,6 +644,8 @@ public class HomeController {
 				userBean.setRole(userBeanResult.getRole());
 				userBean.setUserID(userBeanResult.getUserID());
 				userBean.setUserName(userBeanResult.getUserName());
+				userBean.setFirstName(userBeanResult.getFirstName());
+				userBean.setLastName(userBeanResult.getLastName());
 
 				isValid = true;
 			} else {
@@ -661,7 +665,7 @@ public class HomeController {
 				userBean.setRole(userBeanResult.getRole());
 				userBean.setUserID(userBeanResult.getUserID());
 				userBean.setUserName(userBeanResult.getUserName());
-
+				
 				isValid = true;
 			} else {
 

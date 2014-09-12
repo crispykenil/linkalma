@@ -231,7 +231,9 @@ public class UserBO implements IUserBO
 	public Model getfriendSuggestions(User userDto, Model model)
 	{
 		List<User> userList = getUserDAO().getfriendSuggestions(userDto, ApplicationConstants.FRIEND_SUGGESTIONS);
+		List<User> friendList = getUserDAO().getfriendSuggestions(userDto, ApplicationConstants.FRIEND_REQUEST_ACCEPTED);
 		model.addAttribute("suggestedAlumniList", userList);
+		model.addAttribute("myAlumnusList", friendList);
 		return model;
 	}
 

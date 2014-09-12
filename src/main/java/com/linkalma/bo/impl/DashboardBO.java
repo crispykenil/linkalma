@@ -54,7 +54,7 @@ public class DashboardBO implements IDashboardBO {
 
 	@Override
 	public List<UserUpdateDTO> getUserUpdates(User userDto) {	
-		List<UserUpdateDTO> userUpdateDto = getUserUpdateDAO().getUserWallPost(userDto.getUserID());
+		List<UserUpdateDTO> userUpdateDto = getUserUpdateDAO().getUserWallPost(userDto.getEmailAddress());
 		return userUpdateDto;
 	}
 

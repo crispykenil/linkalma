@@ -33,7 +33,9 @@ public interface IUserDAO {
 	
 	public List<User> getfriendSuggestions(User alumni, String notificationType);
 
-	public Map<String, Object> handleFriendRequest(String fromEmailAddress, String toEmailAddress, int newStatus);
+	public List<User> getfriendList(User alumni, String notificationType);
+
+	public Map<String, Object> handleFriendRequest(String fromEmailAddress, String toEmailAddress, String newStatus);
 	
 	public Map<String, List<User>> getNotfications(User alumni);
 

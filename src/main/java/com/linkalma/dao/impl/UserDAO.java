@@ -277,21 +277,26 @@ public class UserDAO implements IUserDAO {
 		List<User> userList = null;
 		if(ApplicationConstants.FRIEND_REQUEST_PENDING.equalsIgnoreCase(notificationType))
 		{
-			userList = getJdbcTemplateObject().query(QueryConstants.GET_PENDING_FRIEND_REQUEST, 
+			userList = getJdbcTemplateObject().query(QueryConstants.GET_PENDING_ALUMNUS_REQUEST, 
 					new Object[]{alumni.getEmailAddress()}, new UserSuggestionMapper());
 		
 		}
 		else if(ApplicationConstants.FRIEND_SUGGESTIONS.equalsIgnoreCase(notificationType))
 		{
-			userList = getJdbcTemplateObject().query(QueryConstants.GET_FRIEND_SUGGESTION, 
+			userList = getJdbcTemplateObject().query(QueryConstants.GET_ALUMNUS_SUGGESTION, 
 					new Object[]{alumni.getUserID(), alumni.getUserID()}, new UserSuggestionMapper());
+		}
+		else if(ApplicationConstants.FRIEND_REQUEST_ACCEPTED.equalsIgnoreCase(notificationType))
+		{
+			userList = getJdbcTemplateObject().query(QueryConstants.GET_MY_CONNECTED_ALUMNUS, 
+					new Object[]{alumni.getEmailAddress(), alumni.getEmailAddress(), alumni.getEmailAddress()}, new UserSuggestionMapper());
 		}
 		System.out.println("Suggestions List Size: "+userList.size()+"; EMail:"+alumni.getEmailAddress());
 		return userList;
 	}
 
 	@Override
-	public Map<String, Object> handleFriendRequest(final String fromEmailAddress, final String toEmailAddress, final int newStatus)
+	public Map<String, Object> handleFriendRequest(final String fromEmailAddress, final String toEmailAddress, final String newStatus)
 	{
 		 SqlParameter in_fromEmailAddress = new SqlParameter(Types.VARCHAR);
 		 SqlParameter in_toEmailAddress = new SqlParameter(Types.VARCHAR);
@@ -304,6 +309,7 @@ public class UserDAO implements IUserDAO {
 		 paramList.add(in_newStatus );
 		 paramList.add(outParameter);
 		 System.out.println("Param size"+paramList.size());
+		 final int status = Integer.parseInt(newStatus);
 		 Map<String, Object> resultMap = getJdbcTemplateObject().call(new CallableStatementCreator() {
 			
 			@Override
@@ -313,7 +319,7 @@ public class UserDAO implements IUserDAO {
 				CallableStatement callableStatement = con.prepareCall(QueryConstants.SP_HANDLE_FRIEND_REQUEST);
 				callableStatement.setString(1, fromEmailAddress);
 				callableStatement.setString(2, toEmailAddress);
-				callableStatement.setInt(3, newStatus);
+				callableStatement.setInt(3, status);
 				callableStatement.registerOutParameter(4, Types.VARCHAR);
 				return callableStatement;
 			}
@@ -324,6 +330,13 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public Map<String, List<User>> getNotfications(User alumni)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> getfriendList(User alumni, String notificationType)
 	{
 		// TODO Auto-generated method stub
 		return null;

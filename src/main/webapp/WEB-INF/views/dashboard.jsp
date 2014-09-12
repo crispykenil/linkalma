@@ -10,7 +10,7 @@
 				<img src="images/profile-pic.png" width="162px" height="158px" />
 			</div>
 			<div class="user-info fl">
-				<h2>${model.userBean.firstName} &nbsp; ${model.userBean.lastName}</h2>
+				<h2>${model.userBean.firstName} ${model.userBean.lastName}</h2>
 				<ul>
 					<li> <label>Email:</label> ${model.userBean.emailId }</li>
 					
