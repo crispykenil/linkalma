@@ -248,7 +248,7 @@ public class UserBO implements IUserBO
 			{
 				String fromEmailAddress = userDto.getConnectRequestList().get(i).getFromEmailAddress();
 				String toEmailAddress = userDto.getConnectRequestList().get(i).getToEmailAddress(); 
-				
+				System.out.println("Status: "+userDto.getConnectRequestList().get(i).getStatus());
 				resultMap = getUserDAO().handleFriendRequest(fromEmailAddress, toEmailAddress, userDto.getConnectRequestList().get(i).getStatus());
 			}
 			 status =(String) resultMap.get("outStatus");

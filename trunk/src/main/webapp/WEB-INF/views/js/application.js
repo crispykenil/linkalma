@@ -63,7 +63,12 @@ function emailResetLink(){
 	});
 }
 function sendFriendRequest(fromEmailAddress, toEmailAddress, index, status, targetBtn){
-	
+	alert('asd');
+	if(toEmailAddress == '')
+		{
+		 toEmailAddress = $('#emailAddressesDelimited').val();
+		 alert(toEmailAddress);
+		}
 	  $.ajax({
 		  beforeSend:function(){
 			 // $(targetBtn).addClass("disabled");
@@ -72,19 +77,31 @@ function sendFriendRequest(fromEmailAddress, toEmailAddress, index, status, targ
 		  url:"invitefriends?emailAddressesDelimited="+toEmailAddress+"&fromEmailAddress="+fromEmailAddress+"&status="+status,
 		  success:function(result){
 		  
-		  if(result == 0)
-			  $('#friendRequestLink'+index).html('Friend Request Sent.');
-		  else if(result == 1)
-			  $('#friendRequestLink'+index).html('Accepted.');
-		  else if(result == 2)
-			  $('#friendRequestLink'+index).html('Rejected.');
-		  else if(result == 3)
-			  $('#friendRequestLink'+index).html('Blocked.');
-		  	
-			
-		  }});
-	  
-	  
+		  if(index != 999)
+		  {
+			  if(result == 0)
+			  {
+				  $('#friendRequestLink'+index).html('Friend Request Sent.');
+			  }
+			  else if(result == 1)
+			  {
+				  $('#friendRequestLink'+index).html('Accepted.');
+			  }
+			  else if(result == 2)
+			  {
+				  $('#friendRequestLink'+index).html('Rejected.');
+			  }
+			  else if(result == 3)
+			  {
+				  $('#friendRequestLink'+index).html('Blocked.');
+			  }
+		  }
+		  else if(index == 999)
+		  {
+			  $('.message').html('Email Invitation Sent to the receiptients');
+		  }
+			  
+	  }});
 }
 function getPopup(popUpElement){
 	popUpElement.addClass("popupContent");
@@ -129,9 +146,9 @@ function submitSignUpForm() {
 function submitEmailInviteForm() {
 	$("#alumnusForm").submit(function(e) {
 		e.preventDefault();
-		if (form.validateForm($(this))) {
+		/*if (form.validateForm($(this))) {
 			form.submitFormThroughAjax({form:$(this)});
-		}
+		}*/
 
 	});
 }

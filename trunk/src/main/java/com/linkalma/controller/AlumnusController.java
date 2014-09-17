@@ -128,6 +128,7 @@ public class AlumnusController {
 						connectRequest.setStatus(connectRequestDto.getStatus());
 					else
 						connectRequest.setStatus(ApplicationConstants.FRIEND_REQUEST_STATUS_PENDING);
+					
 					connectReqList.add(connectRequest);
 					
 					mailSender.sendMail(userBean.getUserName(), emailList[i], "Linkalma : Friend Request Received from "+userBean.getUserName(), 

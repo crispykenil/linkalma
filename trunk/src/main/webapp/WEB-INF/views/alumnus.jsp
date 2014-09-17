@@ -51,6 +51,8 @@ function fileUpload()
 <div class="infoPanel message"></div>
 	<form action="invitefriends" name="alumnusForm" id="alumnusForm" method="POST">
 	<h1>My Alumnus</h1>
+	<c:choose>
+		<c:when test="${model.myAlumnusList.size() gt 0}">
 		<table border="0" cellpadding="0" cellspacing="0" class="dataTable">
 			<thead>
 				<tr>
@@ -67,14 +69,22 @@ function fileUpload()
 				</c:forEach>
 			</tbody>
 		</table>
-	
+		</c:when>
+      	<c:otherwise>
+      		<div> You are not connected with any Alumnus!!!</div>
+      	</c:otherwise>
+	</c:choose>
+
+
+	<h1>Invite Friends</h1>
+
 		<ul class=" clear-fix">
-			 <li><label>Invite Friend(s)</label> <textarea value="" rows="8" cols="30" placeholder="Enter comma separated EmailID's"
-			 	name="emailAddressesDelimited" class="required" maxlength="1024" ></textarea>
+			 <li><textarea value="" rows="8" cols="30" placeholder="Enter comma separated EmailID's"
+			 	name="emailAddressesDelimited" class="required" maxlength="1024" id="emailAddressesDelimited" ></textarea>
 			 </li>
 		</ul>
 	
-		<input type="submit" value="Invite" />
+		<input type="button" value="Invite" onclick="sendFriendRequest('${model.loggedInUserName }', '', 999, 0, this);" />
 	</form>
 	
 	<h1>Alumnus Suggestions</h1>

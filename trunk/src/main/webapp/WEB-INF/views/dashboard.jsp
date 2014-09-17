@@ -47,6 +47,7 @@
 				<ul>
 					<li><a href="javascirpt:;">Links</a>
 						<ul>
+							<li><a href="notifications">My Notifications</a></li>
 							<li><a href="myalumnus">My Alumnus</a></li>
 							<li><a href="viewprofile">My Schools</a></li>
 							<li><a href="javascirpt:;">My Groups</a></li>
