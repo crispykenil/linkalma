@@ -63,11 +63,9 @@ function emailResetLink(){
 	});
 }
 function sendFriendRequest(fromEmailAddress, toEmailAddress, index, status, targetBtn){
-	alert('asd');
 	if(toEmailAddress == '')
 		{
 		 toEmailAddress = $('#emailAddressesDelimited').val();
-		 alert(toEmailAddress);
 		}
 	  $.ajax({
 		  beforeSend:function(){
