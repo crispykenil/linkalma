@@ -10,43 +10,10 @@ function fileUpload()
     document.forms["fileupload"].submit();
 }
 </script>
-<div class="two-column-layout">
-	
+<div class="three-column-layout">
 	<div class="left-column">
-			<div class="vertical-main-nav">
-				<ul>
-					<li><a href="javascirpt:;">Personalize</a>
-						<ul>
-							<li><a href="viewprofile" title="Update Profile">Update Profile</a></li>
-							<li><a href="javascirpt:;" title="Add Groups">Add Groups</a></li>
-							<li><a href="javascirpt:;" title="Add Friends">Add Alumnus</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-				<ul>
-					<li><a href="javascirpt:;">Links</a>
-						<ul>
-							<li><a href="notifications">My Notifications</a></li>
-							<li><a href="myalumnus">My Alumnus</a></li>
-							<li><a href="viewprofile">My Schools</a></li>
-							<li><a href="javascirpt:;">My Groups</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-				<ul>
-					<li><a href="javascirpt:;">Privacy Settings</a>
-						<ul>
-							<li><a href="javascirpt:;">My Data</a></li>
-							<li><a href="javascirpt:;">My Updates</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-			</div>
-		</div><!-- left-side-column -->
-
+			<%@ include file="include/navigation.jsp" %>
+	</div><!-- left-side-column -->
 <div class="main-content border-box">
 <div class="infoPanel message"></div>
 	<form action="invitefriends" name="alumnusForm" id="alumnusForm" method="POST">
