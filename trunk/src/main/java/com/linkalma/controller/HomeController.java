@@ -547,6 +547,7 @@ public class HomeController {
 		School schoolDto = new School();
 
 		model = schoolBO.getSchoolList(schoolDto, model);
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("registerSchool", "model", model);
 	}
 
