@@ -57,7 +57,7 @@ function emailResetLink(){
 	$("#emailPassword").submit(function(e) {
 		e.preventDefault();
 		if (form.validateForm($(this))) {
-			form.submitFormThroughAjax({form:$(this), callback:myFunction});
+			form.submitFormThroughAjax({form:$(this)});
 		}
 
 	});
