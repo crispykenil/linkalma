@@ -210,7 +210,7 @@ function fileUpload()
 								<th> From Date (MM / YYYY)</th>
 								<th> To Date (MM / YYYY)</th>
 								<th> Designation </th>
-								<th> Description </th>
+<!-- 								<th> Description </th> -->
 								<th class="align-center"> Action</th>
 							</tr>
 						</thead>
@@ -231,7 +231,7 @@ function fileUpload()
 										<input type="hidden" size="4" maxlength="4" name="workplaceList[${count.index}].toYear" value="${workplace.toYear}" >
 									</td>
 									<td><input type="text" name="workplaceList[${count.index}].designation" value="${workplaceList.designation}"></td>
-									<td><input type="text" name="workplaceList[${count.index}].description" value="${workplaceList.description}"></td>
+<%-- 									<td><input type="text" name="workplaceList[${count.index}].description" value="${workplaceList.description}"></td> --%>
 									<td class="align-center"> <a href="deletemyworkplace?ID=${workplaceList.userWorkplaceID}" class="fa fa-times delete-icon" ></a></td>
 								</tr>
 							</c:forEach>

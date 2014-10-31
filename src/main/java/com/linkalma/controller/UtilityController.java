@@ -112,6 +112,7 @@ public class UtilityController {
 //		else
 //			model.addAttribute("errors", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_MSG, null, Locale.US));
 		
+		setRequiredModelPropeties(model, request);
 		return new ModelAndView("passwordreset", "model", model);
 	}
 	private void setRequiredModelPropeties(Model model,

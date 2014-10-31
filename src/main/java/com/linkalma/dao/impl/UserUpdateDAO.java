@@ -54,7 +54,7 @@ public class UserUpdateDAO implements IUserUpdateDAO {
 
 	@Override
 	public List<UserUpdateDTO> getUserWallPost(String emailAddress) {
-		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new String[]{emailAddress, emailAddress},
+		List<UserUpdateDTO> userUpdateDtoList = getJdbcTemplateObject().query( QueryConstants.GET_USER_WALL_POSTS, new String[]{emailAddress, emailAddress, emailAddress},
 				new UserUpdateMapper());
 		
 		/*for(UserUpdateDTO userUpdateDto: userUpdateDtoList)
