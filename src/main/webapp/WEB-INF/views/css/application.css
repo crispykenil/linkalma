@@ -495,3 +495,27 @@ input[type="text"].search-field {
 	 /* background-color:#505765; */
 	margin:0px 5px
 }
+
+
+/* for search page */
+#searchResults .user-info-panel {
+	margin-right:16px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-bottom:15px;
+}
+#searchResults .user-info-panel:hover {
+	box-shadow: -1px 1px 5px #0082c8;
+}
+#searchResults .user-info-panel h3 {
+	background-color:#eee;
+	padding:5px;
+	box-shadow: -1px 1px 5px #ddd;
+	
+}
+#searchResults .user-info-panel .profile-pic, #searchResults .user-info-panel .profile-pic img {
+	width:180px;
+	height:150px;	
+}
