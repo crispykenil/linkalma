@@ -31,6 +31,7 @@
 			<li><label>File</label> 
 				<input type="file" name="uploadedFile" class="required" id="syllabusUploadedFile"/>
 				<input type="hidden" name="dataType" value="1" />
+				<input type="hidden" name="type" value="Syllabus" />
 				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 			</li>
 			<li><input type="submit" value="Save" />
@@ -51,6 +52,7 @@
 			<li><label>File</label> 
 				<input type="file" name="uploadedFile" class="required" id="calenderUploadedFile" />
 				<input type="hidden" name="dataType" value="2" />
+				<input type="hidden" name="type" value="Calendar" />
 				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 				
 			</li>
@@ -78,6 +80,7 @@
 			<li><label>File</label> 
 				<input type="file" name="uploadedFile" class="required" id="examUploadedFile"/>
 				<input type="hidden" name="dataType" value="3" />
+				<input type="hidden" name="type" value="Exams" />
 				<input type="hidden" name="schoolName" value="${model.schoolName }"/>
 			</li>
 			<li><input type="submit" value="Save" />

@@ -7,7 +7,7 @@
 function fileUpload()
 {
 
-    document.forms["fileupload"].submit();
+    document.forms["aboutSchoolForm"].submit();
 }
 </script>
 
@@ -33,6 +33,8 @@ function fileUpload()
 				<li><label>School Logo</label> 
 					<input type="file" name="uploadedFile" accept="image/*" class="button" onchange="javascript:fileUpload();">
 					<img alt="${model.schoolName } Logo" src="images/school/${model.logoFileName}/">
+				</li> <br>
+				<li><img alt="${model.schoolName } Logo" src="${IMAGE_HOST_PATH}" />
 				</li> <br>
 				<li><label>School Name</label> <input type="text" value="${model.school.schoolName }"
 						 name="schoolName" class="required" maxlength="50" /></li><br>

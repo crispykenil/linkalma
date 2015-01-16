@@ -21,7 +21,7 @@ public class SchoolJDBCTemplate  {
    public void setDataSource(DataSource dataSource) {
       this.dataSource = dataSource;
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-   }
+   } 
 
    public long createSchool(School school) {
       String SQL = "insert into School (SchoolID,SchoolName, SchoolAddress1, SchoolAddress2, Branch, WebsiteAddress, Approved, Active) "

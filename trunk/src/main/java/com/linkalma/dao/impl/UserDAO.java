@@ -256,7 +256,7 @@ public class UserDAO implements IUserDAO
 			@Override
 			public CallableStatement createCallableStatement(Connection con) throws SQLException
 			{
-				logger.info("Verify password SP called");
+				System.out.println("Verify password SP called");
 				CallableStatement callableStatement = con.prepareCall(QueryConstants.SP_FETCH_INSERT_VERIFICATION_CODE);
 				callableStatement.setString(1, emailAddress);
 				callableStatement.setString(2, code);

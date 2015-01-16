@@ -26,6 +26,7 @@ import com.linkalma.helper.FileHelperImpl;
 import com.linkalma.helper.ResourceBundleUtil;
 import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.CategoryCodesDAO;
+import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
 import com.linkalma.utils.LinkalmaUtil;
 
@@ -234,9 +235,25 @@ public class SchoolBO implements ISchoolBO
 			this.validateForSchoolAboutInfo(schoolDataDto);
 			MultipartFile multipartFile=schoolDataDto.getUploadedFile();
 			
-			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
+			
+			
+			String profilePhotoName =  ApplicationConstants.PROFILE_PHOTO_PREFIX_NAME+ schoolDataDto.getSchoolName()+ "_" + schoolDataDto.getSchoolID();
+			
+			if(multipartFile.getOriginalFilename().indexOf(".jpg") > 0 || multipartFile.getOriginalFilename().indexOf(".jpeg") > 0)
+				profilePhotoName += ApplicationConstants.JPG_EXTN;
+			else if (multipartFile.getOriginalFilename().indexOf(".png") > 0)
+				profilePhotoName += ApplicationConstants.PNG_EXTN;
+			else
+				profilePhotoName += ApplicationConstants.JPG_EXTN;
+				
+			if(multipartFile!=null && !StringUtils.isEmpty(multipartFile.getName()))
 			{
-				fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(multipartFile.getOriginalFilename()));
+				String schoolParentDir = schoolDataDto.getSchoolName()+ "_" + schoolDataDto.getSchoolID();
+
+				fileHelperImpl.writeFile(multipartFile,
+								linkalmaUtil.getSchoolDirPath(schoolParentDir)+profilePhotoName);
+				
+//				fileHelperImpl.writeFile(multipartFile, linkalmaUtil.prepareFileUploadPath(schoolParentDir+multipartFile.getOriginalFilename()));
 			}
 			schoolDAO.updateAboutSchoolInfo(schoolDataDto);
 	}
