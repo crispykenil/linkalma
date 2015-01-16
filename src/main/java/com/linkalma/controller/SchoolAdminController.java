@@ -28,6 +28,7 @@ import com.linkalma.dto.Staff;
 import com.linkalma.dto.UploadedFile;
 import com.linkalma.dto.UserBean;
 import com.linkalma.helper.ResourceBundleUtil;
+import com.linkalma.utils.ApplicationConstants;
 import com.linkalma.utils.LinkalmaException;
 
 /**
@@ -102,6 +103,9 @@ public class SchoolAdminController {
 			HttpServletRequest request) {
 		logger.info("Redirecting to admin page:" + page);
 
+		School school = (School) request.getSession().getAttribute("school");
+		
+		
 		String msg = request.getParameter("msg");
 		
 		setRequiredModelPropeties(model, request);
@@ -109,7 +113,10 @@ public class SchoolAdminController {
 		model.addAttribute("page", page);
 		model.addAttribute("msg", msg);
 		
-		
+		model.addAttribute("IMAGE_HOST_PATH", ApplicationConstants.PROFILE_PHOTO_PREFIX_NAME+ 
+				schoolName+ "_" + school.getSchoolID()+ApplicationConstants.JPG_EXTN);
+System.out.println(ApplicationConstants.PROFILE_PHOTO_PREFIX_NAME+ 
+				schoolName+ "_" + school.getSchoolID()+ApplicationConstants.JPG_EXTN);
 		return new ModelAndView("/schooladmin/" + page, "model", model);
 	}
 
@@ -214,6 +221,8 @@ public class SchoolAdminController {
 			school = schoolBO.getSchoolBySchoolEmailID(schoolEmailAddress, model);
 			request.getSession().setAttribute("school", school);
 			model.addAttribute("school", school);
+			model.addAttribute("IMAGE_HOST_PATH", ApplicationConstants.PROFILE_PHOTO_PREFIX_NAME+ 
+					schoolDataDto.getSchoolName()+ "_" + schoolDataDto.getSchoolID()+ApplicationConstants.JPG_EXTN);
 
 		}
 		catch (FileNotFoundException e)
@@ -239,7 +248,8 @@ public class SchoolAdminController {
 			{ "Updating School Info" }, Locale.US));
 			e.printStackTrace();
 		}
-
+System.out.println( ApplicationConstants.PROFILE_PHOTO_PREFIX_NAME+ 
+					schoolDataDto.getSchoolName()+ "_" + schoolDataDto.getSchoolID()+ApplicationConstants.JPG_EXTN);
 		return new ModelAndView("redirect:/schooladmin/addaboutschool?schoolName=" + school.getSchoolName(), "model", model);
 	}
 

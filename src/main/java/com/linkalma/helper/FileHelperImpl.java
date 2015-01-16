@@ -6,13 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
-import com.linkalma.utils.LinkalmaUtil;
 
 public class FileHelperImpl  implements FileHelper
 {

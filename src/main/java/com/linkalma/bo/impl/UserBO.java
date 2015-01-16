@@ -16,7 +16,9 @@ import com.linkalma.dto.User;
 import com.linkalma.dto.UserSchoolDTO;
 import com.linkalma.helper.ResourceBundleUtil;
 import com.linkalma.utils.ApplicationConstants;
+import com.linkalma.utils.LinkalmaConstants;
 import com.linkalma.utils.LinkalmaException;
+import com.linkalma.utils.LinkalmaUtil;
 import com.linkalma.utils.MessageConstants;
 import com.linkalma.utils.SendEmail;
 import com.linkalma.utils.Utils;
@@ -168,7 +170,9 @@ public class UserBO implements IUserBO
 		if(!StringUtils.isNullOrEmpty(code))
 		{
 			Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, "GENERATE");
+//			String url = new LinkalmaUtil().getProperties().getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH);
 			String url = ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.LINKALMA_URL, null, Locale.US);
+
 			SendEmail mailSender = (SendEmail) ResourceBundleUtil.getInstance().getBean("sendEmail");
 			StringBuilder sb = new StringBuilder();
 			

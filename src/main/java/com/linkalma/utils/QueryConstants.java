@@ -81,14 +81,14 @@ public class QueryConstants {
 			+ " ORDER BY UU.CREATEDTTM DESC" ;
 */	
 	public static String GET_USER_WALL_POSTS = "SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, UU.CREATEDTTM, "
-			+ " U.FIRSTNAME, U.LASTNAME, u.EmailAddress FROM userupdates UU, user U "
+			+ " U.FIRSTNAME, U.LASTNAME, U.EmailAddress FROM userupdates UU, user U "
 			+ " WHERE UU.USERID = U.USERID "
 			+ " AND U.USERID in(SELECT u3.UserID "
 							+ " FROM user u3, friendrequest fr WHERE fr.Status = "+ApplicationConstants.FRIEND_REQUEST_STATUS_ACCEPTED
 							+ " AND (u3.EmailAddress = fr.ToUserID OR u3.EmailAddress = fr.FromUserID ) "
 							+ " AND (fr.FromUserID = ? or fr.ToUserID = ?)) "
 			+ " UNION "
-			+ " SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME, u.EmailAddress "
+			+ " SELECT UU.POSTID, UU.USERID, UU.SUBJECT, UU.DESCRIPTION, UU.CREATEDTTM, U.FIRSTNAME, U.LASTNAME, U.EmailAddress "
 			+ " FROM userupdates UU, user U WHERE UU.USERID = U.USERID and U.USERID = ?"
 			+ " ORDER BY CREATEDTTM DESC; ";
 

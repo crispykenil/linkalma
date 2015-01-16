@@ -15,7 +15,7 @@
 		<property name="maxUploadSize" value="10000000" />
 	</bean>
 	<bean id="linkalmaUtil" class="com.linkalma.utils.LinkalmaUtil">
-		<property name="properties" ref="linkalmaProp"></property>
+		<property name="properties" ref="linkalmaProp" />
 	</bean>
 	<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
 		id="linkalmaProp">

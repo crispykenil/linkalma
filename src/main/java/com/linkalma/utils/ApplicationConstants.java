@@ -71,5 +71,13 @@ public class ApplicationConstants {
 	public static String EXCEPTION = "exception";
 	
 	public static String UPDATE_SUCCESS_MSG = "update.successMsg";
+
+	public static String UNDERSCORE = "_";
+	public static String JPG_EXTN = ".jpg";
+	public static String PNG_EXTN = ".png";
+	
+	public static String PROFILE_PHOTO_PREFIX_NAME = "Profile"+UNDERSCORE;
+	
+	
 }
 

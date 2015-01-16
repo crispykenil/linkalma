@@ -3,20 +3,24 @@ package com.linkalma.utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.linkalma.controller.HomeController;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LinkalmaUtil 
 {
-	private Properties properties;
+	@Autowired
+	private static Properties properties;
+	
 	private static final Logger logger = LoggerFactory
 			.getLogger(LinkalmaUtil.class);
 
 	public  void setProperties(Properties properties) {
 		this.properties = properties;
+	}
+	
+	public  Properties getProperties() {
+		return this.properties;
 	}
 	
 	public  String prepareFileUploadPath(String strFile)
@@ -26,7 +30,7 @@ public class LinkalmaUtil
 	
 	public String getProperty(LinkalmaConstants.Properties prop)
 	{
-		return properties.getProperty(prop.toString());
+		return getProperties().getProperty(prop.prop);
 	}
 	
 	public String getCurriculumFileUploadPath(String schoolParentDir,String strFile, String type) throws IOException
@@ -129,9 +133,16 @@ public class LinkalmaUtil
 	
 	public  String getSchoolDirPath(String schoolParentDir) 
 	{	
-		
-		String path=getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH)+"//"+
-												schoolParentDir;
+		String path = null;
+		try
+		{
+			String formattedDirPath =  createSchoolDir(schoolParentDir);
+			path = formattedDirPath+"//";
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		
 		return path;
 	}
@@ -151,12 +162,13 @@ public class LinkalmaUtil
 		
 	}
 	
-	private void createSchoolDir(String schoolParentDir) throws IOException 
+	private String createSchoolDir(String schoolParentDir) throws IOException 
 	{
-		logger.info("In Create School Directory");
-		File file=new File(LinkalmaUtil.formatFilePath(schoolParentDir));
+		System.out.println("In Create School Directory");
+		String formattedStrPath = getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH) +"\\"+ LinkalmaUtil.formatFilePath(schoolParentDir);
+		File file=new File(formattedStrPath);
 		this.createDir(file);	
-		
+		return formattedStrPath;
 	}
 	/*
 	 * Replace the blank space with an escape character followed with a blankspace.
@@ -164,9 +176,9 @@ public class LinkalmaUtil
 	 */
 	public static String formatFilePath(String strPath)
 	{
-//		String unixHost = new LinkalmaUtil().getProperty(LinkalmaConstants.Properties.FILE_UPLOAD_PATH);
+		String unixHost = new LinkalmaUtil().getProperty(LinkalmaConstants.Properties.UNIX_HOST);
 		
-		if(ApplicationConstants.TRUE.equalsIgnoreCase("ASd"))
+		if(ApplicationConstants.TRUE.equalsIgnoreCase(unixHost))
 		{
 			System.out.println("Before formatting : "+strPath);
 			String a = "";
