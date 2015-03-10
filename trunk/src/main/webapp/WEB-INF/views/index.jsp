@@ -135,20 +135,6 @@
 					
 </div>
 
-<div id="searchResults" class="clear-fix">
-	<div class="user-info-panel fl">
-		<h3>Gautam Sharma</h3>
-		<div class="profile-pic">
-			<img alt="User Name Dynamically" src="images/profile-pic.png" />
-		</div>
-	</div>
-	<div class="user-info-panel fl">
-		<h3>Gautam Sharma</h3>
-		<div class="profile-pic">
-			<img alt="User Name Dynamically" src="images/staff/img-16.jpg" />
-		</div>
-	</div>
-			
-</div>
+
 <%@ include file="footer.jsp" %>
 
