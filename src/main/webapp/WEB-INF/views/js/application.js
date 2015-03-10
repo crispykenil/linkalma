@@ -15,6 +15,20 @@ var Utility = {
 				} else 
 					$(this).removeClass("fa-chevron-right").addClass("fa-chevron-down");
 			});
+		},
+		getPrivacyPolicy: function(){
+			  $.ajax({
+				  beforeSend:function(){
+					 // $(targetBtn).addClass("disabled");
+					
+				  },
+				  url:"/linkalma/css/privacyPolicy.htm",
+				  success:function(result){
+					  $("#privacyPolicy").html(result).addClass("popupContent").show();
+					  getPopup($("#privacyPolicy"));
+				  }
+					  
+			  });
 		}
 };
 // Semicolon (;) to ensure closing of earlier scripting

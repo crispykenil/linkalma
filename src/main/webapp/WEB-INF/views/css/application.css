@@ -274,7 +274,7 @@ input[type="text"].search-field {
 }
 .copywrite {
 	float:right;
-	line-height:36px;
+
 }
 
 
@@ -518,4 +518,10 @@ input[type="text"].search-field {
 #searchResults .user-info-panel .profile-pic, #searchResults .user-info-panel .profile-pic img {
 	width:180px;
 	height:150px;	
+}
+#privacyPolicy {
+	width:600px;
+	height:400px;
+	overflow:auto;
+	display:none;
 }
