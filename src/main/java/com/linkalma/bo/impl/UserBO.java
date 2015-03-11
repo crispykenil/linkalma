@@ -156,10 +156,15 @@ public class UserBO implements IUserBO
 	public boolean checkVerificationCodeExists(String emailAddress, String code) {
 		logger.info("In Check Verification Code");
 		Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, "VERIFY");
-		if(resultMap.get("isExpired") != null && resultMap.get("isExpired").toString().equalsIgnoreCase("N"))
+		if(resultMap.get("isExpired") != null 
+				&& (resultMap.get("isExpired").toString().equalsIgnoreCase("N")))
 			return true;
 		else
+		{
+			System.out.println("Invalid URL or Reset Link Expired");
+			
 			return false;
+		}
 	}
 	@Override
 	@Transactional

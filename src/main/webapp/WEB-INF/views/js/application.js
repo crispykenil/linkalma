@@ -154,7 +154,16 @@ function submitSignUpForm() {
 
 	});
 }
+function submitPasswordResetForm(){
+	
+		if (form.validateForm($("#resetPassword"))) {
+			//alert('form validated');
+			$("#resetPassword").submit();
+		}
 
+	
+
+}
 function submitEmailInviteForm() {
 	$("#alumnusForm").submit(function(e) {
 		e.preventDefault();
