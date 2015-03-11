@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="header.jsp" %>
 
 
@@ -6,7 +7,6 @@
 
 function fileUpload()
 {
-
     document.forms["fileupload"].submit();
 }
 </script>
@@ -19,7 +19,7 @@ function fileUpload()
 
 	<h1>My Notifications</h1>
 	<c:choose>
-		<c:when test="${model.pendingFriendRequest.size() gt 0}">
+		<c:when test="${fn:length(model.pendingFriendRequest) gt 0}">
 			<table border="0" cellpadding="0" cellspacing="0" class="dataTable">
 				<thead>
 					<tr>

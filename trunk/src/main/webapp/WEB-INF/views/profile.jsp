@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%@ include file="header.jsp"%>
 
@@ -123,7 +124,7 @@ function fileUpload()
 			<form:form name="userSchoolDetailsForm" id="userSchoolDetailsForm" class="readOnlyForm clear-fix schoolDetailsForm collapse-expand-content" 
 			action="updateuserschool" modelAttribute="userSchool" method="post">
 		
-			<input type="hidden" name="totalUserSchoolCount" value="${model.userProfile.userSchoolList.size()}" />
+			<input type="hidden" name="totalUserSchoolCount" value="${fn:length(model.userProfile.userSchoolList)}" />
 								<table class="dataTable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
@@ -202,7 +203,7 @@ function fileUpload()
 				<form:form class="readOnlyForm clear-fix workDetailsForm collapse-expand-content" action="updateworkplace" 
 				name="userWorkplaceDetailsForm" id="userWorkplaceDetailsForm" modelAttribute="workDetails" method="post">
 					
-					<input type="hidden" name="totalUserWorkplaceCount" value="${model.workplaceList.size()}" />
+					<input type="hidden" name="totalUserWorkplaceCount" value="${fn:length(model.workplaceList)}" />
 					<table class="dataTable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>

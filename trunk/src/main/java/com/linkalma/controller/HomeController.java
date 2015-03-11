@@ -69,10 +69,6 @@ public class HomeController {
 		setRequiredModelPropeties(model, request);
 		model.addAttribute("schoolName", "");
 		
-		String name = ResourceBundleUtil.getInstance().getProperty("customer.name", 
-    			new Object[] { 28, "http://www.mkyong.com" }, Locale.US);
-    	System.out.println("Customer name (English) : " + name);
-    	
 		return new ModelAndView("index", "model", model);
 	}
 

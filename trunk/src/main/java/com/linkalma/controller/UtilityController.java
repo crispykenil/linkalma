@@ -87,7 +87,8 @@ public class UtilityController {
 		
 		if("reset".equalsIgnoreCase(userDto.getType()))
 		{
-			if (userBO.checkUserExists(userDto.getEmailAddress(), model))
+			if (userBO.checkUserExists(userDto.getEmailAddress(), model) && 
+					userBO.checkVerificationCodeExists(request.getParameter("emailAddress"), request.getParameter("code")))
 			{
 				userBO.updatePassword(userDto, model);
 			}
