@@ -1,7 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 	<%@ include file="header.jsp" %>
-
+		<c:if test="${empty errors}">
+		<c:if test="${not empty model.msg}">
+			<div class="infoPanel message">${model.msg}</div>
+		</c:if>
+		</c:if>
 				<div class="registerSchoolContainer">
 						<h2>Register New School</h2>
 						<form action="registerschool" name="registerSchool" method="post" id="registerSchoolForm" >

@@ -541,7 +541,10 @@ public class HomeController {
 		ISchoolBO schoolBO = (SchoolBO) ResourceBundleUtil.getInstance().getBean("schoolBO");
 
 		School schoolDto = new School();
-
+		
+		if (null != request.getParameter("msg"))
+			model.addAttribute("msg", request.getParameter("msg"));
+		
 		model = schoolBO.getSchoolList(schoolDto, model);
 		setRequiredModelPropeties(model, request);
 		return new ModelAndView("registerSchool", "model", model);

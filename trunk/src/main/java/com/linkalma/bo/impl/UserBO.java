@@ -155,7 +155,7 @@ public class UserBO implements IUserBO
 	@Override
 	public boolean checkVerificationCodeExists(String emailAddress, String code) {
 		logger.info("In Check Verification Code");
-		Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, "VERIFY");
+		Map<String, Object> resultMap = getUserDAO().saveVerificationCode(emailAddress, code, LinkalmaConstants.OPERATION_VERIFY);
 		if(resultMap.get("isExpired") != null 
 				&& (resultMap.get("isExpired").toString().equalsIgnoreCase("N")))
 			return true;

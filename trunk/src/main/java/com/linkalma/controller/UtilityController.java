@@ -91,6 +91,9 @@ public class UtilityController {
 					userBO.checkVerificationCodeExists(request.getParameter("emailAddress"), request.getParameter("code")))
 			{
 				userBO.updatePassword(userDto, model);
+				setRequiredModelPropeties(model, request);
+				return new ModelAndView("index", "model", model);
+
 			}
 			else if(schoolBO.checkSchoolExists(userDto.getEmailAddress(), model))
 			{
@@ -99,6 +102,8 @@ public class UtilityController {
 				schoolDto.setPassword(userDto.getPassword());
 				schoolBO.updateSchoolCredentials(schoolDto, model);
 				
+				setRequiredModelPropeties(model, request);
+				return new ModelAndView("index", "model", model);
 			}
 			else
 			{
@@ -107,14 +112,27 @@ public class UtilityController {
 			}
 			
 		}
+		else if (userBO.checkVerificationCodeExists(request.getParameter("emailAddress"), request.getParameter("code")))
+		{
+			
+			setRequiredModelPropeties(model, request);
+			return new ModelAndView("passwordreset", "model", model);
+
+		}
 		else
-		if (!userBO.checkVerificationCodeExists(request.getParameter("emailAddress"), request.getParameter("code")))
-			model.addAttribute("errors", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_EXPIRED, null, Locale.US));
-//		else
-//			model.addAttribute("errors", ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_MSG, null, Locale.US));
-		
-		setRequiredModelPropeties(model, request);
-		return new ModelAndView("passwordreset", "model", model);
+		{
+			model.addAttribute("errors",
+					ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_EXPIRED, null, Locale.US));
+			// else
+			// model.addAttribute("errors",
+			// ResourceBundleUtil.getInstance().getProperty(ApplicationConstants.PASSWORD_RESET_LINK_MSG,
+			// null, Locale.US));
+
+			setRequiredModelPropeties(model, request);
+			return new ModelAndView("index", "model", model);
+/*			model.addAttribute("errors", "Incorrect EmailID or Password.");
+			return new ModelAndView("redirect:/dologin", "model", model);
+*/		}
 	}
 	private void setRequiredModelPropeties(Model model,
 			HttpServletRequest request) {

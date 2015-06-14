@@ -43,4 +43,6 @@ public class LinkalmaConstants {
 		
 	}
 	
+	public static String OPERATION_VERIFY = "VERIFY";
+	
 }
