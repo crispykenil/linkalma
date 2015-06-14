@@ -38,15 +38,15 @@
 	</bean>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	    <property name="host" value="smtp.live.com" />
-	    <property name="port" value="587" />
-	    <property name="username" value="link_alma@outlook.com" />
-	    <property name="password" value="@linkalma2014" />
+	    <property name="host" value="mail.linkalma.com" />
+	    <property name="port" value="25" />
+	    <property name="username" value="admin@linkalma.com" />
+	    <property name="password" value="laadmin" />
 	    <property name="javaMailProperties">
 	            <props>
 	                <prop key="mail.smtp.auth">true</prop>
-	                <prop key="mail.smtp.starttls.enable">true</prop>
-	                <prop key="mail.smtp.ssl.trust">smtp.live.com</prop>
+	                <prop key="mail.smtp.starttls.enable">false</prop>
+	                <prop key="mail.smtp.ssl.trust">mail.linkalma.com</prop>
 	            </props>
 	    </property>
 	</bean>

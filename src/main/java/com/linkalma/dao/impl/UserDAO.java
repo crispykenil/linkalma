@@ -231,11 +231,7 @@ public class UserDAO implements IUserDAO
 	public Map<String, Object> saveVerificationCode(final String emailAddress, final String code, final String operation)
 	{
 
-		/*
-		 * int updateStatus = getJdbcTemplateObject().update(
-		 * QueryConstants.INSERT_VERIFICATION_CODE_QUERY, emailAddress, code);
-		 */
-		logger.info("In saveVerificationCode");
+		logger.info("In saveVerificationCode : Opertaion: --"+operation);
 
 		SqlParameter p_emailAddress = new SqlParameter(Types.VARCHAR);
 		SqlParameter p_code = new SqlParameter(Types.VARCHAR);

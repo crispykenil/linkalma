@@ -179,11 +179,13 @@ function fileUpload()
 					<h2>Add school to your profile</h2>
 					<form:form action="addmyschool" name="addMySchool" method="post">
 						<label>School Name</label>
-						<select name="schoolID">
+						<input type="text" name="schoolName" list="schoolID"/>
+						<input type="hidden" name="schoolID"/>
+						<datalist id="schoolID">
 							<c:forEach var="schoolList" items="${model.schoolList}">
-								<option value="${schoolList.schoolID}" > ${schoolList.schoolName } - ${schoolList.branch }
+								<option id="${schoolList.schoolID}" value="${schoolList.schoolName } - ${schoolList.branch }" > ${schoolList.schoolName } - ${schoolList.branch }
 							</c:forEach>
-						</select> 
+						</datalist> 
 						<label>From Year</label>
 						<input type="text" value=""  name="fromYear" maxlength="4" />
 						<label>To Year</label>

@@ -72,7 +72,7 @@ public class SchoolBO implements ISchoolBO
 		int updateStatus = schoolDAO.createSchoolCredentials(schoolDto);
 		System.out.println("Credentials Update Status: "+updateStatus);
 		
-		model.addAttribute("successMsg","School Registered");
+		model.addAttribute("msg","School Registered");
 		return model;
 	}
 
